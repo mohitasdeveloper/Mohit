@@ -6,21 +6,8 @@
     <title>Mohit Mali | Software Developer & FinTech Specialist</title> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
-        /* Default Dark Mode Variables */
+        /* --- Default Light Mode Variables --- */
         :root {
-            --bg-color: #0f172a;
-            --surface-color: #1e293b;
-            --primary-color: #38bdf8;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
-            --border-color: #334155;
-            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
-            --accent-color: #10b981;
-            --nav-bg: rgba(15, 23, 42, 0.85);
-        }
-
-        /* Light Mode Variables */
-        body.light-mode {
             --bg-color: #f8fafc;
             --surface-color: #ffffff;
             --primary-color: #0284c7;
@@ -32,11 +19,30 @@
             --nav-bg: rgba(248, 250, 252, 0.85);
         }
 
+        /* --- Dark Mode Variables --- */
+        body.dark-mode {
+            --bg-color: #0f172a;
+            --surface-color: #1e293b;
+            --primary-color: #38bdf8;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --border-color: #334155;
+            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.5);
+            --accent-color: #10b981;
+            --nav-bg: rgba(15, 23, 42, 0.85);
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
             scroll-behavior: smooth;
+        }
+
+        /* Critical fix for horizontal scrolling */
+        html, body {
+            overflow-x: hidden;
+            width: 100%;
         }
 
         body {
@@ -45,7 +51,7 @@
             color: var(--text-main);
             line-height: 1.7;
             transition: background-color 0.3s ease, color 0.3s ease;
-            overflow-x: hidden;
+            word-break: break-word; /* Prevents long words from breaking viewport */
         }
 
         /* --- PREMIUM HEADER NAV --- */
@@ -549,9 +555,9 @@
             }
         }
         
-        /* Deep Mobile Optimization */
+        /* Deep Mobile Optimization - Strictly Locks Out Horizontal Scroll */
         @media (max-width: 480px) {
-            h1 { font-size: 2.5rem; }
+            h1 { font-size: 2.5rem; letter-spacing: -1px; }
             h2 { font-size: 1.6rem; }
             .hero-p { font-size: 0.8rem; }
             .hero-desc { font-size: 1rem; }
@@ -565,11 +571,14 @@
             }
             section { padding: 60px 5%; }
             .projects-grid { 
-                grid-template-columns: 1fr; /* Forces 1 column on small phones */
+                grid-template-columns: 1fr; /* Snaps to 1 column to prevent overflow */
+            }
+            .skills-container {
+                grid-template-columns: 1fr;
             }
             .contact-pill {
                 font-size: 0.85rem;
-                padding: 8px 16px;
+                padding: 10px 16px;
                 width: 100%;
                 justify-content: center;
             }
@@ -587,7 +596,7 @@
                 <a href="#projects">Work</a>
                 <a href="#contact">Contact</a>
             </div>
-            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Dark/Light Mode">☀️</button>
+            <button class="theme-toggle" id="theme-btn" aria-label="Toggle Dark/Light Mode">🌙</button>
         </div>
     </nav>
 
@@ -787,21 +796,25 @@
         const themeBtn = document.getElementById('theme-btn');
         const body = document.body;
 
+        // Check local storage. If 'dark' is explicitly saved, trigger dark mode. 
+        // Otherwise, it stays in the default Light Mode.
         const currentTheme = localStorage.getItem('theme');
-        if (currentTheme === 'light') {
-            body.classList.add('light-mode');
-            themeBtn.textContent = '🌙';
+        if (currentTheme === 'dark') {
+            body.classList.add('dark-mode');
+            themeBtn.textContent = '☀️'; // Show Sun if in dark mode
+        } else {
+            themeBtn.textContent = '🌙'; // Show Moon if in light mode
         }
 
         themeBtn.addEventListener('click', () => {
-            body.classList.toggle('light-mode');
+            body.classList.toggle('dark-mode');
             
-            if (body.classList.contains('light-mode')) {
-                localStorage.setItem('theme', 'light');
-                themeBtn.textContent = '🌙'; 
-            } else {
+            if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('theme', 'dark');
                 themeBtn.textContent = '☀️'; 
+            } else {
+                localStorage.setItem('theme', 'light');
+                themeBtn.textContent = '🌙'; 
             }
         });
     </script>
