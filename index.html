@@ -454,7 +454,7 @@
         /* Project Footer & Button */
         .project-footer {
             display: flex;
-            justify-content: flex-end; /* Aligns the button cleanly to the right */
+            justify-content: flex-end;
             align-items: center;
             margin-top: auto;
             padding-top: 20px;
@@ -548,6 +548,32 @@
                 justify-content: flex-end;
             }
         }
+        
+        /* Deep Mobile Optimization */
+        @media (max-width: 480px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 1.6rem; }
+            .hero-p { font-size: 0.8rem; }
+            .hero-desc { font-size: 1rem; }
+            .profile-wrapper {
+                width: 240px;
+                height: 240px;
+            }
+            .profile-img {
+                width: 210px;
+                height: 210px;
+            }
+            section { padding: 60px 5%; }
+            .projects-grid { 
+                grid-template-columns: 1fr; /* Forces 1 column on small phones */
+            }
+            .contact-pill {
+                font-size: 0.85rem;
+                padding: 8px 16px;
+                width: 100%;
+                justify-content: center;
+            }
+        }
     </style>
 </head>
 <body>
@@ -582,7 +608,7 @@
 
         <div class="hero-image-content">
             <div class="profile-wrapper">
-                <img src="https://i.ibb.co/8tLQ9tb/1771434071328.png" alt="Mohit Mali" class="profile-img">
+                <img src="https://i.ibb.co/8tLQ9tb/1771434071328.png" alt="Mohit Mali" class="profile-img" loading="lazy">
             </div>
         </div>
     </header>
@@ -659,7 +685,7 @@
             
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/Y4gk8yMp/Be-Aware-3.png" alt="Mally Logo" class="project-logo">
+                    <img src="https://i.ibb.co/Y4gk8yMp/Be-Aware-3.png" alt="Mally Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">Mally Accounting</h3>
                     <p class="project-desc">A powerful web-based financial application built from scratch. Designed to handle complex, Tally-inspired data structures including Vouchers, Ledgers, and real-time Trial Balance compilation.</p>
                 </div>
@@ -670,16 +696,15 @@
 
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/wNN2grJD/image.png" alt="OJAS Logo" class="project-logo">
+                    <img src="https://i.ibb.co/wNN2grJD/image.png" alt="OJAS Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">OJAS 2.0 Platform</h3>
                     <p class="project-desc">Engineered the dedicated digital infrastructure for the OJAS 2.0 college sports festival. Built to handle rapid participant registration and live event tracking.</p>
                 </div>
-               
             </div>
 
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/HD1pSvCz/Be-Aware-2.png" alt="URJA Logo" class="project-logo">
+                    <img src="https://i.ibb.co/HD1pSvCz/Be-Aware-2.png" alt="URJA Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">URJA 3.0 Application</h3>
                     <p class="project-desc">Developed a standalone, high-performance athletic event platform to streamline scheduling, point tracking, and real-time updates for the URJA 3.0 sports fest.</p>
                 </div>
@@ -690,18 +715,18 @@
 
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/C3GBx8MD/study-icon.png" alt="BAFs Logo" class="project-logo">
-                    <h3 class="project-title">BAFs App</h3>
+                    <img src="https://i.ibb.co/C3GBx8MD/study-icon.png" alt="BirlaOne Logo" class="project-logo" loading="lazy">
+                    <h3 class="project-title">BirlaOne</h3>
                     <p class="project-desc">Architected a comprehensive mobile platform specifically tailored for students. Centralizes campus resources, announcements, and automates attendance tracking.</p>
                 </div>
                 <div class="project-footer">
-                    <a href="/BAFs" target="_blank" class="project-link">View Project <span>&rarr;</span></a>
+                    <a href="/BirlaOne" target="_blank" class="project-link">View Project <span>&rarr;</span></a>
                 </div>
             </div>
 
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/00rCw1M/OFFICAL-LOGO.png" alt="EcoCampus Logo" class="project-logo">
+                    <img src="https://i.ibb.co/00rCw1M/OFFICAL-LOGO.png" alt="EcoCampus Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">EcoCampus</h3>
                     <p class="project-desc">Built an environmentally-focused digital partner platform handling massive volumes of student registration data and reward points with absolute precision.</p>
                 </div>
@@ -712,29 +737,26 @@
 
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/LDWjzyBn/Be-Aware-4.png" alt="Voting Engine Logo" class="project-logo">
+                    <img src="https://i.ibb.co/LDWjzyBn/Be-Aware-4.png" alt="Voting Engine Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">Digital Voting Engine</h3>
                     <p class="project-desc">Programmed a secure, real-time digital voting infrastructure for the "Mr. & Miss Birla" event, processing live data entries and compiling results instantly.</p>
                 </div>
-                
             </div>
 
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/tpSxRNtk/C-1-1.png" alt="ClassCount Logo" class="project-logo">
+                    <img src="https://i.ibb.co/tpSxRNtk/C-1-1.png" alt="ClassCount Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">ClassCount</h3>
                     <p class="project-desc">Developed a utility application that solves a core student pain point: tracking educational statistics and calculating daily attendance requirements effortlessly.</p>
                 </div>
-               
             </div>
 
             <div class="project-card">
                 <div>
-                    <img src="https://i.ibb.co/3YmWQQ97/Be-Aware-1.png" alt="BeAware Logo" class="project-logo">
+                    <img src="https://i.ibb.co/3YmWQQ97/Be-Aware-1.png" alt="BeAware Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">BeAware</h3>
                     <p class="project-desc">Designed an interactive application concept focused on secure, immediate campus-wide communication and critical alert distribution.</p>
                 </div>
-               
             </div>
 
         </div>
