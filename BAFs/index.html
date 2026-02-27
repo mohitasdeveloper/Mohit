@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+    <title>Exam Central - BirlaOne</title>
+    <link rel="icon" type="image/png" href="https://fuovcuzaxfkyqrridrgy.supabase.co/storage/v1/object/public/profile-pics//study-icon-modified.png" />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <script>
+      // Prevents a "flash of the wrong theme" on page load.
+      (function() {
+        const savedTheme = localStorage.getItem('theme') || 'dark'; // Default to dark
+        document.documentElement.setAttribute('data-theme', savedTheme);
+      })();
+    </script>
+
+    <style>
+      /* 🎨 --- Color & Theme Variables --- 🎨 */
+      :root {
+        --primary-accent: #b84fff;
+        --primary-gradient: linear-gradient(135deg, #b84fff, #8f00ff);
+        --font-family: 'Inter', sans-serif;
+        
+        --bg-gradient-light: linear-gradient(180deg, #f5f5f7, #e9e9ed);
+        --card-bg-light: #ffffff;
+        --text-primary-light: #121212;
+        --text-secondary-light: #5f5f5f;
+        --border-color-light: #e0e0e0;
+        --shadow-light: 0 4px 20px rgba(0, 0, 0, 0.06);
+        --header-bg-light: #ffffff;
+
+        --bg-gradient-dark: linear-gradient(180deg, #1e1e2e, #14141e);
+        --card-bg-dark: #2a2a3d;
+        --text-primary-dark: #f0f0f0;
+        --text-secondary-dark: #a0a0b0;
+        --border-color-dark: #4a4a6a;
+        --shadow-dark: 0 4px 20px rgba(0, 0, 0, 0.2);
+        --header-bg-dark: #1e1e2e;
+      }
+      
+      [data-theme="light"] {
+        --bg-gradient: var(--bg-gradient-light);
+        --card-bg: var(--card-bg-light);
+        --text-primary: var(--text-primary-light);
+        --text-secondary: var(--text-secondary-light);
+        --border-color: var(--border-color-light);
+        --shadow: var(--shadow-light);
+        --header-bg: var(--header-bg-light);
+        --timetable-row-bg: #f7f7f9;
+        --secondary-button-bg-hover: #f0e6ff;
+        --toast-bg: #323232;
+        --toast-text: #ffffff;
+      }
+
+      [data-theme="dark"] {
+        --bg-gradient: var(--bg-gradient-dark);
+        --card-bg: var(--card-bg-dark);
+        --text-primary: var(--text-primary-dark);
+        --text-secondary: var(--text-secondary-dark);
+        --border-color: var(--border-color-dark);
+        --shadow: var(--shadow-dark);
+        --header-bg: var(--header-bg-dark);
+        --timetable-row-bg: #3a3a50;
+        --secondary-button-bg-hover: #3c3c52;
+        --toast-bg: #f0f0f0;
+        --toast-text: #121212;
+      }
+
+      /* 🧱 --- Base & Layout Styles --- 🧱 */
+      * { box-sizing: border-box; margin: 0; padding: 0; }
+      html { scroll-behavior: smooth; }
+      body {
+        font-family: var(--font-family);
+        background: var(--bg-gradient);
+        color: var(--text-primary);
+        line-height: 1.6;
+      }
+      .page-container { max-width: 1200px; margin: 0 auto; padding: 0 15px 15px 15px; }
+
+      /* 🔝 --- Header --- 🔝 */
+      .top-bar { display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--header-bg); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; height: 60px; }
+      .header-button { background: none; border: none; cursor: pointer; color: var(--text-primary); display: flex; align-items: center; justify-content: center; width: 40px; height: 40px; flex-shrink: 0; }
+      .header-button svg, .header-button i { font-size: 22px; }
+      .header-title { font-weight: 600; font-size: 18px; flex-grow: 1; text-align: center; }
+      
+      /* ⏳ --- Countdown & Collapsible Timetable --- ⏳ */
+      .main-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: var(--shadow); }
+      .section-header { display: flex; align-items: center; font-size: 1.4rem; font-weight: 600; color: var(--text-primary); }
+      .section-header i { margin-right: 12px; color: var(--primary-accent); }
+      #countdown-container { text-align: center; padding-bottom: 25px; }
+      #next-exam-title { font-size: 1rem; font-weight: 400; color: var(--text-secondary); margin-bottom: 5px; }
+      #next-exam-subject { font-size: 1.2rem; font-weight: 600; color: var(--primary-accent); margin-bottom: 15px; }
+      #countdown-timer { display: flex; justify-content: center; gap: 15px; }
+      .countdown-block { text-align: center; }
+      .countdown-block span { display: block; font-size: 2.5rem; font-weight: 700; color: var(--text-primary); }
+      .countdown-block .label { font-size: 0.8rem; text-transform: uppercase; color: var(--text-secondary); }
+      
+      .collapsible-header { display: flex; justify-content: space-between; align-items: center; cursor: pointer; padding-top: 15px; border-top: 1px solid var(--border-color); }
+      .collapsible-header .section-header { margin-bottom: 0; }
+      .collapsible-header .toggle-icon { font-size: 1.2rem; color: var(--text-secondary); transition: transform 0.3s ease; }
+      .collapsible-header.active .toggle-icon { transform: rotate(180deg); }
+      .timetable-list { max-height: 0; overflow: hidden; transition: max-height 0.4s ease-out, padding-top 0.4s ease-out; display: flex; flex-direction: column; gap: 12px; }
+      .timetable-list.active { padding-top: 20px; max-height: 1000px; }
+      .timetable-row { display: flex; flex-direction: column; gap: 5px; padding: 15px; border-radius: 12px; background-color: var(--timetable-row-bg); border: 1px solid var(--border-color); }
+      .timetable-date { font-weight: 600; color: var(--primary-accent); font-size: 1rem; }
+      .timetable-subject { font-weight: 500; color: var(--text-primary); font-size: 0.95rem; }
+
+      /* 📚 --- Resources Section --- 📚 */
+      .resources-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+      .section-title { font-size: 1.6rem; color: var(--text-primary); }
+      .search-container { position: relative; width: 100%; max-width: 300px; }
+      #search-bar { width: 100%; padding: 10px 15px 10px 40px; border-radius: 10px; border: 1px solid var(--border-color); font-size: 0.95rem; background-color: var(--card-bg); color: var(--text-primary); font-family: var(--font-family); }
+      #search-bar:focus { outline: none; border-color: var(--primary-accent); }
+      .search-icon { position: absolute; left: 12px; top: 50%; transform: translateY(-50%); color: var(--text-secondary); }
+
+      .subjects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px; }
+      .subject-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; box-shadow: var(--shadow); padding: 20px; display: flex; flex-direction: column; transition: transform 0.3s ease, box-shadow 0.3s ease; }
+      [data-theme="dark"] .subject-card:hover { box-shadow: 0 8px 25px rgba(0,0,0,0.3); }
+      [data-theme="light"] .subject-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.1); }
+      .card-header { display: flex; align-items: flex-start; margin-bottom: 12px; gap: 15px; }
+      .subject-icon { width: 45px; height: 45px; border-radius: 12px; display: flex; justify-content: center; align-items: center; flex-shrink: 0; }
+      .subject-icon i { font-size: 1.4rem; }
+      .title-block { display: flex; flex-direction: column; }
+      .subject-title { font-size: 1.15rem; font-weight: 600; color: var(--text-primary); line-height: 1.3; }
+      .tag { display: inline-block; width: fit-content; margin-top: 6px; font-size: 12px; font-weight: 600; padding: 3px 10px; border-radius: 12px; background-color: rgba(128, 128, 128, 0.1); color: var(--text-secondary); border: 1px solid var(--border-color); }
+      .subject-description { font-size: 0.9rem; color: var(--text-secondary); flex-grow: 1; margin-bottom: 20px; }
+      .card-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+      .action-button { text-align: center; padding: 10px; border-radius: 8px; text-decoration: none; font-weight: 600; font-size: 0.9rem; transition: all 0.2s ease; display: flex; align-items: center; justify-content: center; gap: 8px; border: 1px solid transparent; }
+      .action-button.primary { background: var(--primary-gradient); color: white; }
+      .action-button.primary:hover { opacity: 0.9; transform: scale(1.03); }
+      .action-button.secondary { background-color: transparent; color: var(--primary-accent); border: 1px solid var(--border-color); }
+      .action-button.secondary:hover { background-color: var(--secondary-button-bg-hover); border-color: var(--primary-accent); }
+      #no-results-message { text-align: center; font-size: 1.1rem; color: var(--text-secondary); padding: 40px; }
+
+      /* 🍞 --- Toast Notification --- 🍞 */
+      .toast { visibility: hidden; opacity: 0; position: fixed; left: 50%; transform: translateX(-50%); bottom: 30px; background-color: var(--toast-bg); color: var(--toast-text); padding: 12px 20px; border-radius: 8px; z-index: 2000; font-size: 0.95rem; font-weight: 500; box-shadow: 0 4px 15px rgba(0,0,0,0.2); transition: opacity 0.3s, transform 0.3s, visibility 0.3s; }
+      .toast.show { visibility: visible; opacity: 1; transform: translate(-50%, -10px); }
+
+      @media (max-width: 768px) {
+        .resources-header { flex-direction: column; align-items: flex-start; gap: 15px; }
+        .search-container { max-width: 100%; }
+        .countdown-block span { font-size: 2rem; }
+      }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar">
+      <h1 class="header-title">Exam Central</h1>
+    </header>
+
+    <div class="page-container">
+        <main style="padding-top: 20px;">
+            <section class="main-card">
+                <div id="countdown-container"> 
+                    <h3 id="next-exam-title">Next Exam In</h3> 
+                    <h4 id="next-exam-subject">Loading...</h4> 
+                    <div id="countdown-timer"> 
+                        <div class="countdown-block"><span id="days">00</span><div class="label">Days</div></div> 
+                        <div class="countdown-block"><span id="hours">00</span><div class="label">Hours</div></div> 
+                        <div class="countdown-block"><span id="minutes">00</span><div class="label">Mins</div></div> 
+                        <div class="countdown-block"><span id="seconds">00</span><div class="label">Secs</div></div> 
+                    </div>
+                </div>
+
+                <div class="collapsible-header" id="timetable-toggle">
+                    <h2 class="section-header"><i class="fas fa-calendar-alt"></i> Exam Timetable</h2>
+                    <i class="fas fa-chevron-down toggle-icon"></i>
+                </div>
+                <div class="timetable-list" id="timetable-list">
+                    </div>
+            </section>
+            
+            <div class="resources-header">
+                <h2 class="section-title">Resources</h2>
+                <div class="search-container">
+                  <i class="fas fa-search search-icon"></i>
+                  <input type="text" id="search-bar" placeholder="Search resources...">
+                </div>
+            </div>
+          
+            <section class="subjects-grid">
+                </section>
+            <p id="no-results-message" style="display: none;">No resources found.</p>
+        </main>
+    </div>
+
+    <div id="toast-notification" class="toast"></div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    // --- 🎨 THEME LOGIC (from URL Param) 🎨 ---
+    function applyThemeFromURL() {
+      const urlParams = new URLSearchParams(window.location.search);
+      const theme = urlParams.get('theme');
+      if (theme === 'light' || theme === 'dark') {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+      }
+    }
+    applyThemeFromURL();
+
+    // --- 📚 UPDATED DATA (A&F Timetable) 📚 ---
+    const examsData = [
+        { date: '2026-03-06T17:00:00', subject: 'Business Communication Skills II (AEC)' },
+        { date: '2026-03-07T17:00:00', subject: 'Intro. to Sports (CC)' },
+        { date: '2026-03-09T17:00:00', subject: 'Cyber Security (OE1)' },
+        { date: '2026-03-10T17:00:00', subject: 'Principle of Management (Minor)' },
+        { date: '2026-03-11T17:00:00', subject: 'Mutual Fund Distributor – II (VSEC)' },
+        { date: '2026-03-12T17:00:00', subject: 'Financial Accounting – IV (Major)' },
+        { date: '2026-03-13T17:00:00', subject: 'Cost Accounting – II (Major)' }
+    ];
+
+    // UPDATED RESOURCES to match the new A&F schedule
+    const resourcesData = [
+        { title: 'Business Communication Skills II', type: 'AEC', icon: 'fa-comments', color: '#c2185b', bgColor: '#fce4ec', desc: 'Resources for improving business communication and corporate correspondence.', qbLink: '#', ppLink: '#' },
+        { title: 'Intro. to Sports', type: 'CC', icon: 'fa-futbol', color: '#2e7d32', bgColor: '#e8f5e9', desc: 'Materials for sports training, tests, and measurement techniques.', qbLink: 'https://birlaone.github.io/Resources/sports2.html', ppLink: 'https://mohitmali5489.github.io/Channels/sportspp.html'  },
+        { title: 'Cyber Security', type: 'OE1', icon: 'fa-shield-alt', color: '#6d4c41', bgColor: '#efebe9', desc: 'Fundamentals of information security, threats, and defensive strategies.', qbLink: '#', ppLink: '#' },
+        { title: 'Principle of Management', type: 'Minor', icon: 'fa-users', color: '#00796b', bgColor: '#e0f7fa', desc: 'Study of organizational behavior, leadership, and management principles.', qbLink: '#', ppLink: '#' },
+        { title: 'Mutual Fund Distributor – II', type: 'VSEC', icon: 'fa-chart-line', color: '#d81b60', bgColor: '#fce4ec', desc: 'Advanced concepts in mutual funds, portfolio management, and regulations.', qbLink: '#', ppLink: '#'  },
+        { title: 'Financial Accounting – IV', type: 'Major', icon: 'fa-file-invoice-dollar', color: '#303f9f', bgColor: '#e8eaf6', desc: 'Advanced financial accounting concepts, company accounts, and reporting.', qbLink: '#' },
+        { title: 'Cost Accounting – II', type: 'Major', icon: 'fa-calculator', color: '#e65100', bgColor: '#fff3e0', desc: 'Advanced cost analysis, variance analysis, and managerial decision making.', qbLink: '#' }
+    ];
+
+    // --- 🍞 TOAST NOTIFICATION LOGIC 🍞 ---
+    const toast = document.getElementById('toast-notification');
+    let toastTimeout;
+    function showToast(message) {
+        if (toastTimeout) clearTimeout(toastTimeout);
+        toast.textContent = message;
+        toast.classList.add('show');
+        toastTimeout = setTimeout(() => { toast.classList.remove('show'); }, 3000);
+    }
+
+    // --- ⏳ TIMETABLE & COUNTDOWN LOGIC ⏳ ---
+    const timetableList = document.getElementById('timetable-list');
+    function formatExamDate(dateString) { const date = new Date(dateString); return `${date.toLocaleDateString('en-US', { weekday: 'long', day: 'numeric', month: 'short', year: 'numeric' })} at ${date.toLocaleTimeString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })}`; }
+    examsData.forEach(exam => { const row = document.createElement('div'); row.className = 'timetable-row'; row.innerHTML = `<div class="timetable-date">${formatExamDate(exam.date)}</div><div class="timetable-subject">${exam.subject}</div>`; timetableList.appendChild(row); });
+    const timetableToggle = document.getElementById('timetable-toggle');
+    timetableToggle.addEventListener('click', () => { timetableToggle.classList.toggle('active'); timetableList.classList.toggle('active'); });
+    const daysEl = document.getElementById('days'), hoursEl = document.getElementById('hours'), minutesEl = document.getElementById('minutes'), secondsEl = document.getElementById('seconds'), nextExamSubjectEl = document.getElementById('next-exam-subject'), countdownContainer = document.getElementById('countdown-container');
+    let countdownInterval;
+    function startCountdown() { if (countdownInterval) clearInterval(countdownInterval); const nextExam = examsData.find(exam => new Date(exam.date).getTime() > new Date().getTime()); if (!nextExam) { countdownContainer.innerHTML = '<h3>All exams are over! Well done.</h3>'; return; } nextExamSubjectEl.textContent = nextExam.subject; const nextExamDate = new Date(nextExam.date).getTime(); countdownInterval = setInterval(() => { const distance = nextExamDate - new Date().getTime(); if (distance < 0) { clearInterval(countdownInterval); startCountdown(); return; } daysEl.innerText = String(Math.floor(distance / 86400000)).padStart(2, '0'); hoursEl.innerText = String(Math.floor((distance % 86400000) / 3600000)).padStart(2, '0'); minutesEl.innerText = String(Math.floor((distance % 3600000) / 60000)).padStart(2, '0'); secondsEl.innerText = String(Math.floor((distance % 60000) / 1000)).padStart(2, '0'); }, 1000); }
+    startCountdown();
+
+    // --- 📚 RESOURCES & SEARCH LOGIC 📚 ---
+    const subjectsGrid = document.querySelector('.subjects-grid');
+    resourcesData.forEach(resource => {
+        const card = document.createElement('div');
+        card.className = 'subject-card';
+        card.innerHTML = `
+            <div class="card-header">
+                <div class="subject-icon" style="background-color: ${resource.bgColor};"><i class="fas ${resource.icon}" style="color: ${resource.color};"></i></div>
+                <div class="title-block">
+                    <h2 class="subject-title">${resource.title}</h2>
+                    <span class="tag">${resource.type}</span>
+                </div>
+            </div>
+            <p class="subject-description">${resource.desc}</p>
+            <div class="card-actions">
+                <a href="${resource.qbLink || '#'}" target="_blank" class="action-button primary">
+                    <i class="fas fa-book-open"></i> Question Bank
+                </a>
+                <a href="${resource.ppLink || '#'}" target="_blank" class="action-button secondary">
+                    <i class="fas fa-file-alt"></i> Paper Pattern
+                </a>
+            </div>
+        `;
+        subjectsGrid.appendChild(card);
+    });
+
+    subjectsGrid.addEventListener('click', function(e) {
+        const button = e.target.closest('.action-button');
+        if (button) {
+            const href = button.getAttribute('href');
+            if (!href || href === '#') {
+                e.preventDefault();
+                showToast("Not Available!");
+            }
+        }
+    });
+
+    const searchBar = document.getElementById('search-bar');
+    const noResultsMessage = document.getElementById('no-results-message');
+    searchBar.addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        let visibleCards = 0;
+        document.querySelectorAll('.subject-card').forEach(card => {
+            const title = card.querySelector('.subject-title').textContent.toLowerCase();
+            const shouldShow = title.includes(searchTerm);
+            card.style.display = shouldShow ? 'flex' : 'none';
+            if (shouldShow) visibleCards++;
+        });
+        noResultsMessage.style.display = visibleCards === 0 ? 'block' : 'none';
+    });
+});
+</script>
+</body>
+</html>
