@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mally Accounting System | FinTech Software Case Study</title>
+    <meta name="description" content="A comprehensive technical overview of Mally, a web-based financial accounting system engineered with complex data structures including Vouchers, Ledgers, and Trial Balances.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --primary-color: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.95);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.8; margin: 0; padding: 0; }
+        nav { padding: 20px 8%; background: var(--nav-bg); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;}
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .back-link:hover { color: var(--primary-color); }
+        .article-container { max-width: 800px; margin: 60px auto; padding: 0 5%; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.2;}
+        h2 { font-size: 1.8rem; margin-top: 50px; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; display: inline-block;}
+        p { margin-bottom: 20px; font-size: 1.1rem; color: #334155; }
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 10px; font-size: 1.1rem; color: #334155; }
+        .launch-box { background: var(--surface-color); padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin: 50px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .launch-btn { display: inline-block; background: var(--primary-color); color: white; padding: 15px 40px; text-decoration: none; font-weight: 800; font-size: 1.2rem; border-radius: 8px; transition: transform 0.2s; }
+        .launch-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 50px;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="https://mohitmali.in" class="logo">Mohit.</a>
+        <a href="https://mohitmali.in" class="back-link">&larr; Back to Portfolio</a>
+    </nav>
+
+    <div class="article-container">
+        <p style="color: var(--primary-color); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">FinTech Architecture Case Study</p>
+        <h1>Mally: Architecting a Modern Accounting Engine</h1>
+        
+        <p>Enterprise accounting software is notoriously complex, heavily localized, and often carries a steep learning curve for new users. As a developer with a deep academic foundation in Financial Accounting and Business Law, I identified a gap between traditional desktop-bound financial software (like Tally Prime) and the need for lightweight, highly accessible web-based alternatives. This gap led to the conceptualization and development of <strong>Mally</strong>, a comprehensive digital accounting system.</p>
+
+        <div class="launch-box">
+            <h3 style="margin-top: 0; font-size: 1.5rem;">Access the Mally Platform</h3>
+            <p style="font-size: 1rem; color: var(--text-muted);">The Mally accounting interface is currently hosted on a dedicated cloud environment for stability and speed.</p>
+            <a href="https://mally-five.vercel.app/" target="_blank" class="launch-btn">Launch Mally Accounting &rarr;</a>
+        </div>
+
+        <h2>The Problem: Data Rigidity in Financial Tracking</h2>
+        <p>Small organizations, student committees, and independent managers often rely on basic spreadsheets for cash handling and daily expense tracking. While functional for micro-transactions, spreadsheets fail when required to enforce strict double-entry accounting rules. They lack the architectural rigidity to prevent unbalanced ledgers and cannot automatically compile complex financial reports without manual intervention.</p>
+        <p>The core objective for Mally was to build a system that enforces financial logic at the code level. The application needed to understand the intrinsic relationship between Journal Entries, Ledgers, and Trial Balances, ensuring that financial data remains uncorrupted and mathematically sound.</p>
+
+        <h2>Core FinTech Functionality</h2>
+        <p>Developing financial technology requires absolute precision. Mally was engineered to handle high-volume data entry with zero tolerance for calculation errors. The system replicates several enterprise-grade features:</p>
+        <ul>
+            <li><strong>Intelligent Voucher System:</strong> Users can log daily transactions through a structured voucher interface that automatically categorizes debits and credits, preventing imbalanced journal entries before they are committed to the database.</li>
+            <li><strong>Dynamic Ledger Generation:</strong> The system automatically routes transaction data from the journal into dedicated ledger accounts, providing real-time visibility into specific asset, liability, equity, revenue, and expense accounts.</li>
+            <li><strong>Real-Time Trial Balance:</strong> A live compilation engine that constantly verifies the fundamental accounting equation. As new vouchers are entered, the Trial Balance updates instantaneously, saving hours of manual reconciliation at the end of a reporting period.</li>
+            <li><strong>Data Integrity & Sorting:</strong> Built with advanced data sorting capabilities, ensuring that historical financial records can be retrieved, filtered, and audited with ease.</li>
+        </ul>
+
+        <h2>Software Architecture & Engineering</h2>
+        <p>To support complex financial logic, Mally required a robust technical foundation. The application logic bridges the gap between raw code and advanced accounting principles.</p>
+        <p>The front-end interface was designed for speed and clarity, prioritizing high-speed data entry (targeting 90+ WPM accuracy) to mimic the rapid input methods favored by professional accountants. The backend architecture relies on strict relational database models (utilizing SQL concepts) to ensure that every transaction is permanently linked to its corresponding ledger and voucher ID.</p>
+        <p>By hosting the application on Vercel, Mally benefits from a globally distributed edge network, ensuring that users experience zero latency when processing intensive financial calculations or generating reports.</p>
+
+        <h2>Conclusion</h2>
+        <p>Mally represents a successful fusion of software development and financial theory. By understanding the core mechanics of business operations and translating them into scalable code, the application provides a reliable, web-based alternative for structured financial management.</p>
+    </div>
+
+    <footer>
+        <p>Engineered by Mohit Mali &copy; 2026</p>
+        <div style="margin-top: 10px; font-size: 0.8rem;">
+            <a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+            <a href="/terms-of-service.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Terms of Service</a> |
+            <a href="/disclaimer.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Disclaimer</a> |
+            <a href="/contact.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
