@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EcoCampus | Digital Partner & Data Management Platform</title>
+    <meta name="description" content="A detailed technical case study of the EcoCampus platform, an environmentally-focused application engineered to handle high-volume event registration and reward point tracking.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --primary-color: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.95);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.8; margin: 0; padding: 0; }
+        nav { padding: 20px 8%; background: var(--nav-bg); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;}
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .back-link:hover { color: var(--primary-color); }
+        .article-container { max-width: 800px; margin: 60px auto; padding: 0 5%; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.2;}
+        h2 { font-size: 1.8rem; margin-top: 50px; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; display: inline-block;}
+        p { margin-bottom: 20px; font-size: 1.1rem; color: #334155; }
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 10px; font-size: 1.1rem; color: #334155; }
+        .launch-box { background: var(--surface-color); padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin: 50px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .launch-btn { display: inline-block; background: var(--primary-color); color: white; padding: 15px 40px; text-decoration: none; font-weight: 800; font-size: 1.2rem; border-radius: 8px; transition: transform 0.2s; }
+        .launch-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 50px;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="https://mohitmali.in" class="logo">Mohit.</a>
+        <a href="https://mohitmali.in" class="back-link">&larr; Back to Portfolio</a>
+    </nav>
+
+    <div class="article-container">
+        <p style="color: var(--primary-color); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Data Management Case Study</p>
+        <h1>EcoCampus: High-Volume Event & Sustainability Tracking</h1>
+        
+        <p>Managing large-scale college events presents a unique set of logistical and technical challenges. When thousands of students interact with campus initiatives simultaneously, traditional paper-based tracking or fragmented digital forms inevitably lead to data loss and administrative bottlenecks. To solve this during the massive OJAS 2026 college festival, I engineered <strong>EcoCampus</strong>—an environmentally-focused digital partner platform built for absolute data precision.</p>
+
+        <div class="launch-box">
+            <h3 style="margin-top: 0; font-size: 1.5rem;">Access the EcoCampus Platform</h3>
+            <p style="font-size: 1rem; color: var(--text-muted);">Explore the interface designed to handle real-time student registration and reward point compilation.</p>
+            <a href="/EcoCampus/app.html" class="launch-btn">Launch EcoCampus &rarr;</a>
+        </div>
+
+        <h2>The Challenge: Zero-Error Data Processing</h2>
+        <p>The core requirement for the EcoCampus initiative was to create a centralized system capable of handling high-velocity data entry without compromising integrity. The platform served as the digital backbone for the OJAS 2026 festival, requiring it to process massive volumes of student registration data while simultaneously tracking an ongoing "reward points" system tied to environmental initiatives.</p>
+        <p>In a live event environment, even a minor database error or UI lag can cause massive physical queues and frustration. The platform needed to guarantee zero errors in record-keeping, ensuring that every student's participation and accrued points were logged flawlessly in real-time.</p>
+
+        <h2>Core Platform Features</h2>
+        <p>To meet the strict demands of live event management, EcoCampus was developed with several highly optimized features:</p>
+        <ul>
+            <li><strong>High-Speed Registration Gateway:</strong> A streamlined, friction-less intake form designed to capture user data in seconds, optimized heavily for mobile devices to accommodate students on the go.</li>
+            <li><strong>Dynamic Reward Point Engine:</strong> A secure backend logic system that calculates, updates, and stores reward points associated with green initiatives and event participation, preventing duplicate entries or fraudulent point generation.</li>
+            <li><strong>Real-Time Data Compilation:</strong> An administrative view that instantly compiles and sorts user data, allowing event coordinators to make live decisions based on accurate participation metrics.</li>
+            <li><strong>Environmentally-Focused UI:</strong> A clean, modern user interface that visually aligns with the sustainability goals of the project, promoting engagement without sacrificing application speed.</li>
+        </ul>
+
+        <h2>Technical Implementation</h2>
+        <p>Serving as the Project Coordinator and Lead Developer, I architected EcoCampus using a robust web stack designed specifically to handle concurrency. By leveraging modern HTML, CSS, and optimized JavaScript, the front-end remains entirely responsive and lightweight, dramatically reducing load times on overloaded campus cellular networks.</p>
+        <p>The data management layer was structured to mimic rigorous professional standards, drawing on concepts of SQL-based relational databases to ensure strict validation of all incoming data before it is permanently committed to the records.</p>
+
+        <h2>Project Impact</h2>
+        <p>EcoCampus successfully managed the digital footprint of the OJAS 2026 festival. By eliminating manual data entry, the platform achieved a zero-error rate in student point tracking and registration. It stands as a testament to the fact that when software is built with a deep understanding of operational workflow, it can completely transform the efficiency of large-scale live events.</p>
+    </div>
+
+    <footer>
+        <p>Engineered by Mohit Mali &copy; 2026</p>
+        <div style="margin-top: 10px; font-size: 0.8rem;">
+            <a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+            <a href="/terms-of-service.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Terms of Service</a> |
+            <a href="/disclaimer.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Disclaimer</a> |
+            <a href="/contact.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
+
