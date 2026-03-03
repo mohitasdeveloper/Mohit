@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title>Business Communication QB - BAFs App</title>
+  <title>Business Communication QB - BirlaOne</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
@@ -17,38 +17,35 @@
 
   <style>
     :root {
-      /* Blue/Cyan Color Combination */
       --primary-accent: #2563eb;
       --primary-gradient: linear-gradient(90deg, #2563eb, #06b6d4);
       --danger-color: #e53935;
       --font-sans: 'Inter', sans-serif;
       --font-serif: 'Lora', serif;
-      --border-radius: 14px;
+      --border-radius: 12px;
       --transition-speed: 0.3s;
     }
     
     html[data-theme="light"] {
-      --bg-color: #f0f4f8;
+      --bg-color: #f4f7fb;
       --card-bg: #ffffff;
       --text-primary: #1e293b;
-      --text-secondary: #64748b;
+      --text-secondary: #475569;
       --border-color: #e2e8f0;
-      --shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-      --header-bg: rgba(255, 255, 255, 0.85);
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+      --header-bg: rgba(255, 255, 255, 0.9);
       --input-bg: #f8fafc;
-      --table-header-bg: #f1f5f9;
     }
 
     html[data-theme="dark"] {
       --bg-color: #0f172a;
       --card-bg: #1e293b;
       --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
+      --text-secondary: #cbd5e1;
       --border-color: #334155;
-      --shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
-      --header-bg: rgba(15, 23, 42, 0.85);
-      --input-bg: #334155;
-      --table-header-bg: #334155;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+      --header-bg: rgba(15, 23, 42, 0.9);
+      --input-bg: #0f172a;
     }
       
     html[data-theme="sepia"] {
@@ -59,193 +56,452 @@
         --border-color: #dcd0b9;
         --primary-accent: #2c5282;
         --primary-gradient: linear-gradient(135deg, #2a4365, #3182ce);
-        --shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
-        --header-bg: rgba(244, 236, 216, 0.8);
+        --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        --header-bg: rgba(244, 236, 216, 0.9);
         --input-bg: #e9deca;
-        --table-header-bg: #e9deca;
     }
 
-    /* Base & Layout Styles */
-    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     
     body {
       font-family: var(--font-serif);
       background-color: var(--bg-color);
       color: var(--text-primary);
-      transition: background-color var(--transition-speed) ease, color var(--transition-speed) ease;
-      line-height: 1.6;
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      line-height: 1.7;
+      font-size: 16px;
     }
 
     /* Header */
-    .top-bar { font-family: var(--font-sans); display: flex; justify-content: space-between; align-items: center; padding: 12px 16px; background: var(--header-bg); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); }
-    .top-bar .title { font-weight: 700; font-size: 22px; color: var(--text-primary); letter-spacing: -0.5px; }
+    .top-bar { 
+        font-family: var(--font-sans); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 20px; 
+        background: var(--header-bg); 
+        backdrop-filter: blur(8px); 
+        position: sticky; 
+        top: 0; 
+        z-index: 100; 
+        border-bottom: 1px solid var(--border-color); 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+    .top-bar .title { font-weight: 800; font-size: 24px; color: var(--text-primary); letter-spacing: -0.5px; }
     
-    .theme-selector select {
+    .controls { display: flex; gap: 12px; }
+    
+    .custom-select select {
       background-color: var(--input-bg);
       color: var(--text-primary);
       border: 1px solid var(--border-color);
-      border-radius: 8px;
-      padding: 6px 10px;
+      border-radius: 6px;
+      padding: 8px 32px 8px 12px;
       font-family: var(--font-sans);
       font-size: 14px;
-      font-weight: 500;
+      font-weight: 600;
       -webkit-appearance: none; appearance: none;
       background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
       background-repeat: no-repeat;
-      background-position: right 8px center;
-      padding-right: 28px;
-      transition: all var(--transition-speed) ease;
+      background-position: right 10px center;
       cursor: pointer;
     }
-    
-    .theme-selector select:focus {
-        outline: 2px solid var(--primary-accent);
-        outline-offset: 2px;
-    }
+    .custom-select select:focus { outline: 2px solid var(--primary-accent); }
 
-    /* Content Styles */
-    .container { padding: 20px 16px; max-width: 850px; margin: 0 auto; position: relative; }
-    .section-header { font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin: 30px 0 15px; color: var(--primary-accent); border-bottom: 3px solid var(--border-color); padding-bottom: 10px; }
+    /* Layout */
+    .container { padding: 30px 20px; max-width: 900px; margin: 0 auto; }
+    .section-header { font-family: var(--font-sans); font-size: 26px; font-weight: 800; margin: 40px 0 20px; color: var(--primary-accent); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
     
-    .note-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 28px; overflow: hidden; transition: all var(--transition-speed) ease; }
-    .note-title { font-family: var(--font-sans); font-size: 20px; font-weight: 700; padding: 18px 22px; background: var(--primary-gradient); color: white; text-shadow: 0 1px 2px rgba(0,0,0,0.15); line-height: 1.4; }
-    .note-body { padding: 20px 24px; }
-    .note-body h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--primary-accent); margin-top: 20px; margin-bottom: 12px; }
-    .note-body h4 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 600; margin-top: 15px; margin-bottom: 8px; }
-    .note-body p { margin-bottom: 16px; text-align: left; font-size: 17px; }
+    /* Cards */
+    .note-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; }
+    .note-title { font-family: var(--font-sans); font-size: 20px; font-weight: 700; padding: 16px 24px; background: var(--primary-gradient); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .note-body { padding: 24px; animation: fadeIn 0.3s ease-in-out; }
+    
+    /* Typography inside cards */
+    .note-body h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--primary-accent); margin: 24px 0 12px; }
+    .note-body h3:first-child { margin-top: 0; }
+    .note-body h4 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 600; margin: 16px 0 8px; }
+    .note-body p { margin-bottom: 16px; color: var(--text-secondary); }
     .note-body strong { font-family: var(--font-sans); font-weight: 700; color: var(--text-primary); }
-    .note-body ul, .note-body ol { padding-left: 20px; margin-bottom: 16px; font-size: 17px; }
+    .note-body ul, .note-body ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
     .note-body li { margin-bottom: 10px; }
+    .note-body li::marker { color: var(--primary-accent); font-weight: bold; }
     
-    .format-box { border: 2px dashed var(--border-color); padding: 20px; background-color: var(--input-bg); border-radius: 8px; font-family: var(--font-sans); margin-top: 15px; }
+    .format-box { border: 2px dashed var(--border-color); padding: 24px; background-color: var(--input-bg); border-radius: 8px; font-family: var(--font-sans); margin-top: 15px; color: var(--text-primary); }
     .format-box .center { text-align: center; }
     .format-box .right { text-align: right; }
-    .format-box p { margin-bottom: 8px; }
+    .format-box p { margin-bottom: 8px; color: var(--text-primary); }
 
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(3px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
   </style>
 </head>
 <body>
 
   <header class="top-bar">
-    <h1 class="title">BAFs App</h1>
-    <div class="theme-selector">
-        <select id="themeSelect" onchange="changeTheme(this.value)" aria-label="Select theme">
-          <option value="light">Light</option>
-          <option value="dark">Dark</option>
-          <option value="sepia">Sepia</option>
-        </select>
+    <h1 class="title">BirlaOne</h1>
+    <div class="controls">
+        <div class="custom-select">
+            <select id="lengthSelect" onchange="changeLength(this.value)" aria-label="Select Answer Length">
+              <option value="long">Long (10 Marks)</option>
+              <option value="medium">Medium (Detailed)</option>
+              <option value="short">Short (Revision)</option>
+            </select>
+        </div>
+        <div class="custom-select">
+            <select id="themeSelect" onchange="changeTheme(this.value)" aria-label="Select theme">
+              <option value="light">Light Theme</option>
+              <option value="dark">Dark Theme</option>
+              <option value="sepia">Sepia Theme</option>
+            </select>
+        </div>
     </div>
   </header>
 
-  <main class="container" id="main-content-wrapper">
-  </main>
+  <main class="container" id="main-content-wrapper"></main>
 
 <script>
+    // Theme logic
     function changeTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
     }
     
-    function renderQuestionBank(container) {
-        const qbData = `
-            <h2 class="section-header">Long Questions (10 Marks)</h2>
-            
-            <article class="note-card">
-                <h2 class="note-title">1. What is an interview and types of interview?</h2>
-                <div class="note-body">
-                    <h3>Meaning & Introduction</h3>
-                    <p>An interview is basically a medium of communication between people. It is a face-to-face oral exchange of information about relevant matters to discover as much information as possible. The primary purpose of an interview is to get truthful responses from the candidates and to find out their various views, attitudes, interests, and hobbies related to management matters.</p>
-                    
-                    <h3>Types of Interview</h3>
-                    <ol>
-                        <li><strong>Selection Interview:</strong> In a selection interview, the employer tries to size up an applicant for a job. The main aim is to find out whether the job is suitable for the candidate and vice versa. The core objective is to assess the suitability of the candidates and select the best candidate for a specific job.</li>
-                        <li><strong>Assessment or Appraisal Interview:</strong> This is a periodical assessment of the performance of subordinates conducted by superior officers. It has two main goals: to improve job performance and better relations, and to review past performance while discussing future work plans to ensure organizational growth.</li>
-                        <li><strong>Grievance Interview:</strong> An organization is a group of people working together, which can lead to complaints. A worker may have a grievance against a fellow worker or a supervisor. The primary aim of this interview is to seek clarification regarding these problems and bring about harmony between individuals and the organization.</li>
-                        <li><strong>Exit Interview:</strong> This type of interview takes place when an employee is voluntarily leaving the organization. It is highly important from the employer's point of view. It should be conducted in an informal and friendly manner where the interviewer keeps an open mind and listens to the departing employee's views.</li>
-                    </ol>
-                    
-                    <h3>Conclusion</h3>
-                    <p>In conclusion, interviews are a vital structural component of business communication. From hiring to appraisals, addressing grievances, and conducting exit procedures, different types of interviews ensure smooth functioning, transparent communication, and mutual growth for both the employees and the organization.</p>
-                </div>
-            </article>
+    // UI State
+    let currentLength = 'long';
+    function changeLength(length) {
+        currentLength = length;
+        renderQuestionBank();
+    }
 
-            <article class="note-card">
-                <h2 class="note-title">2. What is an interview and explain the process of interview?</h2>
-                <div class="note-body">
-                    <h3>Meaning</h3>
-                    <p>An interview is a meeting of persons face-to-face. It involves the interviewer (the person who takes the interview and asks questions) and the interviewee (the person who answers) engaging in oral communication with a certain definite purpose.</p>
-                    
-                    <h3>Process / Steps of Interview</h3>
-                    <p>Conducting an effective interview generally follows these systematic steps:</p>
-                    <ol>
-                        <li><strong>Decide on a suitable location:</strong> The location should be comfortable and completely free from interruption. The room must be well-ventilated with proper positioning of furniture. It is also essential to provide a comfortable waiting area for the candidates.</li>
-                        <li><strong>Prepare for the interview:</strong> Time spent in preparation will save significant time during the actual interview. Key factors that need to be decided in advance include: when the interview is to be arranged, who should conduct it, what specific questions need to be asked, and how the interviewees will be evaluated.</li>
-                        <li><strong>Conduct the interview:</strong> A successful interview requires the interviewer to master three important skills: questioning, actively listening, and summarizing. It is often said that a good interviewer spends more than one-third of the time actively listening to ensure they understand the candidate perfectly.</li>
-                        <li><strong>Make a judgment and analyze the results:</strong> Making decisions can sometimes become the most difficult task. Evaluation is a continuous process during the interview. The candidate's manner, attitudes, and personality fall under 'form', while their actual knowledge and presentation are evaluated as 'content'.</li>
-                    </ol>
-                </div>
-            </article>
+    // Question Bank Data Object (Simplified English)
+    const qbData = {
+        longQuestions: [
+            {
+                title: "1. What is an interview and types of interview?",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Meaning</h3>
+                        <p>An interview is a formal, face-to-face conversation where people ask questions to get honest answers and gather information.</p>
+                        <h3>Types of Interviews</h3>
+                        <ul>
+                            <li><strong>Selection Interview:</strong> Used to hire the best person for a job.</li>
+                            <li><strong>Appraisal Interview:</strong> Used to check how well an employee is doing their work.</li>
+                            <li><strong>Grievance Interview:</strong> Held to solve a worker's complaint or problem.</li>
+                            <li><strong>Exit Interview:</strong> A friendly chat held when an employee is leaving the company to find out why.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <h3>Introduction & Meaning</h3>
+                        <p>An interview is a face-to-face meeting between two or more people. The main purpose is to talk openly, ask questions, and get true answers to understand a person's skills, attitude, and thoughts.</p>
+                        <h3>Types of Interviews</h3>
+                        <ol>
+                            <li><strong>Selection Interview:</strong> This is done when hiring new staff. The boss asks questions to see if the candidate is the right fit for the job, and the candidate learns about the company.</li>
+                            <li><strong>Appraisal Interview:</strong> This is a regular check-up (usually once a year). The manager and employee discuss what went well, what needs improvement, and plan for the future.</li>
+                            <li><strong>Grievance Interview:</strong> Sometimes workers get upset with their coworkers or workplace. This interview is held to listen to their complaints and peacefully solve the problem.</li>
+                            <li><strong>Exit Interview:</strong> When an employee decides to quit, HR conducts this informal interview. They listen with an open mind to understand why the person is leaving, which helps the company improve.</li>
+                        </ol>
+                    `,
+                    long: `
+                        <h3>Introduction: What is an Interview?</h3>
+                        <p>In simple words, an interview is a planned, face-to-face conversation with a clear purpose. It involves an "Interviewer" (the one asking questions) and an "Interviewee" (the one answering). The main goal is to get honest answers and gather important information about a person's skills, personality, and opinions.</p>
+                        
+                        <h3>The 4 Main Types of Interviews</h3>
+                        <p>Companies use different types of interviews for different situations. Here is a detailed look at the four main types:</p>
+                        <ol>
+                            <li><strong>Selection Interview (The Hiring Interview)</strong>
+                                <ul>
+                                    <li><strong>What it is:</strong> This is the most common type. When a company has a job opening, they use this interview to test applicants.</li>
+                                    <li><strong>The Goal:</strong> The employer wants to find the absolute best person for the job. At the same time, the applicant gets to see if they actually want to work for the company. It helps build a good relationship right from the start.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Appraisal Interview (The Performance Review)</strong>
+                                <ul>
+                                    <li><strong>What it is:</strong> Once a person is hired, the company needs to check how well they are working. This meeting happens once or twice a year between an employee and their boss.</li>
+                                    <li><strong>The Goal:</strong> They talk about the employee's past achievements, point out mistakes to learn from, and set new goals for the coming year. This keeps the employee motivated and helps the company grow.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Grievance Interview (The Problem-Solving Meeting)</strong>
+                                <ul>
+                                    <li><strong>What it is:</strong> When many people work together, fights and misunderstandings happen. An employee might be angry about their salary, their boss, or a coworker. </li>
+                                    <li><strong>The Goal:</strong> Management calls the upset employee for a private meeting to listen to their problems. The goal is to solve the conflict quickly and bring peace and harmony back to the office.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Exit Interview (The Goodbye Chat)</strong>
+                                <ul>
+                                    <li><strong>What it is:</strong> This happens when an employee officially resigns and is leaving the company. It is usually taken by HR in a very friendly and relaxed way.</li>
+                                    <li><strong>The Goal:</strong> Because the employee is leaving, they will be very honest. The company wants to know the real reason they are quitting (like bad management or low pay) so they can fix the problem and stop other good workers from leaving.</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <h3>Conclusion</h3>
+                        <p>To sum up, interviews are a very powerful tool in business. Whether it is hiring a fresh graduate, checking an employee's progress, solving an office fight, or saying goodbye, interviews help a company run smoothly and keep its workers happy.</p>
+                    `
+                }
+            },
+            {
+                title: "2. What is an interview and explain the process of interview?",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Meaning</h3>
+                        <p>An interview is a face-to-face meeting between two people meant to gather information for a specific purpose.</p>
+                        <h3>The 4 Steps of an Interview</h3>
+                        <ol>
+                            <li><strong>Location:</strong> Pick a quiet, comfortable room with no noise.</li>
+                            <li><strong>Preparation:</strong> Plan the questions and set the time in advance.</li>
+                            <li><strong>Conducting:</strong> Ask good questions, listen carefully, and summarize the answers.</li>
+                            <li><strong>Evaluating:</strong> Judge the candidate on their confidence (form) and their knowledge (content).</li>
+                        </ol>
+                    `,
+                    medium: `
+                        <h3>Meaning</h3>
+                        <p>An interview is a formal conversation where the interviewer asks questions to the interviewee to gather important information and judge their skills.</p>
+                        <h3>The Step-by-Step Process</h3>
+                        <ol>
+                            <li><strong>Decide the Location:</strong> A good interview needs a quiet, comfortable room with fresh air. There should be no interruptions, like ringing phones. Provide a nice waiting area for the candidates.</li>
+                            <li><strong>Preparation:</strong> The interviewer must do their homework. They need to decide exactly when to hold the meeting, who will ask the questions, and what questions to ask.</li>
+                            <li><strong>Conduct the Interview:</strong> The interviewer must use three skills: asking clear questions, actively listening to the answers, and summarizing what was said. A good rule is to listen 70% of the time and talk 30% of the time.</li>
+                            <li><strong>Evaluate the Results:</strong> After the interview, the panel must judge the candidate. They look at 'Form' (body language, politeness) and 'Content' (how correct and smart their answers were).</li>
+                        </ol>
+                    `,
+                    long: `
+                        <h3>Meaning of an Interview</h3>
+                        <p>An interview is a structured, face-to-face meeting between two sides: the <em>Interviewer</em> (who asks the questions) and the <em>Interviewee</em> (who gives the answers). The main idea is to have a clear, two-way conversation to collect facts, check skills, or solve a problem.</p>
+                        
+                        <h3>The Complete Process of an Interview</h3>
+                        <p>A good interview does not happen by magic. It requires careful planning. Here are the four simple steps every successful interview follows:</p>
+                        
+                        <ol>
+                            <li><strong>Step 1: Choose the Right Location</strong>
+                                <ul>
+                                    <li>The environment is very important. The interview room must be completely quiet and free from distractions. People walking in or phones ringing will break the candidate's focus.</li>
+                                    <li>The room should have comfortable chairs, good lighting, and fresh air. Also, there must be a relaxing waiting area outside so candidates can calm their nerves before coming in.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Step 2: Prepare Before the Meeting</strong>
+                                <ul>
+                                    <li>Preparation saves a lot of time. The company must plan everything before the candidate arrives.</li>
+                                    <li>Management needs to decide: What time will it start? Who is the best manager to take the interview? What specific questions will be asked? How will we score the candidate's answers?</li>
+                                </ul>
+                            </li>
+                            <li><strong>Step 3: Conduct the Interview (The Main Event)</strong>
+                                <ul>
+                                    <li>During the actual meeting, the interviewer needs to use three golden skills: <strong>Questioning, Listening, and Summarizing.</strong></li>
+                                    <li>They must ask easy-to-understand questions. More importantly, they must be a great listener. A smart interviewer talks for only 30% of the time and spends 70% of the time just listening carefully to the candidate.</li>
+                                </ul>
+                            </li>
+                            <li><strong>Step 4: Make a Final Judgment (Evaluation)</strong>
+                                <ul>
+                                    <li>Choosing the right person is the hardest part. The interviewers discuss and score the candidate on two main things:</li>
+                                    <li><strong>'Form':</strong> This means the candidate's personality. Did they make eye contact? Were they confident? Did they smile?</li>
+                                    <li><strong>'Content':</strong> This means the candidate's actual brainpower. Were their answers factually correct? Did they know about the job?</li>
+                                </ul>
+                            </li>
+                        </ol>
+                        
+                        <h3>Conclusion</h3>
+                        <p>When an organization follows these four simple steps—picking a good room, preparing well, listening carefully, and judging fairly—they make the interview process smooth, easy, and highly successful for everyone.</p>
+                    `
+                }
+            },
+            {
+                title: "3. What are the essential skills assessed during group discussion? Give suitable examples.",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>A Group Discussion (GD) checks how well you work with others. The main skills are:</p>
+                        <ul>
+                            <li><strong>Communication Skill:</strong> Speaking clearly and simply.</li>
+                            <li><strong>Teamwork:</strong> Letting others speak and being a good listener.</li>
+                            <li><strong>Conflict Management:</strong> Disagreeing without getting angry or shouting.</li>
+                            <li><strong>Leadership:</strong> Keeping the group on topic and summarizing at the end.</li>
+                            <li><strong>Analytical Skill:</strong> Using real facts and logic to support your points.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <p>In a Group Discussion (GD), companies test how you behave in a team. They look for these essential skills:</p>
+                        <ul>
+                            <li><strong>Communication Skills:</strong> Can you explain your ideas clearly? Evaluators watch your tone and fluency. <em>(Example: Explaining a hard topic using very simple words.)</em></li>
+                            <li><strong>Teamwork & Interpersonal Skills:</strong> Are you polite? A good team player encourages shy people to talk. <em>(Example: Saying, "We haven't heard from Amit yet, what do you think?")</em></li>
+                            <li><strong>Conflict Management:</strong> People will disagree with you. Evaluators check if you stay calm. <em>(Example: Instead of fighting, saying, "I understand your point, but let's also look at...")</em></li>
+                            <li><strong>Leadership Skills:</strong> Can you guide the group? A leader starts the topic well, stops people from wandering off-topic, and summarizes the main points.</li>
+                            <li><strong>Analytical & Presentation Skills:</strong> Do you use facts to prove your point, or just loud opinions? Backing up arguments with real-world examples is highly valued.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>A Group Discussion (GD) is a popular test used by companies to hire people. In a GD, a group of students or candidates is given a topic to discuss for 10-15 minutes. Because modern office jobs require a lot of teamwork, a GD helps the company see how you behave with other people in real life.</p>
+                        
+                        <h3>Essential Skills Assessed During a GD:</h3>
+                        <p>Evaluators sit quietly in the corner and grade you on the following skills:</p>
+                        <ul>
+                            <li><strong>1. Communication and Speaking Skills:</strong>
+                                <ul>
+                                    <li>They check if you speak clearly, confidently, and politely. It is not about shouting the loudest; it is about making sense.</li>
+                                    <li><em>Example:</em> A candidate who takes a tough business topic and explains it in three simple, easy-to-understand points will get very high marks.</li>
+                                </ul>
+                            </li>
+                            <li><strong>2. Interpersonal and Teamwork Skills:</strong>
+                                <ul>
+                                    <li>Companies hate selfish workers. They want team players who listen to others and show respect.</li>
+                                    <li><em>Example:</em> If a candidate notices someone trying to speak but getting cut off, and says, "Let's give Priya a chance to finish her sentence," they show amazing teamwork.</li>
+                                </ul>
+                            </li>
+                            <li><strong>3. Conflict Management (Handling Fights):</strong>
+                                <ul>
+                                    <li>In any discussion, people will disagree. The judges watch carefully to see if you get angry, defensive, or aggressive when someone says you are wrong.</li>
+                                    <li><em>Example:</em> Instead of saying "You are completely wrong," a mature candidate will say, "That is an interesting view, but if we look at the data, a different picture appears."</li>
+                                </ul>
+                            </li>
+                            <li><strong>4. Leadership and Initiative:</strong>
+                                <ul>
+                                    <li>Leadership does not mean dominating everyone. True leadership is guiding the group safely to the finish line.</li>
+                                    <li><em>Example:</em> When the group starts fighting or going off-topic, a good leader will step in and say, "Friends, we only have 2 minutes left, let's come back to the main topic and summarize our points."</li>
+                                </ul>
+                            </li>
+                            <li><strong>5. Analytical and Thinking Skills:</strong>
+                                <ul>
+                                    <li>Judges check if you have real knowledge. Do you just throw random opinions, or do you use logic and facts?</li>
+                                    <li><em>Example:</em> Supporting your argument about 'Online Education' by giving real examples from the Covid-19 lockdown shows deep analytical thinking.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h3>Conclusion</h3>
+                        <p>To win a group discussion, you do not need to speak the entire time. You just need to speak sensibly, respect your teammates, stay calm under pressure, and show that you are a great person to work with.</p>
+                    `
+                }
+            },
+            {
+                title: "4. Explain the different types of meetings.",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>Meetings are divided into two simple types based on how strict their rules are:</p>
+                        <ul>
+                            <li><strong>Formal Meetings:</strong> These are strict, professional meetings with set rules, planned agendas, and official written records (Minutes). Examples: Annual General Meeting (AGM), Board Meetings.</li>
+                            <li><strong>Informal Meetings:</strong> These are casual, relaxed chats without strict rules or paperwork. Examples: Daily team updates, brainstorming sessions over coffee.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <p>In business, meetings are very important to share ideas. Based on their rules, there are two main types of meetings: Formal and Informal.</p>
+                        
+                        <h3>1. Formal Meetings</h3>
+                        <p>These are highly organized, professional, and follow strict company laws. They always have a printed Agenda, a Chairman to lead, and all decisions are legally recorded in a book called 'Minutes'.</p>
+                        <ul>
+                            <li><strong>Annual General Meeting (AGM):</strong> A mandatory yearly meeting where the company owners (shareholders) check the financial profits and vote for new directors.</li>
+                            <li><strong>Board Meetings:</strong> Held by top bosses (like the CEO) to make big, long-term decisions for the company's future.</li>
+                            <li><strong>Special Meetings:</strong> Called urgently to solve a massive, sudden problem that cannot wait for the next regular meeting.</li>
+                        </ul>
 
-            <article class="note-card">
-                <h2 class="note-title">3. What are the essential skills assessed during group discussion? Give suitable examples.</h2>
-                <div class="note-body">
-                    <p>Group discussions are widely held during the recruitment process to assess and eliminate candidates based on various critical skills. The essential skills assessed include:</p>
-                    <ul>
-                        <li><strong>Communication Skill:</strong> Evaluates clarity, fluency, and persuasion. It checks how well a candidate shares ideas and suggestions with others. <em>Example:</em> Explaining a complex business problem in simple terms so the whole group understands.</li>
-                        <li><strong>Soft / Interpersonal Skill:</strong> Evaluates teamwork, cooperation, and empathy. It focuses on the manner in which the candidate speaks and how they answer questions put forth by others. <em>Example:</em> Acknowledging someone else's point before respectfully adding your own thoughts.</li>
-                        <li><strong>Team Working Skills:</strong> Assesses whether the candidate is able to encourage others to participate rather than just dominating the conversation. <em>Example:</em> Actively asking a quiet group member, "What are your views on this topic?"</li>
-                        <li><strong>Conflict Management Skills:</strong> Checks how the candidate expresses disagreement with the opinions of other participants without showing aggression. <em>Example:</em> Using phrases like "I see your point, however, another perspective is..." instead of attacking them personally.</li>
-                        <li><strong>Taking the Initiative:</strong> Evaluates if the candidate can start the topic and help others do the same. <em>Example:</em> Being the first person to outline a logical structure or framework for the group to follow at the start of the discussion.</li>
-                        <li><strong>Leadership Skills:</strong> Shows initiative, the ability to guide the group, and summarizing repeating ideas when necessary. <em>Example:</em> Steering the group back to the main agenda when the discussion drifts off-topic.</li>
-                        <li><strong>Presentation Skills:</strong> Looks at how good the candidate is at substantiating their point of view with facts and clear logic. <em>Example:</em> Backing up an argument with relevant census data or current affairs.</li>
-                        <li><strong>Negotiation & Observation Skills:</strong> Assesses if the candidate listens patiently to others, understands the ideas presented, and can arrive at a mutually satisfying solution.</li>
-                    </ul>
-                </div>
-            </article>
+                        <h3>2. Informal Meetings</h3>
+                        <p>These are casual and flexible. They do not have strict rules, formal notices, or heavy paperwork.</p>
+                        <ul>
+                            <li>They happen in a relaxed environment so people feel free to share creative ideas.</li>
+                            <li>Common examples are daily 10-minute team huddles, brainstorming new ideas, or a quick chat between a manager and their junior.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>A meeting happens when two or more people gather to discuss ideas, solve problems, or make important decisions. In a corporate office, depending on how strict the rules are, meetings are broadly classified into two main types: Formal Meetings and Informal Meetings.</p>
+                        
+                        <h3>1. Formal Meetings (The Strict Meetings)</h3>
+                        <p>Formal meetings are extremely organized and highly structured. They are often controlled by government corporate laws. They require a written notice sent days in advance, a strict list of topics to discuss (Agenda), a minimum number of attendees (Quorum), and detailed written proof of all decisions (Minutes).</p>
+                        <ul>
+                            <li><strong>Annual General Meeting (AGM):</strong> This is a very important, compulsory meeting held once a year. Here, the shareholders (owners) meet the directors. They review the company's profit and loss, declare dividends (profits shared with owners), and vote to elect new leaders. It ensures the company is running honestly.</li>
+                            <li><strong>Board or Executive Meetings:</strong> These are high-level meetings for the top bosses, like the CEO, CFO, and Directors. They meet to discuss major company policies, approve big budgets, and decide the future direction of the business.</li>
+                            <li><strong>Special or Extra-Ordinary Meetings:</strong> Sometimes, an emergency happens that cannot wait for the yearly AGM. For example, a sudden legal crisis or a big merger. A special meeting is called immediately just to solve that one urgent issue.</li>
+                        </ul>
 
-            <article class="note-card">
-                <h2 class="note-title">4. Explain the different types of meetings.</h2>
-                <div class="note-body">
-                    <p>On the basis of how meetings are conducted, they can be broadly categorized into two main types: Formal Meetings and Informal Meetings.</p>
-                    
-                    <h3>Formal Meetings</h3>
-                    <p>In a professional or organizational setting, formal meetings are carefully organized. They follow set guidelines, have a predetermined agenda, and roles of all participants are often documented in the minutes of the meeting.</p>
-                    <ul>
-                        <li><strong>General Members Meeting (GMM):</strong> Often an annual formal gathering for an organization's members (like society residents) to review past performance, discuss future strategy, and vote on key issues.</li>
-                        <li><strong>Special Meetings:</strong> A formal gathering of individuals (such as shareholders or board members) that is called for a specific, urgent purpose outside of the organization's regularly scheduled meetings.</li>
-                        <li><strong>Executive Meeting:</strong> A high-level gathering of senior leaders (C-Suite, VP, board members) to make strategic, long-term decisions and oversee organizational direction rather than focusing on daily tasks.</li>
-                        <li><strong>Annual General Meeting (AGM):</strong> A mandatory yearly gathering where a company's shareholders and board of directors review financial performance, elect directors, appoint auditors, and ensure transparency.</li>
-                    </ul>
-
-                    <h3>Informal Meetings</h3>
-                    <p>Informal meetings are casual, flexible, and less structured discussions between individuals or groups.</p>
-                    <ul>
-                        <li>They do not necessarily follow a set agenda, require meticulous documentation, or have a specified time limit.</li>
-                        <li>Conducted in a relaxed environment, these meetings are heavily used for brainstorming ideas, quick problem-solving, and rapid decision-making.</li>
-                        <li>Examples include brief team huddles and one-on-one chats.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">5. Explain the role of chairman.</h2>
-                <div class="note-body">
-                    <p>The Chairman plays a pivotal role in the proper conduct of a committee meeting. Their authority and responsibilities include:</p>
-                    <ul>
-                        <li><strong>Unquestioned Authority:</strong> The chairman must be firm and not allow themselves to be overruled during the meeting proceedings.</li>
-                        <li><strong>Setting the Tone:</strong> They should set the tone of the meeting by making introductory remarks in which they clearly outline the goals and objectives of the meeting.</li>
-                        <li><strong>Maintaining Focus:</strong> The discussion should be kept strictly to the point. The chairman must try to check any irrelevant discussion which may lead to a loss of interest among members.</li>
-                        <li><strong>Encouraging Contributions:</strong> They must ensure that members make useful and positive contributions to the topic being discussed. They should encourage shy members to voice their views.</li>
-                        <li><strong>Ensuring Fairness:</strong> The chairman must curb excessive verbosity from dominant members to ensure everyone gets a fair hearing and equal opportunity to speak.</li>
-                        <li><strong>Procedural Duties:</strong> They must ensure the meeting is properly convened with a quorum, see that past minutes are approved, and take up items strictly as per the order in the agenda.</li>
-                        <li><strong>Time Management:</strong> They must ensure the meeting moves forward logically, is kept within a reasonable time-limit, and officially declare the meeting closed at the end of business.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">6. Draft the agenda for the board meeting of the company.</h2>
-                <div class="note-body">
+                        <h3>2. Informal Meetings (The Casual Meetings)</h3>
+                        <p>Informal meetings are the complete opposite of formal ones. They are highly flexible, casual, and do not follow strict rules. They form the backbone of daily office work.</p>
+                        <ul>
+                            <li><strong>How they work:</strong> You do not need a 21-day notice, a strict agenda, or a designated chairman. People can speak freely and openly without worrying about parliamentary procedures.</li>
+                            <li><strong>Where they are used:</strong> They are heavily used for creative brainstorming sessions, daily morning department stand-ups, quick problem-solving chats over a cup of coffee, or one-on-one progress updates between a manager and an employee.</li>
+                            <li><strong>The Benefit:</strong> Because there is no heavy paperwork or strict rules, they save a lot of time and allow fresh, out-of-the-box ideas to flow naturally.</li>
+                        </ul>
+                        
+                        <h3>Conclusion</h3>
+                        <p>Both types of meetings are critical for a successful business. While informal meetings help teams do their daily tasks creatively, formal meetings keep the company legally safe, financially sound, and well-directed.</p>
+                    `
+                }
+            },
+            {
+                title: "5. Explain the role of chairman.",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>The Chairman is the main leader of a formal meeting. Their key duties are:</p>
+                        <ul>
+                            <li>Making sure enough people are present to start (Quorum).</li>
+                            <li>Explaining the main goal of the meeting at the beginning.</li>
+                            <li>Ensuring everyone gets a fair chance to speak.</li>
+                            <li>Stopping people from wasting time with off-topic talk.</li>
+                            <li>Closing the meeting exactly on time.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <p>The Chairman is like the captain of a ship during a formal meeting. A successful meeting depends entirely on their leadership and fairness. Their main roles include:</p>
+                        <ul>
+                            <li><strong>Starting Properly:</strong> They check if enough members are present (Quorum) and approve the notes from the last meeting before starting new topics.</li>
+                            <li><strong>Setting the Tone:</strong> They give an opening speech to clearly explain what needs to be decided today so everyone is focused.</li>
+                            <li><strong>Maintaining Order:</strong> They make sure the discussion strictly follows the printed Agenda. If people start talking about irrelevant things, the Chairman firmly brings them back on track.</li>
+                            <li><strong>Being Fair:</strong> They act like a good referee. They encourage shy people to share their ideas, and politely stop loud members from talking too much.</li>
+                            <li><strong>Time Management:</strong> They watch the clock, make sure decisions are made quickly, and officially end the meeting on time.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>In any formal corporate gathering, the Chairman acts as the chief presiding officer. Simply put, they are the boss of the meeting room. A meeting can easily turn into a noisy, time-wasting argument without a good leader. The success and efficiency of the meeting rely entirely on the Chairman's ability to be both strict and fair.</p>
+                        
+                        <h3>Key Roles and Duties of the Chairman:</h3>
+                        <p>A good Chairman has to juggle many responsibilities at once. Here is what they do:</p>
+                        <ul>
+                            <li><strong>1. Absolute but Fair Authority:</strong>
+                                <ul>
+                                    <li>The Chairman's power in the room must be respected. They must be firm enough to keep order and prevent chaos, but they should not act like a dictator. Their final word is law during the meeting.</li>
+                                </ul>
+                            </li>
+                            <li><strong>2. Following the Legal Rules:</strong>
+                                <ul>
+                                    <li>Before starting, they must check if the meeting is legal. This means checking the <em>Quorum</em> (ensuring the minimum required number of members have arrived).</li>
+                                    <li>They must read the 'Minutes' (records) of the previous meeting and get them signed. They also make sure the meeting follows the printed list of topics (Agenda) step-by-step.</li>
+                                </ul>
+                            </li>
+                            <li><strong>3. Setting the Tone and Focus:</strong>
+                                <ul>
+                                    <li>The Chairman opens the floor with a welcoming speech. They clearly explain exactly what needs to be achieved by the end of the hour so no one is confused.</li>
+                                    <li>If members drift into personal complaints or irrelevant gossip, the Chairman must instantly intervene and pull focus back to the main business.</li>
+                                </ul>
+                            </li>
+                            <li><strong>4. Managing People and Fairness:</strong>
+                                <ul>
+                                    <li>In every group, some people talk too much and others are too shy. The Chairman must actively invite quiet, introverted members to share their valuable ideas.</li>
+                                    <li>At the same time, they must politely but strictly stop loud, dominant participants from hijacking the conversation. Everyone deserves an equal chance to speak.</li>
+                                </ul>
+                            </li>
+                            <li><strong>5. Respecting Time and Closure:</strong>
+                                <ul>
+                                    <li>Corporate meetings are famous for wasting time. The Chairman must constantly watch the clock. When a debate goes on too long, they must summarize the points, force a final vote, and officially close the meeting the moment the work is done.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h3>Conclusion</h3>
+                        <p>To conclude, an effective Chairman is much more than an administrator; they are a skilled manager of human behavior. By keeping strict order, encouraging quiet voices, and respecting the clock, a Chairman turns chaotic talking into productive business decisions.</p>
+                    `
+                }
+            },
+            {
+                title: "6. Draft the agenda for the board meeting of the company.",
+                type: "static",
+                content: `
                     <div class="format-box">
                         <div class="center">
                             <h3>N.K.O COMPANY LIMITED</h3>
@@ -253,174 +509,404 @@
                             <br>
                             <h4>NOTICE AND AGENDA OF THE 1st BOARD MEETING</h4>
                         </div>
-                        <p>Notice is hereby given that the first meeting of the Board of Directors of the company will be held at the Registered Office of the company on Tuesday, 9th Jan 2026 at 1:00 PM to transact the following business:</p>
+                        <p>Notice is hereby given that the first meeting of the Board of Directors of the company will be held at the Registered Office of the company on <strong>Tuesday, 9th Jan 2026 at 1:00 PM</strong> to discuss the following business:</p>
                         <hr style="margin: 15px 0; border: 1px solid var(--border-color);">
-                        <p><strong>Items of Business / Agenda:</strong></p>
+                        <p><strong>List of Topics to Discuss (Agenda):</strong></p>
                         <ol>
-                            <li>Election of Chairman.</li>
-                            <li>To introduce the incorporation certificates, the memorandum, and the articles of association.</li>
-                            <li>Appointment of first directors.</li>
-                            <li>Appointment of Secretary, Auditor, Bankers, and Solicitor.</li>
-                            <li>Approval and adoption of the Company's Seal.</li>
-                            <li>Fixing a quorum for the Board Meeting.</li>
-                            <li>Adoption of preliminary contracts and underwriting control.</li>
-                            <li>To consider and approve the draft prospectus as submitted by the Solicitors.</li>
-                            <li>Application to the Stock Exchange for listing of shares.</li>
-                            <li>Any other business and the date of the next Board Meeting with the permission of the chair.</li>
+                            <li>Elect the Chairman of the meeting.</li>
+                            <li>Review the official company registration documents (Memorandum and Articles of Association).</li>
+                            <li>Officially appoint the first directors of the company.</li>
+                            <li>Appoint key staff: Company Secretary, Auditor, Bankers, and Lawyers.</li>
+                            <li>Approve and accept the official Company Seal (Stamp).</li>
+                            <li>Fix the minimum number of members (Quorum) needed for future meetings.</li>
+                            <li>Review and approve early business contracts.</li>
+                            <li>Check and approve the draft prospectus (company brochure) made by the lawyers.</li>
+                            <li>Apply to the Stock Exchange to list the company's shares.</li>
+                            <li>Any other important topic, followed by deciding the date for the next meeting.</li>
                         </ol>
                     </div>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">7. Draft the notice for the Annual General Meeting of the company.</h2>
-                <div class="note-body">
+                `
+            },
+            {
+                title: "7. Draft the notice for the Annual General Meeting of the company.",
+                type: "static",
+                content: `
                     <div class="format-box">
                         <div class="center">
                             <h3>RONEO VICKERS LTD.</h3>
-                            <p>36, Sundernagar, New Delhi</p>
+                            <p>36, Sundernagar, New Delhi - 110003</p>
                         </div>
                         <br>
                         <p><strong>To:</strong><br>
                         Mr. B.K. Pal<br>
                         58, Krishan Nagar,<br>
-                        Vrindavan 07</p>
+                        Vrindavan - 281121</p>
                         <br>
                         <p class="right"><strong>Date:</strong> 3 January 2026</p>
                         <br>
-                        <p>Dear Sir,</p>
-                        <p>This is to inform you that the Annual General Meeting of the Company will be held in the Board Room of the Registered Office of the Company on the 30th of January 2026 at 1:00 PM when you are requested to be present.</p>
-                        <p>The Agenda for the meeting is enclosed.</p>
+                        <p><strong>Subject: Invitation to the Annual General Meeting (AGM)</strong></p>
                         <br>
-                        <p class="right">Yours faithfully,<br>XYZ<br>Secretary</p>
+                        <p>Dear Sir,</p>
+                        <p>We are happy to inform you that the Annual General Meeting (AGM) for the shareholders of Roneo Vickers Ltd. is scheduled to be held in the Board Room of our Registered Office on <strong>Friday, 30th January 2026, starting at 1:00 PM</strong>.</p>
+                        <p>We kindly request you to attend this meeting to discuss the company's progress and vote on important matters.</p>
+                        <p>The detailed list of topics (Agenda) to be discussed, along with the Annual Financial Report, is attached to this letter for you to read beforehand.</p>
+                        <br>
+                        <p class="right">Yours faithfully,<br><strong>XYZ</strong><br><em>Company Secretary</em></p>
                     </div>
-                </div>
-            </article>
+                `
+            },
+            {
+                title: "8. How should a candidate prepare for an interview?",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>Good preparation is the secret to passing an interview. Follow these steps:</p>
+                        <ul>
+                            <li><strong>Know Yourself:</strong> Be clear about your career goals and why you want this job.</li>
+                            <li><strong>Know the Company:</strong> Research what the company sells, its history, and recent news.</li>
+                            <li><strong>Practice Questions:</strong> Prepare smart answers for common questions like your strengths, weaknesses, and expected salary.</li>
+                            <li><strong>Be Professional:</strong> Dress neatly, smile, act confident, and don't forget to say thank you at the end.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <p>Preparation is the most important step to beat interview nervousness and succeed. A candidate should prepare by focusing on:</p>
+                        <ul>
+                            <li><strong>Self-Awareness:</strong> You must know exactly what you want from your career (money, learning, or stability). You need to ask yourself honestly if this job fits your skills.</li>
+                            <li><strong>Company Research:</strong> Going to an interview without knowing the company is a big mistake. You must study their website, know their main products, and read up on their future plans.</li>
+                            <li><strong>Practice Standard Questions:</strong> Always prepare honest answers for classic questions like: "Where do you see yourself in 5 years?", "What are your weaknesses?", and "Why should we hire you?".</li>
+                            <li><strong>Attitude & Body Language:</strong> First impressions matter. Enter the room calmly, smile warmly, and sit straight. Show excitement for the job, and always thank the interviewers before leaving.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>People often say, "Failing to prepare is preparing to fail." An interview is like a sales pitch where you are selling your skills. Good preparation builds your confidence, removes fear, and heavily increases your chances of getting hired. Here is how a candidate must prepare:</p>
+                        
+                        <ul>
+                            <li><strong>1. Deep Self-Awareness (Know Yourself):</strong>
+                                <ul>
+                                    <li>Before applying, you need to look inward. Be very clear about what you want in your career (Do you want creative work, a high salary, or job security?).</li>
+                                    <li>Evaluate your own skills honestly. If you know exactly why you are a good fit, you will easily be able to answer the question, "Why do you want this job?" with total confidence.</li>
+                                </ul>
+                            </li>
+                            <li><strong>2. Extensive Company Research (Do Your Homework):</strong>
+                                <ul>
+                                    <li>Nothing impresses a boss more than a candidate who already knows the business. You must study the company thoroughly.</li>
+                                    <li>Check their website. Know what products they sell, read about their history, understand who their competitors are, and look up recent news articles about them. This shows you genuinely care about the company.</li>
+                                </ul>
+                            </li>
+                            <li><strong>3. Anticipating and Rehearsing Questions:</strong>
+                                <ul>
+                                    <li>While you cannot predict every question, certain classic questions are always asked. You must practice structured, positive answers for them.</li>
+                                    <li>Common questions include: "Tell me about yourself," "What are your goals for the next five years?", "What are your strengths and weaknesses?", and "What salary do you expect?"</li>
+                                    <li>Also, prepare 1 or 2 smart questions to ask the interviewer at the end. It shows you are curious and serious about the role.</li>
+                                </ul>
+                            </li>
+                            <li><strong>4. Non-Verbal Communication (Body Language):</strong>
+                                <ul>
+                                    <li>Preparation is also physical. Dress neatly and appropriately for the office culture.</li>
+                                    <li>Manage your nerves. When you enter, greet the panel with a warm smile, wait until you are asked to sit, and maintain a relaxed, professional posture. Do not slouch or bite your nails.</li>
+                                </ul>
+                            </li>
+                            <li><strong>5. Positivity and a Courteous Closing:</strong>
+                                <ul>
+                                    <li>You must show high energy and excitement for the job throughout the whole meeting. A positive attitude is very attractive to employers.</li>
+                                    <li>Finally, when the interview is over, always remember to politely thank the interviewers for their valuable time before you leave the room.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        
+                        <h3>Conclusion</h3>
+                        <p>Ultimately, preparation transforms a scared job-seeker into a confident professional. By knowing yourself, knowing the company, and practicing your answers, you prove to the company that you are the best choice for the job.</p>
+                    `
+                }
+            }
+        ],
+        shortNotes: [
+            {
+                title: "Q1. Importance of Meeting Minutes",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <ul>
+                            <li><strong>Record Keeping:</strong> Written proof of what was decided so nothing is forgotten.</li>
+                            <li><strong>Track Progress:</strong> Acts as a guide to check if people are finishing their assigned tasks.</li>
+                            <li><strong>Helpful Reminder:</strong> Helps workers remember their duties and deadlines.</li>
+                            <li><strong>Update Absentees:</strong> Easily informs people who missed the meeting about what happened.</li>
+                            <li><strong>Saves Time:</strong> Stops people from arguing over past decisions, saving time in future meetings.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <ul>
+                            <li><strong>Record Key Decisions securely:</strong> Minutes act as an official document that records all decisions, ensuring important information is never lost or forgotten.</li>
+                            <li><strong>Track Team Progress:</strong> They serve as a roadmap. By clearly listing who needs to do what, they hold the team accountable for their tasks.</li>
+                            <li><strong>Serve as a Reliable Reminder:</strong> Human memory is weak. Documented minutes allow workers to easily look back at past decisions to guide their daily work.</li>
+                            <li><strong>Update Absentees:</strong> They are a fast and excellent way to update team members who were sick or on leave, keeping everyone on the same page.</li>
+                            <li><strong>Save Organizational Time:</strong> With written proof of decisions, minutes stop office arguments and prevent teams from repeating the same discussions next week.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <p>Meeting 'Minutes' are the official written notes of everything important that happened during a formal meeting. They are not a word-for-word script, but a smart summary of actions and decisions. They are highly important for these reasons:</p>
+                        <ul>
+                            <li><strong>1. Permanent Record of Key Decisions:</strong> In an office, if it isn't written down, it didn't happen. Minutes safely document the main points and critical decisions. This guarantees that important corporate decisions are never lost or falsely remembered.</li>
+                            <li><strong>2. Enables Tracking of Team Progress:</strong> Minutes act as a vital roadmap for teams. They list "Action Items" (what needs to be done, who will do it, and by what date). This makes employees responsible and helps managers check if the work is actually getting done.</li>
+                            <li><strong>3. Serves as an Essential Reminder:</strong> Office workers are very busy. It is incredibly easy to forget what was agreed upon in a 2-hour meeting. Well-written minutes allow team members to quickly check their notes and remember their exact duties.</li>
+                            <li><strong>4. Crucial Reference for Absentees:</strong> In any company, someone is always sick or traveling. Detailed meeting minutes are the fastest, best way to update absent workers so they don't fall behind on important projects.</li>
+                            <li><strong>5. Saves Significant Time and Prevents Arguments:</strong> Because minutes provide undisputed written proof of decisions, they stop useless arguments about "who said what." This vastly reduces confusion and saves hours of time that would otherwise be wasted repeating the same topics.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "Q2. Importance of Meetings",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <ul>
+                            <li><strong>Better Decisions:</strong> Combining different ideas leads to smarter and safer choices.</li>
+                            <li><strong>Sharing Knowledge:</strong> Experts can teach and share their special skills with the whole team.</li>
+                            <li><strong>Better Teamwork:</strong> Helps different departments stay connected and work together smoothly.</li>
+                            <li><strong>Divides Work:</strong> Heavy tasks can be divided fairly among the group members.</li>
+                            <li><strong>Training Ground:</strong> Helps junior staff learn how to speak confidently and lead others.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <ul>
+                            <li><strong>Better Decision-Making:</strong> Two heads are better than one. Getting diverse ideas from different members leads to much smarter and well-thought-out business choices.</li>
+                            <li><strong>Sharing of Knowledge:</strong> Meetings allow experienced workers to share their unique skills and technical knowledge, which helps upgrade the entire team.</li>
+                            <li><strong>Improves Coordination:</strong> A company has many moving parts. Meetings help different departments (like Sales and IT) communicate properly and work together without confusion.</li>
+                            <li><strong>Reduces the Workload:</strong> By discussing big projects openly, the heavy workload can be broken down and divided fairly among capable members.</li>
+                            <li><strong>Training Future Leaders:</strong> Participating in meetings helps young employees develop important leadership abilities and professional speaking skills.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <p>Even though people sometimes complain about them, well-planned meetings are actually the heart of a successful company. Their core importance lies in the following areas:</p>
+                        <ul>
+                            <li><strong>1. Superior Decision-Making (Team Synergy):</strong> When you gather different people with different viewpoints in one room, magic happens. The group can debate an issue deeply, catch hidden mistakes, and make exceptionally well-thought-out, safe decisions compared to a manager deciding all alone.</li>
+                            <li><strong>2. Extensive Sharing of Knowledge and Expertise:</strong> Interactive meetings allow employees to bring their unique experiences to the table. An IT expert can share technical advice, while a Sales expert shares customer feedback. This teamwork immensely benefits the whole group and speeds up problem-solving.</li>
+                            <li><strong>3. Vastly Improves Cross-Departmental Coordination:</strong> Companies often suffer when departments don't talk to each other. Regular meetings force different teams to align their efforts, clear up misunderstandings, and work seamlessly together toward one common goal.</li>
+                            <li><strong>4. Fairly Reduces and Distributes Workload:</strong> By openly discussing massive upcoming projects as a group, a very heavy workload can be systematically broken down. Tasks can be divided fairly and given to the right people based on their free time and skills.</li>
+                            <li><strong>5. Invaluable Training Ground for Future Leaders:</strong> Meetings are live classrooms for soft skills. Actively taking part, debating respectfully, and presenting ideas helps junior employees build confidence, negotiation tactics, and highly professional public speaking skills.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "Q3. Characteristics of Good Note Taker",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <ul>
+                            <li><strong>Great Listener:</strong> Focuses purely on understanding the main message, not just typing blindly.</li>
+                            <li><strong>Summarizing Skills:</strong> Can turn long, boring speeches into short, useful bullet points.</li>
+                            <li><strong>Smart Filter:</strong> Ignores casual jokes and writes down only real facts and firm decisions.</li>
+                            <li><strong>Highly Organized:</strong> Uses clear headings so the notes are neat and easy to read later.</li>
+                            <li><strong>Totally Neutral:</strong> Writes down exactly what was decided, without adding their own personal opinions.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <ul>
+                            <li><strong>Profound Active Listener:</strong> A good note taker focuses heavily on truly understanding the core discussion, rather than just acting like a robot typing every single word.</li>
+                            <li><strong>Exceptional Summarizing Skills:</strong> They have the ability to quickly condense 10 minutes of messy debate into two clear, highly actionable bullet points.</li>
+                            <li><strong>Sharp Filtering Ability:</strong> They easily ignore casual office chatter and off-topic jokes, documenting only the concrete facts, firm decisions, and future action plans.</li>
+                            <li><strong>Highly Organized:</strong> Outstanding note takers structure their notes beautifully. They use bolding, bullet points, and spacing to separate different topics clearly.</li>
+                            <li><strong>Total Objectivity:</strong> They record the strict facts of the discussion impartially. They never let their personal emotions or bias leak into the official corporate record.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <p>Being the official note taker (or Secretary) of a high-stakes corporate meeting is a very demanding job. It requires a lot more brainpower than just typing fast. The characteristics of an excellent note taker include:</p>
+                        <ul>
+                            <li><strong>1. Profound Active Listener:</strong> A highly effective note taker focuses heavily on actively listening. Their goal is to fundamentally understand the core meaning of the discussion rather than blindly typing every spoken word. They listen carefully to understand the "why" and "how" of a decision.</li>
+                            <li><strong>2. Exceptional Summarizing Skills:</strong> Business debates can often go in circles. The note taker has the distinct ability to rapidly summarize complex discussions. They cut out the useless talk and produce extremely clear, short points that accurately reflect the group's final decision.</li>
+                            <li><strong>3. Sharp Analytical Ability (Smart Filtering):</strong> They have a strong mental filter. They can easily tune out casual conversation, jokes, or irrelevant tangents. They meticulously write down only the absolute concrete facts, firm financial decisions, and strict future action items (who is doing what task).</li>
+                            <li><strong>4. Highly Organized Format:</strong> A giant wall of text is useless to read. Outstanding note takers structure their detailed notes incredibly logically. They use clear headings, bullet points, numbered lists, and bold text to separate different topics, making the document instantly readable for everyone.</li>
+                            <li><strong>5. Total Objectivity and Neutrality:</strong> They record the strict facts of the discussion totally impartially. Even if the note taker personally disagrees with a decision the boss made, they write it down completely accurately without adding any of their own personal bias, anger, or commentary into the official record.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "Q4. Exit Interview",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>An exit interview is a friendly chat that happens when an employee decides to quit. HR conducts this meeting to find out exactly why the person is leaving. The goal is to get honest feedback to fix problems in the company. It is rarely done if an employee is fired.</p>
+                    `,
+                    medium: `
+                        <p>An exit interview is highly important for a company. It takes place exclusively when an employee voluntarily resigns and is leaving the organization. Because the employee is already leaving, they don't fear the boss anymore and will give brutally honest feedback.</p>
+                        <p>These interviews must be as informal, friendly, and relaxed as possible. The HR manager must use great people skills to encourage the employee to talk openly. HR must keep an open mind, not get defensive, and use this honest feedback to fix toxic company culture or poor salaries. (Note: These rarely happen if a bad employee is fired).</p>
+                    `,
+                    long: `
+                        <p>An incredibly critical HR process, an exit interview is a goldmine of information for a company. This particular type of interview takes place specifically when an employee has handed in their resignation and is voluntarily leaving the organization.</p>
+                        
+                        <p><strong>The Core Objective:</strong> Once an employee has resigned, they no longer fear getting fired or punished. This makes them the most honest source of feedback regarding toxic managers, uncompetitive salaries, or a bad work environment. The main goal of the company is to find out exactly *why* they are leaving so management can fix those hidden issues and stop other good talent from quitting.</p>
+                        
+                        <p><strong>How it is Conducted:</strong> To be truly effective, this interview must be kept totally informal, friendly, and relaxed. The assigned interviewer (usually someone from HR, not the employee's direct angry boss) must use considerable interpersonal skill to make the departing employee feel safe to complain.</p>
+                        
+                        <p>The employer must actively keep a completely open mind. They should listen carefully to what the person wants to say without arguing back or getting defensive. The company must then reflect heavily on this feedback to actively improve the organization.</p>
+                        
+                        <p><em>(Crucial Note: All this essentially applies only to a person leaving voluntarily. If an undesirable employee is fully dismissed or fired due to bad performance, it is an involuntary exit, and the exit interview is rarely conducted).</em></p>
+                    `
+                }
+            },
+            {
+                title: "Q5. Selection Interview",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>A selection interview is the main hiring meeting. The boss evaluates a job applicant to see if they have the right skills. The main goal is to select the absolute best person for the job, inform them about the work, and encourage them to join the company.</p>
+                    `,
+                    medium: `
+                        <p>In a selection interview, the employer tries to closely evaluate a job applicant to find out if the applicant's skills and personality are a perfect match for the job opening.</p>
+                        <p>The core objective is to strictly assess the candidate and definitively select the absolute best person from a large pool of applicants. Other vital goals include: giving the candidate detailed information about their daily job duties, motivating the star candidates to accept the job offer, and promoting a positive brand image so even rejected candidates respect the company.</p>
+                    `,
+                    long: `
+                        <p>A completely foundational business process, a formal selection interview is a highly critical event (often the final stage of hiring). It is a meeting where the employer specifically tries to closely evaluate an applicant for an open job position.</p>
+                        
+                        <p><strong>The Core Objective:</strong> The ultimate aim of the employer is to meticulously find out whether the candidate has the right brains, skills, and attitude for the complex job. It is also a two-way street; the candidate is also checking if the company is a good place for their career growth.</p>
+                        
+                        <p><strong>Key Goals of a Selection Interview:</strong></p>
+                        <ul>
+                            <li><strong>Filtering and Assessment:</strong> To strictly assess the overall technical and behavioral suitability of many candidates in order to explicitly select the absolute best possible person for a highly specific job profile.</li>
+                            <li><strong>Information Exchange:</strong> Actively giving the candidate highly detailed, honest information about the daily job expectations, salary, work hours, and the company culture.</li>
+                            <li><strong>Selling the Job:</strong> If a candidate is brilliant, the interviewer must act like a salesman. They must aggressively motivate the star candidate to happily accept the job over rival offers from other companies.</li>
+                            <li><strong>Public Relations (Goodwill):</strong> Strongly promoting ongoing goodwill toward the entire company. Even if a candidate is rejected, a fair, polite, and respectful interview ensures they leave with a positive image of the brand.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "Q6. Grievance Interview",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>A grievance interview is a private meeting held when an employee has a serious complaint about their workplace, coworkers, or boss. The aim is to listen to the problem, understand it, and quickly solve the conflict to restore peace in the office.</p>
+                    `,
+                    medium: `
+                        <p>In any company, fights and conflict inevitably happen. A worker may have a serious grievance (complaint) against a rude coworker, terrible office conditions, or a strict boss. Conversely, bosses might have complaints against disobedient staff.</p>
+                        <p>The primary aim of a formal grievance interview is to seek deep clarification regarding the exact problems faced by the employee in a safe, private space. If properly conducted with empathy and fairness, these interviews help swiftly resolve toxic office conflicts and bring about deep harmony and peace between fighting individuals.</p>
+                    `,
+                    long: `
+                        <p>Because an active company is essentially a massive group of heavily different people with different egos working closely together, deep interpersonal conflicts entirely naturally arise.</p>
+                        
+                        <p><strong>The Context:</strong> A deeply frustrated worker may naturally have a serious grievance or loud complaint strongly against their fellow worker (for example, facing harassment or someone stealing credit for their work) or even against an abusive supervisor. Similarly, supervisors may easily have serious ongoing grievances regarding disobedient staff who refuse to do their work.</p>
+                        
+                        <p><strong>The Objective:</strong> A grievance interview is a formal, private sit-down arranged by HR to address this boiling anger. The absolute primary aim of this highly sensitive interview is to seek immediate clarification regarding the highly specific problems faced by the employees. It is a peaceful fact-finding mission.</p>
+                        
+                        <p><strong>The Outcome:</strong> By giving the frustrated employee a safe space to vent their anger and be truly heard, the company prevents lawsuits and strikes. If a complicated grievance interview is properly conducted, it massively helps resolve these toxic inner conflicts incredibly swiftly. It restores lasting harmony between the frustrated individuals, which improves the overall mood and productivity of the entire company.</p>
+                    `
+                }
+            },
+            {
+                title: "Q7. Role of Interviewer",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p>An interviewer controls the meeting and must act like a true professional. They must:</p>
+                        <ul>
+                            <li>Make the nervous candidate feel welcome and relaxed.</li>
+                            <li>Ask smart, relevant questions, avoiding personal or illegal topics.</li>
+                            <li>Never be dominating, rude, or arrogant.</li>
+                            <li>Ensure a smooth, friendly two-way conversation.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <p>The interviewer is in a clear position of power, but they must be extremely careful not to misuse it to bully or intimidate candidates. Their role critically involves:</p>
+                        <ul>
+                            <li><strong>Building Comfort:</strong> Putting the nervous interviewee totally at ease with a warm welcome and actively giving them the confidence to speak truly.</li>
+                            <li><strong>Professional Empathy:</strong> Maintaining a polite, understanding attitude. They must never be arrogant or overbearing, as that instantly creates intense fear and ruins the interview.</li>
+                            <li><strong>Relevance:</strong> Completely refraining from abusing their power by asking highly personal, illegal, or completely irrelevant questions.</li>
+                            <li><strong>Facilitation:</strong> Ensuring a beautifully smooth, friendly, two-way communication process to effectively gather vital data about the candidate's skills.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <p>The interviewer is the face of the company. They hold a distinct position of immense control and authority during the meeting. However, they essentially must be incredibly careful not to terribly misuse this power to bully or intimidate. Their primary critical roles include:</p>
+                        
+                        <ul>
+                            <li><strong>1. Ice-Breaking & Building Confidence:</strong> Interviews are terrifying for applicants. The interviewer must be extremely careful to put the completely nervous interviewee at total ease (like offering a glass of water or making polite small talk). They must proactively give the candidate the confidence to show their true skills.</li>
+                            <li><strong>2. Maintaining Professional Empathy:</strong> They must strictly maintain a highly empathetic, professional attitude of total understanding. They should genuinely want to help the candidate feel comfortable and answer well.</li>
+                            <li><strong>3. Avoiding Arrogance:</strong> They must never, absolutely ever be overbearing, arrogant, or aggressive. That kind of toxic behavior will instantly create intense panic in the mind of the interviewee, completely ruining the assessment.</li>
+                            <li><strong>4. Asking Ethical & Relevant Questions:</strong> They must absolutely refrain from abusing their powerful position by asking highly personal, invasive, illegal, or totally irrelevant questions. The candidate needs a deeply calm and relaxed mind to perform at their best.</li>
+                            <li><strong>5. Facilitating Two-Way Dialogue:</strong> An interview is a friendly conversation, not a police interrogation. The interviewer must flawlessly ensure a smooth, dynamic two-way communication process from the very beginning to effectively gather and interchange vital information.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "Q8. Features of Zoom / Google Meet",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <p><strong>Zoom Features:</strong> Known for amazing HD video, fun virtual backgrounds for privacy, live whiteboards for drawing, easy screen sharing, and secure meeting recording capabilities.</p>
+                        <p><strong>Google Meet Features:</strong> Runs directly in the web browser (no app download needed), integrates perfectly with Google Calendar for easy scheduling, features live chat, and automatically saves video recordings directly to Google Drive.</p>
+                    `,
+                    medium: `
+                        <h3>Features of ZOOM</h3>
+                        <ul>
+                            <li><strong>High Quality Communication:</strong> Flawless HD video and audio conferencing accommodating massive numbers of people, including options to fully mute all and control background noise.</li>
+                            <li><strong>Interactive Tools:</strong> Robust screen sharing options and virtual whiteboards for live drawing. Also features fun emojis and hand-raising for quick feedback.</li>
+                            <li><strong>Recording & Security:</strong> Meetings can be completely recorded locally. You can use customized virtual backgrounds for absolute privacy, and secure rooms with waiting rooms and passwords.</li>
+                        </ul>
+                        <h3>Features of Google Meet</h3>
+                        <ul>
+                            <li><strong>Web-Based & Seamless:</strong> It is entirely web-based requiring absolutely zero heavy software downloads. Flawlessly supports clear audio and high-quality video for effortless screen sharing.</li>
+                            <li><strong>Integration & Storage:</strong> Seamlessly scheduled through Google Calendar with automatic email reminders. Large video recordings are automatically saved directly to Google Drive for incredibly easy sharing.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <p>The rise of remote work has made online meeting platforms absolutely essential to modern business communication. The two undeniable market leaders are Zoom and Google Meet. Here is why they are so popular:</p>
+                        
+                        <h3>Features of ZOOM</h3>
+                        <ul>
+                            <li><strong>High Quality Elite Communication:</strong> Zoom actively supports incredibly high-quality pristine HD video and flawlessly clear audio conferencing. It handles massive participant numbers seamlessly. It features highly robust options to instantly mute/unmute participants and actively control intense background noise.</li>
+                            <li><strong>Deep Interactive Tools:</strong> It provides highly advanced live screen sharing options, dynamic virtual interactive whiteboards explicitly intended for live brainstorming, and amazingly engaging interactive tools exactly like brilliant emojis, live polling, and hand-raising for quick feedback.</li>
+                            <li><strong>Advanced Secure Recording & Security:</strong> Important ongoing meetings can be completely seamlessly recorded (both locally and to the cloud) for future viewing. It features highly customized virtual backgrounds essentially for absolute privacy, and the virtual room is strictly protected with heavy passwords, waiting rooms, total end-to-end encryption, and strict host controls.</li>
+                        </ul>
+                        
+                        <h3>Features of Google Meet</h3>
+                        <ul>
+                            <li><strong>Massive Absolute Accessibility:</strong> Unlike Zoom, Google Meet is flawlessly and entirely web-based, explicitly requiring absolutely zero heavy or slow software installations. It beautifully and effortlessly functions seamlessly on all smartphones, tablets, and heavy desktops directly through the Google Chrome browser.</li>
+                            <li><strong>Incredible Video & Seamless Screen Sharing:</strong> Flawlessly provides amazing clear audio and brilliantly deep high-quality sharp video exactly for intense one-to-one or incredibly large group meetings. It allows users to effortlessly and perfectly share their exact full screen, a specific window, or an individual Chrome tab.</li>
+                            <li><strong>Unmatched Deep Integration & Secure Storage:</strong> Because it is part of the Google ecosystem, meetings are unbelievably flawlessly scheduled totally through Google Calendar with automatic email reminders. Furthermore, large, heavy video recordings are beautifully and automatically saved strictly and permanently to your vast Google Drive, making future sharing incredibly easy.</li>
+                        </ul>
+                    `
+                }
+            }
+        ]
+    };
 
-            <article class="note-card">
-                <h2 class="note-title">8. How should a candidate prepare for an interview?</h2>
-                <div class="note-body">
-                    <p>Preparation is widely considered the first and most crucial step to success in an interview. A candidate should prepare by focusing comprehensively on the following aspects:</p>
-                    <ul>
-                        <li><strong>Self-Awareness & Goals:</strong> The interviewee must have a clear understanding of what they want to achieve through the work assignment (whether it is inner fulfillment, wealth, security, comfort, or power). When applying, they must deeply know why they are applying and whether the job will actually suit them.</li>
-                        <li><strong>Company Research:</strong> It is mandatory to know about the company where they are seeking a job. This includes knowing its core activities, its growth over the years, and its future prospectus.</li>
-                        <li><strong>Anticipate Standard Questions:</strong> Nobody knows exactly what will be asked, but candidates should anticipate standard questions and prepare truthful answers. Common questions include: "What are your goals in five years?", "What are your strengths and weaknesses?", "What are your salary expectations?", and "Why should I hire you?".</li>
-                        <li><strong>Prepare Own Inquiries:</strong> The candidate should formulate intelligent questions required to be asked to the interviewer related to the organization's culture or role.</li>
-                        <li><strong>Professional Conduct & Attitude:</strong> The interviewee should avoid nervousness. Upon entering the room, they should greet the interviewer with a polite smile, take a seat, and occupy it in a relaxed, composed manner.</li>
-                        <li><strong>Enthusiasm:</strong> They must be highly positive in their attitude throughout the conduct of the interview and must clearly express their enthusiasm for the job as well as the company.</li>
-                        <li><strong>Courteous Closing:</strong> When the interview is officially over, the candidate must not forget to politely thank the interviewer.</li>
-                    </ul>
-                </div>
-            </article>
+    function renderQuestionBank() {
+        const container = document.getElementById('main-content-wrapper');
+        let html = '<h2 class="section-header">Long Questions (8 - 10 Marks)</h2>';
+        
+        qbData.longQuestions.forEach(q => {
+            let contentHtml = q.type === 'static' ? q.content : q.content[currentLength];
+            html += '<article class="note-card">';
+            html += '<h2 class="note-title">' + q.title + '</h2>';
+            html += '<div class="note-body">' + contentHtml + '</div>';
+            html += '</article>';
+        });
 
-            <h2 class="section-header">Short Notes (5 Marks)</h2>
+        html += '<h2 class="section-header">Short Notes (5 Marks)</h2>';
 
-            <article class="note-card">
-                <h2 class="note-title">Q1. Importance of Meeting Minutes</h2>
-                <div class="note-body">
-                    <ul>
-                        <li><strong>Record Key Decisions:</strong> Meeting minutes thoroughly document the main points and decisions made during discussions, ensuring that important information is never lost or misremembered.</li>
-                        <li><strong>Enable Tracking Team Progress:</strong> Minutes act as a roadmap for teams, helping them strictly follow up on goals, assignments, and milestones by providing a clear overview of what has been achieved.</li>
-                        <li><strong>Serve as a Reminder:</strong> Because it is easy to forget what was agreed upon, well-documented minutes allow team members to quickly revisit decisions and assigned responsibilities.</li>
-                        <li><strong>Reference for Absentees:</strong> Meeting summaries are an excellent and efficient way to update team members who were unable to attend the session.</li>
-                        <li><strong>Save Time:</strong> With everyone having ready access to the documented information, meeting minutes vastly reduce confusion and unnecessary repetition.</li>
-                    </ul>
-                </div>
-            </article>
+        qbData.shortNotes.forEach(q => {
+            let contentHtml = q.type === 'static' ? q.content : q.content[currentLength];
+            html += '<article class="note-card">';
+            html += '<h2 class="note-title">' + q.title + '</h2>';
+            html += '<div class="note-body">' + contentHtml + '</div>';
+            html += '</article>';
+        });
 
-            <article class="note-card">
-                <h2 class="note-title">Q2. Importance of Meetings</h2>
-                <div class="note-body">
-                    <ul>
-                        <li><strong>Better Decision-Making:</strong> Gathering ideas from different members with diverse perspectives leads to well-thought-out and comprehensive decisions.</li>
-                        <li><strong>Sharing of Knowledge:</strong> Meetings allow members to bring their unique experiences and specialized expertise to the table, benefiting the whole group.</li>
-                        <li><strong>Improves Coordination:</strong> Regular meetings help different departments align their efforts, communicate effectively, and work seamlessly together.</li>
-                        <li><strong>Reduces Workload:</strong> By discussing tasks openly, the overall workload can be systematically divided and delegated among various capable members.</li>
-                        <li><strong>Training Ground for Leaders:</strong> Participating in and running meetings actively develops essential leadership and professional communication skills.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">Q3. Characteristics of Good Note Taker</h2>
-                <div class="note-body">
-                    <ul>
-                        <li><strong>Active Listener:</strong> A highly effective note taker focuses on actively listening and understanding the discussion rather than just blindly transcribing every spoken word.</li>
-                        <li><strong>Summarizing Skills:</strong> They possess the ability to rapidly summarize complex discussions into clear, actionable points that accurately reflect the group's consensus.</li>
-                        <li><strong>Analytical Ability:</strong> They can easily filter out casual or irrelevant conversation and document only the concrete facts, decisions, and future action items.</li>
-                        <li><strong>Highly Organized:</strong> Good note takers structure their notes logically using headings, bullet points, and highlighters to separate different agenda topics clearly.</li>
-                        <li><strong>Total Objectivity:</strong> They record the facts of the discussion impartially and accurately without injecting any of their own personal bias into the official record.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">Q4. Exit Interview</h2>
-                <div class="note-body">
-                    <p>An exit interview is highly important from the employer's point of view. This type of interview takes place specifically when an employee is voluntarily leaving the organization. To be effective, such interviews should be kept as informal as possible.</p>
-                    <p>The interviewer must use considerable skill to draw out the departing employee in a friendly manner. The interviewer should keep a completely open mind, actively listen to what the person wants to say, and reflect on their views to improve the company environment. However, if an undesirable employee is involuntarily dismissed, it is considered an exit, and the exit interview usually does not take place.</p>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">Q5. Selection Interview</h2>
-                <div class="note-body">
-                    <p>A selection interview is a critical process where the employer tries to closely size up an applicant for a job. The core aim of the employer is to find out whether the job for which the candidate is being interviewed is truly suitable for them, and vice versa.</p>
-                    <p>The main objective is to strictly assess the suitability of the candidates to select the best possible candidate for a specific job profile. Additional objectives include determining the most suitable candidates, giving the candidate detailed information about the job and the company, motivating the candidate to accept the job, and promoting overall goodwill toward the company.</p>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">Q6. Grievance Interview</h2>
-                <div class="note-body">
-                    <p>Because an organization is a large group of people working closely together, conflicts naturally arise. A worker may have a grievance or complaint against their fellow worker or supervisor. Similarly, supervisors may have grievances regarding subordinates for not carrying out instructions properly.</p>
-                    <p>The primary aim of the grievance interview is to seek immediate clarification regarding the specific problems faced by the employees. If a grievance interview is properly conducted, it helps resolve these inner conflicts swiftly and brings about harmony between the individuals and the broader organization.</p>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">Q7. Role of Interviewer</h2>
-                <div class="note-body">
-                    <p>The interviewer holds a position of control and authority and must be at pains not to misuse it. Their primary roles include:</p>
-                    <ul>
-                        <li>Being extremely careful to put the interviewee completely at ease and to actively give them confidence.</li>
-                        <li>Maintaining an attitude of deep understanding and genuinely wanting to be of assistance.</li>
-                        <li>Not being overbearing, as that behavior may instantly create nervousness in the mind of the interviewee.</li>
-                        <li>Not abusing their position by putting forth highly personal or completely irrelevant questions; the candidate needs a calm and relaxed mind.</li>
-                        <li>Ensuring a smooth, two-way communication process from the very beginning to effectively gather and interchange information.</li>
-                    </ul>
-                </div>
-            </article>
-
-            <article class="note-card">
-                <h2 class="note-title">Q8. Features of Zoom / Google Meet</h2>
-                <div class="note-body">
-                    <h3>Features of ZOOM</h3>
-                    <ul>
-                        <li><strong>High Quality Communication:</strong> Supports high-quality video and audio conferencing with multiple participants simultaneously, including options to mute/unmute and control background noise.</li>
-                        <li><strong>Interactive Tools:</strong> Provides robust screen sharing options, virtual whiteboards for live flowcharts, and tools like emojis and hand-raising for quick feedback.</li>
-                        <li><strong>Recording & Security:</strong> Meetings can be recorded for later viewing, customized backgrounds can be used for privacy, and meetings are protected with locks, encryption, and host controls.</li>
-                    </ul>
-                    
-                    <h3>Features of Google Meet</h3>
-                    <ul>
-                        <li><strong>Video & Screen Sharing:</strong> Offers clear audio and high-quality video for one-to-one or group meetings, allowing users to effortlessly share their screen, window, or specific tab.</li>
-                        <li><strong>Integration & Storage:</strong> Meets can be directly scheduled through Google Calendar with automatic reminders, and recordings are automatically saved to Google Drive for future reference.</li>
-                        <li><strong>Accessibility:</strong> Functions seamlessly on mobile phones, tablets, and desktops. It is entirely web-based requiring no heavy software installations, while supporting a very large participant capacity.</li>
-                    </ul>
-                </div>
-            </article>
-        `;
-        container.innerHTML = qbData;
+        container.innerHTML = html;
     }
 
+    // Initialize application
     document.addEventListener("DOMContentLoaded", () => {
         const savedTheme = localStorage.getItem('theme') || 'light';
         document.documentElement.setAttribute('data-theme', savedTheme);
         document.getElementById('themeSelect').value = savedTheme;
+        document.getElementById('lengthSelect').value = 'long';
         
-        const mainContent = document.getElementById('main-content-wrapper');
-        renderQuestionBank(mainContent);
+        renderQuestionBank();
     });
 </script>
 </body>
