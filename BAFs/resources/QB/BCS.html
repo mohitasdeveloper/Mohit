@@ -3,15 +3,23 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
-  <title>Business Communication QB - BirlaOne</title>
+  <title>Business Communication QB</title>
   
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
   
   <script>
+    // Instantly apply theme and correct browser tab color before the page even loads
     (function() {
       const savedTheme = localStorage.getItem('theme') || 'light';
       document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const themeColors = { 
+          light: '#f4f7fb', 
+          dark: '#0f172a', 
+          sepia: '#f4ecd8' 
+      };
+      document.write('<meta id="theme-color-meta" name="theme-color" content="' + themeColors[savedTheme] + '">');
     })();
   </script>
 
@@ -92,7 +100,10 @@
     
     .controls { display: flex; gap: 12px; }
     
+    .custom-select { width: 100%; }
+    
     .custom-select select {
+      width: 100%;
       background-color: var(--input-bg);
       color: var(--text-primary);
       border: 1px solid var(--border-color);
@@ -106,8 +117,29 @@
       background-repeat: no-repeat;
       background-position: right 10px center;
       cursor: pointer;
+      text-overflow: ellipsis;
     }
     .custom-select select:focus { outline: 2px solid var(--primary-accent); }
+
+    /* Mobile Responsive Layout for Selectors */
+    @media (max-width: 600px) {
+        .top-bar {
+            flex-direction: column;
+            align-items: stretch; /* Stretch children to full width */
+            padding: 12px 16px;
+            gap: 12px;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr; /* Split exactly 50/50 */
+            gap: 10px;
+            width: 100%;
+        }
+        .custom-select select {
+            font-size: 13px; /* Slightly smaller text for mobile */
+            padding: 8px 25px 8px 8px; /* Adjust padding to fit text better */
+        }
+    }
 
     /* Layout */
     .container { padding: 30px 20px; max-width: 900px; margin: 0 auto; }
@@ -142,13 +174,13 @@
 <body>
 
   <header class="top-bar">
-    <h1 class="title">BirlaOne</h1>
+    <h1 class="title">BAFs App</h1>
     <div class="controls">
         <div class="custom-select">
             <select id="lengthSelect" onchange="changeLength(this.value)" aria-label="Select Answer Length">
-              <option value="long">Long (10 Marks)</option>
-              <option value="medium">Medium (Detailed)</option>
-              <option value="short">Short (Revision)</option>
+              <option value="long">Long (Detailed)</option>
+              <option value="medium">Medium (short)</option>
+              <option value="short">Short (overview)</option>
             </select>
         </div>
         <div class="custom-select">
@@ -164,10 +196,21 @@
   <main class="container" id="main-content-wrapper"></main>
 
 <script>
-    // Theme logic
+    // Theme logic and Chrome tab color update
     function changeTheme(theme) {
         document.documentElement.setAttribute('data-theme', theme);
         localStorage.setItem('theme', theme);
+        
+        // Update Chrome Tab Color
+        const themeColors = { 
+            light: '#f4f7fb', 
+            dark: '#0f172a', 
+            sepia: '#f4ecd8' 
+        };
+        const metaTag = document.getElementById('theme-color-meta');
+        if (metaTag) {
+            metaTag.setAttribute('content', themeColors[theme]);
+        }
     }
     
     // UI State
