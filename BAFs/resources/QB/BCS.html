@@ -919,7 +919,7 @@
 
     function renderQuestionBank() {
         const container = document.getElementById('main-content-wrapper');
-        let html = '<h2 class="section-header">Long Questions (8 - 10 Marks)</h2>';
+        let html = '<h2 class="section-header">Long Questions</h2>';
         
         qbData.longQuestions.forEach(q => {
             let contentHtml = q.type === 'static' ? q.content : q.content[currentLength];
@@ -929,7 +929,7 @@
             html += '</article>';
         });
 
-        html += '<h2 class="section-header">Short Notes (5 Marks)</h2>';
+        html += '<h2 class="section-header">Short Notes</h2>';
 
         qbData.shortNotes.forEach(q => {
             let contentHtml = q.type === 'static' ? q.content : q.content[currentLength];
