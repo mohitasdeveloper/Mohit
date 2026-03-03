@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Sports & PE QB - BirlaOne</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    // Instantly apply theme and correct browser tab color before the page even loads
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const themeColors = { 
+          light: '#f0fdf4', 
+          dark: '#022c22', 
+          sepia: '#f4ecd8' // Fixed to match the proper sepia background
+      };
+      document.write('<meta id="theme-color-meta" name="theme-color" content="' + themeColors[savedTheme] + '">');
+    })();
+  </script>
+
+  <style>
+    :root {
+      /* Sporty Green and Teal Theme for Light/Dark */
+      --primary-accent: #059669; 
+      --primary-gradient: linear-gradient(90deg, #059669, #0d9488); 
+      --danger-color: #e53935;
+      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Lora', serif;
+      --border-radius: 12px;
+      --transition-speed: 0.3s;
+    }
+    
+    html[data-theme="light"] {
+      --bg-color: #f0fdf4; 
+      --card-bg: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --border-color: #d1fae5;
+      --shadow: 0 4px 20px rgba(5, 150, 105, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --input-bg: #f8fafc;
+      --table-header-bg: #ecfdf5;
+    }
+
+    html[data-theme="dark"] {
+      --bg-color: #022c22; 
+      --card-bg: #064e3b;
+      --text-primary: #f8fafc;
+      --text-secondary: #a7f3d0;
+      --border-color: #047857;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --header-bg: rgba(2, 44, 34, 0.9);
+      --input-bg: #065f46;
+      --table-header-bg: #065f46;
+    }
+      
+    /* Restored Proper Sepia Theme */
+    html[data-theme="sepia"] {
+        --bg-color: #f4ecd8;
+        --card-bg: #fbf5e9;
+        --text-primary: #5b4636;
+        --text-secondary: #7d6b59;
+        --border-color: #dcd0b9;
+        --primary-accent: #a98244;
+        --primary-gradient: linear-gradient(135deg, #c5a265, #a98244);
+        --shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        --header-bg: rgba(244, 236, 216, 0.9);
+        --input-bg: #e9deca;
+        --table-header-bg: #e9deca;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: var(--font-serif);
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* Header */
+    .top-bar { 
+        font-family: var(--font-sans); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 20px; 
+        background: var(--header-bg); 
+        backdrop-filter: blur(8px); 
+        position: sticky; 
+        top: 0; 
+        z-index: 100; 
+        border-bottom: 1px solid var(--border-color); 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+    .top-bar .title { font-weight: 800; font-size: 24px; color: var(--text-primary); letter-spacing: -0.5px; }
+    
+    .controls { display: flex; gap: 12px; }
+    
+    .custom-select { width: 100%; }
+    
+    .custom-select select {
+      width: 100%;
+      background-color: var(--input-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 32px 8px 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      cursor: pointer;
+      text-overflow: ellipsis;
+    }
+    .custom-select select:focus { outline: 2px solid var(--primary-accent); }
+
+    /* Mobile Responsive Layout for Selectors */
+    @media (max-width: 600px) {
+        .top-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+        }
+        .custom-select select {
+            font-size: 13px;
+            padding: 8px 25px 8px 8px;
+        }
+    }
+
+    /* Layout */
+    .container { padding: 30px 20px; max-width: 900px; margin: 0 auto; }
+    .section-header { font-family: var(--font-sans); font-size: 26px; font-weight: 800; margin: 40px 0 20px; color: var(--primary-accent); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+    
+    /* Cards */
+    .note-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; }
+    .note-title { font-family: var(--font-sans); font-size: 20px; font-weight: 700; padding: 16px 24px; background: var(--primary-gradient); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .note-body { padding: 24px; animation: fadeIn 0.3s ease-in-out; }
+    
+    /* Typography inside cards */
+    .note-body h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--primary-accent); margin: 24px 0 12px; }
+    .note-body h3:first-child { margin-top: 0; }
+    .note-body h4 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 600; margin: 16px 0 8px; }
+    .note-body p { margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body strong { font-family: var(--font-sans); font-weight: 700; color: var(--text-primary); }
+    .note-body ul, .note-body ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body li { margin-bottom: 10px; }
+    .note-body li::marker { color: var(--primary-accent); font-weight: bold; }
+    
+    /* Tables */
+    .table-wrapper { overflow-x: auto; margin-bottom: 15px; }
+    .styled-table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); min-width: 400px; border-radius: 8px; overflow: hidden; }
+    .styled-table th, .styled-table td { padding: 12px 15px; border: 1px solid var(--border-color); text-align: left; color: var(--text-primary); }
+    .styled-table thead tr { background-color: var(--table-header-bg); font-weight: bold; }
+    
+    /* Objective Answers specific */
+    .blank-box { display: inline-block; border-bottom: 2px solid var(--danger-color); font-weight: bold; padding: 0 5px; color: var(--danger-color); font-family: var(--font-sans);}
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(3px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <h1 class="title">BAFs App</h1>
+    <div class="controls">
+        <div class="custom-select">
+            <select id="lengthSelect" onchange="changeLength(this.value)" aria-label="Select Answer Length">
+              <option value="long">Long (Detailed)</option>
+              <option value="medium">Medium (Short)</option>
+              <option value="short">Short (Overview)</option>
+            </select>
+        </div>
+        <div class="custom-select">
+            <select id="themeSelect" onchange="changeTheme(this.value)" aria-label="Select theme">
+              <option value="light">Light Theme</option>
+              <option value="dark">Dark Theme</option>
+              <option value="sepia">Sepia Theme</option>
+            </select>
+        </div>
+    </div>
+  </header>
+
+  <main class="container" id="main-content-wrapper"></main>
+
+<script>
+    // Theme logic and Chrome tab color update
+    function changeTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        // Update Chrome Tab Color
+        const themeColors = { 
+            light: '#f0fdf4', 
+            dark: '#022c22', 
+            sepia: '#f4ecd8' // Fixed Sepia Tab Color
+        };
+        const metaTag = document.getElementById('theme-color-meta');
+        if (metaTag) {
+            metaTag.setAttribute('content', themeColors[theme]);
+        }
+    }
+    
+    // UI State
+    let currentLength = 'long';
+    function changeLength(length) {
+        currentLength = length;
+        renderQuestionBank();
+    }
+
+    // Question Bank Data Object (Sports & PE)
+    const qbData = {
+        objectiveQuestions: [
+            {
+                title: "Q.1) Fill in the Blanks",
+                type: "static",
+                content: `
+                    <ol>
+                        <li>Physical literacy includes developing <span class="blank-box">Fundamental</span> Movement Skills.</li>
+                        <li>The Olympic Games were originally held in <span class="blank-box">Greece</span>.</li>
+                        <li>The term yoga is derived from a Sanskrit word meaning <span class="blank-box">Union</span>.</li>
+                        <li>High-Intensity Interval Training (HIIT) is a modern trend in <span class="blank-box">Fitness</span>.</li>
+                        <li><span class="blank-box">Physical Fitness</span> is the ability to perform daily activities with vigor and without undue fatigue.</li>
+                    </ol>
+                `
+            },
+            {
+                title: "Q.2) Match the Following",
+                type: "static",
+                content: `
+                    <div class="table-wrapper">
+                        <table class="styled-table">
+                            <thead>
+                                <tr>
+                                    <th>Game</th>
+                                    <th>Correct Answer (Number of Players)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>1. Lawn Tennis</td><td><strong>a. 1 or 2 Players</strong></td></tr>
+                                <tr><td>2. Hockey</td><td><strong>b. 11 Players</strong></td></tr>
+                                <tr><td>3. Kho-Kho</td><td><strong>c. 9 Players</strong></td></tr>
+                                <tr><td>4. Kabaddi</td><td><strong>d. 7 Players</strong></td></tr>
+                                <tr><td>5. Volleyball</td><td><strong>e. 6 Players</strong></td></tr>
+                                <tr><td>6. Ball Badminton</td><td><strong>f. 5 Players</strong></td></tr>
+                                <tr><td>7. Cricket</td><td><strong>g. 11 Players</strong></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                `
+            }
+        ],
+        longQuestions: [
+            {
+                title: "1) Concept & Meaning of Sports Management",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Meaning</h3>
+                        <p>Sports Management is the business side of sports. It involves planning, organizing, directing, and controlling sports events, teams, and facilities.</p>
+                        <h3>Core Concept</h3>
+                        <ul>
+                            <li><strong>Planning:</strong> Deciding schedules and budgets.</li>
+                            <li><strong>Organizing:</strong> Arranging stadiums and equipment.</li>
+                            <li><strong>Leading:</strong> Managing players and coaching staff.</li>
+                            <li><strong>Goal:</strong> To run sports smoothly and make it profitable.</li>
+                        </ul>
+                    `,
+                    medium: `
+                        <h3>Meaning</h3>
+                        <p>Sports Management is the application of business and management principles to the sports industry. It involves running everything off the field so that athletes can perform well on the field.</p>
+                        <h3>Key Concepts</h3>
+                        <ul>
+                            <li><strong>Planning & Organizing:</strong> Scheduling matches, booking stadiums, and managing budgets for teams and tournaments.</li>
+                            <li><strong>Marketing & Finance:</strong> Selling tickets, getting sponsorships, and managing player salaries to ensure the team makes a profit.</li>
+                            <li><strong>Human Resources:</strong> Hiring the best coaches, medical staff, and scouts to support the athletes.</li>
+                            <li><strong>Event Management:</strong> Ensuring crowd safety, broadcasting rights, and smooth operations during match days.</li>
+                        </ul>
+                    `,
+                    long: `
+                        <h3>Introduction & Meaning</h3>
+                        <p>Sports are no longer just a hobby; they are a multi-billion dollar global industry. <strong>Sports Management</strong> is the professional application of business, administration, and management principles specifically to the sports sector. It involves running the entire "behind-the-scenes" operations of a sports organization, team, or event.</p>
+                        
+                        <h3>The Core Concept of Sports Management</h3>
+                        <p>The concept revolves around treating a sports team or event like a proper business. The main elements include:</p>
+                        <ul>
+                            <li><strong>1. Planning and Organizing:</strong> This involves creating long-term strategies, scheduling tournaments, booking venues (stadiums), arranging travel, and ensuring all sports equipment is ready.</li>
+                            <li><strong>2. Financial Management:</strong> Sports require money. Managers handle budgets, pay athlete salaries, negotiate broadcasting rights with TV channels, and secure big sponsorships to ensure the team is profitable.</li>
+                            <li><strong>3. Human Resource Management:</strong> A team is not just players. Sports management involves hiring expert head coaches, fitness trainers, physiotherapists, and PR managers to support the athletes.</li>
+                            <li><strong>4. Marketing and Public Relations (PR):</strong> Selling tickets, running fan clubs, selling team jerseys (merchandising), and managing the public image of star players on social media.</li>
+                            <li><strong>5. Event & Facility Management:</strong> Ensuring that on match day, the stadium is safe, the crowd is controlled, and food and beverage services run smoothly.</li>
+                        </ul>
+                        
+                        <h3>Conclusion</h3>
+                        <p>In simple words, sports management takes care of all the business and organizational headaches so that the athletes and coaches can focus 100% on winning the game. Without good management, even the most talented team will fail.</p>
+                    `
+                }
+            },
+            {
+                title: "2) Principle of Communication & Organization",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Principle of Communication</h3>
+                        <p>Information must flow clearly between management, coaches, and players to avoid confusion and build teamwork.</p>
+                        <h3>Principle of Organization</h3>
+                        <p>Everyone must have a clear role. Facilities, equipment, and staff must be arranged properly to run events smoothly.</p>
+                    `,
+                    medium: `
+                        <h3>Principle of Communication</h3>
+                        <p>Good communication is the backbone of any sports team. Messages must be clear, fast, and honest. Management must clearly explain the goals to the coach, and the coach must clearly explain the game strategy to the players. Without this, there will be confusion and a lack of teamwork.</p>
+                        <h3>Principle of Organization</h3>
+                        <p>Organization means arranging resources (money, people, and materials) logically. In sports, this means defining clear roles: the medical team handles injuries, the coach handles strategy, and management handles money. Proper organization ensures that tournaments and training camps run without any panic or delays.</p>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>For any sports club, tournament, or team to succeed, they must strictly follow the basic principles of management. Two of the most important pillars are Communication and Organization.</p>
+                        
+                        <h3>1. The Principle of Communication</h3>
+                        <p>Communication is the lifeblood of sports. It means the clear, accurate, and fast exchange of information.</p>
+                        <ul>
+                            <li><strong>Clarity of Strategy:</strong> A coach must be able to clearly communicate the game plan to the players. If the message is confusing, the players will make mistakes on the field.</li>
+                            <li><strong>Two-Way Feedback:</strong> Communication should not just be the boss giving orders. Players must feel safe to communicate their injuries or mental health issues to the management.</li>
+                            <li><strong>External Communication:</strong> The sports organization must communicate effectively with the public, fans, and the media (press conferences) to maintain a good image.</li>
+                        </ul>
+
+                        <h3>2. The Principle of Organization</h3>
+                        <p>Organization means bringing together human resources (players, staff) and physical resources (stadiums, money, equipment) to achieve a goal.</p>
+                        <ul>
+                            <li><strong>Clear Roles and Duties:</strong> Everyone must know their exact job. The coach trains, the physiotherapist heals, the manager handles tickets. If roles overlap, it creates chaos.</li>
+                            <li><strong>Resource Allocation:</strong> Good organization ensures that training grounds are booked on time, travel tickets for away-matches are ready, and practice equipment is available before the players arrive.</li>
+                            <li><strong>Hierarchy:</strong> There must be a clear chain of command (e.g., Owner &rarr; General Manager &rarr; Head Coach &rarr; Team Captain) so decisions are made quickly.</li>
+                        </ul>
+                        
+                        <h3>Conclusion</h3>
+                        <p>If a sports team has poor communication, players will be confused. If they have poor organization, they will waste time and money. Together, these principles create a disciplined and winning environment.</p>
+                    `
+                }
+            },
+            {
+                title: "3) Principle of Control and Evaluation & Discipline",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Control & Evaluation</h3>
+                        <p>This means checking if the team is performing as planned. Managers evaluate player stats and match results to fix mistakes.</p>
+                        <h3>Discipline</h3>
+                        <p>Players and staff must strictly follow the rules, attend training on time, and behave professionally on and off the field.</p>
+                    `,
+                    medium: `
+                        <h3>Principle of Control and Evaluation</h3>
+                        <p>Control means tracking performance. Management sets a goal (like winning the cup). Evaluation involves checking the actual match results and player fitness levels against that goal. If the team is losing, management finds the mistakes and makes changes (like changing the training routine or hiring new players).</p>
+                        <h3>Principle of Discipline</h3>
+                        <p>Discipline is the foundation of sports. It means strict obedience to rules, diets, and training schedules. A talented team without discipline will lose to a less talented but highly disciplined team. It also includes behaving respectfully with umpires and fans.</p>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>Managing a sports team requires constant monitoring and strict rules. The principles of Control, Evaluation, and Discipline ensure that the team stays on the right track towards winning.</p>
+                        
+                        <h3>1. The Principle of Control and Evaluation</h3>
+                        <p>You cannot improve what you do not measure. This principle is about checking progress and correcting mistakes.</p>
+                        <ul>
+                            <li><strong>Setting Standards:</strong> The management sets clear targets (e.g., qualifying for the playoffs or reaching a certain fitness level).</li>
+                            <li><strong>Evaluation (Measuring Performance):</strong> Using data analytics, video replays, and fitness tests to measure how well players are actually performing during real matches.</li>
+                            <li><strong>Taking Corrective Action (Control):</strong> If the evaluation shows that the team's defense is weak, the manager exercises "control" by changing the defensive strategy, altering the training schedule, or substituting players.</li>
+                        </ul>
+
+                        <h3>2. The Principle of Discipline</h3>
+                        <p>Discipline is the absolute heart of sports. Without it, talent is wasted.</p>
+                        <ul>
+                            <li><strong>Strict Adherence to Rules:</strong> Players must follow the rules of the game to avoid fouls, red cards, or penalties which hurt the team.</li>
+                            <li><strong>Personal Discipline:</strong> Athletes must strictly follow their sleeping schedules, strict diets, and attend practice sessions exactly on time. Skipping practice shows a lack of discipline.</li>
+                            <li><strong>Code of Conduct:</strong> Discipline also applies off the field. Players must behave professionally in public, avoid controversies, and respect the referees and opponents. Any breach of discipline usually results in fines or suspension by the management.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "4) Principle of Discipline & Equity",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Discipline</h3>
+                        <p>Following strict rules, showing up for practice on time, and respecting the referee and teammates.</p>
+                        <h3>Equity</h3>
+                        <p>Treating every player fairly. The rules must be exactly the same for a superstar player and a new junior player without any bias.</p>
+                    `,
+                    medium: `
+                        <h3>Principle of Discipline</h3>
+                        <p>In sports, discipline is everything. It requires athletes to commit to hard training, follow dietary restrictions, and respect the authority of the coach and umpires. A lack of discipline leads to injuries, penalties, and team failure.</p>
+                        <h3>Principle of Equity</h3>
+                        <p>Equity means fairness, justice, and kindness. In sports management, the manager and coach must treat all players equally. A star player who comes late to practice should get the exact same punishment as a junior substitute player. Favoritism destroys team unity.</p>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>To keep the team united and focused, management must balance strict rules with complete fairness. This is governed by the principles of Discipline and Equity.</p>
+                        
+                        <h3>1. The Principle of Discipline</h3>
+                        <p>Discipline is the core requirement for athletic success. It ensures that the organization runs smoothly without chaos.</p>
+                        <ul>
+                            <li><strong>Obedience:</strong> Players must listen to the coach's strategies without arguing. Staff must follow management's policies.</li>
+                            <li><strong>Consistency:</strong> It means waking up early every day, eating the right food, and training hard even when the athlete is tired or unmotivated.</li>
+                            <li><strong>Respect:</strong> True discipline involves showing respect to the game, the umpires, the opponents, and the fans, maintaining the spirit of sportsmanship.</li>
+                        </ul>
+
+                        <h3>2. The Principle of Equity</h3>
+                        <p>Equity means treating everyone with fairness, equality, and justice. It is the opposite of favoritism.</p>
+                        <ul>
+                            <li><strong>No Bias:</strong> A coach must select players for the final match based purely on their fitness and performance, not because of personal friendship, religion, or background.</li>
+                            <li><strong>Equal Rules for All:</strong> The rules must apply to everyone equally. If the rule is "no mobile phones before a match", then even the highest-paid superstar player must be punished if they break it, just like a junior player would be.</li>
+                            <li><strong>Team Unity:</strong> When players see that the management is 100% fair and transparent (Equity), they trust the management more. This builds strong team morale and brotherhood.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "5) Objective & Importance of Sports Management",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Objectives</h3>
+                        <ul>
+                            <li>To organize sports events smoothly and safely.</li>
+                            <li>To discover and train new athletic talent.</li>
+                            <li>To generate profit through tickets and sponsors.</li>
+                        </ul>
+                        <h3>Importance</h3>
+                        <p>Good management prevents chaos, reduces injuries, creates jobs, and turns local sports into massive global entertainment.</p>
+                    `,
+                    medium: `
+                        <h3>Objectives of Sports Management</h3>
+                        <ul>
+                            <li><strong>Smooth Operations:</strong> To plan and execute tournaments without any delays or chaos.</li>
+                            <li><strong>Talent Development:</strong> To find young athletes and provide them with top-level coaching and facilities.</li>
+                            <li><strong>Financial Success:</strong> To ensure the team or club makes money through sponsorships, TV rights, and merchandise.</li>
+                        </ul>
+                        <h3>Importance of Sports Management</h3>
+                        <p>Without management, sports would just be an unorganized hobby. It is important because it provides proper safety for players, turns sports into a profitable global industry, creates thousands of jobs (coaches, medics, event staff), and provides high-quality entertainment to millions of fans worldwide.</p>
+                    `,
+                    long: `
+                        <h3>Objectives of Sports Management</h3>
+                        <p>The primary goals that sports management aims to achieve are:</p>
+                        <ul>
+                            <li><strong>1. Flawless Execution of Events:</strong> To plan, organize, and conduct matches or massive tournaments (like the Olympics or IPL) smoothly, safely, and exactly on schedule.</li>
+                            <li><strong>2. Talent Identification & Development:</strong> To scout for young, raw talent at the grassroots level and provide them with world-class facilities, nutrition, and coaching to become champions.</li>
+                            <li><strong>3. Financial Profitability:</strong> To generate revenue. Sports is a business; the objective is to secure big sponsorships, sell broadcasting rights to TV networks, and sell stadium tickets so the club makes a profit.</li>
+                            <li><strong>4. Promoting Health and Fitness:</strong> To encourage the general public and youth to participate in physical activities, thereby building a healthier society.</li>
+                        </ul>
+                        
+                        <h3>Importance of Sports Management</h3>
+                        <p>Sports management is crucial for the survival and growth of modern sports. Its importance includes:</p>
+                        <ul>
+                            <li><strong>1. Professionalism:</strong> It transforms casual street games into highly professional, globally respected leagues.</li>
+                            <li><strong>2. Player Welfare & Safety:</strong> Good management ensures that medical teams are always ready, playing conditions are safe, and players are not overworked, which prevents serious injuries.</li>
+                            <li><strong>3. Economic Growth & Employment:</strong> The sports industry creates millions of jobs globally—not just for athletes, but for stadium managers, marketers, physiotherapists, and journalists.</li>
+                            <li><strong>4. Fan Engagement:</strong> Through clever marketing and PR, sports management builds intense loyalty among fans, uniting people from different cultures through a shared love of the game.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "6) Principle of Planning & Organization",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Planning</h3>
+                        <p>Deciding in advance what to do. E.g., creating a training schedule for the whole year before the tournament starts.</p>
+                        <h3>Organization</h3>
+                        <p>Arranging the resources needed to execute the plan. E.g., booking the stadium, buying equipment, and hiring staff.</p>
+                    `,
+                    medium: `
+                        <h3>Principle of Planning</h3>
+                        <p>Planning is thinking before doing. In sports, it involves setting goals (like winning the championship) and creating a detailed roadmap to achieve them. This includes making daily practice schedules, deciding the budget, and analyzing opponent strategies well in advance.</p>
+                        <h3>Principle of Organization</h3>
+                        <p>Once the plan is made, Organization is putting the pieces together. It means assigning specific duties to the staff and gathering physical resources. For example, organizing a marathon requires arranging water stations, medical camps, police permissions, and volunteers along the route.</p>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>In sports management, "failing to plan is planning to fail." The principles of Planning and Organization are the very first steps taken before any sport is played.</p>
+                        
+                        <h3>1. The Principle of Planning</h3>
+                        <p>Planning involves deciding in advance: <em>What is to be done, when it is to be done, and who will do it.</em></p>
+                        <ul>
+                            <li><strong>Setting Clear Goals:</strong> Deciding the ultimate target, such as winning a gold medal at the Olympics or simply avoiding relegation in a football league.</li>
+                            <li><strong>Forecasting:</strong> Predicting future challenges. For example, planning alternative indoor training sessions if heavy rain is expected.</li>
+                            <li><strong>Strategic Blueprints:</strong> Making long-term training calendars, diet plans, and financial budgets months before the actual competition begins.</li>
+                        </ul>
+
+                        <h3>2. The Principle of Organization</h3>
+                        <p>While planning is thinking, Organization is the physical arrangement of things. It is the process of bringing together resources to execute the plan.</p>
+                        <ul>
+                            <li><strong>Division of Work:</strong> Breaking down a massive task into smaller jobs. In a cricket tournament, one group handles ground maintenance, one handles ticket sales, and one handles player security.</li>
+                            <li><strong>Resource Gathering:</strong> Arranging all necessary physical and financial resources. This means ensuring the stadium is booked, the sports kits are purchased, and the transport buses are hired.</li>
+                            <li><strong>Creating Structure:</strong> Establishing a clear management structure so every volunteer and staff member knows exactly who their boss is and what their specific duty is on match day.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "7) Principle of Coordination & Leadership",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>Coordination</h3>
+                        <p>Making sure all departments (coaches, doctors, players) work together in harmony, without fighting or confusing each other.</p>
+                        <h3>Leadership</h3>
+                        <p>A good captain or manager inspires, motivates, and guides the team to victory, especially during tough times.</p>
+                    `,
+                    medium: `
+                        <h3>Principle of Coordination</h3>
+                        <p>Coordination is the glue that holds a sports organization together. It involves syncing the efforts of different groups. For example, the fitness coach, the head coach, and the medical doctor must coordinate perfectly so that an injured player is not forced to play too early.</p>
+                        <h3>Principle of Leadership</h3>
+                        <p>Leadership is the ability to inspire and guide people. In sports, the manager and the team captain must lead by example. A strong leader keeps the team united, motivates them when they are losing, and takes responsibility for failures instead of blaming others.</p>
+                    `,
+                    long: `
+                        <h3>Introduction</h3>
+                        <p>A team is made up of individuals with different skills and egos. To win, these individuals must act as one machine. This is achieved through the principles of Coordination and Leadership.</p>
+                        
+                        <h3>1. The Principle of Coordination</h3>
+                        <p>Coordination is the synchronization of all efforts to ensure that everyone is moving in the exact same direction.</p>
+                        <ul>
+                            <li><strong>Harmonizing Departments:</strong> A sports franchise has many departments: Coaching, Medical, PR, and Finance. Coordination ensures the coach doesn't demand to buy a player that the Finance department cannot afford.</li>
+                            <li><strong>Timing and Unity:</strong> On the field, coordination means teamwork. In a relay race, the perfect timing of passing the baton is pure coordination. Off the field, it ensures the team bus arrives exactly when practice ends.</li>
+                            <li><strong>Avoiding Duplication:</strong> It prevents confusion. If two coaches give opposite advice to a player, it ruins performance. Coordination ensures a single, unified message is given.</li>
+                        </ul>
+
+                        <h3>2. The Principle of Leadership</h3>
+                        <p>Leadership is the most visible principle in sports. It is the ability to influence and inspire players to give their 100% effort.</p>
+                        <ul>
+                            <li><strong>Leading by Example:</strong> A good captain or manager works the hardest. If the captain shows absolute dedication in training, the junior players will automatically follow.</li>
+                            <li><strong>Motivation:</strong> A true leader knows how to handle the psychology of the players. They know how to calm a nervous player and how to aggressively motivate the team when they are losing at half-time.</li>
+                            <li><strong>Decision Making:</strong> Leaders must make brave, quick decisions under immense pressure, such as changing the bowling attack in the final over of a match, and taking full responsibility for the outcome.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "Q.4.1) Information about any 2 sports games and their rules",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>1. Cricket</h3>
+                        <p>Played between two teams of 11 players. The team scoring the most runs wins. An over consists of 6 legal balls. A batsman can be out by being bowled, caught, or run-out.</p>
+                        <h3>2. Kabaddi</h3>
+                        <p>An Indian contact sport with 7 players per team. A "raider" crosses into the opponent's half, tags defenders, and returns to their half while continuously chanting "Kabaddi".</p>
+                    `,
+                    medium: `
+                        <h3>1. Cricket</h3>
+                        <p>Cricket is a bat-and-ball game played between two teams of 11 players on an oval field with a rectangular 22-yard pitch in the center. The batting team tries to score runs, while the bowling team tries to take wickets. <strong>Basic Rules:</strong> A match is divided into innings (e.g., 20 overs for T20). A bowler bowls 6 legal deliveries to complete an 'over'. A batsman is out if the ball hits the stumps (bowled), if a fielder catches the ball directly (caught), or if the batsman's leg blocks the stumps (LBW).</p>
+                        <h3>2. Kabaddi</h3>
+                        <p>Kabaddi is a traditional Indian contact sport played between two teams of 7 players on a rectangular court. <strong>Basic Rules:</strong> The game is played in two halves of 20 minutes. A player from the attacking team, called a "raider," enters the opponent's half. To score points, the raider must tag one or more defenders and safely return to their own half without getting tackled. The raider must do this in a single breath while continuously chanting "Kabaddi". Tackled raiders are "out" but can be revived if their team scores a point.</p>
+                    `,
+                    long: `
+                        <h3>1. Cricket</h3>
+                        <p>Cricket is a globally popular bat-and-ball game played between two teams of 11 players. The game is played on a large oval grass field with a 22-yard rectangular pitch in the center. The objective is simply to score more runs than the opposing team.</p>
+                        <ul>
+                            <li><strong>Format:</strong> Matches are divided into 'Innings' and 'Overs'. An over consists of 6 legal deliveries bowled by a single bowler. Formats range from fast-paced T20 (20 overs) to 5-day Test matches.</li>
+                            <li><strong>Scoring Runs:</strong> Batsmen score by hitting the ball and physically running between the wickets. Hitting the ball to the boundary rope scores 4 runs, and hitting it over the rope without bouncing scores 6 runs.</li>
+                            <li><strong>Ways to get 'Out':</strong> A batsman is dismissed if the bowler hits the stumps (Bowled), a fielder catches the hit ball before it touches the ground (Caught), the batsman is outside their crease when the stumps are hit (Run-Out/Stumped), or the ball hits their leg which is blocking the stumps (LBW - Leg Before Wicket).</li>
+                        </ul>
+
+                        <h3>2. Kabaddi</h3>
+                        <p>Kabaddi is a highly physical, traditional Indian contact sport played between two teams of 7 players each on a rectangular mat or mud court. It requires immense strength, speed, and breath control.</p>
+                        <ul>
+                            <li><strong>The Gameplay:</strong> The match is divided into two halves of 20 minutes each. The teams take turns sending a single attacking player, called a "Raider", into the opponent's half.</li>
+                            <li><strong>The Raid:</strong> The raider must cross the center line, tag (touch) as many defending players as possible, and safely cross back into their own half to score points.</li>
+                            <li><strong>The Chant (Cant):</strong> The raider must complete the entire raid in a single breath while loudly and continuously chanting the word "Kabaddi". If they stop chanting or take a breath, they are declared out.</li>
+                            <li><strong>Defending & Revival:</strong> The defending team tries to physically tackle and pin down the raider before they can return to their half. Players who are tagged or tackled are temporarily sent "out" of the court, but they can be "revived" (brought back in) every time their team scores a point.</li>
+                        </ul>
+                    `
+                }
+            },
+            {
+                title: "Q.4.2) Information about any 2 yoga asanas and their benefits",
+                type: "dynamic",
+                content: {
+                    short: `
+                        <h3>1. Padmasana (Lotus Pose)</h3>
+                        <p>A sitting posture where feet are placed on opposite thighs. <strong>Benefits:</strong> Calms the brain, deeply relaxes the mind, and improves posture and concentration.</p>
+                        <h3>2. Vrikshasana (Tree Pose)</h3>
+                        <p>A standing balance pose where you stand on one leg and place the other foot on your inner thigh. <strong>Benefits:</strong> Improves physical balance, strengthens the legs, and builds focus.</p>
+                    `,
+                    medium: `
+                        <h3>1. Padmasana (Lotus Pose)</h3>
+                        <p>Padmasana is a cross-legged sitting meditation pose. You sit on the floor and carefully place your right foot on your left thigh, and your left foot on your right thigh, keeping your back totally straight.<br>
+                        <strong>Benefits:</strong> It is considered the ultimate pose for meditation. It deeply calms the brain, reduces stress and anxiety, keeps the spine straight, and stretches the ankles and knees.</p>
+                        
+                        <h3>2. Vrikshasana (Tree Pose)</h3>
+                        <p>Vrikshasana is a standing pose that requires balance. You stand straight, shift your weight to your left leg, and place the sole of your right foot flat against your inner left thigh, while bringing your hands together in prayer position above your head.<br>
+                        <strong>Benefits:</strong> It vastly improves physical balance and stability. It strengthens the ligaments in the ankles and feet, tones the leg muscles, and helps build intense mental focus and concentration.</p>
+                    `,
+                    long: `
+                        <h3>1. Padmasana (The Lotus Pose)</h3>
+                        <p>The word Padmasana comes from the Sanskrit word 'Padma', meaning lotus. It is a traditional cross-legged sitting posture used widely for deep meditation and breathing exercises (Pranayama).</p>
+                        <ul>
+                            <li><strong>How to perform it:</strong> Sit flat on the floor with your legs stretched out. Gently bend the right knee and place the right foot on top of the left thigh, with the sole facing upward. Then, do the same with the left leg, placing the left foot on the right thigh. Keep the spine completely straight, head erect, and rest your hands on your knees in a mudra (gesture).</li>
+                            <li><strong>Benefits:</strong>
+                                <ul>
+                                    <li>It instantly calms the brain and deeply relaxes the central nervous system, relieving high stress and anxiety.</li>
+                                    <li>It promotes excellent posture by keeping the spine perfectly straight.</li>
+                                    <li>It gently stretches the ankles and knees, keeping the joints flexible.</li>
+                                    <li>It increases awareness and concentration, making it the best posture for meditation.</li>
+                                </ul>
+                            </li>
+                        </ul>
+
+                        <h3>2. Vrikshasana (The Tree Pose)</h3>
+                        <p>The word Vrikshasana comes from the Sanskrit word 'Vriksha', meaning tree. Unlike seated poses, this is a standing balancing posture that mimics the steady, graceful stance of a tree.</p>
+                        <ul>
+                            <li><strong>How to perform it:</strong> Stand perfectly straight. Shift your entire body weight onto your left leg. Bend your right knee and place the sole of your right foot flat and firmly against your inner left thigh (avoiding the knee joint). Once perfectly balanced, take a deep breath in, and gracefully raise your arms over your head, joining your palms together in a "Namaste" prayer position. Keep your eyes focused on a single point in front of you.</li>
+                            <li><strong>Benefits:</strong>
+                                <ul>
+                                    <li>It drastically improves neuro-muscular coordination, physical balance, and stability.</li>
+                                    <li>It intensely strengthens the thighs, calves, ankles, and the spine.</li>
+                                    <li>Because you must balance on one leg, it forces the mind to stop wandering, thereby building incredible mental focus and concentration.</li>
+                                    <li>It helps relieve cases of sciatica (nerve pain in the legs).</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    `
+                }
+            }
+        ],
+        shortNotes: []
+    };
+
+    function renderQuestionBank() {
+        const container = document.getElementById('main-content-wrapper');
+        let html = '';
+        
+        // Render Objective Questions first
+        if (qbData.objectiveQuestions && qbData.objectiveQuestions.length > 0) {
+            html += '<h2 class="section-header">Objective Questions</h2>';
+            qbData.objectiveQuestions.forEach(q => {
+                html += '<article class="note-card">';
+                html += '<h2 class="note-title">' + q.title + '</h2>';
+                html += '<div class="note-body">' + q.content + '</div>';
+                html += '</article>';
+            });
+        }
+
+        // Render Long Questions
+        if (qbData.longQuestions && qbData.longQuestions.length > 0) {
+            html += '<h2 class="section-header">Descriptive Questions</h2>';
+            qbData.longQuestions.forEach(q => {
+                let contentHtml = q.type === 'static' ? q.content : q.content[currentLength];
+                html += '<article class="note-card">';
+                html += '<h2 class="note-title">' + q.title + '</h2>';
+                html += '<div class="note-body">' + contentHtml + '</div>';
+                html += '</article>';
+            });
+        }
+
+        container.innerHTML = html;
+    }
+
+    // Initialize application
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeSelect').value = savedTheme;
+        document.getElementById('lengthSelect').value = 'long';
+        
+        renderQuestionBank();
+    });
+</script>
+</body>
+</html>
