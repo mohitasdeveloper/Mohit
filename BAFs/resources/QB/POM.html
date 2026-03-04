@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Principles of Management QB - BirlaOne</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const themeColors = { 
+          light: '#f8fafc', 
+          dark: '#0f172a', 
+          sepia: '#f4ecd8' 
+      };
+      document.write('<meta id="theme-color-meta" name="theme-color" content="' + themeColors[savedTheme] + '">');
+    })();
+  </script>
+
+  <style>
+    :root {
+      /* Professional Corporate Blue Theme */
+      --primary-accent: #2563eb; /* Royal Blue */
+      --primary-gradient: linear-gradient(90deg, #1e3a8a, #3b82f6); /* Navy to Bright Blue */
+      --danger-color: #e53935;
+      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Lora', serif;
+      --border-radius: 12px;
+      --transition-speed: 0.3s;
+    }
+    
+    html[data-theme="light"] {
+      --bg-color: #f8fafc; 
+      --card-bg: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --border-color: #e2e8f0;
+      --shadow: 0 4px 20px rgba(37, 99, 235, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --input-bg: #f1f5f9;
+      --table-header-bg: #eff6ff;
+    }
+
+    html[data-theme="dark"] {
+      --bg-color: #0f172a; 
+      --card-bg: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border-color: #334155;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --header-bg: rgba(15, 23, 42, 0.9);
+      --input-bg: #334155;
+      --table-header-bg: #1e293b;
+    }
+      
+    html[data-theme="sepia"] {
+        --bg-color: #f4ecd8;
+        --card-bg: #fbf5e9;
+        --text-primary: #5b4636;
+        --text-secondary: #7d6b59;
+        --border-color: #dcd0b9;
+        --primary-accent: #a98244;
+        --primary-gradient: linear-gradient(135deg, #c5a265, #a98244);
+        --shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        --header-bg: rgba(244, 236, 216, 0.9);
+        --input-bg: #e9deca;
+        --table-header-bg: #e9deca;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: var(--font-serif);
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* Header */
+    .top-bar { 
+        font-family: var(--font-sans); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 20px; 
+        background: var(--header-bg); 
+        backdrop-filter: blur(8px); 
+        position: sticky; 
+        top: 0; 
+        z-index: 100; 
+        border-bottom: 1px solid var(--border-color); 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+    .top-bar .title { font-weight: 800; font-size: 24px; color: var(--text-primary); letter-spacing: -0.5px; }
+    
+    .controls { display: flex; gap: 12px; }
+    
+    .custom-select { width: 100%; }
+    
+    .custom-select select {
+      width: 100%;
+      background-color: var(--input-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 32px 8px 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      cursor: pointer;
+      text-overflow: ellipsis;
+    }
+    .custom-select select:focus { outline: 2px solid var(--primary-accent); }
+
+    /* Mobile Responsive Layout */
+    @media (max-width: 600px) {
+        .top-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+        }
+        .custom-select select {
+            font-size: 13px;
+            padding: 8px 25px 8px 8px;
+        }
+    }
+
+    /* Layout */
+    .container { padding: 30px 20px; max-width: 900px; margin: 0 auto; }
+    .section-header { font-family: var(--font-sans); font-size: 26px; font-weight: 800; margin: 40px 0 20px; color: var(--primary-accent); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+    
+    /* Cards */
+    .note-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; }
+    .note-title { font-family: var(--font-sans); font-size: 20px; font-weight: 700; padding: 16px 24px; background: var(--primary-gradient); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .note-body { padding: 24px; animation: fadeIn 0.3s ease-in-out; }
+    
+    /* Typography inside cards */
+    .note-body h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--primary-accent); margin: 24px 0 12px; }
+    .note-body h3:first-child { margin-top: 0; }
+    .note-body h4 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 600; margin: 16px 0 8px; }
+    .note-body p { margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body strong { font-family: var(--font-sans); font-weight: 700; color: var(--text-primary); }
+    .note-body ul, .note-body ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body li { margin-bottom: 10px; }
+    .note-body li::marker { color: var(--primary-accent); font-weight: bold; }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(3px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <h1 class="title">BAFs App</h1>
+    <div class="controls">
+        <div class="custom-select">
+            <select id="lengthSelect" onchange="changeLength(this.value)" aria-label="Select Answer Length">
+             <option value="long">Long (Pura)</option>
+              <option value="medium">Medium (Thoda bahut)</option>
+              <option value="short">Short (Thoda sa)</option>
+            </select>
+        </div>
+        <div class="custom-select">
+            <select id="themeSelect" onchange="changeTheme(this.value)" aria-label="Select theme">
+              <option value="light">Light Theme</option>
+              <option value="dark">Dark Theme</option>
+              <option value="sepia">Sepia Theme</option>
+            </select>
+        </div>
+    </div>
+  </header>
+
+  <main class="container" id="main-content-wrapper"></main>
+
+<script>
+    function changeTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        const themeColors = { 
+            light: '#f8fafc', 
+            dark: '#0f172a', 
+            sepia: '#f4ecd8' 
+        };
+        const metaTag = document.getElementById('theme-color-meta');
+        if (metaTag) {
+            metaTag.setAttribute('content', themeColors[theme]);
+        }
+    }
+    
+    let currentLength = 'long';
+    function changeLength(length) {
+        currentLength = length;
+        renderQuestionBank();
+    }
+
+    // SHARED TEXT BLOCKS (To make learning easy and repetitive as requested)
+    const defManagement = "Management is the art of getting work done through other people to achieve business goals efficiently. It involves planning, organizing, leading, and controlling resources.";
+    const defPlanning = "Planning is the first function of management. It means deciding in advance what to do, how to do it, when to do it, and who will do it.";
+    const defDecisionMaking = "Decision making is the process of choosing the best option out of many available alternatives to solve a problem.";
+    const defOrganising = "Organising is the process of dividing work, assigning duties, and grouping activities into departments to achieve the planned goals.";
+    const defMotivation = "Motivation is the psychological process of encouraging and inspiring employees to give their best effort at work.";
+    const defCommunication = "Communication is the process of exchanging information, ideas, and feelings between two or more people to create a common understanding.";
+    const defLeadership = "Leadership is the ability to influence, guide, and inspire followers to achieve a common goal willingly.";
+    const defMBO = "MBO (Management by Objectives) is a modern process where the manager and the employee sit together to set clear, achievable goals for the employee.";
+    const defControlling = "Controlling is the process of checking if the actual work matches the planned goals, finding mistakes, and correcting them.";
+
+    const qbData = [
+        {
+            title: "1. Explain the concept management with features.",
+            content: {
+                short: `
+                    <h3>Meaning</h3>
+                    <p>${defManagement}</p>
+                    <h3>Features</h3>
+                    <ul>
+                        <li><strong>Goal-Oriented:</strong> It aims to reach a specific target.</li>
+                        <li><strong>Continuous Process:</strong> It never stops.</li>
+                        <li><strong>Group Activity:</strong> It relies on teamwork.</li>
+                        <li><strong>Intangible:</strong> You cannot touch it, only feel its results.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Concept & Meaning</h3>
+                    <p>${defManagement}</p>
+                    <h3>Key Features of Management</h3>
+                    <ul>
+                        <li><strong>Goal-Oriented:</strong> Every activity is directed toward achieving specific business targets.</li>
+                        <li><strong>Continuous Process:</strong> Management is an ongoing cycle. Managers are constantly planning and adjusting.</li>
+                        <li><strong>Group Activity:</strong> A single person cannot build a company. It unites different individuals into a team.</li>
+                        <li><strong>Intangible Force:</strong> You cannot touch "management," but its presence is felt through the company's profits.</li>
+                        <li><strong>Dynamic Function:</strong> Good management adapts to changes in the market and technology.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>Management is the backbone of any successful business. Without it, a company is just a confused group of people. <strong>${defManagement}</strong></p>
+                    
+                    <h3>Key Features of Management</h3>
+                    <p>The main features that define management are:</p>
+                    <ul>
+                        <li><strong>1. Goal-Oriented Process:</strong> Management never does work randomly. Every action is taken to reach a specific target. <em>Example: A manager's goal might be to sell 1000 cars in one month.</em></li>
+                        <li><strong>2. Continuous Activity:</strong> Management never sleeps. As soon as one problem is solved, a new one appears. It is a never-ending cycle of planning, acting, and checking results.</li>
+                        <li><strong>3. It is a Group Activity:</strong> One person cannot run a factory alone. Management is about teamwork. It brings together people with different skills and unites them to work as one single machine.</li>
+                        <li><strong>4. Intangible Force:</strong> You cannot see or touch "management." It is invisible. However, you can clearly feel its presence if the office is disciplined, employees are happy, and the company is making a profit.</li>
+                        <li><strong>5. Dynamic Function:</strong> The business world changes every day. Good management is highly flexible. <em>Example: When COVID-19 hit, good management quickly changed their rules and allowed employees to work from home.</em></li>
+                        <li><strong>6. Universal Application:</strong> The rules of management are used everywhere. You need management to run a hospital, a cricket team, a school, or a massive global company like Apple.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>To conclude, management is a continuous, invisible, and dynamic force that turns scattered resources into organized success.</p>`
+            }
+        },
+        {
+            title: "2. Discuss Henri Fayol’s principles of management.",
+            content: {
+                short: `
+                    <h3>Meaning</h3>
+                    <p>Henri Fayol gave 14 rules to help managers run companies. Important ones are:</p>
+                    <ul>
+                        <li><strong>Division of Work:</strong> Dividing work makes people experts.</li>
+                        <li><strong>Unity of Command:</strong> One employee should have only one boss.</li>
+                        <li><strong>Discipline:</strong> Employees must obey company rules.</li>
+                        <li><strong>Remuneration:</strong> Workers must be paid fairly.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Henri Fayol's Principles</h3>
+                    <p>Henri Fayol is known as the father of modern management. He created 14 principles to guide managers. The most important are:</p>
+                    <ul>
+                        <li><strong>Division of Work:</strong> Work is divided into smaller tasks to increase speed and specialization.</li>
+                        <li><strong>Authority & Responsibility:</strong> Managers need power to give orders, but must take responsibility for results.</li>
+                        <li><strong>Unity of Command:</strong> An employee should receive orders from only one boss to avoid confusion.</li>
+                        <li><strong>Discipline:</strong> Employees must respect authority and follow company rules.</li>
+                        <li><strong>Remuneration:</strong> Workers must be paid a fair salary for their hard work.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>Henri Fayol is world-famous as the "Father of General Management." From his long experience as a manager, he created 14 universal principles. These principles act as a guide to help managers run any business smoothly and profitably.</p>
+                    
+                    <h3>Important Principles of Henri Fayol</h3>
+                    <ul>
+                        <li><strong>1. Division of Work (Specialization):</strong> Fayol said that a big job should be divided into small, simple tasks. When an employee does the exact same small task every day, they become an expert. <em>Example: In a car factory, one person only fixes tires, making the work much faster.</em></li>
+                        <li><strong>2. Authority and Responsibility:</strong> Authority is the power to give orders. Responsibility is the duty to complete the work. Fayol said these two must be equal. If you give a manager responsibility, you must give him the authority to make decisions.</li>
+                        <li><strong>3. Discipline:</strong> This is the soul of any company. Discipline means strict obedience, respecting the boss, and following office rules. Without discipline, the company will collapse into chaos.</li>
+                        <li><strong>4. Unity of Command:</strong> This is a very famous rule. It states that an employee should take orders from exactly ONE boss only. <em>Example: If two managers give conflicting orders to one worker at the same time, the worker will be totally confused and stressed.</em></li>
+                        <li><strong>5. Unity of Direction:</strong> "One Head, One Plan." All departments working toward the same goal must follow a single unified plan directed by one manager.</li>
+                        <li><strong>6. Company Goals over Personal Goals:</strong> The success of the company is always more important than the selfish personal goals of any single employee. Employees must keep their ego aside for the company's benefit.</li>
+                        <li><strong>7. Fair Remuneration (Fair Pay):</strong> Employees do not work for free. They must be paid a fair, reasonable, and timely salary. Fair pay keeps the staff happy, motivated, and loyal to the company.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>By strictly following Henri Fayol's principles, any manager can create a highly disciplined, efficient, and successful organization.</p>`
+            }
+        },
+        {
+            title: "3. Define planning. Stress its importance to business.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defPlanning}</p>
+                    <h3>Importance</h3>
+                    <ul>
+                        <li><strong>Provides Direction:</strong> Gives everyone a clear target.</li>
+                        <li><strong>Reduces Risks:</strong> Helps prepare for future problems.</li>
+                        <li><strong>Stops Wastage:</strong> Saves time and money by avoiding confusion.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Definition of Planning</h3>
+                    <p>${defPlanning} It bridges the gap between where a business is today and where it wants to be tomorrow.</p>
+                    <h3>Importance to Business</h3>
+                    <ul>
+                        <li><strong>Provides Clear Direction:</strong> It gives a clear target so all employees know what they are working towards.</li>
+                        <li><strong>Reduces Uncertainty:</strong> It helps managers anticipate future risks and prepare backup plans.</li>
+                        <li><strong>Reduces Wastage:</strong> By planning steps carefully, companies avoid useless efforts and save money.</li>
+                        <li><strong>Sets Standards:</strong> It gives management a benchmark to compare against actual performance later.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Planning</h3>
+                    <p><strong>${defPlanning}</strong> It is a mental exercise. Planning acts as a bridge that connects where a company stands today to where it wants to reach in the future.</p>
+                    
+                    <h3>Importance of Planning to a Business</h3>
+                    <p>Planning is the most important step for any business. Without it, a company is like a ship without a steering wheel. Its importance is explained below:</p>
+                    <ul>
+                        <li><strong>1. Provides Clear Direction:</strong> Without a plan, employees work blindly and get confused. Planning ensures that all departments (Sales, HR, Production) are moving in the exact same direction toward a single, unified goal.</li>
+                        <li><strong>2. Reduces Future Risks and Uncertainty:</strong> The business world is dangerous and unpredictable. Planning forces managers to look ahead, predict future problems (like a market crash), and prepare "Plan B" to survive those risks safely.</li>
+                        <li><strong>3. Reduces Wasteful Activities:</strong> When work is well-planned, everyone knows their exact duty. This stops people from doing the same job twice, stops the waste of expensive raw materials, and saves valuable time.</li>
+                        <li><strong>4. Promotes Innovative Ideas:</strong> Because planning requires deep thinking, it forces managers to use their brains and come up with highly creative, out-of-the-box ideas to beat their competitors.</li>
+                        <li><strong>5. Facilitates Decision Making:</strong> Planning provides a clear set of rules. When managers have a set plan in their hands, making quick daily decisions becomes much faster and easier.</li>
+                        <li><strong>6. Sets Standards for Controlling:</strong> You cannot judge success without a target. Planning sets a target (<em>Example: "We must sell 500 phones"</em>). Later, the manager checks if they actually hit that target. Without planning, there is nothing to check.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>In short, planning guarantees that a business does not depend on luck. It creates a safe, organized, and clear path to massive success.</p>`
+            }
+        },
+        {
+            title: "4. What is decision making? Explain its features.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defDecisionMaking}</p>
+                    <h3>Features</h3>
+                    <ul>
+                        <li><strong>Intellectual Process:</strong> Requires deep thinking and logic.</li>
+                        <li><strong>Goal-Oriented:</strong> Made to achieve a specific target.</li>
+                        <li><strong>Involves Choices:</strong> You need at least two options to make a decision.</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is Decision Making?</h3>
+                    <p>${defDecisionMaking}</p>
+                    <h3>Features of Decision Making</h3>
+                    <ul>
+                        <li><strong>Intellectual Process:</strong> It requires deep thinking, data analysis, and logical reasoning, not just guessing.</li>
+                        <li><strong>Goal-Oriented:</strong> Every decision is made to solve a specific problem or reach a target.</li>
+                        <li><strong>Continuous Activity:</strong> Managers have to make decisions every single day, it never stops.</li>
+                        <li><strong>Involves Choices:</strong> A decision only happens when there are at least two or more options to choose from.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Decision Making</h3>
+                    <p>In business, a manager is known by the decisions they make. <strong>${defDecisionMaking}</strong> It involves identifying a problem, analyzing the facts, and picking the safest and most profitable solution.</p>
+                    
+                    <h3>Key Features of Decision Making</h3>
+                    <p>The main features of the decision-making process are:</p>
+                    <ul>
+                        <li><strong>1. It is an Intellectual Process:</strong> Decision making is not about flipping a coin or guessing. It requires heavy mental effort, deep analysis, logical reasoning, and studying past data before coming to a final conclusion.</li>
+                        <li><strong>2. Always Involves Alternatives (Choices):</strong> Decision making only exists when there is a choice. If there is only one road to take, no decision is needed. It is the act of picking the best out of many different options.</li>
+                        <li><strong>3. Highly Goal-Oriented:</strong> Decisions are never made randomly just for fun. Every corporate decision is made specifically to achieve a set objective or to quickly solve an urgent business problem.</li>
+                        <li><strong>4. It is a Continuous Activity:</strong> A manager’s job is never done. Decision making is a never-ending, daily activity. From the CEO deciding to buy a new company, to the junior supervisor deciding the daily lunch break timing, decisions happen all day.</li>
+                        <li><strong>5. It Can be Positive or Negative:</strong> A decision can be a choice to take action (<em>Example: deciding to launch a new product</em>) or a choice to do nothing (<em>Example: deciding NOT to enter a risky new market</em>).</li>
+                        <li><strong>6. Time-Bound Process:</strong> Gathering data takes time, but a good decision must be made at the exact right moment. A brilliant decision made too late is completely useless and causes financial loss.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Decision making is the core duty of management. A single good decision can make a company rich, while one bad decision can destroy it. Therefore, it requires sharp intelligence and perfect timing.</p>`
+            }
+        },
+        {
+            title: "5. What is meant by the term Organising? Describe the nature of organizing.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defOrganising}</p>
+                    <h3>Nature</h3>
+                    <ul>
+                        <li><strong>Division of Work:</strong> Breaking big tasks into smaller jobs.</li>
+                        <li><strong>Coordination:</strong> Linking all departments together.</li>
+                        <li><strong>Authority:</strong> Defining who is the boss.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Meaning of Organising</h3>
+                    <p>${defOrganising}</p>
+                    <h3>Nature of Organising</h3>
+                    <ul>
+                        <li><strong>Division of Work:</strong> Breaking a large task into smaller jobs so people can become experts at their specific role.</li>
+                        <li><strong>Coordination:</strong> Linking different departments (like Sales and Production) together so they work in harmony.</li>
+                        <li><strong>Authority Structure:</strong> Clearly defining who is the boss and who reports to whom.</li>
+                        <li><strong>Common Objective:</strong> The entire structure is built solely to achieve the company's main goals.</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Organising</h3>
+                    <p>Once a plan is made on paper, it needs to be put into real action. This is where organizing comes in. <strong>${defOrganising}</strong> It means gathering people, money, and machines and creating a structured team to do the work.</p>
+                    
+                    <h3>Nature and Characteristics of Organising</h3>
+                    <p>The nature of organizing can be understood through the following points:</p>
+                    <ul>
+                        <li><strong>1. Division of Labor (Work):</strong> The very first nature of organizing is breaking down a massive, impossible goal into small, easy tasks. These small tasks are then given to specific employees based on their personal skills.</li>
+                        <li><strong>2. Requires Coordination:</strong> When work is divided among 100 people, it must also be re-connected. Organising acts as the glue that coordinates the efforts of all different individuals and departments so they don't fight or clash.</li>
+                        <li><strong>3. Creates an Authority Structure:</strong> Organising builds the official "chain of command" in the office. It clearly defines who has the power to give orders, who must do the work, and who reports to whom. This completely removes office confusion.</li>
+                        <li><strong>4. Group of Persons:</strong> Organising is never for a single person. It is naturally a group activity. It brings together people of different talents and binds them into a unified, working machine.</li>
+                        <li><strong>5. Focus on Common Objectives:</strong> The entire organizational structure (the teams, the offices, the hierarchy) is not created for fun. It exists for only one reason: to achieve the common business goals set during the planning stage.</li>
+                        <li><strong>6. It is a Dynamic Process:</strong> A company's structure is not made of stone. Good organizing is flexible. It changes its shape when the business grows larger, uses new technology, or enters new international markets.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>In conclusion, organizing is the process of bringing order to chaos. It ensures that every single person knows exactly what their job is and who their boss is, making the company run like a smooth engine.</p>`
+            }
+        },
+        {
+            title: "6. What are the factors determining the organization structure.",
+            content: {
+                short: `
+                    <h3>Factors</h3>
+                    <p>The structure depends on: Size of the business, Company strategy, Technology used, and the Business environment.</p>`,
+                medium: `
+                    <h3>Factors Determining Organization Structure</h3>
+                    <ul>
+                        <li><strong>Size of the Business:</strong> A small shop has a simple structure, while a massive global company needs complex departments.</li>
+                        <li><strong>Business Strategy:</strong> If a company wants fast growth, it needs a flexible structure. For low costs, it needs strict control.</li>
+                        <li><strong>Technology:</strong> Highly automated factories need fewer managers and have a flatter structure.</li>
+                        <li><strong>Environment:</strong> In a fast-changing market, companies need a dynamic, fast-moving structure.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>An organization structure is the physical framework of a company—how it divides its teams, managers, and departments. There is no single "perfect" structure for everyone. Managers must design the structure based on several critical factors.</p>
+                    
+                    <h3>Factors Determining the Organization Structure</h3>
+                    <ul>
+                        <li><strong>1. Size of the Enterprise:</strong> This is the biggest deciding factor. A small startup might have a simple "flat" structure where all 5 employees report directly to the founder. However, a giant multinational company (like Tata or Reliance) requires a "tall", complex structure with many departments, regional heads, and strict hierarchies.</li>
+                        <li><strong>2. Business Strategy and Goals:</strong> Structure always follows strategy. If a company’s strategy is rapid innovation and creativity (like a software company), it needs a loose, flexible structure. If the strategy is mass manufacturing at the cheapest cost, it needs a rigid, highly disciplined structure.</li>
+                        <li><strong>3. Technology Used:</strong> The type of technology a business uses shapes its teams. Highly automated factories with robots require very few ground-level managers. On the other hand, manual labor-intensive companies (like a garment factory) need many layers of supervisors to watch the workers.</li>
+                        <li><strong>4. Business Environment:</strong> A company operating in a highly volatile, fast-changing market (like fashion or smartphones) needs a decentralized structure so employees can make very quick decisions. Companies in stable, slow environments can use strict, centralized structures.</li>
+                        <li><strong>5. People and Culture (Employees):</strong> The skill level of the employees matters deeply. If the staff is highly educated and professional (like doctors or engineers), managers can give them more freedom. If the workers are unskilled, they need closer, tighter supervision and a stricter structure.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>A manager must carefully study the company's size, goals, and technology before drawing the organization chart. A wrongly chosen structure will slow down work and cause massive losses.</p>`
+            }
+        },
+        {
+            title: "7. What are essentials of sound decision making.",
+            content: {
+                short: `
+                    <h3>Essentials</h3>
+                    <p>A safe, sound decision requires: Accurate data, Clear goals, Checking all alternatives, Perfect timing, and Clear communication to the team.</p>`,
+                medium: `
+                    <h3>Essentials of Sound Decision Making</h3>
+                    <ul>
+                        <li><strong>Accurate Information:</strong> Good decisions cannot be made on guesses. They require solid, factual data.</li>
+                        <li><strong>Clear Objectives:</strong> The manager must know exactly what problem they are trying to solve.</li>
+                        <li><strong>Evaluating Alternatives:</strong> Never jump at the first idea. Compare all possible options before choosing.</li>
+                        <li><strong>Proper Timing:</strong> A perfect decision is useless if it is made too late. Speed is critical.</li>
+                        <li><strong>Effective Communication:</strong> Once decided, the plan must be clearly communicated to the staff executing it.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>Making a basic decision is easy, but making a "sound" (highly effective, safe, and profitable) decision requires strict discipline. A bad decision can ruin a company. Managers must ensure the following essential elements are present:</p>
+                    
+                    <h3>Essentials of Sound Decision Making</h3>
+                    <ul>
+                        <li><strong>1. Reliable and Accurate Information:</strong> Data is the fuel for making choices. A sound decision is always backed by real facts, market research, and past financial records. A manager should never make a major decision based merely on emotional "gut feeling" or guesswork.</li>
+                        <li><strong>2. Absolute Clarity of Objectives:</strong> Before choosing a path, the manager must clearly define what the exact goal is. If the actual problem is not understood properly, any solution applied will naturally fail.</li>
+                        <li><strong>3. Thorough Evaluation of Alternatives:</strong> A good decision-maker never picks the very first idea that comes to their mind. They brainstorm multiple different options, carefully weigh the pros and cons (benefits and risks) of each, and then select the safest and most profitable one.</li>
+                        <li><strong>4. Proper Timing:</strong> In the business world, time is money. A sound decision must be made at the exact right moment. Delaying a decision causes the company to miss golden opportunities, while rushing it causes careless, expensive mistakes.</li>
+                        <li><strong>5. Mental Flexibility:</strong> A good decision is never made of stone. The business world changes rapidly. If a manager realizes their recent decision is failing, they must have the flexibility and humility to adjust or reverse it without letting their ego get in the way.</li>
+                        <li><strong>6. Effective Communication:</strong> A brilliant decision is useless if it stays locked inside the manager's head. It must be clearly, simply, and politely communicated to the ground-level employees who will actually do the hard work.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>By collecting good data, looking at all options, acting on time, and communicating clearly, a manager guarantees that their decisions will bring success to the organization.</p>`
+            }
+        },
+        {
+            title: "8. What is meant by motivation? Explain its main features.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defMotivation}</p>
+                    <h3>Features</h3>
+                    <ul>
+                        <li><strong>Internal Feeling:</strong> It comes from inside a person.</li>
+                        <li><strong>Continuous:</strong> It is an ongoing, never-ending process.</li>
+                        <li><strong>Positive or Negative:</strong> Uses rewards or punishments.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Meaning of Motivation</h3>
+                    <p>${defMotivation}</p>
+                    <h3>Main Features</h3>
+                    <ul>
+                        <li><strong>Internal Feeling:</strong> You cannot force motivation; it is a psychological urge that comes from inside the employee.</li>
+                        <li><strong>Continuous Process:</strong> Human needs change. Once one desire is fulfilled, a manager must find new ways to motivate the worker.</li>
+                        <li><strong>Goal-Directed:</strong> Highly motivated employees focus sharply on achieving their targets.</li>
+                        <li><strong>Positive or Negative:</strong> It can be done through rewards (bonuses, promotions) or punishments (fear of losing a job).</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Motivation</h3>
+                    <p>The word motivation comes from the word 'motive', which means a deep human need or desire. In management, <strong>${defMotivation}</strong> It is the art of making people actually *want* to do what the company needs them to do, without forcing them.</p>
+                    
+                    <h3>Main Features of Motivation</h3>
+                    <p>The key characteristics of motivation in the workplace are:</p>
+                    <ul>
+                        <li><strong>1. It is an Internal Psychological Feeling:</strong> Motivation cannot be physically injected into a person. It is an internal emotion like pride, ambition, or a desire for money. A manager can only create a good office environment that triggers these internal feelings.</li>
+                        <li><strong>2. It is a Continuous, Never-Ending Process:</strong> Human desires are infinite. When an employee gets a salary hike, they are highly motivated for a few months, but soon they will desire a promotion. Therefore, managers must continuously find new ways to motivate their staff year after year.</li>
+                        <li><strong>3. It Creates Goal-Directed Behavior:</strong> Motivation always leads to serious action. A highly motivated employee does not waste time gossiping or taking long breaks; their behavior is totally focused on completing their tasks and hitting their targets.</li>
+                        <li><strong>4. It Can be Positive or Negative:</strong> 
+                            <ul>
+                                <li><em>Positive Motivation</em> involves offering attractive rewards like cash bonuses, public praise, or promotions to inspire work.</li>
+                                <li><em>Negative Motivation</em> involves using fear, such as threatening to cut pay, demote, or fire the employee if they do not perform well.</li>
+                            </ul>
+                        </li>
+                        <li><strong>5. It is Highly Complex:</strong> Every human is completely different. One worker might be motivated purely by money, while another might be motivated by getting flexible working hours or respect. A good manager must understand individual psychology.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Motivation is the fuel that drives a company. Even the most talented employee is useless if they are completely unmotivated. Proper motivation turns an average worker into a superstar.</p>`
+            }
+        },
+        {
+            title: "9. Define communication and explain its features.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defCommunication}</p>
+                    <h3>Features</h3>
+                    <ul>
+                        <li><strong>Two Persons:</strong> Needs a sender and a receiver.</li>
+                        <li><strong>Two-Way Process:</strong> Needs feedback to be complete.</li>
+                        <li><strong>Continuous:</strong> Happens all day in an office.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Definition of Communication</h3>
+                    <p>${defCommunication}</p>
+                    <h3>Features of Communication</h3>
+                    <ul>
+                        <li><strong>Two or More Persons:</strong> You cannot communicate with yourself. It requires a sender and a receiver.</li>
+                        <li><strong>Two-Way Process:</strong> It is not complete until the receiver understands the message and provides feedback.</li>
+                        <li><strong>Continuous Activity:</strong> Managers are constantly communicating orders, reports, and emails all day.</li>
+                        <li><strong>Various Forms:</strong> It can be verbal (speaking), written (emails, memos), or non-verbal (body language).</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Communication</h3>
+                    <p>The word is derived from the Latin word 'communis', which means common. <strong>${defCommunication}</strong> In a company, it is the lifeline that connects all the different departments together. Without it, business stops.</p>
+                    
+                    <h3>Key Features of Communication</h3>
+                    <p>The main characteristics of business communication are:</p>
+                    <ul>
+                        <li><strong>1. Involves at least Two Persons:</strong> Communication fundamentally requires two parties: a 'Sender' (who creates and sends the message) and a 'Receiver' (who listens, reads, and decodes the message).</li>
+                        <li><strong>2. It is a Two-Way Process:</strong> Simply talking or sending an email is not communication. The process is only considered successful and complete when the receiver understands the exact meaning and sends back a response or 'Feedback' (saying "Yes, I understood").</li>
+                        <li><strong>3. It is a Continuous Activity:</strong> A business cannot survive a single day without communication. Managers are constantly engaged in giving instructions, holding meetings, writing emails, and solving office disputes. It never stops.</li>
+                        <li><strong>4. Core Tool of Management:</strong> Without communication, planning remains stuck on paper, organizing is impossible, and leadership completely fails. It is the primary tool managers use to actually get work done.</li>
+                        <li><strong>5. Multiple Channels and Forms:</strong> Communication is highly versatile and takes many shapes in an office. It can be:
+                            <ul>
+                                <li><em>Verbal:</em> Face-to-face meetings, phone calls, presentations.</li>
+                                <li><em>Written:</em> Official emails, printed notices, company reports.</li>
+                                <li><em>Non-Verbal:</em> Facial expressions, eye contact, and body language (which often speak louder than words).</li>
+                            </ul>
+                        </li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>In conclusion, communication is the blood flowing through the veins of a company. Clear, fast, and polite communication ensures that everyone works together smoothly without errors.</p>`
+            }
+        },
+        {
+            title: "10. Describe the main features of leadership.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defLeadership}</p>
+                    <h3>Features</h3>
+                    <ul>
+                        <li><strong>Needs Followers:</strong> A leader must have people to lead.</li>
+                        <li><strong>Influence, Not Force:</strong> Leaders inspire, they don't threaten.</li>
+                        <li><strong>Continuous:</strong> It is a daily process of guiding others.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Meaning of Leadership</h3>
+                    <p>${defLeadership}</p>
+                    <h3>Features of Leadership</h3>
+                    <ul>
+                        <li><strong>Presence of Followers:</strong> A leader cannot exist without a group of willing followers.</li>
+                        <li><strong>Influence, Not Force:</strong> True leaders guide and inspire their team through trust and respect, not by shouting or punishing.</li>
+                        <li><strong>Continuous Process:</strong> A leader constantly guides, supports, and directs the team through daily challenges.</li>
+                        <li><strong>Shared Goals:</strong> The leader ensures that both the company's goals and the employees' goals are achieved together.</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Leadership</h3>
+                    <p>Management is about handling tasks, but leadership is about handling people. <strong>${defLeadership}</strong> It is the spark that motivates a team to go above and beyond their normal duties.</p>
+                    
+                    <h3>Main Features of Leadership</h3>
+                    <p>The most important characteristics that define true leadership are:</p>
+                    <ul>
+                        <li><strong>1. Essential Presence of Followers:</strong> The most basic feature of leadership is that it requires other people. You cannot be a leader in an empty room. A leader’s power and success are entirely dependent on having a group of loyal followers.</li>
+                        <li><strong>2. Power of Influence (Not Dictatorship):</strong> A bad boss uses formal authority to force people to work through fear. A true leader uses their personal charm, intelligence, and empathy to <em>influence</em> people to work happily. It is about winning hearts, not issuing threats.</li>
+                        <li><strong>3. It is a Continuous, Active Process:</strong> Leadership is not just giving a one-time motivational speech. It is a daily, continuous process of advising, supporting, solving problems, and keeping the team’s morale high during tough times.</li>
+                        <li><strong>4. Alignment of Mutual Goals:</strong> A great leader bridges the gap between what the company wants (high profits) and what the employees want (growth, respect, and good pay). They create a shared vision that benefits everyone involved.</li>
+                        <li><strong>5. Highly Situational:</strong> There is no single perfect leadership style. A good leader acts like water—they change their behavior based on the situation. They act strict during a massive emergency, but act like a friendly mentor during a training session.</li>
+                        <li><strong>6. Focus on Personal Qualities:</strong> Leadership heavily relies on the personal traits of the individual, such as absolute honesty, high self-confidence, excellent communication skills, and deep emotional intelligence.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>In summary, while anyone can be appointed as a manager, only those who can inspire trust and influence human behavior become true leaders.</p>`
+            }
+        },
+        {
+            title: "11. What is meant by MBO? Explain MBO process in detail.",
+            content: {
+                short: `
+                    <h3>Meaning</h3>
+                    <p>${defMBO}</p>
+                    <h3>Process</h3>
+                    <p>1. Set Company Goals -> 2. Set Department Goals -> 3. Jointly set Employee Goals -> 4. Review Progress -> 5. Final Reward.</p>`,
+                medium: `
+                    <h3>Meaning of MBO</h3>
+                    <p>${defMBO}</p>
+                    <h3>The MBO Process</h3>
+                    <ol>
+                        <li><strong>Set Company Goals:</strong> Top management decides the ultimate goals for the entire organization.</li>
+                        <li><strong>Set Individual Objectives:</strong> Managers and subordinates jointly agree on specific, achievable targets for each worker.</li>
+                        <li><strong>Action Plan:</strong> Creating a step-by-step plan on how the employee will hit those targets.</li>
+                        <li><strong>Performance Review:</strong> Regularly checking if the employee is succeeding or failing.</li>
+                        <li><strong>Final Appraisal:</strong> Rewarding the employee based on actual results achieved.</li>
+                    </ol>`,
+                long: `
+                    <h3>Meaning of Management by Objectives (MBO)</h3>
+                    <p>Introduced by management expert Peter Drucker, <strong>${defMBO}</strong> Instead of bosses blindly giving top-down orders, MBO is a friendly, collaborative process. The manager and employee negotiate the targets together, and the employee is judged purely on whether they hit those exact targets.</p>
+                    
+                    <h3>The Step-by-Step MBO Process</h3>
+                    <p>Implementing MBO successfully in a company requires following a strict, logical cycle:</p>
+                    <ul>
+                        <li><strong>Step 1: Setting Broad Organizational Goals:</strong> The process begins at the absolute highest level. The CEO and Board of Directors deeply analyze the market and establish clear, strategic goals for the entire organization. <em>(Example: "Achieve 30% growth in global sales this year").</em></li>
+                        <li><strong>Step 2: Setting Departmental Goals:</strong> The massive company goals are divided and passed down. The Marketing Head sets goals for their team to run ads, while the Production Head sets output targets for the factory.</li>
+                        <li><strong>Step 3: Joint Setting of Individual Objectives (The Core Step):</strong> This is the beating heart of MBO. A manager sits down with each employee individually. Instead of giving orders, they negotiate and jointly agree on specific, measurable, and realistic targets for that worker. Because the worker helped set the goal, they work much harder to achieve it.</li>
+                        <li><strong>Step 4: Developing the Action Plan:</strong> Goals are useless without a roadmap. The employee creates a detailed, step-by-step action plan outlining exactly how they will hit their targets, while the manager promises to provide the necessary budget and tools.</li>
+                        <li><strong>Step 5: Periodic Performance Reviews:</strong> MBO requires constant tracking. Every quarter (3 months), the manager and employee meet to track progress. If the employee is falling behind, the manager provides immediate training and help to fix the issue.</li>
+                        <li><strong>Step 6: Final Performance Appraisal and Reward:</strong> At the end of the year, a final review happens. The employee's actual performance is strictly measured against the goals set in Step 3. If they succeeded, they are heavily rewarded with promotions or bonuses. If they failed, the reasons are discussed to improve next year.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>MBO is a highly effective system because it removes confusion. Every employee knows exactly what they need to do to get a bonus, leading to massive company growth.</p>`
+            }
+        },
+        {
+            title: "12. What are essentials of sound decision making.",
+            content: {
+                short: `
+                    <h3>Essentials</h3>
+                    <p>A safe, sound decision requires: Accurate data, Clear goals, Checking all alternatives, Perfect timing, and Clear communication to the team.</p>`,
+                medium: `
+                    <h3>Essentials of Sound Decision Making</h3>
+                    <ul>
+                        <li><strong>Accurate Information:</strong> Good decisions cannot be made on guesses. They require solid, factual data.</li>
+                        <li><strong>Clear Objectives:</strong> The manager must know exactly what problem they are trying to solve.</li>
+                        <li><strong>Evaluating Alternatives:</strong> Never jump at the first idea. Compare all possible options before choosing.</li>
+                        <li><strong>Proper Timing:</strong> A perfect decision is useless if it is made too late. Speed is critical.</li>
+                        <li><strong>Effective Communication:</strong> Once decided, the plan must be clearly communicated to the staff executing it.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>Making a basic decision is easy, but making a "sound" (highly effective, safe, and profitable) decision requires strict discipline. A bad decision can ruin a company. Managers must ensure the following essential elements are present:</p>
+                    
+                    <h3>Essentials of Sound Decision Making</h3>
+                    <ul>
+                        <li><strong>1. Reliable and Accurate Information:</strong> Data is the fuel for making choices. A sound decision is always backed by real facts, market research, and past financial records. A manager should never make a major decision based merely on emotional "gut feeling" or guesswork.</li>
+                        <li><strong>2. Absolute Clarity of Objectives:</strong> Before choosing a path, the manager must clearly define what the exact goal is. If the actual problem is not understood properly, any solution applied will naturally fail.</li>
+                        <li><strong>3. Thorough Evaluation of Alternatives:</strong> A good decision-maker never picks the very first idea that comes to their mind. They brainstorm multiple different options, carefully weigh the pros and cons (benefits and risks) of each, and then select the safest and most profitable one.</li>
+                        <li><strong>4. Proper Timing:</strong> In the business world, time is money. A sound decision must be made at the exact right moment. Delaying a decision causes the company to miss golden opportunities, while rushing it causes careless, expensive mistakes.</li>
+                        <li><strong>5. Mental Flexibility:</strong> A good decision is never made of stone. The business world changes rapidly. If a manager realizes their recent decision is failing, they must have the flexibility and humility to adjust or reverse it without letting their ego get in the way.</li>
+                        <li><strong>6. Effective Communication:</strong> A brilliant decision is useless if it stays locked inside the manager's head. It must be clearly, simply, and politely communicated to the ground-level employees who will actually do the hard work.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>By collecting good data, looking at all options, acting on time, and communicating clearly, a manager guarantees that their decisions will bring success to the organization.</p>`
+            }
+        },
+        {
+            title: "13. Describe the importance of controlling.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defControlling}</p>
+                    <h3>Importance</h3>
+                    <ul>
+                        <li><strong>Finds Errors:</strong> Catches mistakes early.</li>
+                        <li><strong>Stops Wastage:</strong> Saves money and materials.</li>
+                        <li><strong>Creates Discipline:</strong> Keeps employees working hard.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Meaning of Controlling</h3>
+                    <p>${defControlling}</p>
+                    <h3>Importance of Controlling</h3>
+                    <ul>
+                        <li><strong>Achieving Goals:</strong> It ensures that all activities are heading in the right direction to hit the company's targets.</li>
+                        <li><strong>Judging Accuracy of Plans:</strong> It helps managers realize if their original plans were too difficult or unrealistic.</li>
+                        <li><strong>Ensures Discipline:</strong> When employees know their work is being checked, they work harder and avoid wasting time.</li>
+                        <li><strong>Improves Efficiency:</strong> By catching errors early, it stops the massive waste of raw materials and company money.</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Controlling</h3>
+                    <p><strong>${defControlling}</strong> It is the final function of management, but it is just as vital as planning. Without controlling, even the most brilliant plans will fail because no one is checking the work.</p>
+                    
+                    <h3>The Importance of Controlling</h3>
+                    <p>The survival of a business depends on tight control for the following reasons:</p>
+                    <ul>
+                        <li><strong>1. Accomplishing Organizational Goals:</strong> Controlling acts exactly like the steering wheel of a car. It constantly checks if the company is moving in the right direction. If a department goes off-track, controlling pulls them back toward the main goal.</li>
+                        <li><strong>2. Judging Accuracy of Standards:</strong> The business environment changes constantly. A good control system allows a manager to verify if the targets they set 6 months ago are still realistic, or if they need to be changed because they are too hard.</li>
+                        <li><strong>3. Making Efficient Use of Resources:</strong> By closely monitoring daily work, controlling instantly highlights if expensive raw materials are being wasted or if machines are sitting idle. It guarantees maximum efficiency and cuts massive costs.</li>
+                        <li><strong>4. Ensuring Order and Discipline:</strong> Human nature tends to relax if not supervised. When employees know that their daily output is being officially measured and checked by the boss, it creates a highly disciplined, serious, and focused work environment.</li>
+                        <li><strong>5. Facilitating Coordination:</strong> Controlling forces all departments to work together. <em>Example: It ensures that the production department is manufacturing exactly the amount that the sales department has promised to sell, avoiding over-production.</em></li>
+                        <li><strong>6. Early Detection of Errors:</strong> It acts as an early warning radar. Controlling detects small problems and mistakes on the factory floor before they turn into massive, expensive disasters that ruin the company's reputation.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Controlling is not about punishing employees. It is a positive process of finding mistakes, fixing them quickly, and ensuring the company reaches the finish line safely.</p>`
+            }
+        },
+        {
+            title: "14. Outline the main characteristics of line and staff organization.",
+            content: {
+                short: `
+                    <h3>Meaning</h3>
+                    <p>It is a structure where 'Line' managers have the power to give orders, and 'Staff' specialists have the role of giving expert advice.</p>
+                    <h3>Characteristics</h3>
+                    <ul>
+                        <li><strong>Two Roles:</strong> Doers (Line) and Thinkers (Staff).</li>
+                        <li><strong>Expert Advice:</strong> Staff gives highly specialized advice.</li>
+                        <li><strong>Clear Authority:</strong> Only Line managers can give orders.</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is Line and Staff Organization?</h3>
+                    <p>This is an organizational structure where expert advisors (Staff) are added to help the main managers (Line) make better decisions.</p>
+                    <h3>Characteristics</h3>
+                    <ul>
+                        <li><strong>Two Types of Roles:</strong> It divides the company into 'Line' executives (who do the actual work) and 'Staff' executives (who provide expert advice).</li>
+                        <li><strong>Authority vs Advice:</strong> Line managers have the power to command and make final decisions. Staff officers only have the right to suggest and advise.</li>
+                        <li><strong>Specialization:</strong> The company gets the massive benefit of hiring experts (like Legal or IT advisors) to solve complex problems.</li>
+                        <li><strong>Maintains Chain of Command:</strong> The strict top-to-bottom chain of command is kept intact because staff cannot bypass the line manager to give orders to workers.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction to Line and Staff Organization</h3>
+                    <p>As companies grow larger and more complex, a simple management structure fails. The "Line and Staff" organization was created to solve this problem. It brilliantly combines the strict authority of traditional management with the deep knowledge of highly specialized experts.</p>
+                    
+                    <h3>Main Characteristics of this Structure</h3>
+                    <p>The main features that make this structure unique are:</p>
+                    <ul>
+                        <li><strong>1. Clear Division of Roles:</strong> The organization strictly divides its people into two distinct groups: 
+                            <br>a) <em>Line Executives:</em> They are the "doers" (like the Production Manager). They are directly responsible for achieving the company's main goals and running daily operations.
+                            <br>b) <em>Staff Executives:</em> They are the "thinkers" (like a Legal Advisor, IT Expert, or HR specialist). Their only job is to research, analyze, and advise.</li>
+                        <li><strong>2. Distinct Flow of Authority:</strong> Formal authority and command always flow purely through the "Line" managers from top to bottom. "Staff" specialists have zero authority to give orders to the regular ground-level workers.</li>
+                        <li><strong>3. Advisory Nature of Staff:</strong> The Staff officers act purely as internal consultants. They analyze complex problems and present expert solutions to the Line manager. The Line manager has the full right to accept or totally reject that advice.</li>
+                        <li><strong>4. High Specialization:</strong> Because line managers are too busy running daily factory operations, they don't have time to study deep technical or legal issues. This structure brings in highly specialized experts to handle those complex problems, improving overall decision quality.</li>
+                        <li><strong>5. Unity of Command is Preserved:</strong> Despite having many brilliant experts walking around the building, regular employees still only take orders from their one direct Line boss. This prevents office confusion and maintains strict discipline.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>The Line and Staff organization is highly effective for large modern companies. It allows managers to act quickly while being backed by the safest expert advice.</p>`
+            }
+        },
+        {
+            title: "15. Define management and explain its nature.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defManagement}</p>
+                    <h3>Nature</h3>
+                    <ul>
+                        <li><strong>Both Art & Science:</strong> Uses theories (Science) and personal skill (Art).</li>
+                        <li><strong>Universal:</strong> Needed in all types of organizations.</li>
+                        <li><strong>Dynamic:</strong> Changes constantly with the market.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Definition of Management</h3>
+                    <p>${defManagement}</p>
+                    <h3>Nature of Management</h3>
+                    <ul>
+                        <li><strong>Both Art and Science:</strong> It is a science because it has proven theories, and an art because it requires personal, creative skill to apply them.</li>
+                        <li><strong>Universal Application:</strong> Good management is needed everywhere—in businesses, hospitals, schools, and armies.</li>
+                        <li><strong>Multi-Disciplinary:</strong> It borrows valuable knowledge from psychology, economics, sociology, and math.</li>
+                        <li><strong>Dynamic:</strong> It constantly adapts and changes to survive new technologies and market shifts.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Management</h3>
+                    <p>Management is the backbone of any successful organization. <strong>${defManagement}</strong> It is a comprehensive process consisting of planning, organizing, directing, and controlling the human, financial, and physical resources of an enterprise to achieve specific objectives.</p>
+                    
+                    <h3>The Nature of Management</h3>
+                    <p>To truly understand management, we must look at its core nature and characteristics:</p>
+                    <ul>
+                        <li><strong>1. It is Both an Art and a Science:</strong> 
+                            <br><em>As a Science:</em> Management relies on deeply tested, universally accepted principles and theories (like Fayol's 14 principles).
+                            <br><em>As an Art:</em> Every manager has a completely unique, personal style. Applying those scientific principles to real-world messy human problems requires massive creativity, making it a pure art.</li>
+                        <li><strong>2. Universality (Used Everywhere):</strong> The core principles of management are universally applicable. Whether you are running a small local bakery, managing a massive global tech company, or organizing a charity event, you absolutely need to plan, organize, and coordinate.</li>
+                        <li><strong>3. Multi-Disciplinary:</strong> Management does not exist in a vacuum. It heavily borrows vital concepts from several other subjects. It uses Psychology to understand workers' minds, Economics to manage budgets, and Sociology to understand team behavior.</li>
+                        <li><strong>4. It is a Profession:</strong> Modern management is rapidly becoming a formalized profession exactly like medicine or law. It requires specialized formal education (like an MBA degree), is backed by a strict code of ethics, and has professional associations.</li>
+                        <li><strong>5. Highly Dynamic Nature:</strong> The business world is never static; it changes every single day. True management is highly dynamic and flexible. It constantly changes its tactics and rules to survive new technologies, new government laws, and shifting customer tastes.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Management is a complex, living process. By combining scientific rules with human creativity, it turns disorganized resources into highly profitable businesses.</p>`
+            }
+        },
+        {
+            title: "16. What are the qualities of a good leader.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defLeadership}</p>
+                    <h3>Qualities</h3>
+                    <ul>
+                        <li><strong>Clear Vision:</strong> Knows the future goals.</li>
+                        <li><strong>Communication:</strong> Speaks clearly and listens well.</li>
+                        <li><strong>Honesty:</strong> Can be trusted completely by the team.</li>
+                        <li><strong>Empathy:</strong> Understands the team's emotions.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Meaning of Leadership</h3>
+                    <p>${defLeadership}</p>
+                    <h3>Qualities of a Good Leader</h3>
+                    <ul>
+                        <li><strong>Clear Vision:</strong> A leader must clearly see the future goals and know exactly how to guide the team to reach them.</li>
+                        <li><strong>Excellent Communication:</strong> They must be able to explain their ideas clearly and listen carefully to their followers' problems.</li>
+                        <li><strong>Integrity and Honesty:</strong> A leader must be trustworthy. If the team doesn't trust the leader, they won't follow.</li>
+                        <li><strong>Confidence and Courage:</strong> They must remain calm under massive pressure and take responsibility for tough decisions.</li>
+                        <li><strong>Empathy:</strong> They must deeply understand the emotional needs and struggles of their employees.</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Leadership</h3>
+                    <p>Management is about handling tasks, but leadership is about handling people. <strong>${defLeadership}</strong> It is the spark that motivates a team to go above and beyond their normal duties.</p>
+                    
+                    <h3>Qualities of a Good Leader</h3>
+                    <p>A manager gets their power from their job title, but a true leader gets their power from their personality. To effectively inspire and command the respect of a team, a good leader must possess the following qualities:</p>
+                    <ul>
+                        <li><strong>1. Vision and Foresight:</strong> A true leader always sees the big picture. They have a crystal-clear vision of where the company needs to be in the next 5 years, and they have the strategic intelligence to map out the exact path to get the team there.</li>
+                        <li><strong>2. Exceptional Communication Skills:</strong> A leader is essentially a motivator. They must have the vocabulary and charisma to clearly explain their vision to the staff. More importantly, they must be active, patient listeners who genuinely value the opinions of their juniors.</li>
+                        <li><strong>3. Absolute Integrity and Honesty:</strong> Leadership is built entirely on trust. A good leader acts with high moral ethics, keeps their promises, and is highly transparent. If employees catch a leader lying, their authority is permanently destroyed.</li>
+                        <li><strong>4. Courage and Confidence:</strong> The business world is full of sudden crises. A great leader does not panic. They display immense self-confidence during tough times, make brave decisions under intense pressure, and take the blame when things go wrong instead of hiding behind their team.</li>
+                        <li><strong>5. Empathy and Emotional Intelligence:</strong> A leader manages humans, not robots. They must be highly empathetic, taking the time to understand the personal problems, stress, and mental health of their employees. A leader who cares for their team will get massive loyalty in return.</li>
+                        <li><strong>6. Decisiveness:</strong> Leaders cannot be confused. They must have the ability to quickly analyze facts and make firm, final decisions without endlessly delaying.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Ultimately, a good leader is someone who creates more leaders, not just followers. Through honesty, empathy, and clear vision, they drive the whole company to massive success.</p>`
+            }
+        },
+        {
+            title: "17. Discuss the importance of management for business organisations.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defManagement}</p>
+                    <h3>Importance</h3>
+                    <ul>
+                        <li><strong>Achieves Goals:</strong> Unites the team towards one target.</li>
+                        <li><strong>Reduces Costs:</strong> Stops wastage of time and materials.</li>
+                        <li><strong>Survives Change:</strong> Helps the business adapt to market shifts.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Meaning of Management</h3>
+                    <p>${defManagement}</p>
+                    <h3>Importance of Management</h3>
+                    <ul>
+                        <li><strong>Achieves Group Goals:</strong> It unites everyone's individual effort toward a single business target.</li>
+                        <li><strong>Reduces Costs:</strong> By carefully planning and organizing, management stops the waste of time and raw materials, increasing profits.</li>
+                        <li><strong>Establishes Sound Organization:</strong> It clearly defines who is the boss and who does what job, preventing office chaos.</li>
+                        <li><strong>Adapts to Change:</strong> A good management team guides the company safely through new technologies or economic crashes.</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Management</h3>
+                    <p><strong>${defManagement}</strong> It acts as the brain and the engine of any corporate body. Without it, everything stops.</p>
+                    
+                    <h3>The Importance of Management for Business Organisations</h3>
+                    <p>There is a famous saying: "Anything minus management equals zero." The survival, growth, and immense success of any business absolutely depend on its management for the following reasons:</p>
+                    <ul>
+                        <li><strong>1. Achievement of Group Goals:</strong> A company has hundreds of employees, all with different mindsets. Management provides the crucial leadership that unites all these scattered, individual efforts and directs them forcefully toward the main corporate objective (like launching a new product).</li>
+                        <li><strong>2. Optimum Utilization of Resources / Cost Reduction:</strong> Resources like money, electricity, and machinery are highly expensive. Expert management carefully plans their use, totally eliminating overlapping tasks, preventing the waste of raw materials, and drastically reducing overall operational costs.</li>
+                        <li><strong>3. Establishes a Sound Organizational Structure:</strong> Management removes confusion. It clearly establishes who is responsible for what task, who reports to whom, and ensures the exact right person is hired for the right job. This prevents total chaos on the factory floor.</li>
+                        <li><strong>4. Survival in a Changing Environment:</strong> The global market is deeply unpredictable, with new technologies and aggressive competitors appearing daily. Strong management constantly monitors the market, adapts the company's strategy quickly, and ensures the business survives and beats the competition.</li>
+                        <li><strong>5. Provides Innovation and Growth:</strong> Management isn't just about maintaining normal daily work. Good managers bring fresh, innovative ideas, push for research and development, and drive the massive expansion and financial growth of the company.</li>
+                        <li><strong>6. Development of Society:</strong> Successful management creates massive corporate profits, which allows the company to generate employment, pay fair wages to workers, pay heavy taxes to the government, and provide high-quality products to the public, elevating the whole society.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>In short, management is the lifeblood of a business. It takes disorganized raw materials and human effort and transforms them into highly valuable, profitable results.</p>`
+            }
+        },
+        {
+            title: "18. What is planning? State features of planning.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defPlanning}</p>
+                    <h3>Features</h3>
+                    <ul>
+                        <li><strong>Primary Function:</strong> It is the first step of management.</li>
+                        <li><strong>Futuristic:</strong> It looks into the future.</li>
+                        <li><strong>Continuous:</strong> It is a never-ending process.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Definition of Planning</h3>
+                    <p>${defPlanning} It bridges the gap between where a business is today and where it wants to be tomorrow.</p>
+                    <h3>Features of Planning</h3>
+                    <ul>
+                        <li><strong>Primary Function:</strong> All other management tasks (like organizing and controlling) can only happen after a plan is made.</li>
+                        <li><strong>Futuristic:</strong> Planning always looks ahead to prepare the business for tomorrow's challenges.</li>
+                        <li><strong>Mental Exercise:</strong> It requires high intelligence, imagination, and deep analysis, not physical labor.</li>
+                        <li><strong>Continuous:</strong> As soon as one plan finishes (or fails), a new plan must instantly be made.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Planning</h3>
+                    <p><strong>${defPlanning}</strong> It is a highly intellectual process that provides the absolute blueprint guiding the entire organization from where it is today to its desired future destination.</p>
+                    
+                    <h3>Key Features of Planning</h3>
+                    <p>The core characteristics that define the planning process are:</p>
+                    <ul>
+                        <li><strong>1. It is the Primary Function of Management:</strong> Planning holds the absolute first position in management. You cannot organize teams, hire staff, or control factory operations until you actually have a plan detailing what you are trying to achieve.</li>
+                        <li><strong>2. Highly Goal-Oriented:</strong> Planning is never done randomly just for fun. Every single plan is constructed with the sole purpose of achieving a highly specific, pre-determined business objective (<em>Example: Capturing 20% of the smartphone market</em>).</li>
+                        <li><strong>3. Forward-Looking (Futuristic):</strong> Planning is essentially "peeking into the future." Managers deeply analyze current data to forecast future market trends, customer behavior, and potential risks, preparing the company for what is to come.</li>
+                        <li><strong>4. It is an Intellectual Mental Exercise:</strong> Planning is purely brain-work. It does not require physical labor; rather, it demands high intelligence, creative imagination, sound judgment, and the ability to analyze complex data to select the absolute best strategy.</li>
+                        <li><strong>5. It is a Continuous Process:</strong> Plans are typically made for a specific time period (like a 1-year financial plan). Once that period ends, or if market conditions suddenly change, managers must immediately draft new, updated plans. It never stops.</li>
+                        <li><strong>6. Pervasive at all Levels:</strong> Planning is not just for the CEO. Every manager plans. Top management plans the 5-year strategy, middle management plans the monthly goals, and junior supervisors plan the daily factory schedule.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Planning is the foundation of all business success. A company that fails to plan is simply planning to fail.</p>`
+            }
+        },
+        {
+            title: "19. What are the factors determining organization structure.",
+            content: {
+                short: `
+                    <h3>Factors</h3>
+                    <p>The structure depends on: Size of the business, Company strategy, Technology used, and the Business environment.</p>`,
+                medium: `
+                    <h3>Factors Determining Organization Structure</h3>
+                    <ul>
+                        <li><strong>Size of the Business:</strong> A small shop has a simple structure, while a massive global company needs complex departments.</li>
+                        <li><strong>Business Strategy:</strong> If a company wants fast growth, it needs a flexible structure. For low costs, it needs strict control.</li>
+                        <li><strong>Technology:</strong> Highly automated factories need fewer managers and have a flatter structure.</li>
+                        <li><strong>Environment:</strong> In a fast-changing market, companies need a dynamic, fast-moving structure.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>An organization structure is the physical framework of a company—how it divides its teams, managers, and departments. There is no single "perfect" structure for everyone. Managers must design the structure based on several critical factors.</p>
+                    
+                    <h3>Factors Determining the Organization Structure</h3>
+                    <ul>
+                        <li><strong>1. Size of the Enterprise:</strong> This is the biggest deciding factor. A small startup might have a simple "flat" structure where all 5 employees report directly to the founder. However, a giant multinational company (like Tata or Reliance) requires a "tall", complex structure with many departments, regional heads, and strict hierarchies.</li>
+                        <li><strong>2. Business Strategy and Goals:</strong> Structure always follows strategy. If a company’s strategy is rapid innovation and creativity (like a software company), it needs a loose, flexible structure. If the strategy is mass manufacturing at the cheapest cost, it needs a rigid, highly disciplined structure.</li>
+                        <li><strong>3. Technology Used:</strong> The type of technology a business uses shapes its teams. Highly automated factories with robots require very few ground-level managers. On the other hand, manual labor-intensive companies (like a garment factory) need many layers of supervisors to watch the workers.</li>
+                        <li><strong>4. Business Environment:</strong> A company operating in a highly volatile, fast-changing market (like fashion or smartphones) needs a decentralized structure so employees can make very quick decisions. Companies in stable, slow environments can use strict, centralized structures.</li>
+                        <li><strong>5. People and Culture (Employees):</strong> The skill level of the employees matters deeply. If the staff is highly educated and professional (like doctors or engineers), managers can give them more freedom. If the workers are unskilled, they need closer, tighter supervision and a stricter structure.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>A manager must carefully study the company's size, goals, and technology before drawing the organization chart. A wrongly chosen structure will slow down work and cause massive losses.</p>`
+            }
+        },
+        {
+            title: "20. What is departmentation? Explain departmentation by functions in detail.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>Departmentation is dividing a company into smaller units. Functional departmentation groups jobs based on the type of work (like HR, Finance, Marketing).</p>`,
+                medium: `
+                    <h3>What is Departmentation?</h3>
+                    <p>Departmentation is the process of dividing a large company into smaller, manageable units or "departments" based on certain similarities, to make managing them easier.</p>
+                    <h3>Departmentation by Functions</h3>
+                    <p>This is the most common method. The company is divided based on specialized tasks (functions). Examples:</p>
+                    <ul>
+                        <li><strong>Production Dept:</strong> Handles all manufacturing.</li>
+                        <li><strong>Marketing Dept:</strong> Handles advertising and sales.</li>
+                        <li><strong>Finance Dept:</strong> Manages money and budgets.</li>
+                        <li><strong>HR Dept:</strong> Handles hiring and employee training.</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Departmentation</h3>
+                    <p>As an organization grows massive, it becomes physically impossible for one manager to oversee everything. Departmentation is the highly logical process of grouping related activities and jobs together into specialized, manageable units called departments, divisions, or branches. It creates the formal framework of the company.</p>
+                    
+                    <h3>Departmentation by Functions (Functional Structure)</h3>
+                    <p>Departmentation by functions is the oldest, simplest, and most universally used method of creating an organizational structure. In this method, activities are grouped together entirely based on the core specialized functions (nature of work) the business performs.</p>
+                    <p>For example, a typical large manufacturing company will divide itself into the following functional departments:</p>
+                    <ul>
+                        <li><strong>1. Production Department:</strong> Every single employee related to manufacturing, factory engineering, and quality checking is grouped here. They focus purely on making the product efficiently.</li>
+                        <li><strong>2. Marketing & Sales Department:</strong> All activities related to market research, TV advertising campaigns, selling to customers, and customer service are placed under one roof.</li>
+                        <li><strong>3. Finance Department:</strong> Everyone dealing with bookkeeping, budgeting, arranging bank loans, and paying taxes sits in this highly specialized unit.</li>
+                        <li><strong>4. Human Resources (HR) Department:</strong> This team handles all matters regarding the people—recruiting top talent, conducting training, paying salaries, and ensuring employee safety.</li>
+                    </ul>
+                    
+                    <h3>Major Advantages of Functional Departmentation:</h3>
+                    <ul>
+                        <li><strong>High Specialization:</strong> It creates intense occupational specialization. When HR people only do HR work every single day, they become highly efficient experts.</li>
+                        <li><strong>Cost-Effective:</strong> It is highly logical and very cost-effective because it totally prevents duplication of efforts (you only need one finance team for the whole company, not multiple).</li>
+                        <li><strong>Easy Training:</strong> Training new employees is much easier because each department focuses on a very narrow, specific set of skills.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Functional departmentation is the most common and powerful way to organize a business because it keeps things simple and allows people to focus on what they do best.</p>`
+            }
+        },
+        {
+            title: "21. Discuss barriers to effective communication.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>Barriers are obstacles that block clear communication. They include physical barriers (noise), psychological barriers (anger), language barriers (hard words), and organizational barriers (too many managers).</p>`,
+                medium: `
+                    <h3>Barriers to Effective Communication</h3>
+                    <p>Communication often fails because of obstacles called "barriers". The main types are:</p>
+                    <ul>
+                        <li><strong>Language (Semantic) Barriers:</strong> Using highly technical words (jargon) that the listener doesn't understand, or poor translation between languages.</li>
+                        <li><strong>Psychological Barriers:</strong> If the receiver is angry, stressed, or prejudiced, their brain will block or twist the meaning of the message.</li>
+                        <li><strong>Physical Barriers:</strong> Loud background noise in a factory, bad phone signals, or broken internet connections.</li>
+                        <li><strong>Organizational Barriers:</strong> Strict company rules or too many layers of management can cause messages to get delayed or filtered out.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p><strong>${defCommunication}</strong> However, communication is only effective when the receiver perfectly understands what the sender intended. In reality, messages are often distorted, misunderstood, or totally lost due to various obstacles known as "barriers."</p>
+                    
+                    <h3>Main Barriers to Effective Communication</h3>
+                    <p>These barriers can be classified into four main categories:</p>
+                    <ul>
+                        <li><strong>1. Semantic (Language) Barriers:</strong> This occurs when the sender and receiver interpret words differently. 
+                            <br>- <em>Technical Jargon:</em> An IT expert using complex computer terms with a normal sales employee causes massive confusion.
+                            <br>- <em>Faulty Translation:</em> Using the wrong words or bad grammar totally changes the intended meaning of an official email.
+                        </li>
+                        <li><strong>2. Psychological (Emotional) Barriers:</strong> The human mind filters information based on emotions.
+                            <br>- <em>Premature Evaluation:</em> The listener jumps to conclusions and stops listening before the speaker has even finished.
+                            <br>- <em>Emotions:</em> If an employee is in deep anger or fear, they physically cannot absorb logical instructions given by the manager.
+                            <br>- <em>Lack of Trust:</em> If the staff dislikes the boss, they will view all his messages with extreme suspicion and doubt.
+                        </li>
+                        <li><strong>3. Physical and Environmental Barriers:</strong> These are real-world, physical obstacles. Loud noise on a factory floor, poor office lighting, terrible cellular networks, a faulty microphone during a Zoom call, or vast geographical distance between global offices can severely damage the message.</li>
+                        <li><strong>4. Organizational Barriers:</strong> The structure of the company itself can ruin communication.
+                            <br>- <em>Too Many Levels:</em> If a message from the CEO has to pass through 6 different managers to reach the worker, the message gets delayed and altered (like a game of Chinese whisper).
+                            <br>- <em>Strict Rules:</em> Highly rigid company policies that discourage junior staff from speaking freely to top management completely kill upward communication.
+                        </li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>To succeed, a manager must actively identify these barriers and remove them by using simple language, creating a friendly environment, and reducing noise.</p>`
+            }
+        },
+        {
+            title: "22. What are steps involved in MBO process.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defMBO}</p>
+                    <h3>Process</h3>
+                    <p>1. Set Company Goals -> 2. Set Department Goals -> 3. Jointly set Employee Goals -> 4. Review Progress -> 5. Final Reward.</p>`,
+                medium: `
+                    <h3>Meaning of MBO</h3>
+                    <p>${defMBO}</p>
+                    <h3>The MBO Process</h3>
+                    <ol>
+                        <li><strong>Set Company Goals:</strong> Top management decides the ultimate goals for the entire organization.</li>
+                        <li><strong>Set Individual Objectives:</strong> Managers and subordinates jointly agree on specific, achievable targets for each worker.</li>
+                        <li><strong>Action Plan:</strong> Creating a step-by-step plan on how the employee will hit those targets.</li>
+                        <li><strong>Performance Review:</strong> Regularly checking if the employee is succeeding or failing.</li>
+                        <li><strong>Final Appraisal:</strong> Rewarding the employee based on actual results achieved.</li>
+                    </ol>`,
+                long: `
+                    <h3>Meaning of Management by Objectives (MBO)</h3>
+                    <p>Introduced by management expert Peter Drucker, <strong>${defMBO}</strong> Instead of bosses blindly giving top-down orders, MBO is a friendly, collaborative process. The manager and employee negotiate the targets together, and the employee is judged purely on whether they hit those exact targets.</p>
+                    
+                    <h3>The Step-by-Step MBO Process</h3>
+                    <p>Implementing MBO successfully in a company requires following a strict, logical cycle:</p>
+                    <ul>
+                        <li><strong>Step 1: Setting Broad Organizational Goals:</strong> The process begins at the absolute highest level. The CEO and Board of Directors deeply analyze the market and establish clear, strategic goals for the entire organization. <em>(Example: "Achieve 30% growth in global sales this year").</em></li>
+                        <li><strong>Step 2: Setting Departmental Goals:</strong> The massive company goals are divided and passed down. The Marketing Head sets goals for their team to run ads, while the Production Head sets output targets for the factory.</li>
+                        <li><strong>Step 3: Joint Setting of Individual Objectives (The Core Step):</strong> This is the beating heart of MBO. A manager sits down with each employee individually. Instead of giving orders, they negotiate and jointly agree on specific, measurable, and realistic targets for that worker. Because the worker helped set the goal, they work much harder to achieve it.</li>
+                        <li><strong>Step 4: Developing the Action Plan:</strong> Goals are useless without a roadmap. The employee creates a detailed, step-by-step action plan outlining exactly how they will hit their targets, while the manager promises to provide the necessary budget and tools.</li>
+                        <li><strong>Step 5: Periodic Performance Reviews:</strong> MBO requires constant tracking. Every quarter (3 months), the manager and employee meet to track progress. If the employee is falling behind, the manager provides immediate training and help to fix the issue.</li>
+                        <li><strong>Step 6: Final Performance Appraisal and Reward:</strong> At the end of the year, a final review happens. The employee's actual performance is strictly measured against the goals set in Step 3. If they succeeded, they are heavily rewarded with promotions or bonuses. If they failed, the reasons are discussed to improve next year.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>MBO is a highly effective system because it removes confusion. Every employee knows exactly what they need to do to get a bonus, leading to massive company growth.</p>`
+            }
+        },
+        {
+            title: "23. Identify the significance of Indian Ethos to management.",
+            content: {
+                short: `
+                    <h3>Meaning</h3>
+                    <p>Indian Ethos means applying ancient Indian wisdom (like from the Bhagavad Gita) to modern business management.</p>
+                    <h3>Significance</h3>
+                    <p>It focuses on self-management, ethical behavior, working without greed (Karma), and the holistic growth of society.</p>`,
+                medium: `
+                    <h3>Significance of Indian Ethos to Management</h3>
+                    <p>Indian Ethos refers to applying ancient Indian wisdom and spiritual values to modern corporate management. Its significance includes:</p>
+                    <ul>
+                        <li><strong>Self-Management:</strong> It teaches that before managing others, a manager must first master their own mind and emotions through discipline.</li>
+                        <li><strong>Karma Yoga (Duty):</strong> It encourages employees to focus entirely on working hard with dedication, rather than just obsessing over selfish rewards.</li>
+                        <li><strong>Holistic Growth:</strong> It promotes not just financial profit, but also the mental, spiritual, and social well-being of the employees and society.</li>
+                        <li><strong>Ethical Leadership:</strong> It demands that business decisions be based on truth, morality, and justice, building long-term trust.</li>
+                    </ul>`,
+                long: `
+                    <h3>Meaning of Indian Ethos</h3>
+                    <p>Modern western management heavily focuses on aggressive competition, high profits, and materialism, which often leads to severe stress and corporate scandals. <strong>Indian Ethos means applying ancient Indian wisdom (like from the Vedas, Upanishads, and Bhagavad Gita) to modern business management, focusing on ethics and self-management.</strong></p>
+                    
+                    <h3>Significance of Indian Ethos in Corporate Management</h3>
+                    <p>Its profound significance in solving modern business problems includes:</p>
+                    <ul>
+                        <li><strong>1. Supreme Focus on Self-Management:</strong> Indian ethos firmly believes that "you must manage yourself before you can manage others." It teaches managers to achieve mental peace, emotional stability, and inner discipline through techniques like Yoga and Meditation before attempting to lead a large team.</li>
+                        <li><strong>2. The Principle of Karma Yoga:</strong> The Bhagavad Gita preaches 'Nishkama Karma' (work without attachment to the exact fruit). In a corporate setting, this teaches employees to focus intensely on doing their duty perfectly and ethically, without being blinded by greed or anxiety over promotions. This dramatically reduces workplace stress.</li>
+                        <li><strong>3. Holistic Growth and Welfare:</strong> While western models focus solely on maximizing shareholder wealth, Indian ethos advocates for 'Sarva Loka Hitam' (the well-being of all). It demands that companies protect the environment, uplift society, and care for the spiritual and mental health of their employees, not just treat them as money-making machines.</li>
+                        <li><strong>4. Value-Driven and Ethical Leadership:</strong> Indian ethos puts morality above money. It requires leaders to be driven by truth (Satya) and righteousness (Dharma). Business decisions made with deep ethics prevent corporate frauds and build immense, unbreakable trust with customers and the public.</li>
+                        <li><strong>5. Viewing Work as Worship:</strong> It changes the whole mindset of the office. Instead of viewing the 9-to-5 job as a boring burden, it encourages workers to view their daily work as a spiritual offering or worship. This leads to absolute dedication, zero laziness, and incredibly high-quality output.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Indian Ethos proves that a business can be highly profitable while still being highly ethical, peaceful, and beneficial to society.</p>`
+            }
+        },
+        {
+            title: "24. Define span of control with importance.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>Span of control refers to the exact number of employees that one single manager can effectively supervise at one time.</p>
+                    <h3>Importance</h3>
+                    <p>It prevents managers from being overloaded with work, improves supervision, and speeds up communication in the team.</p>`,
+                medium: `
+                    <h3>Definition of Span of Control</h3>
+                    <p>Span of control refers to the exact number of employees that one single manager can effectively supervise, direct, and control at one time.</p>
+                    <h3>Importance of Span of Control</h3>
+                    <ul>
+                        <li><strong>Prevents Overload:</strong> If a manager handles too many people, they become stressed and make bad decisions. Proper span keeps workload balanced.</li>
+                        <li><strong>Improves Supervision:</strong> A smaller group allows the manager to give personal attention and high-quality guidance to every worker.</li>
+                        <li><strong>Speeds up Communication:</strong> With the right number of subordinates, giving instructions and getting feedback happens instantly.</li>
+                        <li><strong>Shapes Organization Structure:</strong> A narrow span creates a tall organizational structure, while a wide span creates a flat structure.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Span of Control</h3>
+                    <p>The <strong>Span of Control</strong> (also known as the Span of Management) is a critical organizational concept. <strong>Span of control refers to the exact number of employees that one single manager can effectively supervise at one time.</strong> For example, if a manager oversees 5 employees, their span of control is 5.</p>
+                    
+                    <h3>Importance of Span of Control</h3>
+                    <p>Setting the correct span of control is extremely important for a company’s survival for the following reasons:</p>
+                    <ul>
+                        <li><strong>1. Prevents Executive Overload:</strong> A human brain has limits. If a manager is given 50 employees to supervise, they will suffer from severe mental overload, massive stress, and total burnout. A proper span ensures the manager has enough time to focus on strategic thinking rather than just putting out fires all day.</li>
+                        <li><strong>2. Ensures Close and Effective Supervision:</strong> When a manager has a manageable number of people (e.g., 6 to 8), they can provide intense, personalized attention. They can monitor daily mistakes closely, provide deep training, and ensure high-quality output.</li>
+                        <li><strong>3. Facilitates Instant Communication:</strong> A proper span creates a tight-knit team. The manager can instantly communicate new strategies, and the employees can quickly report problems directly to the boss without waiting in a long line.</li>
+                        <li><strong>4. Improves Team Discipline and Morale:</strong> When a boss is closely involved with a small group, it is impossible for lazy employees to hide. At the same time, hardworking employees get noticed and praised immediately, which massively boosts team morale.</li>
+                        <li><strong>5. Determines the Entire Organizational Structure:</strong> The span of control practically dictates the physical shape of the company. A 'Narrow Span' (few people per manager) creates a "Tall" organization with many layers of management. A 'Wide Span' (many people per manager) creates a "Flat" organization, saving the company money on manager salaries.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Choosing the right span of control ensures that a manager is neither sitting totally idle nor completely crushed under the weight of too many subordinates.</p>`
+            }
+        },
+        {
+            title: "25. Define coordination. Describe its importance.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>Coordination is the process of linking and syncing the efforts of all different departments to work smoothly towards a common goal.</p>
+                    <h3>Importance</h3>
+                    <p>It stops office arguments, reduces wasted time, and unites the whole company into one working machine.</p>`,
+                medium: `
+                    <h3>Definition of Coordination</h3>
+                    <p>Coordination is the process of linking and syncing the efforts of all different departments to work smoothly towards a common goal. It is the invisible thread that binds management together.</p>
+                    <h3>Importance of Coordination</h3>
+                    <ul>
+                        <li><strong>Unity of Action:</strong> It ensures that the Sales, Production, and Finance teams are all running in the exact same direction.</li>
+                        <li><strong>Prevents Conflicts:</strong> By clearly connecting everyone's tasks, it stops giant ego clashes and office arguments between departments.</li>
+                        <li><strong>Optimum Use of Resources:</strong> It stops two different departments from wasting money by doing the exact same job twice.</li>
+                        <li><strong>Key to Survival:</strong> Without coordination, a large company will collapse into total chaos and fail.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Coordination</h3>
+                    <p>Coordination is widely considered the very "essence of management." <strong>Coordination is the process of linking and syncing the efforts of all different departments to work smoothly towards a common goal.</strong> It is exactly like the conductor of an orchestra ensuring all the different instruments play together to create beautiful music, rather than chaotic noise.</p>
+                    
+                    <h3>Importance of Coordination</h3>
+                    <p>As companies grow massive, coordination becomes the most critical tool for survival. Its immense importance includes:</p>
+                    <ul>
+                        <li><strong>1. Guarantees Unity of Action:</strong> A large company has thousands of employees. Left alone, they will all pull in different directions. Coordination forcefully ties all their separate efforts together, ensuring every single person is pulling the rope in the exact same direction.</li>
+                        <li><strong>2. Resolves Departmental Conflicts:</strong> The Marketing team wants to spend heavily on ads, while the Finance team wants to cut costs. These natural clashes can destroy a company. Coordination brings these warring department heads together to find a balanced, peaceful compromise.</li>
+                        <li><strong>3. Prevents Duplication and Wastage:</strong> In a large, uncoordinated company, the HR team in London and the HR team in New York might accidentally waste money buying the exact same training software. Proper coordination creates open communication channels, preventing this massive waste of funds.</li>
+                        <li><strong>4. Synergy Effect:</strong> Coordination creates synergy, which means 2 + 2 = 5. When all departments sync their timing perfectly (<em>Example: the factory finishes making the product on the exact day the marketing ads go live</em>), the final financial result is much larger than working individually.</li>
+                        <li><strong>5. Key to Retaining Specialists:</strong> Modern businesses hire highly specialized experts who often have huge egos and think their department is the most important. Coordination keeps these specialists grounded and forces them to respect and work with other teams.</li>
+                        <li><strong>6. Essential for Growth:</strong> A small shop of 3 people naturally coordinates. But a multinational company with 50,000 employees across 10 countries will instantly collapse into total chaos without a strict, highly organized system of coordination linking them together.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>To conclude, coordination is the ultimate glue of a business. It turns individual, selfish efforts into massive, unstoppable corporate success.</p>`
+            }
+        }
+    ];
+
+    function renderQuestionBank() {
+        const container = document.getElementById('main-content-wrapper');
+        let html = '<h2 class="section-header">Long Questions</h2>';
+        
+        qbData.forEach(q => {
+            html += '<article class="note-card">';
+            html += '<h2 class="note-title">' + q.title + '</h2>';
+            html += '<div class="note-body">' + q.content[currentLength] + '</div>';
+            html += '</article>';
+        });
+
+        container.innerHTML = html;
+    }
+
+    // Initialize application
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeSelect').value = savedTheme;
+        document.getElementById('lengthSelect').value = 'long';
+        
+        renderQuestionBank();
+    });
+</script>
+</body>
+</html>
