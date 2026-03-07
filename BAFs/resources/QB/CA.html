@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Cost Accounting QB - Notebook</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
+  
+  <style>
+    :root {
+      --bg-paper: #fffdf8;
+      --blue-line: #d0e2ff;
+      --red-margin: #ff9999;
+      --text-ink: #1a1a1a;
+      --heading-ink: #000080;
+      --table-border: #a0b4d6;
+      --highlight: #fff3cd;
+    }
+    
+    body {
+      margin: 0;
+      padding: 20px;
+      font-family: 'Patrick Hand', cursive;
+      background-color: #e5e7eb; /* Desk background */
+      color: var(--text-ink);
+      font-size: 19px;
+      line-height: 1.8;
+    }
+
+    /* Notebook Paper Effect */
+    .notebook-page {
+      max-width: 900px;
+      margin: 0 auto;
+      background-color: var(--bg-paper);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      border-radius: 5px;
+      padding: 40px 40px 60px 60px;
+      position: relative;
+      /* Ruled lines background */
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        var(--blue-line) 31px,
+        var(--blue-line) 32px
+      );
+      background-size: 100% 32px;
+      background-position: 0 8px; /* Align text to lines */
+    }
+
+    /* Red Margin Line */
+    .notebook-page::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 45px;
+      width: 2px;
+      background-color: var(--red-margin);
+      z-index: 1;
+    }
+
+    /* Content wrapper to sit above lines and margin */
+    .content {
+      position: relative;
+      z-index: 2;
+    }
+
+    h1, h2, h3 {
+      color: var(--heading-ink);
+      margin-top: 30px;
+      margin-bottom: 15px;
+      font-weight: normal;
+    }
+    
+    h1 { font-size: 2.2rem; text-align: center; border-bottom: 2px dashed var(--heading-ink); display: inline-block; padding-bottom: 5px;}
+    h2 { font-size: 1.8rem; background: var(--highlight); display: inline-block; padding: 0 10px; border-radius: 3px;}
+    h3 { font-size: 1.5rem; text-decoration: underline; }
+
+    p { margin: 10px 0; }
+
+    /* Accounting Tables */
+    .table-responsive {
+      overflow-x: auto;
+      margin: 20px 0;
+      background-color: rgba(255, 255, 255, 0.7);
+      border-radius: 5px;
+      padding: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      border: 2px solid var(--table-border);
+    }
+
+    th, td {
+      border: 1px solid var(--table-border);
+      padding: 8px 12px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f0f4fa;
+      color: var(--heading-ink);
+      font-weight: bold;
+      text-align: center;
+    }
+
+    .amt-col {
+      text-align: right;
+      width: 120px;
+    }
+
+    .bold-row td {
+      font-weight: bold;
+      background-color: #f9fbff;
+    }
+
+    .total-row td {
+      font-weight: bold;
+      border-top: 2px solid var(--table-border);
+      border-bottom: 3px double var(--table-border);
+      background-color: #eaf0f8;
+    }
+
+    /* Working Notes Box */
+    .working-notes {
+      border: 2px dashed #bba171;
+      background-color: #fffdf2;
+      padding: 15px 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    .working-notes h4 {
+      margin-top: 0;
+      color: #8b6e3b;
+      font-size: 1.3rem;
+    }
+    .working-notes ul {
+      padding-left: 20px;
+      margin-bottom: 0;
+    }
+
+    .citation {
+      font-size: 0.8rem;
+      color: #666;
+      vertical-align: super;
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="notebook-page">
+    <div class="content">
+      
+      <div style="text-align: center;">
+        <h1>Cost Accounting - Question Bank</h1>
+        <p><strong>Batch 1: Question 1 to 4</strong></p>
+      </div>
+
+      <h2>Q.1: Preparation of Cost Sheet</h2>
+      <p><strong>Problem:</strong> From the following particulars prepare a cost sheet showing various elements of cost: [cite: 1505]</p>
+      
+      <div class="table-responsive">
+        <table>
+          <tr><th>Particulars</th><th>₹</th></tr>
+          <tr><td>Opening Stock of Raw Materials</td><td class="amt-col">1,10,000</td></tr>
+          <tr><td>Purchases of Raw Materials</td><td class="amt-col">8,25,000</td></tr>
+          <tr><td>Carriage Outwards</td><td class="amt-col">28,500</td></tr>
+          <tr><td>Direct Wages</td><td class="amt-col">4,21,400</td></tr>
+          <tr><td>Direct power</td><td class="amt-col">25,840</td></tr>
+          <tr><td>Technical Directors salary</td><td class="amt-col">40,590</td></tr>
+          <tr><td>Factory Rent, Rates & Insurance</td><td class="amt-col">10,140</td></tr>
+          <tr><td>Sales of Factory Scraps</td><td class="amt-col">1,460</td></tr>
+          <tr><td>Depreciation on factory buildings</td><td class="amt-col">75,200</td></tr>
+          <tr><td>Closing work in progress</td><td class="amt-col">1,20,260</td></tr>
+          <tr><td>Factory Stationary</td><td class="amt-col">12,340</td></tr>
+          <tr><td>Opening stock of finished goods</td><td class="amt-col">45,280</td></tr>
+          <tr><td>Closing stock of raw materials</td><td class="amt-col">36,920</td></tr>
+          <tr><td>Fees to brand ambassador</td><td class="amt-col">2,00,000</td></tr>
+          <tr><td>Stationery and printing</td><td class="amt-col">12,200</td></tr>
+          <tr><td>Staff salaries</td><td class="amt-col">6,30,000</td></tr>
+          <tr><td>Trade discount</td><td class="amt-col">1,20,000</td></tr>
+          <tr><td>Office rent</td><td class="amt-col">60,000</td></tr>
+          <tr><td>Free sample expenses</td><td class="amt-col">20,320</td></tr>
+          <tr><td>Closing stock of finished goods</td><td class="amt-col">50,240</td></tr>
+        </table>
+      </div>
+      <p>Sales are made to earn a profit @ 10% on cost price. [cite: 1507]</p>
+
+      <h3>Solution: Cost Sheet</h3>
+      <div class="table-responsive">
+        <table>
+          <tr>
+            <th>Particulars</th>
+            <th>Details (₹)</th>
+            <th>Amount (₹)</th>
+          </tr>
+          <tr>
+            <td><strong>Direct Materials Consumed:</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Opening Stock of Raw Materials</td>
+            <td class="amt-col">1,10,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Add: Purchases of Raw Materials</td>
+            <td class="amt-col">8,25,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Less: Trade Discount</td>
+            <td class="amt-col">(1,20,000)</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Less: Closing Stock of Raw Materials</td>
+            <td class="amt-col">(36,920)</td>
+            <td class="amt-col">7,78,080</td>
+          </tr>
+          <tr>
+            <td>Direct Wages</td>
+            <td></td>
+            <td class="amt-col">4,21,400</td>
+          </tr>
+          <tr>
+            <td>Direct Power</td>
+            <td></td>
+            <td class="amt-col">25,840</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Prime Cost</td>
+            <td></td>
+            <td class="amt-col">12,25,320</td>
+          </tr>
+          <tr>
+            <td><strong>Add: Factory Overheads</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Technical Director's Salary</td>
+            <td class="amt-col">40,590</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Factory Rent, Rates & Insurance</td>
+            <td class="amt-col">10,140</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Depreciation on Factory Buildings</td>
+            <td class="amt-col">75,200</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Factory Stationary</td>
+            <td class="amt-col">12,340</td>
+            <td class="amt-col">1,38,270</td>
+          </tr>
+          <tr>
+            <td><strong>Gross Works Cost</strong></td>
+            <td></td>
+            <td class="amt-col">13,63,590</td>
+          </tr>
+          <tr>
+            <td>Less: Sale of Factory Scrap</td>
+            <td></td>
+            <td class="amt-col">(1,460)</td>
+          </tr>
+          <tr>
+            <td>Less: Closing Work in Progress (WIP)</td>
+            <td></td>
+            <td class="amt-col">(1,20,260)</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Net Works Cost (Factory Cost)</td>
+            <td></td>
+            <td class="amt-col">12,41,870</td>
+          </tr>
+          <tr>
+            <td><strong>Add: Office & Administration Overheads</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Staff Salaries</td>
+            <td class="amt-col">6,30,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Office Rent</td>
+            <td class="amt-col">60,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Stationery and Printing</td>
+            <td class="amt-col">12,200</td>
+            <td class="amt-col">7,02,200</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Production (COP)</td>
+            <td></td>
+            <td class="amt-col">19,44,070</td>
+          </tr>
+          <tr>
+            <td>Add: Opening Stock of Finished Goods</td>
+            <td></td>
+            <td class="amt-col">45,280</td>
+          </tr>
+          <tr>
+            <td>Less: Closing Stock of Finished Goods</td>
+            <td></td>
+            <td class="amt-col">(50,240)</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Goods Sold (COGS)</td>
+            <td></td>
+            <td class="amt-col">19,39,110</td>
+          </tr>
+          <tr>
+            <td><strong>Add: Selling & Distribution Overheads</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Fees to Brand Ambassador</td>
+            <td class="amt-col">2,00,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Carriage Outwards</td>
+            <td class="amt-col">28,500</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Free Sample Expenses</td>
+            <td class="amt-col">20,320</td>
+            <td class="amt-col">2,48,820</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Sales (Total Cost)</td>
+            <td></td>
+            <td class="amt-col">21,87,930</td>
+          </tr>
+          <tr>
+            <td>Add: Profit (10% on Cost of Sales)</td>
+            <td></td>
+            <td class="amt-col">2,18,793</td>
+          </tr>
+          <tr class="total-row">
+            <td>Sales</td>
+            <td></td>
+            <td class="amt-col">24,06,723</td>
+          </tr>
+        </table>
+      </div>
+      
+      <div class="working-notes">
+        <h4>Working Notes:</h4>
+        <ul>
+          <li><strong>Trade Discount:</strong> Trade discount of ₹1,20,000 has been assumed as a discount received on the purchase of raw materials and is directly deducted from the 'Purchases of Raw Materials' to arrive at the actual material cost. [cite: 1506]</li>
+          <li><strong>Profit Calculation:</strong> The problem states "profit @ 10% on cost price". Therefore, Profit = 10% of Cost of Sales (₹21,87,930) = ₹2,18,793. [cite: 1507]</li>
+        </ul>
+      </div>
+
+      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
+
+      <h2>Q.2: Cost Sheet with Per Unit Cost</h2>
+      <p><strong>Problem:</strong> Krishna Ltd. started a factory in Mumbai. Detail available for year ended 31st March, 2025: [cite: 1508, 1509]<br>
+      Raw material consumed: 40,000 units @ Rs. 7 per unit. [cite: 1510]<br>
+      Direct wages: Skilled worker Rs. 9 per unit, Unskilled worker Rs. 6 per unit. [cite: 1511, 1512]<br>
+      Direct expenses: Rs. 3 per unit. [cite: 1513]<br>
+      Work overheads: Rs. 8 per machine hours worked (25,000 hrs). [cite: 1514]<br>
+      Offices overheads: Rs. 4,00,000. Sales commission: Rs. 4 per unit sold. [cite: 1515]<br>
+      Units produced: 40,000. Units sold: 36,000. Selling price: Rs. 50 per unit. [cite: 1516, 1517]<br>
+      Prepare cost sheet showing various elements of cost and per unit cost. [cite: 1518]</p>
+
+      <h3>Solution: Cost Sheet of Krishna Ltd.</h3>
+      <p><strong>Output Produced:</strong> 40,000 units | <strong>Units Sold:</strong> 36,000 units</p>
+      <div class="table-responsive">
+        <table>
+          <tr>
+            <th>Particulars</th>
+            <th>Total Cost (₹)</th>
+            <th>Cost Per Unit (₹)</th>
+          </tr>
+          <tr>
+            <td>Raw Material Consumed (40,000 x ₹7)</td>
+            <td class="amt-col">2,80,000</td>
+            <td class="amt-col">7.00</td>
+          </tr>
+          <tr>
+            <td>Direct Wages: Skilled (40,000 x ₹9)</td>
+            <td class="amt-col">3,60,000</td>
+            <td class="amt-col">9.00</td>
+          </tr>
+          <tr>
+            <td>Direct Wages: Unskilled (40,000 x ₹6)</td>
+            <td class="amt-col">2,40,000</td>
+            <td class="amt-col">6.00</td>
+          </tr>
+          <tr>
+            <td>Direct Expenses (40,000 x ₹3)</td>
+            <td class="amt-col">1,20,000</td>
+            <td class="amt-col">3.00</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Prime Cost</td>
+            <td class="amt-col">10,00,000</td>
+            <td class="amt-col">25.00</td>
+          </tr>
+          <tr>
+            <td>Add: Works Overheads (25,000 hrs x ₹8)</td>
+            <td class="amt-col">2,00,000</td>
+            <td class="amt-col">5.00</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Works Cost</td>
+            <td class="amt-col">12,00,000</td>
+            <td class="amt-col">30.00</td>
+          </tr>
+          <tr>
+            <td>Add: Office Overheads</td>
+            <td class="amt-col">4,00,000</td>
+            <td class="amt-col">10.00</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Production (for 40,000 units)</td>
+            <td class="amt-col">16,00,000</td>
+            <td class="amt-col">40.00</td>
+          </tr>
+          <tr>
+            <td>Less: Closing Stock of Finished Goods (4,000 units x ₹40)</td>
+            <td class="amt-col">(1,60,000)</td>
+            <td class="amt-col">-</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Goods Sold (COGS) (for 36,000 units)</td>
+            <td class="amt-col">14,40,000</td>
+            <td class="amt-col">40.00</td>
+          </tr>
+          <tr>
+            <td>Add: Selling Overheads (Sales Comm. 36,000 x ₹4)</td>
+            <td class="amt-col">1,44,000</td>
+            <td class="amt-col">4.00</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Sales</td>
+            <td class="amt-col">15,84,000</td>
+            <td class="amt-col">44.00</td>
+          </tr>
+          <tr>
+            <td>Add: Profit (Balancing Figure)</td>
+            <td class="amt-col">2,16,000</td>
+            <td class="amt-col">6.00</td>
+          </tr>
+          <tr class="total-row">
+            <td>Sales (36,000 units x ₹50)</td>
+            <td class="amt-col">18,00,000</td>
+            <td class="amt-col">50.00</td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="working-notes">
+        <h4>Working Notes:</h4>
+        <ul>
+          <li><strong>Closing Stock Valuation:</strong> Units produced (40,000) - Units sold (36,000) = Closing Stock (4,000 units). It is valued at the Cost of Production per unit (₹40). Value = 4,000 x 40 = ₹1,60,000. [cite: 1516]</li>
+          <li><strong>Selling Overheads:</strong> Sales commission is paid only on units sold. Hence, 36,000 units x ₹4 = ₹1,44,000. [cite: 1515, 1516]</li>
+        </ul>
+      </div>
+
+      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
+
+      <h2>Q.3: Statement of Cost (Reverse Calculation)</h2>
+      <p><strong>Problem:</strong> Books of Anand Mfg Co. for Aug 2014 show: [cite: 1519, 1520]<br>
+      Direct labour cost: 16,000 (160% of factory overhead) [cite: 1521]<br>
+      Cost of goods sold: 56,000 [cite: 1521]<br>
+      Inventories (Op | Cl): RM (8,000 | 8,600), WIP (8,000 | 12,000), FG (14,000 | 18,000) [cite: 1523]<br>
+      Selling Exp: 3,400, Gen & Admin Exp: 2,600, Sales: 75,000 [cite: 1523]<br>
+      Prepare statement showing cost of goods manufactured, sold and profit. [cite: 1524]</p>
+
+      <h3>Solution: Statement of Cost & Profit</h3>
+      
+      <div class="working-notes" style="margin-bottom: 20px;">
+        <h4>Working Note (Reverse Calculations to find Purchases):</h4>
+        <ul>
+          <li><strong>Factory Overhead:</strong> Direct Labour is 160% of Factory OH. Therefore, Factory OH = 16,000 / 1.60 = ₹10,000. [cite: 1521]</li>
+          <li><strong>Cost of Production (COP):</strong> COGS (56,000) = COP + Op FG (14,000) - Cl FG (18,000). Thus, COP = 56,000 + 4,000 = ₹60,000. [cite: 1521, 1523]</li>
+          <li><strong>Gross Works Cost:</strong> Net Works Cost (COP) (60,000) = Gross Works Cost + Op WIP (8,000) - Cl WIP (12,000). Thus, Gross Works Cost = 60,000 + 4,000 = ₹64,000. [cite: 1523]</li>
+          <li><strong>Prime Cost:</strong> Gross Works Cost (64,000) = Prime Cost + Factory OH (10,000). Thus, Prime Cost = ₹54,000.</li>
+          <li><strong>Raw Material Consumed:</strong> Prime Cost (54,000) = RM Consumed + Direct Labour (16,000). Thus, RM Consumed = ₹38,000. [cite: 1521]</li>
+          <li><strong>Purchases:</strong> RM Consumed (38,000) = Op RM (8,000) + Purchases - Cl RM (8,600). Thus, Purchases = 38,000 - 8,000 + 8,600 = ₹38,600. [cite: 1523]</li>
+        </ul>
+      </div>
+
+      <div class="table-responsive">
+        <table>
+          <tr>
+            <th>Particulars</th>
+            <th>Details (₹)</th>
+            <th>Amount (₹)</th>
+          </tr>
+          <tr>
+            <td>Opening Stock of Raw Materials</td>
+            <td class="amt-col">8,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Add: Purchases of Raw Materials (Balancing Figure)</td>
+            <td class="amt-col">38,600</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Less: Closing Stock of Raw Materials</td>
+            <td class="amt-col">(8,600)</td>
+            <td class="amt-col">38,000</td>
+          </tr>
+          <tr>
+            <td>Add: Direct Labour</td>
+            <td></td>
+            <td class="amt-col">16,000</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Prime Cost</td>
+            <td></td>
+            <td class="amt-col">54,000</td>
+          </tr>
+          <tr>
+            <td>Add: Factory Overheads (16,000 / 1.6)</td>
+            <td></td>
+            <td class="amt-col">10,000</td>
+          </tr>
+          <tr>
+            <td><strong>Gross Works Cost</strong></td>
+            <td></td>
+            <td class="amt-col">64,000</td>
+          </tr>
+          <tr>
+            <td>Add: Opening Work-in-Progress</td>
+            <td class="amt-col">8,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Less: Closing Work-in-Progress</td>
+            <td class="amt-col">(12,000)</td>
+            <td class="amt-col">(4,000)</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Production (Net Works Cost)</td>
+            <td></td>
+            <td class="amt-col">60,000</td>
+          </tr>
+          <tr>
+            <td>Add: Opening Stock of Finished Goods</td>
+            <td class="amt-col">14,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Less: Closing Stock of Finished Goods</td>
+            <td class="amt-col">(18,000)</td>
+            <td class="amt-col">(4,000)</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Goods Sold (COGS)</td>
+            <td></td>
+            <td class="amt-col">56,000</td>
+          </tr>
+          <tr>
+            <td>Add: General and Administration Expenses</td>
+            <td class="amt-col">2,600</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>Add: Selling Expenses</td>
+            <td class="amt-col">3,400</td>
+            <td class="amt-col">6,000</td>
+          </tr>
+          <tr class="bold-row">
+            <td>Cost of Sales</td>
+            <td></td>
+            <td class="amt-col">62,000</td>
+          </tr>
+          <tr>
+            <td>Add: Profit (Balancing Figure)</td>
+            <td></td>
+            <td class="amt-col">13,000</td>
+          </tr>
+          <tr class="total-row">
+            <td>Sales</td>
+            <td></td>
+            <td class="amt-col">75,000</td>
+          </tr>
+        </table>
+      </div>
+
+      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
+
+      <h2>Q.4: Reconciliation of Cost and Financial Accounts</h2>
+      <p><strong>Problem:</strong> Net profit as per financial record: 1,28,755. Net profit as per cost books: 1,72,400. [cite: 1525]<br>
+      Differences: Works OH under-recovered: 3,120. Admin OH over-recovered: 1,700. Depr in Cost: 12,500. Depr in FA: 11,200. Interest on Investments (FA): 8,000. Obsolescence Loss (FA): 5,700. Income-Tax (FA): 40,300. Bank Int & Transfer Fees (FA Credit): 750. Stores Adj (FA Credit): 475. Stock Depr Loss (FA): 6,750. [cite: 1527]<br>
+      Prepare Reconciliation Statement and Memorandum Reconciliation Account. [cite: 1528, 1529]</p>
+
+      <h3>Solution 1: Reconciliation Statement</h3>
+      <div class="table-responsive">
+        <table>
+          <tr>
+            <th>Particulars</th>
+            <th>Amount (₹)</th>
+            <th>Amount (₹)</th>
+          </tr>
+          <tr class="bold-row">
+            <td>Net Profit as per Cost Accounts</td>
+            <td></td>
+            <td class="amt-col">1,72,400</td>
+          </tr>
+          <tr>
+            <td><strong>Add: Incomes/Gains not recorded in Cost or Over-recoveries</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>1. Administrative Overheads over-recovered in Cost</td>
+            <td class="amt-col">1,700</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2. Depreciation over-charged in Cost (12,500 - 11,200)</td>
+            <td class="amt-col">1,300</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>3. Interest on Investments credited in Financial A/c only</td>
+            <td class="amt-col">8,000</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4. Bank Interest & Transfer Fees credited in Financial A/c only</td>
+            <td class="amt-col">750</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>5. Stores Adjustment credited in Financial A/c only</td>
+            <td class="amt-col">475</td>
+            <td class="amt-col">12,225</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td class="amt-col"><strong>1,84,625</strong></td>
+          </tr>
+          <tr>
+            <td><strong>Less: Expenses/Losses charged only in Financial A/c or Under-recoveries</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>1. Works Overheads under-recovered in Cost</td>
+            <td class="amt-col">3,120</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>2. Loss due to obsolescence in Financial A/c</td>
+            <td class="amt-col">5,700</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>3. Income-Tax provided in Financial A/c</td>
+            <td class="amt-col">40,300</td>
+            <td></td>
+          </tr>
+          <tr>
+            <td>4. Loss due to Depr. in Stock Values in Financial A/c</td>
+            <td class="amt-col">6,750</td>
+            <td class="amt-col">(55,870)</td>
+          </tr>
+          <tr class="total-row">
+            <td>Net Profit as per Financial Accounts</td>
+            <td></td>
+            <td class="amt-col">1,28,755</td>
+          </tr>
+        </table>
+      </div>
+
+      <br>
+      <h3>Solution 2: Memorandum Reconciliation Account</h3>
+      <div class="table-responsive">
+        <table>
+          <tr>
+            <th style="width:50%;">Particulars (Dr.)</th>
+            <th>Amount (₹)</th>
+            <th style="width:50%;">Particulars (Cr.)</th>
+            <th>Amount (₹)</th>
+          </tr>
+          <tr>
+            <td>To Works OH under-recovered in Cost</td>
+            <td class="amt-col">3,120</td>
+            <td>By Net Profit as per Cost Accounts</td>
+            <td class="amt-col">1,72,400</td>
+          </tr>
+          <tr>
+            <td>To Loss due to obsolescence in FA</td>
+            <td class="amt-col">5,700</td>
+            <td>By Admin OH over-recovered in Cost</td>
+            <td class="amt-col">1,700</td>
+          </tr>
+          <tr>
+            <td>To Income-Tax provided in FA</td>
+            <td class="amt-col">40,300</td>
+            <td>By Depreciation over-charged in Cost</td>
+            <td class="amt-col">1,300</td>
+          </tr>
+          <tr>
+            <td>To Loss on Stock Values in FA</td>
+            <td class="amt-col">6,750</td>
+            <td>By Interest on Investments (FA)</td>
+            <td class="amt-col">8,000</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>By Bank Interest & Transfer Fees (FA)</td>
+            <td class="amt-col">750</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td></td>
+            <td>By Stores Adjustment (FA)</td>
+            <td class="amt-col">475</td>
+          </tr>
+          <tr>
+            <td><strong>To Net Profit as per Financial Accounts</strong></td>
+            <td class="amt-col"><strong>1,28,755</strong></td>
+            <td></td>
+            <td></td>
+          </tr>
+          <tr class="total-row">
+            <td>Total</td>
+            <td class="amt-col">1,84,625</td>
+            <td>Total</td>
+            <td class="amt-col">1,84,625</td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+</body>
+</html>
