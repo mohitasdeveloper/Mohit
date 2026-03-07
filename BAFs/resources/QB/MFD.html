@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Mutual Fund QB - BirlaOne</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    // Instantly apply theme and correct browser tab color before the page even loads
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const themeColors = { 
+          light: '#faf5ff', // Light Purple
+          dark: '#171026',  // Deep Dark Purple/Navy
+          sepia: '#f4ecd8'  // Sepia
+      };
+      document.write('<meta id="theme-color-meta" name="theme-color" content="' + themeColors[savedTheme] + '">');
+    })();
+  </script>
+
+  <style>
+    :root {
+      /* Wealth Purple Theme for Finance Subject */
+      --primary-accent: #7c3aed; /* Vibrant Purple */
+      --primary-gradient: linear-gradient(90deg, #4c1d95, #7c3aed); /* Deep Purple to Vibrant Purple */
+      --danger-color: #ef4444;
+      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Lora', serif;
+      --border-radius: 12px;
+      --transition-speed: 0.3s;
+    }
+    
+    html[data-theme="light"] {
+      --bg-color: #faf5ff; 
+      --card-bg: #ffffff;
+      --text-primary: #1e293b;
+      --text-secondary: #475569;
+      --border-color: #e9d5ff;
+      --shadow: 0 4px 20px rgba(124, 58, 237, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --input-bg: #f3e8ff;
+      --table-header-bg: #f3e8ff;
+    }
+
+    html[data-theme="dark"] {
+      --bg-color: #171026; 
+      --card-bg: #2e1065;
+      --text-primary: #f8fafc;
+      --text-secondary: #c4b5fd;
+      --border-color: #4c1d95;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --header-bg: rgba(23, 16, 38, 0.9);
+      --input-bg: #4c1d95;
+      --table-header-bg: #3b0764;
+    }
+      
+    html[data-theme="sepia"] {
+        --bg-color: #f4ecd8;
+        --card-bg: #fbf5e9;
+        --text-primary: #5b4636;
+        --text-secondary: #7d6b59;
+        --border-color: #dcd0b9;
+        --primary-accent: #a98244;
+        --primary-gradient: linear-gradient(135deg, #c5a265, #a98244);
+        --shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        --header-bg: rgba(244, 236, 216, 0.9);
+        --input-bg: #e9deca;
+        --table-header-bg: #e9deca;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: var(--font-serif);
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* Header */
+    .top-bar { 
+        font-family: var(--font-sans); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 20px; 
+        background: var(--header-bg); 
+        backdrop-filter: blur(8px); 
+        position: sticky; 
+        top: 0; 
+        z-index: 100; 
+        border-bottom: 1px solid var(--border-color); 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+    .top-bar .title { font-weight: 800; font-size: 24px; color: var(--text-primary); letter-spacing: -0.5px; }
+    
+    .controls { display: flex; gap: 12px; }
+    
+    .custom-select { width: 100%; }
+    
+    .custom-select select {
+      width: 100%;
+      background-color: var(--input-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 32px 8px 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      cursor: pointer;
+      text-overflow: ellipsis;
+    }
+    .custom-select select:focus { outline: 2px solid var(--primary-accent); }
+
+    /* Mobile Responsive Layout */
+    @media (max-width: 600px) {
+        .top-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+        }
+        .custom-select select {
+            font-size: 13px;
+            padding: 8px 25px 8px 8px;
+        }
+    }
+
+    /* Layout */
+    .container { padding: 30px 20px; max-width: 900px; margin: 0 auto; }
+    .section-header { font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin: 40px 0 20px; color: var(--primary-accent); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+    
+    /* Cards */
+    .note-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; }
+    .note-title { font-family: var(--font-sans); font-size: 20px; font-weight: 700; padding: 16px 24px; background: var(--primary-gradient); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .note-body { padding: 24px; animation: fadeIn 0.3s ease-in-out; }
+    
+    /* Typography inside cards */
+    .note-body h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--primary-accent); margin: 24px 0 12px; }
+    .note-body h3:first-child { margin-top: 0; }
+    .note-body h4 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 600; margin: 16px 0 8px; }
+    .note-body p { margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body strong { font-family: var(--font-sans); font-weight: 700; color: var(--text-primary); }
+    .note-body ul, .note-body ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body li { margin-bottom: 10px; }
+    .note-body li::marker { color: var(--primary-accent); font-weight: bold; }
+    
+    /* Difference Tables */
+    .table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 8px; border: 1px solid var(--border-color); }
+    .diff-table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); min-width: 500px; }
+    .diff-table th, .diff-table td { padding: 12px 16px; border: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+    .diff-table th { background-color: var(--table-header-bg); font-weight: 700; color: var(--primary-accent); font-size: 1.05rem; }
+    .diff-table td { color: var(--text-secondary); }
+    .diff-table strong { color: var(--text-primary); }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(3px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <h1 class="title">BAFs App</h1>
+    <div class="controls">
+        <div class="custom-select">
+            <select id="lengthSelect" onchange="changeLength(this.value)" aria-label="Select Answer Length">
+              <option value="long">Long (Pura)</option>
+              <option value="medium">Medium (Thoda bahut)</option>
+              <option value="short">Short (Thoda sa)</option>
+            </select>
+        </div>
+        <div class="custom-select">
+            <select id="themeSelect" onchange="changeTheme(this.value)" aria-label="Select theme">
+              <option value="light">Light Theme</option>
+              <option value="dark">Dark Theme</option>
+              <option value="sepia">Sepia Theme</option>
+            </select>
+        </div>
+    </div>
+  </header>
+
+  <main class="container" id="main-content-wrapper"></main>
+
+<script>
+    function changeTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        const themeColors = { 
+            light: '#faf5ff', 
+            dark: '#171026', 
+            sepia: '#f4ecd8' 
+        };
+        const metaTag = document.getElementById('theme-color-meta');
+        if (metaTag) {
+            metaTag.setAttribute('content', themeColors[theme]);
+        }
+    }
+    
+    let currentLength = 'long';
+    function changeLength(length) {
+        currentLength = length;
+        renderQuestionBank();
+    }
+
+    // SHARED TEXT BLOCKS (To make learning easy and repetitive)
+    const defSEBI = "SEBI (Securities and Exchange Board of India) is the supreme regulator of the entire capital market and Mutual Fund industry in India. Its main job is to protect investors and regulate the stock market.";
+    const defSID = "SID (Scheme Information Document) is the most important legal document of a mutual fund scheme. It contains all the exact details about the scheme's investment objective, risks, and fees.";
+    const defAddendum = "An Addendum is an official supplementary document issued by a Mutual Fund company to make any new changes, updates, or corrections to the existing SID.";
+    const defCreditRating = "A Credit Rating is an expert score given by independent agencies (like CRISIL or ICRA) that shows the financial safety and repayment ability of a company borrowing money.";
+
+    const qbData = [
+        {
+            title: "1. Explain the key regulators in India and their roles.",
+            content: {
+                short: `
+                    <h3>Meaning</h3>
+                    <p>The financial market in India is carefully controlled by multiple government regulators to protect people's money.</p>
+                    <h3>Key Regulators</h3>
+                    <ul>
+                        <li><strong>SEBI:</strong> Regulates the stock market and all Mutual Funds.</li>
+                        <li><strong>RBI:</strong> Regulates all banks and the money supply.</li>
+                        <li><strong>IRDAI:</strong> Regulates all insurance companies.</li>
+                        <li><strong>PFRDA:</strong> Regulates pension funds (like NPS).</li>
+                        <li><strong>AMFI:</strong> An industry body that develops the mutual fund market.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Introduction to Key Regulators</h3>
+                    <p>To ensure that the financial system runs smoothly and investors are not cheated, the Government of India has set up specialized regulators.</p>
+                    <h3>The Regulators and Their Roles</h3>
+                    <ul>
+                        <li><strong>SEBI (Securities and Exchange Board of India):</strong> ${defSEBI} Every single mutual fund must register with SEBI before launching.</li>
+                        <li><strong>RBI (Reserve Bank of India):</strong> It is the central bank of India. It strictly regulates all commercial banks, controls interest rates, and manages the nation's money supply.</li>
+                        <li><strong>IRDAI (Insurance Regulatory and Development Authority):</strong> It regulates and licenses all life and general insurance companies in India to protect policyholders.</li>
+                        <li><strong>PFRDA (Pension Fund Regulatory and Development Authority):</strong> It controls and regulates the National Pension System (NPS) and other pension schemes.</li>
+                        <li><strong>AMFI (Association of Mutual Funds in India):</strong> It is not a government regulator, but an industry association. It sets ethical standards for all mutual funds and issues ARN codes to distributors.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>The Indian financial system is massive and handles trillions of rupees of public money. To ensure that this money is safe, that companies do not commit fraud, and that the economy remains stable, the government has created several highly powerful regulatory bodies. Each body controls a specific sector of finance.</p>
+                    
+                    <h3>The Key Regulators and Their Exact Roles</h3>
+                    <ul>
+                        <li><strong>1. SEBI (Securities and Exchange Board of India):</strong> 
+                            <br>${defSEBI} SEBI is the absolute boss of mutual funds. No mutual fund can launch a new scheme without SEBI's strict approval. It ensures that mutual funds follow the rules and do not make false promises to investors in their advertisements.</li>
+                        <li><strong>2. RBI (Reserve Bank of India):</strong> 
+                            <br>The RBI is the central bank of the country. Its primary role is to regulate the entire banking system (like SBI and HDFC) and control the flow of money in the economy. It sets the main interest rates (Repo Rate). While RBI doesn't regulate mutual funds directly, its policies deeply affect Debt Mutual Funds.</li>
+                        <li><strong>3. IRDAI (Insurance Regulatory and Development Authority of India):</strong> 
+                            <br>IRDAI is the sole regulator for the insurance sector. It registers and strictly monitors all life insurance (like LIC) and general insurance companies. It ensures that insurance companies settle customer claims fairly and quickly.</li>
+                        <li><strong>4. PFRDA (Pension Fund Regulatory and Development Authority):</strong> 
+                            <br>PFRDA is dedicated entirely to the pension sector. It regulates the National Pension System (NPS) and ensures that the retirement money of citizens is invested safely for their old age.</li>
+                        <li><strong>5. AMFI (Association of Mutual Funds in India):</strong> 
+                            <br>Note: AMFI is technically not a government regulator. It is a self-regulatory industry body formed by all the mutual fund companies (AMCs) together. Its role is to promote the mutual fund industry, educate investors, and issue the mandatory ARN (AMFI Registration Number) to all mutual fund distributors.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Together, these powerful regulators ensure that the Indian financial market is transparent, highly efficient, and deeply safe for the common retail investor.</p>`
+            }
+        },
+        {
+            title: "2. Distinguish between MFD and Investment advisor.",
+            content: {
+                short: `
+                    <h3>Difference Between MFD and RIA</h3>
+                    <p>An MFD sells mutual funds to earn a commission, while an RIA gives unbiased financial advice for a fee.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Feature</th><th>Mutual Fund Distributor (MFD)</th><th>Registered Investment Advisor (RIA)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Role</strong></td><td>Sells specific mutual fund products.</td><td>Gives overall financial advice to clients.</td></tr>
+                                <tr><td><strong>Income</strong></td><td>Earns commission from the AMC.</td><td>Earns a direct fee from the client.</td></tr>
+                                <tr><td><strong>Loyalty</strong></td><td>Acts as an agent of the Mutual Fund company.</td><td>Acts strictly in the best interest of the client.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <h3>Difference Between MFD and Investment Advisor</h3>
+                    <p>Many investors get confused between a Mutual Fund Distributor (MFD) and a Registered Investment Advisor (RIA). Here is the exact difference:</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>Mutual Fund Distributor (MFD)</th><th>Registered Investment Advisor (RIA)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Primary Role</strong></td><td>Their main job is to distribute and sell mutual fund schemes to investors.</td><td>Their main job is to analyze the client's goals and give unbiased financial advice.</td></tr>
+                                <tr><td><strong>Source of Income</strong></td><td>They earn a regular commission paid directly by the Mutual Fund Company (AMC).</td><td>They are not allowed to take commissions. They charge a professional fee directly to the client.</td></tr>
+                                <tr><td><strong>Registration Body</strong></td><td>They must register with AMFI and get an ARN code to sell funds.</td><td>They must pass tough exams and officially register with SEBI as an RIA.</td></tr>
+                                <tr><td><strong>Fiduciary Duty</strong></td><td>They are technically agents of the AMC, so their duty is to sell the product.</td><td>They have a strict legal (fiduciary) duty to act only in the absolute best interest of the client.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>When an investor wants to invest their money, they can approach either a Mutual Fund Distributor (MFD) or a SEBI Registered Investment Advisor (RIA). While both help people invest, their legal roles, business models, and loyalties are completely different.</p>
+                    
+                    <h3>Detailed Difference Between MFD and RIA</h3>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>Mutual Fund Distributor (MFD)</th><th>Registered Investment Advisor (RIA)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1. Core Definition & Role</strong></td><td>An MFD is essentially a salesperson or an agent. Their primary job is to safely distribute and facilitate the sale of mutual fund schemes to the public.</td><td>An RIA is a financial consultant. Their job is to deeply analyze a client's entire financial life, goals, and risks, and provide a comprehensive, unbiased financial plan.</td></tr>
+                                <tr><td><strong>2. Source of Income (Remuneration)</strong></td><td>MFDs do not charge the investor any money directly. Instead, they earn a trailing commission paid to them by the Asset Management Company (AMC) for bringing in business.</td><td>RIAs are strictly banned by SEBI from taking any commissions from AMCs. They earn their income by charging a transparent, professional consultation fee directly to the client.</td></tr>
+                                <tr><td><strong>3. Fiduciary Duty & Loyalty</strong></td><td>Because MFDs are paid by the AMC, they legally act as agents of the Mutual Fund company. While they guide the investor, their ultimate product loyalty is to the AMC.</td><td>An RIA has a strict legal "fiduciary duty." This means they must, by law, put the client's interests above everything else. They must recommend the absolute best product, even if it pays zero commission.</td></tr>
+                                <tr><td><strong>4. Registration & Regulation</strong></td><td>To become an MFD, a person only needs to pass the simple NISM VA exam and register with AMFI to get an ARN (AMFI Registration Number).</td><td>To become an RIA, a person must pass very tough advanced exams, meet strict education/experience criteria, and register directly with SEBI.</td></tr>
+                                <tr><td><strong>5. Focus of the Service</strong></td><td>The focus is heavily on the "Product". The MFD explains the features of a specific mutual fund and helps execute the transaction.</td><td>The focus is heavily on the "Process". The RIA looks at the client's taxes, insurance, retirement goals, and overall portfolio before recommending anything.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Conclusion</h3>
+                    <p>If an investor already knows what they want and just needs help buying it, an MFD is perfect. If an investor is totally confused and needs a complete, unbiased life plan, they should pay an RIA.</p>`
+            }
+        },
+        {
+            title: "3. What is SID. and why it important.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defSID}</p>
+                    <h3>Why is it Important?</h3>
+                    <ul>
+                        <li><strong>Transparency:</strong> It tells the investor exactly where their money will be invested.</li>
+                        <li><strong>Risk Warning:</strong> It clearly highlights all the market risks involved.</li>
+                        <li><strong>Cost Details:</strong> It openly shows all the fees and charges the AMC will cut.</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is SID?</h3>
+                    <p>${defSID} Before an investor puts their money into a fund, they are legally advised to read this document.</p>
+                    <h3>Contents and Importance of SID</h3>
+                    <ul>
+                        <li><strong>Investment Objective:</strong> It clearly states what the fund is trying to achieve (e.g., long-term growth vs regular income).</li>
+                        <li><strong>Asset Allocation:</strong> It shows exactly what percentage of the money will go into high-risk equity (stocks) and low-risk debt (bonds).</li>
+                        <li><strong>Risk Factors:</strong> It honestly lists all the possible risks, proving transparency and protecting the investor from sudden shocks.</li>
+                        <li><strong>Fees and Expenses:</strong> It details the exact 'Expense Ratio' and exit loads, so investors know exactly how much the AMC is charging them for the service.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of SID</h3>
+                    <p><strong>${defSID}</strong> It is the primary legal offer document prepared by the Asset Management Company (AMC) and strictly approved by SEBI before the fund is launched to the public. It acts as the absolute rulebook for how that specific mutual fund will be managed.</p>
+                    
+                    <h3>Key Contents of the SID</h3>
+                    <p>The SID is a highly detailed document that contains every piece of information an investor needs to know:</p>
+                    <ul>
+                        <li><strong>Investment Objective:</strong> The exact financial goal of the scheme. (<em>Example: "To generate long-term capital appreciation by investing mostly in large-cap stocks."</em>)</li>
+                        <li><strong>Asset Allocation Pattern:</strong> The strict rules the fund manager must follow regarding where the money goes. (<em>Example: Minimum 80% must be invested in Equity, maximum 20% in Debt.</em>)</li>
+                        <li><strong>Risk Factors:</strong> Both standard market risks and specific risks related to that particular scheme.</li>
+                        <li><strong>Fees and Expenses:</strong> Complete transparency on the scheme's Expense Ratio, entry loads (if any), and exit loads.</li>
+                        <li><strong>Fund Manager Details:</strong> The name, qualifications, and past track record of the person who will actually be managing the money.</li>
+                    </ul>
+                    
+                    <h3>Why is the SID Extremely Important?</h3>
+                    <ul>
+                        <li><strong>1. Empowers Informed Decisions:</strong> It gives the investor all the raw facts they need to decide if the mutual fund actually matches their personal financial goals.</li>
+                        <li><strong>2. Acts as a Legal Binding Contract:</strong> The AMC is legally forced by SEBI to follow whatever is written in the SID. If the SID says the fund is a "Large Cap Fund", the manager cannot secretly invest all the money in risky Small Cap stocks.</li>
+                        <li><strong>3. Complete Transparency on Costs:</strong> It protects investors from hidden charges by openly declaring exactly how much money the AMC will cut as management fees every year.</li>
+                        <li><strong>4. Risk Awareness:</strong> By reading the SID, the investor cannot later claim they were tricked. It ensures the investor fully understands the risks before writing a cheque.</li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>The SID is the ultimate truth of a mutual fund. Ignoring the SID is like buying a house without checking the legal papers.</p>`
+            }
+        },
+        {
+            title: "4. What is addendum in mutual fund documentation and when it is use.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defAddendum} It saves the company from printing the whole SID book again.</p>
+                    <h3>When is it Used?</h3>
+                    <ul>
+                        <li>When the Fund Manager is changed or resigns.</li>
+                        <li>When the AMC changes its official fees (Exit Load).</li>
+                        <li>When the AMC changes its official office address.</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is an Addendum?</h3>
+                    <p>${defAddendum} Since the SID is a massive, printed legal book, it is impossible and expensive to reprint the whole book every time a small rule changes. Therefore, an Addendum (a small notice) is attached to the original document.</p>
+                    <h3>When is an Addendum Used?</h3>
+                    <p>It is used whenever there is a material change in the mutual fund, such as:</p>
+                    <ul>
+                        <li><strong>Change in Key Personnel:</strong> If the main Fund Manager or the CEO of the AMC resigns or is replaced.</li>
+                        <li><strong>Change in Fees:</strong> If the AMC decides to increase or decrease the Exit Load (penalty for leaving early).</li>
+                        <li><strong>Change in Rules:</strong> If SEBI introduces a new rule that changes how the fund can invest its money.</li>
+                        <li><strong>Change in Address:</strong> If the AMC moves to a new official registered office.</li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of an Addendum</h3>
+                    <p>The word "Addendum" literally translates to "something to be added." <strong>${defAddendum}</strong></p>
+                    <p>The original Scheme Information Document (SID) is a massive, heavily detailed legal book. Because the financial market changes constantly, the rules of a mutual fund might need to change slightly over the years. It is highly impractical, slow, and expensive to reprint the entire 100-page SID every time a small detail changes. Therefore, the AMC simply issues a 1-page "Addendum" which acts as an official update to the original document.</p>
+                    
+                    <h3>When exactly is an Addendum Used?</h3>
+                    <p>An AMC is legally required to issue an addendum whenever any "material change" happens that affects the investors. Common scenarios include:</p>
+                    <ul>
+                        <li><strong>1. Change in Fundamental Attributes:</strong> If the core investment objective changes (<em>Example: A fund changing from a pure Equity fund to a Hybrid fund</em>). This is a massive change, and an addendum is immediately required.</li>
+                        <li><strong>2. Change in Key Personnel:</strong> The skill of the Fund Manager is the main reason people invest. If the star Fund Manager resigns or is replaced by a new person, the AMC must issue an addendum to notify all investors immediately.</li>
+                        <li><strong>3. Change in Load Structure (Fees):</strong> If the AMC decides to introduce a new Exit Load (a penalty fee for withdrawing money early) or change the existing expense ratio, it must be done via an addendum.</li>
+                        <li><strong>4. Change in AMC Details:</strong> If the Mutual Fund company changes its official registered office address, its contact numbers, or its customer service email, an addendum is published.</li>
+                        <li><strong>5. Changes dictated by SEBI:</strong> If the government regulator (SEBI) passes a new law that forces the mutual fund to change how it operates, the AMC will issue an addendum to comply with the law.</li>
+                    </ul>
+                    
+                    <h3>How is it Communicated?</h3>
+                    <p>To ensure transparency, SEBI makes it mandatory that an addendum is not kept a secret. It must be uploaded prominently on the AMC's official website, and it must be published as an advertisement in at least two daily newspapers (one English and one regional language).</p>`
+            }
+        },
+        {
+            title: "5. Explain investors right and obligations in mutual funds.",
+            content: {
+                short: `
+                    <h3>Investor Rights</h3>
+                    <ul>
+                        <li>Right to receive units or refunds on time.</li>
+                        <li>Right to receive dividend payments quickly.</li>
+                        <li>Right to complain to SEBI if cheated.</li>
+                    </ul>
+                    <h3>Investor Obligations (Duties)</h3>
+                    <ul>
+                        <li>Duty to read the SID document carefully before investing.</li>
+                        <li>Duty to provide correct PAN and KYC details.</li>
+                        <li>Duty to pay correct taxes on their profits.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Rights of Mutual Fund Investors</h3>
+                    <ul>
+                        <li><strong>Timely Allotment:</strong> The right to receive an Account Statement and mutual fund units within a few days of giving the money.</li>
+                        <li><strong>Timely Payments:</strong> The right to receive redemption money (when selling) or dividends within the strict timeline set by SEBI.</li>
+                        <li><strong>Right to Vote:</strong> The right to vote or easily exit the fund without penalty if the AMC changes the fundamental rules of the scheme.</li>
+                        <li><strong>Right to Complain:</strong> The right to file an official complaint against the AMC on the SEBI 'SCORES' portal.</li>
+                    </ul>
+                    <h3>Obligations (Duties) of Mutual Fund Investors</h3>
+                    <ul>
+                        <li><strong>Read Documents:</strong> It is the investor's duty to carefully read the Scheme Information Document (SID) and understand the risks before blindly investing.</li>
+                        <li><strong>Complete KYC:</strong> The obligation to provide highly accurate KYC details (PAN card, Aadhaar, correct bank account) to prevent fraud.</li>
+                        <li><strong>Track Investments:</strong> The duty to regularly monitor their own portfolio rather than just blaming the AMC for market losses.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>When an individual invests money in a mutual fund, they enter into a legal relationship with the Asset Management Company (AMC). To ensure a fair balance of power, the regulator (SEBI) has clearly defined the strict Rights (what the investor is entitled to) and the Obligations (what the investor must responsibly do).</p>
+                    
+                    <h3>Key Rights of Mutual Fund Investors</h3>
+                    <p>Investors have powerful legal rights to protect their hard-earned money:</p>
+                    <ul>
+                        <li><strong>1. Right to Timely Service:</strong> Investors have the absolute right to receive their official Account Statement and mutual fund units within a strict few days of their cheque clearing.</li>
+                        <li><strong>2. Right to Timely Payouts:</strong> When an investor decides to sell (redeem) their mutual funds, or when the fund declares a dividend, they have the right to receive that money directly into their bank account within the strict timeline set by SEBI. If the AMC delays the payment, the investor has the right to receive penal interest.</li>
+                        <li><strong>3. Right to Information:</strong> Investors have the right to receive regular updates, daily NAV (Net Asset Value) prices, and the complete monthly portfolio (showing exactly which company stocks the fund bought).</li>
+                        <li><strong>4. Right to Exit on Changes:</strong> If the AMC decides to change the fundamental core rules of the scheme (like changing from a safe debt fund to a risky equity fund), the investor has the right to be notified and given a 30-day window to exit the fund completely without paying any Exit Load penalties.</li>
+                        <li><strong>5. Right to Complain (Grievance Redressal):</strong> If the AMC ignores an investor, they have the right to immediately escalate the issue and file a formal complaint directly to the government on the SEBI 'SCORES' website.</li>
+                    </ul>
+                    
+                    <h3>Key Obligations (Duties) of Mutual Fund Investors</h3>
+                    <p>With great rights come great responsibilities. Investors cannot just blindly throw money; they must follow these rules:</p>
+                    <ul>
+                        <li><strong>1. Duty to Read Documents (Caveat Emptor):</strong> The law says "Let the buyer beware." It is the strict obligation of the investor to carefully read the Scheme Information Document (SID) and fully understand the market risks before investing. They cannot blame the AMC if the stock market naturally falls.</li>
+                        <li><strong>2. Provide Accurate KYC Information:</strong> Investors have a legal obligation to provide completely truthful and updated KYC (Know Your Customer) details, including a valid PAN card, Aadhaar, and correct bank account numbers. This stops money laundering and prevents payout failures.</li>
+                        <li><strong>3. Monitor the Portfolio:</strong> While the fund manager does the hard work, it is the investor's personal duty to actively track their own portfolio statements to ensure their financial goals are being met.</li>
+                        <li><strong>4. Pay Applicable Taxes:</strong> Earning profit is good, but the investor has a strict legal obligation to honestly calculate and pay the required Capital Gains taxes to the government on whatever profits they make from mutual funds.</li>
+                    </ul>`
+            }
+        },
+        {
+            title: "6. Write a note on credit rating.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defCreditRating}</p>
+                    <h3>Key Points</h3>
+                    <ul>
+                        <li><strong>Agencies:</strong> Ratings are given by companies like CRISIL, ICRA, and CARE.</li>
+                        <li><strong>Scale:</strong> A rating of 'AAA' is the safest. A rating of 'D' means the company has defaulted (failed to pay).</li>
+                        <li><strong>Importance:</strong> It helps Mutual Funds pick the safest bonds to invest public money.</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is a Credit Rating?</h3>
+                    <p>${defCreditRating} It is heavily used by Debt Mutual Funds to decide where to invest.</p>
+                    <h3>The Rating Scale</h3>
+                    <ul>
+                        <li><strong>AAA (Highest Safety):</strong> The company is incredibly strong and will definitely repay the loan.</li>
+                        <li><strong>BBB (Moderate Safety):</strong> The company is okay, but slight risks exist.</li>
+                        <li><strong>C (High Risk):</strong> The company is struggling to survive.</li>
+                        <li><strong>D (Default):</strong> The company has completely failed to pay back its loans.</li>
+                    </ul>
+                    <h3>Importance for Mutual Funds</h3>
+                    <p>Fund managers look at these ratings before buying a company's bonds. If a mutual fund buys 'AAA' rated bonds, the investors' money is highly safe. If they buy 'C' rated bonds, the risk of losing money is huge.</p>`,
+                long: `
+                    <h3>Definition of Credit Rating</h3>
+                    <p>When a company needs money, it borrows from the market by issuing "Bonds" or "Debentures." But how does the public know if that company is safe or a fraud? This is where Credit Ratings come in. <strong>${defCreditRating}</strong> It is basically a financial report card.</p>
+                    
+                    <h3>Who gives these Ratings?</h3>
+                    <p>In India, credit ratings are strictly provided by highly specialized, SEBI-registered Credit Rating Agencies (CRAs). The most famous agencies are <strong>CRISIL, ICRA, CARE, and India Ratings</strong>. These agencies deeply analyze the company's balance sheet, past history, and management quality before assigning a score.</p>
+                    
+                    <h3>The Standard Credit Rating Scale</h3>
+                    <p>Agencies use easy-to-understand alphabet codes to denote safety levels:</p>
+                    <ul>
+                        <li><strong>AAA (Highest Safety):</strong> The ultimate gold standard. The company is financially massive and incredibly stable. The risk of them failing to repay the loan is almost zero.</li>
+                        <li><strong>AA (High Safety):</strong> Very strong, but just slightly below AAA.</li>
+                        <li><strong>A to BBB (Adequate to Moderate Safety):</strong> The company is currently fine and paying on time, but if the economy crashes, they might face slight problems. (Note: Anything BBB and above is considered "Investment Grade" and safe to buy).</li>
+                        <li><strong>BB to C (High Risk / Junk):</strong> These companies are currently struggling heavily with cash flow. Buying their bonds is highly risky and considered "Junk".</li>
+                        <li><strong>D (Default):</strong> The absolute worst rating. It means the company has already failed to pay its interest or principal on time. They are officially bankrupt or defaulting.</li>
+                    </ul>
+                    
+                    <h3>Why is Credit Rating Important for Mutual Funds?</h3>
+                    <ul>
+                        <li><strong>1. Ultimate Risk Assessment:</strong> Debt Mutual Funds strictly invest public money into corporate bonds. The Fund Manager completely relies on these credit ratings to avoid bad companies and ensure the investors' capital is perfectly protected.</li>
+                        <li><strong>2. Investor Transparency:</strong> Mutual funds publish their portfolios every month. An investor can look at the portfolio and see if the fund holds mostly 'AAA' bonds (very safe) or low-rated bonds (risky). It helps the investor make an informed choice.</li>
+                        <li><strong>3. Risk vs Return Rule:</strong> Credit ratings perfectly explain the interest rate. A super-safe 'AAA' company will offer a low interest rate (e.g., 7%) because there is no risk. A highly risky 'BBB' company will offer a massive interest rate (e.g., 11%) to attract greedy investors. Ratings help fund managers balance this risk and reward.</li>
+                    </ul>`
+            }
+        }
+    ];
+
+    function renderQuestionBank() {
+        const container = document.getElementById('main-content-wrapper');
+        let html = '<h2 class="section-header">Question Bank (8 - 10 Marks)</h2>';
+        
+        qbData.forEach(q => {
+            html += '<article class="note-card">';
+            html += '<h2 class="note-title">' + q.title + '</h2>';
+            html += '<div class="note-body">' + q.content[currentLength] + '</div>';
+            html += '</article>';
+        });
+
+        container.innerHTML = html;
+    }
+
+    // Initialize application
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeSelect').value = savedTheme;
+        document.getElementById('lengthSelect').value = 'long';
+        
+        renderQuestionBank();
+    });
+</script>
+</body>
+</html>
