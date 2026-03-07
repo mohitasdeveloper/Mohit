@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Cyber Security QB</title>
+  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  
+  <script>
+    // Instantly apply theme and correct browser tab color before the page even loads
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      
+      const themeColors = { 
+          light: '#f0f9ff', 
+          dark: '#0f172a', 
+          sepia: '#f4ecd8' 
+      };
+      document.write('<meta id="theme-color-meta" name="theme-color" content="' + themeColors[savedTheme] + '">');
+    })();
+  </script>
+
+  <style>
+    :root {
+      /* Cyber Security Tech Theme (Cyan & Navy) */
+      --primary-accent: #0ea5e9; /* Sky Blue */
+      --primary-gradient: linear-gradient(90deg, #0284c7, #06b6d4); /* Dark Sky to Cyan */
+      --danger-color: #ef4444;
+      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Lora', serif;
+      --border-radius: 12px;
+      --transition-speed: 0.3s;
+    }
+    
+    html[data-theme="light"] {
+      --bg-color: #f0f9ff; 
+      --card-bg: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --border-color: #bae6fd;
+      --shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --input-bg: #e0f2fe;
+      --table-header-bg: #e0f2fe;
+    }
+
+    html[data-theme="dark"] {
+      --bg-color: #0f172a; 
+      --card-bg: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border-color: #334155;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --header-bg: rgba(15, 23, 42, 0.9);
+      --input-bg: #334155;
+      --table-header-bg: #1e293b;
+    }
+      
+    html[data-theme="sepia"] {
+        --bg-color: #f4ecd8;
+        --card-bg: #fbf5e9;
+        --text-primary: #5b4636;
+        --text-secondary: #7d6b59;
+        --border-color: #dcd0b9;
+        --primary-accent: #a98244;
+        --primary-gradient: linear-gradient(135deg, #c5a265, #a98244);
+        --shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        --header-bg: rgba(244, 236, 216, 0.9);
+        --input-bg: #e9deca;
+        --table-header-bg: #e9deca;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    body {
+      font-family: var(--font-serif);
+      background-color: var(--bg-color);
+      color: var(--text-primary);
+      transition: background-color var(--transition-speed), color var(--transition-speed);
+      line-height: 1.7;
+      font-size: 16px;
+    }
+
+    /* Header */
+    .top-bar { 
+        font-family: var(--font-sans); 
+        display: flex; 
+        justify-content: space-between; 
+        align-items: center; 
+        padding: 15px 20px; 
+        background: var(--header-bg); 
+        backdrop-filter: blur(8px); 
+        position: sticky; 
+        top: 0; 
+        z-index: 100; 
+        border-bottom: 1px solid var(--border-color); 
+        flex-wrap: wrap; 
+        gap: 15px; 
+    }
+    .top-bar .title { font-weight: 800; font-size: 24px; color: var(--text-primary); letter-spacing: -0.5px; }
+    
+    .controls { display: flex; gap: 12px; }
+    
+    .custom-select { width: 100%; }
+    
+    .custom-select select {
+      width: 100%;
+      background-color: var(--input-bg);
+      color: var(--text-primary);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 32px 8px 12px;
+      font-family: var(--font-sans);
+      font-size: 14px;
+      font-weight: 600;
+      -webkit-appearance: none; appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 10px center;
+      cursor: pointer;
+      text-overflow: ellipsis;
+    }
+    .custom-select select:focus { outline: 2px solid var(--primary-accent); }
+
+    /* Mobile Responsive Layout */
+    @media (max-width: 600px) {
+        .top-bar {
+            flex-direction: column;
+            align-items: stretch;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            width: 100%;
+        }
+        .custom-select select {
+            font-size: 13px;
+            padding: 8px 25px 8px 8px;
+        }
+    }
+
+    /* Layout */
+    .container { padding: 30px 20px; max-width: 900px; margin: 0 auto; }
+    .section-header { font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin: 40px 0 20px; color: var(--primary-accent); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+    
+    /* Cards */
+    .note-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; }
+    .note-title { font-family: var(--font-sans); font-size: 20px; font-weight: 700; padding: 16px 24px; background: var(--primary-gradient); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .note-body { padding: 24px; animation: fadeIn 0.3s ease-in-out; }
+    
+    /* Typography inside cards */
+    .note-body h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--primary-accent); margin: 24px 0 12px; }
+    .note-body h3:first-child { margin-top: 0; }
+    .note-body h4 { font-family: var(--font-sans); font-size: 1.1rem; font-weight: 600; margin: 16px 0 8px; }
+    .note-body p { margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body strong { font-family: var(--font-sans); font-weight: 700; color: var(--text-primary); }
+    .note-body ul, .note-body ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body li { margin-bottom: 10px; }
+    .note-body li::marker { color: var(--primary-accent); font-weight: bold; }
+    
+    /* Difference Tables */
+    .table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 8px; border: 1px solid var(--border-color); }
+    .diff-table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); min-width: 500px; }
+    .diff-table th, .diff-table td { padding: 12px 16px; border: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+    .diff-table th { background-color: var(--table-header-bg); font-weight: 700; color: var(--primary-accent); font-size: 1.05rem; }
+    .diff-table td { color: var(--text-secondary); }
+    .diff-table strong { color: var(--text-primary); }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(3px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="top-bar">
+    <h1 class="title">BAFs App</h1>
+    <div class="controls">
+        <div class="custom-select">
+            <select id="lengthSelect" onchange="changeLength(this.value)" aria-label="Select Answer Length">
+             <option value="long">Long (Pura)</option>
+              <option value="medium">Medium (Thoda bahut)</option>
+              <option value="short">Short (Thoda sa)</option>
+            </select>
+        </div>
+        <div class="custom-select">
+            <select id="themeSelect" onchange="changeTheme(this.value)" aria-label="Select theme">
+              <option value="light">Light Theme</option>
+              <option value="dark">Dark Theme</option>
+              <option value="sepia">Sepia Theme</option>
+            </select>
+        </div>
+    </div>
+  </header>
+
+  <main class="container" id="main-content-wrapper"></main>
+
+<script>
+    function changeTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        
+        const themeColors = { 
+            light: '#f0f9ff', 
+            dark: '#0f172a', 
+            sepia: '#f4ecd8' 
+        };
+        const metaTag = document.getElementById('theme-color-meta');
+        if (metaTag) {
+            metaTag.setAttribute('content', themeColors[theme]);
+        }
+    }
+    
+    let currentLength = 'long';
+    function changeLength(length) {
+        currentLength = length;
+        renderQuestionBank();
+    }
+
+    // SHARED TEXT BLOCKS (To make learning easy and repetitive)
+    const defCyberSec = "Cyber Security is the strict practice of protecting computers, networks, software systems, and highly sensitive data from unauthorized access, cyber-attacks, physical damage, or digital theft.";
+    const defPhishing = "Phishing is a highly dangerous cyberattack where attackers deceive users into voluntarily sharing their own sensitive information, such as passwords, credit card numbers, or bank account details.";
+    const defTargets = "Attack targets on the Internet refer to the specific computer systems, web services, or individual users that cyber criminals intentionally select to carry out harmful, illegal activities.";
+    const defCloud = "Cloud computing lets people and businesses rent and use computing resources (like servers, storage drives, databases, and software apps) directly over the internet, without having to buy physical hardware.";
+    const defPasswordTheft = "Password theft is a major cyber-crime in which attackers secretly and illegally obtain a user's login details, such as usernames and passwords, entirely without their knowledge or permission.";
+    const defAuth = "Authentication is the strict security process used to absolutely verify and make sure that the person trying to log into a system is genuinely who they claim to be.";
+
+    const qbData = [
+        { section: "Model 1: Fundamentals of Cyber Security" },
+        {
+            title: "Q1. Define Cyber security with its application and example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defCyberSec} It ensures that data remains secure and private.</p>
+                    <h3>Applications & Examples</h3>
+                    <ul>
+                        <li><strong>Network Security:</strong> Protects office networks. <em>Example: Using Firewalls to block hackers.</em></li>
+                        <li><strong>Information Security:</strong> Protects actual files. <em>Example: Encrypting secret company data.</em></li>
+                        <li><strong>Application Security:</strong> Secures software coding. <em>Example: Secure logins in banking apps.</em></li>
+                        <li><strong>Cloud Security:</strong> Protects online storage. <em>Example: Securing Google Drive with 2FA.</em></li>
+                    </ul>`,
+                medium: `
+                    <h3>Definition of Cyber Security</h3>
+                    <p>${defCyberSec} It is absolutely essential to ensure that digital information remains highly secure and accessible only to authorized, approved users.</p>
+                    <h3>Applications with Examples</h3>
+                    <ul>
+                        <li><strong>Network Security:</strong> Protects local computer networks from unauthorized outside access. <em>Example: Implementing Firewalls and Intrusion Detection Systems (IDS) to block suspicious traffic.</em></li>
+                        <li><strong>Information Security:</strong> Protects raw data from being secretly modified, deleted, or destroyed. <em>Example: Encrypting highly confidential files inside a corporate database.</em></li>
+                        <li><strong>Application Security:</strong> Focuses on securing software and mobile apps during the coding phase. <em>Example: Adding secure biometric login systems to mobile banking applications.</em></li>
+                        <li><strong>Cloud Security:</strong> Protects data, applications, and services hosted completely on the internet. <em>Example: Using Two-Factor Authentication (2FA) for Amazon Web Services (AWS).</em></li>
+                        <li><strong>Critical Infrastructure Security:</strong> Securing essential systems that keep society running. <em>Example: Protecting the database of a hospital or a city power grid from being shut down by hackers.</em></li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Cyber Security</h3>
+                    <p>${defCyberSec} In today's digital world, it is absolutely essential for safeguarding personal identity, massive organizational databases, and critical government information. It ensures that digital information remains highly secure, perfectly confidential, and accessible only to legally authorized users.</p>
+                    
+                    <h3>Key Applications of Cyber Security</h3>
+                    <p>Cyber security is not just one thing; it is applied across various different technological fields to protect specific digital assets:</p>
+                    <ul>
+                        <li><strong>1. Network Security:</strong> This focuses purely on protecting local computer networks from unauthorized access and external attacks. It acts as the gatekeeper for an office.
+                            <br><em>Example: Using advanced hardware Firewalls and Intrusion Prevention Systems (IPS) to actively monitor and block suspicious hacking activities from entering the company network.</em></li>
+                        <li><strong>2. Information Security (InfoSec):</strong> This is concerned with protecting the actual raw data from unauthorized access, accidental modification, or intentional destruction, thereby ensuring complete confidentiality and data integrity.
+                            <br><em>Example: Encrypting highly confidential financial files in a company database so that even if a hacker steals the files, they cannot read them.</em></li>
+                        <li><strong>3. Application Security:</strong> This involves securing software and mobile apps. It starts at the coding phase to prevent hackers from finding and exploiting weak spots in the software's code.
+                            <br><em>Example: Requiring complex secure login systems, CAPTCHAs, and regular security updates in mobile banking applications.</em></li>
+                        <li><strong>4. Cloud Security:</strong> This strictly protects data, applications, and services that are hosted entirely on third-party cloud platforms on the internet, ensuring data doesn't leak from shared servers.
+                            <br><em>Example: Implementing strict Two-Factor Authentication (2FA) and data encryption in cloud services like AWS, Microsoft Azure, or Google Drive.</em></li>
+                        <li><strong>5. Critical Infrastructure Protection:</strong> This is the most serious application. It involves securing essential, life-saving physical systems that rely on computers, such as national power grids, water supplies, and modern hospitals, protecting them from catastrophic cyber-terrorist attacks.
+                            <br><em>Example: Protecting hospital medical databases to ensure patient life-support machines and health records are perfectly safe.</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Cyber security is a broad, continuous process. Without strong security applications, businesses would constantly lose money, and personal privacy would not exist on the internet.</p>`
+            }
+        },
+        {
+            title: "Q2. Differentiate between black hat and white hat hackers with example.",
+            content: {
+                short: `
+                    <h3>Difference Between Hackers</h3>
+                    <p>While both have deep computer knowledge, they use it for opposite reasons.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Feature</th><th>Black Hat Hackers</th><th>White Hat Hackers</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Intent</strong></td><td>Criminal intent. They break in to steal or destroy.</td><td>Good intent. They break in to find and fix weak spots.</td></tr>
+                                <tr><td><strong>Legality</strong></td><td>Completely illegal. They break cyber laws.</td><td>Completely legal. They work with company permission.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>Stealing bank details using malware.</td><td>Doing legal Penetration Testing for a bank.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <h3>Difference Between Black Hat and White Hat Hackers</h3>
+                    <p>While both possess advanced computer programming skills, they use them for completely opposite purposes. Here is the detailed difference:</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>Black Hat Hackers</th><th>White Hat Hackers</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Definition & Intent</strong></td><td>They are criminals who illegally break into systems for malicious purposes (stealing data, causing damage, earning illegal money).</td><td>They are ethical professionals. Their intention is strictly to test systems to identify weaknesses and improve overall security.</td></tr>
+                                <tr><td><strong>Legality & Ethics</strong></td><td>They completely violate cyber laws, privacy rights, and all ethical standards.</td><td>They always operate within strict legal boundaries and only hack with explicit written permission from the company.</td></tr>
+                                <tr><td><strong>Impact on Society</strong></td><td>Their actions result in devastating data breaches, massive financial loss, and severe system downtime.</td><td>Their actions massively improve system security, preventing real attacks and saving companies millions of dollars.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>A criminal hacker secretly stealing customer credit card information by infecting a shopping website with malware.</td><td>An ethical hacker hired by a bank to perform "Penetration Testing" to legally find weak spots before criminals do.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>In the world of cyber security, a "hacker" is simply someone with deep technical knowledge of computer systems. However, hackers are categorized by the "color of their hat" based entirely on their ethics, intentions, and legality.</p>
+                    
+                    <h3>Detailed Difference Between Black Hat and White Hat Hackers</h3>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>Black Hat Hackers (Cyber Criminals)</th><th>White Hat Hackers (Ethical Hackers)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1. Definition & Core Intent</strong></td><td>They are malicious individuals who illegally break into computer systems. Their main intention is to steal sensitive data, cause network damage, or gain unauthorized access purely for personal revenge or illegal financial gain.</td><td>They are highly skilled, ethical professionals. Their core intention is strictly to identify vulnerabilities, test defenses, and help organizations fix their security before a real attack happens.</td></tr>
+                                <tr><td><strong>2. Legality and Permission</strong></td><td>They completely violate national cyber laws and ethical standards. They never ask for permission before attacking a network, making them wanted criminals.</td><td>They always operate within strict legal and ethical boundaries. They only attempt to hack a system after receiving a formal, signed contract and explicit permission from the system owner.</td></tr>
+                                <tr><td><strong>3. Actions & Societal Impact</strong></td><td>They exploit security weaknesses to cause harm. Their malicious activities result in devastating data breaches, stolen identities, massive corporate financial loss, and severe system destruction.</td><td>They also exploit security weaknesses, but only to report them. Their professional activities massively improve system security, build stronger firewalls, and prevent devastating future cyber-attacks.</td></tr>
+                                <tr><td><strong>4. What Happens After Hacking</strong></td><td>After finding a weak spot, they exploit it, steal the data, and often sell that stolen data on the illegal dark web for cryptocurrency.</td><td>After finding a weak spot, they write a detailed professional report explaining exactly how the hack worked and giving instructions on how the company can fix it.</td></tr>
+                                <tr><td><strong>5. Real-World Example</strong></td><td><strong>Example:</strong> A criminal hacker successfully breaching a hospital's database, locking all patient files with ransomware, and demanding 1 million dollars to unlock them.</td><td><strong>Example:</strong> An ethical hacker formally hired by a major bank to perform "Penetration Testing", deliberately trying to legally hack the bank's new app to ensure it is safe before releasing it to customers.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Conclusion</h3>
+                    <p>While Black Hat hackers use their brilliant skills to destroy and steal, White Hat hackers use the exact same skills to protect and defend the digital world.</p>`
+            }
+        },
+        {
+            title: "Q3. Describe phishing attack with example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defPhishing}</p>
+                    <h3>Types & Examples</h3>
+                    <ul>
+                        <li><strong>Email Phishing:</strong> Sending fake emails that look real. <em>Example: A fake email from 'HDFC Bank' asking you to click a link.</em></li>
+                        <li><strong>Website Phishing:</strong> Creating fake login pages. <em>Example: A fake Facebook login page.</em></li>
+                        <li><strong>SMS Phishing (Smishing):</strong> Fake text messages. <em>Example: SMS saying "Your account is blocked, click here."</em></li>
+                        <li><strong>Voice Phishing (Vishing):</strong> Fake phone calls. <em>Example: Caller asking for your OTP.</em></li>
+                    </ul>`,
+                medium: `
+                    <h3>What is a Phishing Attack?</h3>
+                    <p>${defPhishing} The attackers pretend to be highly trusted organizations (like a bank, Amazon, or a government agency) to easily gain the victim's absolute trust.</p>
+                    <h3>Common Types of Phishing</h3>
+                    <ul>
+                        <li><strong>Email Phishing:</strong> The attacker sends fraudulent emails that perfectly copy the logos of trusted companies to trick users. <em>Example: An email pretending to be from a bank asks the user to click a malicious link to urgently update their KYC details.</em></li>
+                        <li><strong>Website Phishing:</strong> Attackers build fake websites that look exactly like legitimate sites to capture login credentials. <em>Example: A fake Google login page that secretly steals usernames and passwords.</em></li>
+                        <li><strong>SMS Phishing (Smishing):</strong> Using highly deceptive text messages sent to mobile phones. <em>Example: A message stating "Your electricity will be cut tonight, click here to pay the bill".</em></li>
+                        <li><strong>Voice Phishing (Vishing):</strong> Impersonating officials over a phone call. <em>Example: A fake caller posing as bank staff strongly demands the user to read out their OTP.</em></li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Phishing Attack</h3>
+                    <p>${defPhishing} It is a form of "social engineering"—which means hacking the human mind instead of hacking the computer. The attackers carefully pretend to be highly trusted organizations—like massive banks, government tax agencies, or well-known companies like Netflix—in order to easily gain the victim's absolute trust. They usually create a sudden sense of extreme fear or urgency (like warning about an immediate account suspension) so the panicked user acts quickly without checking if the message is real.</p>
+                    
+                    <h3>Common Types of Phishing Attacks</h3>
+                    <p>Phishing attacks happen across multiple different platforms. The most common forms are:</p>
+                    <ul>
+                        <li><strong>1. Email Phishing:</strong> This is the oldest and most common form. Attackers send millions of fraudulent emails that perfectly copy the logos, fonts, and professional style of trusted organizations. The goal is to trick users into clicking a bad link or downloading a virus file.
+                            <br><em>Example: An email pretending to be from your bank warns you that "Someone tried to log into your account. Please click this link immediately and enter your password to secure it."</em></li>
+                        <li><strong>2. Website Phishing (Spoofing):</strong> Attackers build extremely realistic fake websites designed to look exactly like legitimate sites (like Amazon or Instagram). The moment the user types in their details, the data goes straight to the hacker.
+                            <br><em>Example: You click a link and go to a fake Instagram login page. You enter your username and password, but instead of logging in, you just gave your account to a hacker.</em></li>
+                        <li><strong>3. SMS Phishing (Smishing):</strong> This attack uses highly deceptive, short text messages sent directly to your personal mobile phone to lure you into clicking malicious mobile links.
+                            <br><em>Example: A text message stating "Your PAN card is expiring today and your bank account will be totally blocked. Click this link to reactivate it immediately".</em></li>
+                        <li><strong>4. Voice Phishing (Vishing):</strong> This involves live phone calls where attackers confidently and professionally impersonate officials (like police officers, tax agents, or bank managers) to obtain confidential information over the phone.
+                            <br><em>Example: A very polite caller posing as bank security staff tells you that your credit card was stolen, and asks you to read out the OTP (One-Time Password) they just sent you for "verification purposes".</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Phishing proves that the weakest link in cyber security is always the human being. No firewall can protect a system if the user willingly hands over their password to a disguised hacker.</p>`
+            }
+        },
+        {
+            title: "Q4. Explain the TCP/IP model with diagram.",
+            content: {
+                short: `
+                    <h3>Meaning</h3>
+                    <p>The TCP/IP model is a set of networking rules that allows computers across the world to communicate and send data over the Internet.</p>
+                    <h3>The 4 Layers of the Model</h3>
+                    <ol>
+                        <li><strong>Application Layer:</strong> Where the user interacts (e.g., Web browsers using HTTP).</li>
+                        <li><strong>Transport Layer:</strong> Makes sure data is delivered safely and in order (e.g., TCP protocol).</li>
+                        <li><strong>Internet Layer:</strong> Handles IP addresses and finds the best route for data.</li>
+                        <li><strong>Network Access Layer:</strong> Manages the physical cables and Wi-Fi signals.</li>
+                    </ol>`,
+                medium: `
+                    <h3>What is the TCP/IP Model?</h3>
+                    <p>The TCP/IP (Transmission Control Protocol / Internet Protocol) model is the foundational framework that sets the strict rules for how computers communicate over the Internet. It ensures that data sent from one device reaches another completely accurately.</p>
+                    <h3>The 4 Layers of the Model</h3>
+                    <p>The process of sending data is divided into four specific layers:</p>
+                    <ol>
+                        <li><strong>Application Layer:</strong> The topmost layer. It allows user applications (like web browsers or email clients) to communicate over the network. <em>Example: HTTP for loading websites, SMTP for sending emails.</em></li>
+                        <li><strong>Transport Layer:</strong> Responsible for reliable data transfer. It breaks data into pieces and ensures it is delivered correctly and in exact order. <em>Example: TCP (reliable delivery) and UDP (fast streaming).</em></li>
+                        <li><strong>Internet Layer:</strong> Deals with logical IP addressing and routing. It acts like a GPS, deciding the absolute best path for data packets to travel across complex networks. <em>Example: IP protocol.</em></li>
+                        <li><strong>Network Access Layer:</strong> Manages the actual physical transmission of data over the hardware, converting data into electrical or radio signals. <em>Example: Ethernet cables, Wi-Fi routers.</em></li>
+                    </ol>`,
+                long: `
+                    <h3>Introduction to the TCP/IP Model</h3>
+                    <p>The TCP/IP (Transmission Control Protocol / Internet Protocol) model is the absolute backbone of modern global networking. It is a vital framework that establishes the strict, universal rules for exactly how computers and devices communicate over the Internet. It ensures that a picture sent from a mobile phone in India reaches a laptop in America accurately, efficiently, and reliably. It acts as a common, standard "language" for all computers regardless of their brand.</p>
+                    
+                    <h3>The 4 Layers of the TCP/IP Model</h3>
+                    <p>The model simplifies complex network communication by neatly organizing it into four stacked layers, with each layer handling highly specific tasks:</p>
+                    <ul>
+                        <li><strong>1. Application Layer:</strong> This is the highest layer and the only one the user interacts with. It provides the necessary interfaces and protocols that allow user software applications to access the network. It handles tasks like file transfer, email sending, and web browsing. 
+                            <br><em>Examples: HTTP/HTTPS (for loading secure websites), SMTP (for sending emails), and FTP (for uploading files).</em></li>
+                        <li><strong>2. Transport Layer:</strong> This crucial layer is directly responsible for reliable, error-free data transfer between two devices. It takes large files from the Application layer and chops them into smaller "segments." It ensures that data is delivered completely correctly, in the exact original order, and without any lost pieces.
+                            <br><em>Examples: TCP (Transmission Control Protocol, which heavily checks for errors to ensure perfect delivery) and UDP (User Datagram Protocol, used for very fast, connectionless communication like live gaming or video calls where speed matters more than perfect accuracy).</em></li>
+                        <li><strong>3. Internet Layer:</strong> This layer acts like a global post office. It deals with logical IP addressing and routing. It is responsible for attaching the sender's and receiver's IP addresses to the data packets. It then figures out the absolute best, fastest path to send those packets across highly complex global networks.
+                            <br><em>Examples: IPv4 and IPv6 (Internet Protocols that give every device a unique address).</em></li>
+                        <li><strong>4. Network Access (Link) Layer:</strong> This is the lowest, most physical layer. It manages exactly how digital data is physically transmitted over the actual hardware medium. It converts digital 1s and 0s into electrical signals or radio waves and deals with hardware MAC addresses.
+                            <br><em>Examples: Ethernet (for wired LAN cables) and Wi-Fi (for wireless connections).</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>By dividing the incredibly complex task of internet communication into four manageable layers, the TCP/IP model allows different hardware and software to work together flawlessly around the world.</p>`
+            }
+        },
+        {
+            title: "Q5. Identify analyse various attack targets on the internet with suitable example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defTargets}</p>
+                    <h3>Common Targets</h3>
+                    <ul>
+                        <li><strong>Websites:</strong> Hacked to steal customer data (e.g., SQL injection).</li>
+                        <li><strong>Servers:</strong> Flooded with traffic to crash them entirely (e.g., DDoS attacks).</li>
+                        <li><strong>User Devices:</strong> Laptops and phones infected to steal info (e.g., Ransomware).</li>
+                        <li><strong>Online Accounts:</strong> Hacked to steal money (e.g., Phishing emails).</li>
+                    </ul>`,
+                medium: `
+                    <h3>What are Attack Targets?</h3>
+                    <p>${defTargets} Attackers focus heavily on these specific areas to steal sensitive information, empty bank accounts, or completely disrupt normal business operations.</p>
+                    <h3>Various Attack Targets Analysed</h3>
+                    <ul>
+                        <li><strong>Websites:</strong> Targeted specifically to steal massive amounts of stored customer data or passwords. <em>Example: Using an SQL injection attack to steal credit card information from a shopping site database.</em></li>
+                        <li><strong>Servers:</strong> Targeted because they run the entire company. <em>Example: A DDoS attack flooding a bank's server with fake traffic to completely crash the website.</em></li>
+                        <li><strong>Networks:</strong> Targeted to quietly monitor data flowing between computers. <em>Example: A man-in-the-middle attack secretly reading messages on a free public Wi-Fi.</em></li>
+                        <li><strong>User Devices (Laptops/Phones):</strong> Attacked to install malicious software. <em>Example: Ransomware locking all personal files on a laptop and demanding a heavy payment.</em></li>
+                        <li><strong>Cloud Services:</strong> Attacked to steal huge corporate databases stored online.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction to Attack Targets</h3>
+                    <p>${defTargets} The internet is a massive battlefield. Cyber criminals do not attack randomly; they carefully analyse and focus on highly specific targets to steal highly sensitive information, such as personal identity details, corporate secrets, or banking information. In many situations, the malicious goal is to intentionally crash servers and make online services totally unavailable.</p>
+                    
+                    <h3>Detailed Analysis of Various Attack Targets on the Internet</h3>
+                    <p>The primary digital targets for hackers include:</p>
+                    <ul>
+                        <li><strong>1. Websites and Web Applications:</strong> Websites are constantly targeted to damage their appearance, steal stored customer data, or spread malware to innocent visitors. E-commerce sites are the biggest targets.
+                            <br><em>Example: Hackers successfully using an SQL injection attack to bypass a website's login screen and directly steal millions of credit card numbers from an online shopping database.</em></li>
+                        <li><strong>2. Web and Database Servers:</strong> Servers are massive, high-value targets because they literally store the company's most critical data and keep important services running.
+                            <br><em>Example: A devastating DDoS (Distributed Denial of Service) attack that intentionally floods a university server with millions of fake internet requests, causing the exam result website to completely crash.</em></li>
+                        <li><strong>3. Communication Networks:</strong> Entire networks (like office Wi-Fi or router systems) are targeted to silently monitor data flow or gain secret back-door access to internal company systems.
+                            <br><em>Example: A man-in-the-middle (MitM) attack executed on a free, unsecured airport Wi-Fi network to secretly capture and read a user's private banking login credentials as they type them.</em></li>
+                        <li><strong>4. End-User Devices (Computers and Mobile Phones):</strong> Personal devices are the easiest and most frequently attacked targets. They are targeted to install malware, spy on users, or steal highly private information.
+                            <br><em>Example: Ransomware silently downloading onto a user's laptop, aggressively encrypting all their personal photos and work files, and demanding a heavy cryptocurrency payment to unlock them.</em></li>
+                        <li><strong>5. Personal Online Accounts:</strong> Individual social media, banking, and email accounts are directly targeted to steal personal identities or steal financial funds.
+                            <br><em>Example: A clever, highly targeted phishing email successfully tricking an old man into revealing his Gmail password, allowing hackers to reset all his other passwords.</em></li>
+                        <li><strong>6. Cloud Services & Smart IoT Devices:</strong> Modern cloud platforms are attacked to steal large corporate databases. Furthermore, smart IoT devices (like home CCTV cameras or smart fridges) often have very weak security and are easily hacked to spy on people.
+                            <br><em>Example: Hackers gaining remote access to cheap, unsecured smart CCTV cameras to spy on users inside their own private homes.</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Understanding these attack targets is the first step in cyber security. By knowing exactly what hackers want to attack, companies can build stronger, smarter defenses specifically for those weak areas.</p>`
+            }
+        },
+        {
+            title: "Q6. Differentiate between threats and virus with example.",
+            content: {
+                short: `
+                    <h3>Difference Between Threats and Viruses</h3>
+                    <p>A threat is any general danger, while a virus is one specific type of malware.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Feature</th><th>Cyber Threat</th><th>Computer Virus</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Meaning</strong></td><td>Any potential danger that can harm a system.</td><td>A specific malicious software program.</td></tr>
+                                <tr><td><strong>Scope</strong></td><td>Very broad (includes hacking, phishing, theft).</td><td>Very narrow (only focuses on infecting files).</td></tr>
+                                <tr><td><strong>Example</strong></td><td>A phishing email sent to steal passwords.</td><td>The ILOVEYOU virus that destroys documents.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <h3>Difference Between Threats and Viruses</h3>
+                    <p>While people often use these words interchangeably, they mean very different things in computer security.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>Cyber Threat</th><th>Computer Virus</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Definition</strong></td><td>A threat is any potential danger or risk that has the ability to harm a computer system or steal data.</td><td>A virus is a highly specific type of malicious software that attaches itself to clean files and spreads.</td></tr>
+                                <tr><td><strong>Nature & Scope</strong></td><td>"Threat" is a very broad, umbrella concept. It includes malware, human hacking, spam, phishing, and even physical laptop theft.</td><td>"Virus" is just one specific, narrow category of malware. It is a piece of code written by a programmer.</td></tr>
+                                <tr><td><strong>Detection & Prevention</strong></td><td>Threats are prevented using a combination of firewalls, strict company policies, data encryption, and user training.</td><td>Viruses are strictly detected and removed by scanning the hard drive with dedicated antivirus software.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>A cleverly disguised phishing attack tricking users into revealing their bank passwords over the phone.</td><td>The famous "ILOVEYOU" virus which rapidly spread via email attachments and instantly corrupted computer documents.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>In everyday language, people often use the words "threat" and "virus" as if they mean the exact same thing. However, in the professional field of cyber security, they are distinct concepts with very different meanings.</p>
+                    
+                    <h3>Detailed Difference Between Threats and Viruses</h3>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>Cyber Threat</th><th>Computer Virus</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1. Definition</strong></td><td>A threat is defined as any potential danger, risk, or event that has the capability to successfully harm a computer system, network, or sensitive data.</td><td>A virus is a highly specific, small type of malicious software program that physically attaches itself to clean files and actively spreads when the file is executed.</td></tr>
+                                <tr><td><strong>2. Nature and Scope</strong></td><td>"Threat" is a massive, broad, umbrella concept. It includes literally everything dangerous: all types of malware, human hacking, phishing emails, social engineering, and even physical threats like a thief stealing a server.</td><td>"Virus" is just one specific, narrow type of malware. It is purely a piece of digital code written by a bad programmer. It does not include physical theft or phone scams.</td></tr>
+                                <tr><td><strong>3. Goal / Objective</strong></td><td>The goal of a threat depends entirely on the attacker. It could be to steal money, ruin a company's reputation, or secretly spy on citizens.</td><td>The primary goal of a virus is almost always destructive: to quickly replicate itself, spread to other computers, and actively corrupt, delete, or destroy digital files.</td></tr>
+                                <tr><td><strong>4. Detection and Prevention</strong></td><td>Preventing broad threats requires a massive, multi-layered defense system: hardware firewalls, strict company security policies, deep data encryption, and extensive user awareness training.</td><td>Viruses are much simpler to handle. They are specifically detected, quarantined, and cleanly deleted by using dedicated antivirus software (like McAfee or Norton) to scan the computer's hard drive.</td></tr>
+                                <tr><td><strong>5. Real-World Example</strong></td><td><strong>Example:</strong> A highly sophisticated phishing attack that successfully tricks a tired employee into revealing their bank passwords, or a disgruntled employee purposely deleting company files (an Insider Threat).</td><td><strong>Example:</strong> The globally famous "ILOVEYOU" virus from the year 2000, which rapidly spread via fake email attachments and instantly corrupted millions of computer documents worldwide.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Conclusion</h3>
+                    <p>To summarize, every computer virus is a type of threat, but not every threat is a virus. A virus is a specific software problem, while a threat is any danger to the system.</p>`
+            }
+        },
+        {
+            title: "Q7. Describe the various attacks targets on the internet with suitable example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defTargets}</p>
+                    <h3>Common Targets</h3>
+                    <ul>
+                        <li><strong>Websites:</strong> Hacked to steal customer data (e.g., SQL injection).</li>
+                        <li><strong>Servers:</strong> Flooded with traffic to crash them entirely (e.g., DDoS attacks).</li>
+                        <li><strong>User Devices:</strong> Laptops and phones infected to steal info (e.g., Ransomware).</li>
+                        <li><strong>Online Accounts:</strong> Hacked to steal money (e.g., Phishing emails).</li>
+                    </ul>`,
+                medium: `
+                    <h3>What are Attack Targets?</h3>
+                    <p>${defTargets} Attackers focus heavily on these specific areas to steal sensitive information, empty bank accounts, or completely disrupt normal business operations.</p>
+                    <h3>Various Attack Targets Analysed</h3>
+                    <ul>
+                        <li><strong>Websites:</strong> Targeted specifically to steal massive amounts of stored customer data or passwords. <em>Example: Using an SQL injection attack to steal credit card information from a shopping site database.</em></li>
+                        <li><strong>Servers:</strong> Targeted because they run the entire company. <em>Example: A DDoS attack flooding a bank's server with fake traffic to completely crash the website.</em></li>
+                        <li><strong>Networks:</strong> Targeted to quietly monitor data flowing between computers. <em>Example: A man-in-the-middle attack secretly reading messages on a free public Wi-Fi.</em></li>
+                        <li><strong>User Devices (Laptops/Phones):</strong> Attacked to install malicious software. <em>Example: Ransomware locking all personal files on a laptop and demanding a heavy payment.</em></li>
+                        <li><strong>Cloud Services:</strong> Attacked to steal huge corporate databases stored online.</li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction to Attack Targets</h3>
+                    <p>${defTargets} The internet is a massive battlefield. Cyber criminals do not attack randomly; they carefully analyse and focus on highly specific targets to steal highly sensitive information, such as personal identity details, corporate secrets, or banking information. In many situations, the malicious goal is to intentionally crash servers and make online services totally unavailable.</p>
+                    
+                    <h3>Detailed Analysis of Various Attack Targets on the Internet</h3>
+                    <p>The primary digital targets for hackers include:</p>
+                    <ul>
+                        <li><strong>1. Websites and Web Applications:</strong> Websites are constantly targeted to damage their appearance, steal stored customer data, or spread malware to innocent visitors. E-commerce sites are the biggest targets.
+                            <br><em>Example: Hackers successfully using an SQL injection attack to bypass a website's login screen and directly steal millions of credit card numbers from an online shopping database.</em></li>
+                        <li><strong>2. Web and Database Servers:</strong> Servers are massive, high-value targets because they literally store the company's most critical data and keep important services running.
+                            <br><em>Example: A devastating DDoS (Distributed Denial of Service) attack that intentionally floods a university server with millions of fake internet requests, causing the exam result website to completely crash.</em></li>
+                        <li><strong>3. Communication Networks:</strong> Entire networks (like office Wi-Fi or router systems) are targeted to silently monitor data flow or gain secret back-door access to internal company systems.
+                            <br><em>Example: A man-in-the-middle (MitM) attack executed on a free, unsecured airport Wi-Fi network to secretly capture and read a user's private banking login credentials as they type them.</em></li>
+                        <li><strong>4. End-User Devices (Computers and Mobile Phones):</strong> Personal devices are the easiest and most frequently attacked targets. They are targeted to install malware, spy on users, or steal highly private information.
+                            <br><em>Example: Ransomware silently downloading onto a user's laptop, aggressively encrypting all their personal photos and work files, and demanding a heavy cryptocurrency payment to unlock them.</em></li>
+                        <li><strong>5. Personal Online Accounts:</strong> Individual social media, banking, and email accounts are directly targeted to steal personal identities or steal financial funds.
+                            <br><em>Example: A clever, highly targeted phishing email successfully tricking an old man into revealing his Gmail password, allowing hackers to reset all his other passwords.</em></li>
+                        <li><strong>6. Cloud Services & Smart IoT Devices:</strong> Modern cloud platforms are attacked to steal large corporate databases. Furthermore, smart IoT devices (like home CCTV cameras or smart fridges) often have very weak security and are easily hacked to spy on people.
+                            <br><em>Example: Hackers gaining remote access to cheap, unsecured smart CCTV cameras to spy on users inside their own private homes.</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Understanding these attack targets is the first step in cyber security. By knowing exactly what hackers want to attack, companies can build stronger, smarter defenses specifically for those weak areas.</p>`
+            }
+        },
+
+        // MODULE 2
+        { section: "Model 2: Advanced Cyber Concepts" },
+        {
+            title: "Q1. Define password theft and account access tricks with example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defPasswordTheft} This allows hackers to control your accounts.</p>
+                    <h3>Common Tricks</h3>
+                    <ul>
+                        <li><strong>Phishing:</strong> Sending fake emails to steal logins.</li>
+                        <li><strong>Keylogging:</strong> Hidden virus software recording what you type on the keyboard.</li>
+                        <li><strong>Brute Force:</strong> Using software to guess passwords repeatedly.</li>
+                        <li><strong>Shoulder Surfing:</strong> Physically standing behind someone to watch them type a PIN.</li>
+                    </ul>`,
+                medium: `
+                    <h3>Definition of Password Theft</h3>
+                    <p>${defPasswordTheft} Once the password is stolen, attackers easily access private banking or social media accounts to steal money or highly sensitive data.</p>
+                    <h3>Account Access Tricks</h3>
+                    <p>Hackers use several clever tricks to steal passwords:</p>
+                    <ul>
+                        <li><strong>Phishing:</strong> Sending highly fake emails/links that look totally real. <em>Example: A fake bank email asking for your account details immediately.</em></li>
+                        <li><strong>Keylogging:</strong> Malicious software that secretly records every single key pressed on the keyboard. <em>Example: A cracked video game secretly recording your passwords.</em></li>
+                        <li><strong>Brute Force Attack:</strong> Using fast software to repeatedly guess passwords. <em>Example: Trying common weak passwords like '123456' rapidly until it works.</em></li>
+                        <li><strong>Fake Login Pages:</strong> Websites designed to look exactly like the real login page. <em>Example: A fake Instagram page that steals credentials when you try to log in.</em></li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Password Theft</h3>
+                    <p>${defPasswordTheft} It is one of the most dangerous forms of hacking. Once the password is stolen, attackers can easily access the user's highly private online accounts—like corporate email, social media, or banking services. This unauthorized access allows them to read private information, steal large amounts of money, commit identity fraud, or even lock the real user completely out of their own life.</p>
+                    
+                    <h3>Common Account Access Tricks Used by Attackers</h3>
+                    <p>Hackers rarely "guess" strong passwords. Instead, they use various clever methods and tricks to steal these credentials:</p>
+                    <ul>
+                        <li><strong>1. Phishing:</strong> Attackers send highly deceptive fake emails, WhatsApp messages, or links that appear 100% genuine to trick users into willingly typing their login details. 
+                            <br><em>Example: A fake bank email warning that your account is locked and aggressively asking you to log in via a provided link to verify details.</em></li>
+                        <li><strong>2. Keylogging:</strong> This is a sneaky method where hidden malicious software (a keylogger virus) secretly records every single keystroke made on a physical keyboard to capture passwords as they are typed. 
+                            <br><em>Example: Downloading a cracked movie file that silently installs a keylogger, recording all the passwords you type that day.</em></li>
+                        <li><strong>3. Brute Force Attack:</strong> Attackers use advanced automated software to repeatedly try thousands of different password combinations per second until the correct one is randomly guessed. 
+                            <br><em>Example: The hacker's software rapidly trying common dictionary passwords like '123456', 'qwerty', or 'password123' against a user's account.</em></li>
+                        <li><strong>4. Credential Stuffing:</strong> Since many lazy people use the exact same password everywhere, attackers take massive lists of stolen login details from one previously hacked website and rapidly try them on other major websites. 
+                            <br><em>Example: Using leaked email passwords from an old Yahoo hack to successfully log into a user's Amazon shopping account.</em></li>
+                        <li><strong>5. Fake Login Pages (Spoofing):</strong> Attackers build fraudulent websites designed to look perfectly like real login pages to steal user credentials the second they hit the 'Enter' button. 
+                            <br><em>Example: A fake Facebook login page sent via WhatsApp; it looks real, but sends your password straight to the hacker.</em></li>
+                        <li><strong>6. Shoulder Surfing:</strong> This is an old-school, physical, real-world technique where attackers steal passwords simply by secretly watching users enter them. 
+                            <br><em>Example: A criminal standing uncomfortably close behind you in line and carefully watching you enter your ATM PIN on the keypad.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q2. Describe and classify authentication with types and example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defAuth} It stops unknown people from entering.</p>
+                    <h3>Types of Authentication</h3>
+                    <ul>
+                        <li><strong>Password-Based:</strong> Using an ID and a memorized password.</li>
+                        <li><strong>Two-Factor (2FA):</strong> Using a Password + an OTP sent to phone.</li>
+                        <li><strong>Biometric:</strong> Using physical body traits like fingerprints or face scan.</li>
+                        <li><strong>Token-Based:</strong> Using a physical smart card to scan and enter.</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is Authentication?</h3>
+                    <p>${defAuth} It acts as the very first line of defense. It strictly checks details like passwords or fingerprints before giving access to sensitive data.</p>
+                    <h3>Types of Authentication</h3>
+                    <ul>
+                        <li><strong>Password-Based:</strong> The oldest and most common method using a recognized username and a secret password. <em>Example: Logging into an email account.</em></li>
+                        <li><strong>Two-Factor Authentication (2FA):</strong> Requires two totally different forms of proof (a password AND a mobile device). <em>Example: Entering a password online, plus an OTP sent instantly to your phone.</em></li>
+                        <li><strong>Biometric Authentication:</strong> Uses completely unique physical body characteristics. <em>Example: Using advanced face recognition or a fingerprint scan to unlock a smartphone.</em></li>
+                        <li><strong>Token-Based Authentication:</strong> Uses a physical or digital key that the user must carry. <em>Example: Swiping a plastic smart card to access a secure office building.</em></li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Authentication</h3>
+                    <p>${defAuth} Before giving access to a computer system or sensitive database, it thoroughly checks secret details like a typed password, a PIN, a physical fingerprint, or a one-time code. It acts as the absolute first, and most important, layer of security, heavily reducing the risk of cyberattacks and data theft.</p>
+                    
+                    <h3>Classification / Types of Authentication</h3>
+                    <p>There are several ways to officially prove identity, ranging from very simple to highly advanced military-grade security:</p>
+                    <ul>
+                        <li><strong>1. Password-Based Authentication:</strong> This is the oldest and most universally common method. Here, a user proves their identity using something they memorize (a combination of a username and a secret password). 
+                            <br><em>Example: Logging into a basic Gmail account using a standard user ID and a memorized password.</em></li>
+                        <li><strong>2. Two-Factor Authentication (2FA):</strong> This powerful method is the modern standard. It requires two entirely different forms of verification. It combines something the user <em>knows</em> (like a password) with something the user physically <em>has</em> (like a mobile phone). 
+                            <br><em>Example: Entering a password on a banking website, and then entering a secure 6-digit OTP (One-Time Password) that is sent instantly to the user's registered mobile phone.</em></li>
+                        <li><strong>3. Biometric Authentication:</strong> This highly advanced modern method uses unique physical or behavioral characteristics of a user's actual body. Because everyone's body is different, it is incredibly difficult for a hacker to forge.
+                            <br><em>Example: Using a highly accurate fingerprint scanner or a 3D facial recognition camera to securely unlock an Apple iPhone.</em></li>
+                        <li><strong>4. Token-Based Authentication:</strong> In this method, a physical or digital device (called a token) is used as an access key. It ensures that only users physically holding the correct token can log into the system. 
+                            <br><em>Example: Tapping a plastic RFID smart card or plugging in a physical USB security token to access a highly secure corporate office server.</em></li>
+                        <li><strong>5. Multi-Factor Authentication (MFA):</strong> This is the absolute strongest method available. MFA requires two or more authentication factors layered heavily together, making it incredibly difficult for attackers to compromise all of them at exactly the same time. 
+                            <br><em>Example: Logging into a high-security military or banking account using a complex password, an OTP from a phone app, AND a live retinal eye scan.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q3. Differentiate between DOS and DDOS attack with example.",
+            content: {
+                short: `
+                    <h3>Difference Between DOS and DDOS</h3>
+                    <p>Both attacks try to crash a server by flooding it with fake traffic, but they do it differently.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Feature</th><th>DOS (Denial of Service)</th><th>DDOS (Distributed Denial of Service)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Source</strong></td><td>From ONE single computer.</td><td>From MULTIPLE hacked computers (Botnet).</td></tr>
+                                <tr><td><strong>Impact</strong></td><td>Small impact, easy to stop.</td><td>Massive impact, very hard to stop.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>Ping of Death attack from one PC.</td><td>Mirai Botnet attacking Twitter.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <h3>Difference Between DOS and DDOS Attacks</h3>
+                    <p>Both attacks share the same ultimate goal: flooding a server with garbage traffic so it crashes. The difference lies in how they achieve it.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>DOS Attack</th><th>DDOS Attack</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Full Form</strong></td><td>Denial of Service.</td><td>Distributed Denial of Service.</td></tr>
+                                <tr><td><strong>Source of Attack</strong></td><td>Uses only one single computer and one internet connection to flood the server.</td><td>Uses thousands of hacked computers globally (a Botnet) to attack at the same time.</td></tr>
+                                <tr><td><strong>Impact & Danger</strong></td><td>Limited impact. It can only crash very small, weak servers.</td><td>Massive impact. The combined power can easily take down giant global websites.</td></tr>
+                                <tr><td><strong>Defense Difficulty</strong></td><td>Very easy to block by simply banning the single attacker's IP address.</td><td>Extremely hard to block because the fake traffic comes from thousands of different IP addresses.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>A basic 'Ping of Death' attack targeted at a school website from one single computer.</td><td>The famous Mirai Botnet attack that used thousands of smart devices to successfully take down Netflix and Twitter.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>Both DOS and DDOS attacks share the exact same destructive goal: maliciously flooding a target server with so much garbage traffic and fake requests that it crashes, freezes, and becomes completely unavailable to real, legitimate users. The critical difference lies entirely in exactly how they achieve this flood.</p>
+                    
+                    <h3>Detailed Difference Between DOS and DDOS</h3>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>DOS (Denial of Service)</th><th>DDOS (Distributed Denial of Service)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1. Definition & Source</strong></td><td>A DOS attack is launched from a <em>single</em> attacking computer and a single internet connection. The solo attacker sends excessive requests to slow down the target.</td><td>A DDOS attack is launched from <em>multiple</em> computers or devices simultaneously. Attackers use a "botnet" (a massive global army of hacked, infected devices) to combine their traffic.</td></tr>
+                                <tr><td><strong>2. Speed and Volume</strong></td><td>The volume of traffic is very low because a single computer and one Wi-Fi router can only generate so much traffic at once.</td><td>The volume of traffic is terrifyingly high. The combined power of a million hacked devices sends a tsunami of data that instantly crushes the target server.</td></tr>
+                                <tr><td><strong>3. Impact and Danger Level</strong></td><td>The impact is limited. It usually only affects small, poorly defended target servers (like a local bakery website). Giant servers easily absorb a DOS attack.</td><td>The impact is absolutely massive and catastrophic. The combined power of a botnet can easily overwhelm and destroy the servers of giant global companies and even governments.</td></tr>
+                                <tr><td><strong>4. Detection and Defense</strong></td><td>It is extremely easy to detect and stop. The firewall simply sees that too much traffic is coming from one single IP address, and permanently blocks that one IP.</td><td>It is extremely hard to detect and block. Because the attacking traffic is coming from hundreds of thousands of completely different, innocent-looking sources all over the world, the firewall gets confused.</td></tr>
+                                <tr><td><strong>5. Real-World Example</strong></td><td><strong>Example:</strong> A basic "Ping of Death" or "Buffer Overflow" attack launched against a small school website directly from one angry student's laptop in his bedroom.</td><td><strong>Example:</strong> The devastating Mirai Botnet attack in 2016, which successfully hacked thousands of smart cameras worldwide and forced them to simultaneously attack and take down giant companies like Twitter, Netflix, and Reddit.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Conclusion</h3>
+                    <p>While a DOS attack is like one person trying to block a door, a DDOS attack is like a massive crowd of ten thousand people crushing the door down at the same time. DDOS is vastly more dangerous.</p>`
+            }
+        },
+        {
+            title: "Q4. Explain the cloud with different service and example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defCloud} You don't need to buy physical servers.</p>
+                    <h3>Cloud Services</h3>
+                    <ul>
+                        <li><strong>IaaS:</strong> Renting empty servers and hard drives (e.g., AWS, Azure).</li>
+                        <li><strong>PaaS:</strong> Providing a coding platform for software developers (e.g., Google App Engine).</li>
+                        <li><strong>SaaS:</strong> Providing ready-to-use software directly on the web browser (e.g., Gmail, Netflix).</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is the Cloud?</h3>
+                    <p>${defCloud} You only pay for what you actually use, and the cloud provider handles all the heavy technical maintenance and electricity costs.</p>
+                    <h3>Different Cloud Services</h3>
+                    <ul>
+                        <li><strong>IaaS (Infrastructure as a Service):</strong> The provider gives you raw virtual servers, networking, and storage over the internet. You install your own software and build the rest. <em>Example: Amazon Web Services (AWS EC2).</em></li>
+                        <li><strong>PaaS (Platform as a Service):</strong> The provider gives a complete environment (tools and operating system) specifically for developers to easily code, test, and launch apps. <em>Example: Google App Engine.</em></li>
+                        <li><strong>SaaS (Software as a Service):</strong> The provider delivers a fully finished, ready-to-use application accessible instantly via a web browser. No installation is needed. <em>Example: Gmail, Dropbox, Microsoft 365.</em></li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction to Cloud Computing</h3>
+                    <p>${defCloud} Think of it exactly like renting tools instead of owning a full, expensive workshop: you simply use what you need and pay rent only for that exact amount. Cloud providers (like Amazon or Google) totally handle all the messy server updates, hardware maintenance, electricity bills, and physical security, allowing businesses to focus purely on their actual work.</p>
+                    
+                    <h3>Different Service Models of the Cloud</h3>
+                    <p>Cloud computing is logically divided into three main layers or service models, each offering a different level of control:</p>
+                    <ul>
+                        <li><strong>1. IaaS (Infrastructure as a Service):</strong> 
+                            <br>This is the bottom, base layer. IaaS provides raw, empty virtualized computing resources over the internet, such as bare servers, storage hard drives, and basic networking. The business is responsible for installing their own operating systems, databases, and software. It requires technical skill but is highly flexible and cost-effective for large companies.
+                            <br><em>Example: Amazon Web Services (AWS EC2), Google Compute Engine, or Microsoft Azure Virtual Machines.</em></li>
+                        <li><strong>2. PaaS (Platform as a Service):</strong> 
+                            <br>This is the middle layer, designed entirely and specifically for software developers and programmers. PaaS offers a complete, pre-built platform (including operating systems, databases, and coding tools) for developing, testing, and deploying applications rapidly. Developers can focus purely on writing brilliant code while the cloud provider completely handles the underlying hardware and servers.
+                            <br><em>Example: Google App Engine, Heroku, or AWS Elastic Beanstalk.</em></li>
+                        <li><strong>3. SaaS (Software as a Service):</strong> 
+                            <br>This is the top layer, meant for everyday end-users and non-technical staff. SaaS delivers completely finished, ready-to-use software applications directly over the internet. Users do not have to install, update, or maintain absolutely anything. They just open a web browser, log in, and start working immediately.
+                            <br><em>Example: Everyday tools like Gmail, Microsoft Office 365, Dropbox, Zoom, and Salesforce.</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Cloud computing has revolutionized business. SaaS makes software accessible to everyone, PaaS makes coding faster, and IaaS makes building giant company networks incredibly cheap.</p>`
+            }
+        },
+        {
+            title: "Q5. Difference between IDS and IPS with example.",
+            content: {
+                short: `
+                    <h3>Difference Between IDS and IPS</h3>
+                    <p>Both are network security tools, but one watches and one acts.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Feature</th><th>IDS (Intrusion Detection System)</th><th>IPS (Intrusion Prevention System)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Action</strong></td><td>Passive. It only watches and sends a warning alert.</td><td>Active. It watches and automatically blocks the attack.</td></tr>
+                                <tr><td><strong>Speed</strong></td><td>Slow. Waits for a human to stop the attack.</td><td>Instant. Stops the hacker immediately in real-time.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>Snort software running in detection/alert mode.</td><td>Snort software running in active blocking mode.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <h3>Difference Between IDS and IPS</h3>
+                    <p>Both are critical network security tools that analyze traffic for threats, but they react in fundamentally different ways.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>IDS (Intrusion Detection System)</th><th>IPS (Intrusion Prevention System)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Primary Action</strong></td><td>IDS is purely passive. It just detects the threat and sends a loud alert to the admin, but takes no action.</td><td>IPS is highly active. It detects the threat and automatically takes immediate action to block the hacker.</td></tr>
+                                <tr><td><strong>Response Time</strong></td><td>Response is very slow because it totally depends on a human admin to read the alert and react.</td><td>Response is instant. It stops the attack in real-time automatically without waiting for human approval.</td></tr>
+                                <tr><td><strong>Impact on Network</strong></td><td>IDS is safe. It sits on the side and won't accidentally disturb normal internet traffic.</td><td>IPS is risky. It sits in the main traffic path and can accidentally block normal users if not configured perfectly.</td></tr>
+                                <tr><td><strong>Example</strong></td><td><em>Snort</em> software set carefully in detection mode—sends an email alert for unusual activity.</td><td><em>Snort</em> software set forcefully in prevention mode—automatically drops and blocks suspicious packets.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <h3>Introduction</h3>
+                    <p>In network security, finding a hacker is only half the battle. You also need to stop them. This is where the crucial difference between an IDS (Intrusion Detection System) and an IPS (Intrusion Prevention System) comes into play. Both are critical tools, but they react to cyber threats in fundamentally different ways.</p>
+                    
+                    <h3>Detailed Difference Between IDS and IPS</h3>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Point of Difference</th><th>IDS (Intrusion Detection System)</th><th>IPS (Intrusion Prevention System)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>1. Purpose and Action</strong></td><td>It acts exactly like a passive security camera. It strictly watches your network traffic and raises a loud alert if something suspicious happens, but it physically cannot stop the attack.</td><td>It acts exactly like an active, armed security guard. It watches the network and physically stops, drops, and blocks the threat immediately before it can cause any damage.</td></tr>
+                                <tr><td><strong>2. Response Time</strong></td><td>The response time is terribly slow because it entirely depends on a human IT administrator to wake up, read the alert on their screen, and manually block the hacker.</td><td>The response time is completely instant. It stops the aggressive attack in real-time automatically without ever waiting for human approval.</td></tr>
+                                <tr><td><strong>3. Placement in Network</strong></td><td>It usually sits safely "out-of-band" (off to the side of the network), secretly monitoring a copy of the traffic without physically touching the main data flow.</td><td>It is placed directly "in-line" (in the exact main traffic path). All internet data must physically flow through the IPS before entering the company.</td></tr>
+                                <tr><td><strong>4. Risk of False Positives</strong></td><td>It is perfectly safe. If it makes a mistake and flags a normal user as a hacker, it only sends a false alarm. It won't accidentally disturb normal business traffic.</td><td>It is highly risky. Because it actively blocks traffic, a badly configured IPS can accidentally block legitimate, normal customers from accessing the company network, ruining business.</td></tr>
+                                <tr><td><strong>5. Real-World Example</strong></td><td><strong>Example:</strong> Using Snort software in strictly detection mode—it only sends an urgent email alert to the IT team when it spots unusual network activity from Russia.</td><td><strong>Example:</strong> Using Snort software in strict prevention mode—it instantly and automatically drops the connection and blocks the Russian IP address the second it looks suspicious.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <h3>Conclusion</h3>
+                    <p>To ensure maximum safety, modern companies use both: an IDS to gather deep intelligence and log alarms, and an IPS to act as the primary shield that violently blocks incoming attacks.</p>`
+            }
+        },
+        {
+            title: "Q6. Analysis cloud with the different services and example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>${defCloud} You don't need to buy physical servers.</p>
+                    <h3>Cloud Services</h3>
+                    <ul>
+                        <li><strong>IaaS:</strong> Renting empty servers and hard drives (e.g., AWS, Azure).</li>
+                        <li><strong>PaaS:</strong> Providing a coding platform for software developers (e.g., Google App Engine).</li>
+                        <li><strong>SaaS:</strong> Providing ready-to-use software directly on the web browser (e.g., Gmail, Netflix).</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is the Cloud?</h3>
+                    <p>${defCloud} You only pay for what you actually use, and the cloud provider handles all the heavy technical maintenance and electricity costs.</p>
+                    <h3>Different Cloud Services</h3>
+                    <ul>
+                        <li><strong>IaaS (Infrastructure as a Service):</strong> The provider gives you raw virtual servers, networking, and storage over the internet. You install your own software and build the rest. <em>Example: Amazon Web Services (AWS EC2).</em></li>
+                        <li><strong>PaaS (Platform as a Service):</strong> The provider gives a complete environment (tools and operating system) specifically for developers to easily code, test, and launch apps. <em>Example: Google App Engine.</em></li>
+                        <li><strong>SaaS (Software as a Service):</strong> The provider delivers a fully finished, ready-to-use application accessible instantly via a web browser. No installation is needed. <em>Example: Gmail, Dropbox, Microsoft 365.</em></li>
+                    </ul>`,
+                long: `
+                    <h3>Introduction to Cloud Computing</h3>
+                    <p>${defCloud} Think of it exactly like renting tools instead of owning a full, expensive workshop: you simply use what you need and pay rent only for that exact amount. Cloud providers (like Amazon or Google) totally handle all the messy server updates, hardware maintenance, electricity bills, and physical security, allowing businesses to focus purely on their actual work.</p>
+                    
+                    <h3>Different Service Models of the Cloud</h3>
+                    <p>Cloud computing is logically divided into three main layers or service models, each offering a different level of control:</p>
+                    <ul>
+                        <li><strong>1. IaaS (Infrastructure as a Service):</strong> 
+                            <br>This is the bottom, base layer. IaaS provides raw, empty virtualized computing resources over the internet, such as bare servers, storage hard drives, and basic networking. The business is responsible for installing their own operating systems, databases, and software. It requires technical skill but is highly flexible and cost-effective for large companies.
+                            <br><em>Example: Amazon Web Services (AWS EC2), Google Compute Engine, or Microsoft Azure Virtual Machines.</em></li>
+                        <li><strong>2. PaaS (Platform as a Service):</strong> 
+                            <br>This is the middle layer, designed entirely and specifically for software developers and programmers. PaaS offers a complete, pre-built platform (including operating systems, databases, and coding tools) for developing, testing, and deploying applications rapidly. Developers can focus purely on writing brilliant code while the cloud provider completely handles the underlying hardware and servers.
+                            <br><em>Example: Google App Engine, Heroku, or AWS Elastic Beanstalk.</em></li>
+                        <li><strong>3. SaaS (Software as a Service):</strong> 
+                            <br>This is the top layer, meant for everyday end-users and non-technical staff. SaaS delivers completely finished, ready-to-use software applications directly over the internet. Users do not have to install, update, or maintain absolutely anything. They just open a web browser, log in, and start working immediately.
+                            <br><em>Example: Everyday tools like Gmail, Microsoft Office 365, Dropbox, Zoom, and Salesforce.</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Cloud computing has revolutionized business. SaaS makes software accessible to everyone, PaaS makes coding faster, and IaaS makes building giant company networks incredibly cheap.</p>`
+            }
+        },
+        {
+            title: "Q7. Describe and classify authorisation with types and example.",
+            content: {
+                short: `
+                    <h3>Definition</h3>
+                    <p>Authorization is the security step that decides what a user is allowed to do inside a system <em>after</em> they successfully log in.</p>
+                    <h3>Types of Authorization</h3>
+                    <ul>
+                        <li><strong>Role-Based (RBAC):</strong> Access depends purely on your job title (Admin vs Employee).</li>
+                        <li><strong>Mandatory (MAC):</strong> Ultra-strict access based on secret clearance (Used in Military).</li>
+                        <li><strong>Discretionary (DAC):</strong> The file creator decides who gets to open it.</li>
+                    </ul>`,
+                medium: `
+                    <h3>What is Authorization?</h3>
+                    <p>While authentication answers "Who are you?", authorization firmly answers "What are you allowed to do?" It strictly controls the permissions a user has. Logging in proves you are the account holder, but authorization decides if you can only view the balance or actually transfer money.</p>
+                    <h3>Types of Authorization</h3>
+                    <ul>
+                        <li><strong>Role-Based Access Control (RBAC):</strong> Access is based solely on the user's official job role. <em>Example: An IT Admin can delete company data, but a normal Employee can only view their own data.</em></li>
+                        <li><strong>Attribute-Based Access Control (ABAC):</strong> Access depends on smart conditions like time or GPS location. <em>Example: A confidential file can only be opened during normal office hours.</em></li>
+                        <li><strong>Mandatory Access Control (MAC):</strong> Ultra-strict access based on hard-coded security labels. Users cannot change permissions. <em>Example: A military document labeled 'Top Secret' can only be opened by generals.</em></li>
+                        <li><strong>Discretionary Access Control (DAC):</strong> The creator or owner of a file decides exactly who can open it. <em>Example: Sharing a Google Doc and personally giving specific friends 'read' access.</em></li>
+                    </ul>`,
+                long: `
+                    <h3>Definition of Authorization</h3>
+                    <p>Authorization is the critical security process of deciding exactly what a user can and cannot do <em>after</em> the system knows who they are. While authentication perfectly answers the question "Who are you?", authorization firmly answers "What are you allowed to do?". It is incredibly important because it keeps highly sensitive information safe and ensures people only access the exact files they are legally supposed to see.</p>
+                    
+                    <h3>Classification / Types of Authorization</h3>
+                    <p>Modern computer systems use different advanced models to grant permissions based on their specific security needs:</p>
+                    <ul>
+                        <li><strong>1. Role-Based Access Control (RBAC):</strong> This is the most common method in business. Users are officially assigned specific job roles, and each role determines what actions they can perform. Access is strictly based on the job title, not the person. 
+                            <br><em>Example: In an HR office app, the 'Manager' role can add or fire users, but the 'Basic Employee' role can only view their own personal profile and nothing else.</em></li>
+                        <li><strong>2. Attribute-Based Access Control (ABAC):</strong> This is highly dynamic and smart. Access depends on evaluating multiple real-time factors or 'attributes' such as the user's department, the time of day, or their current GPS location. 
+                            <br><em>Example: A hospital patient document can only be accessed if the user is a verified doctor AND it is currently normal working hours AND they are physically inside the hospital building.</em></li>
+                        <li><strong>3. Mandatory Access Control (MAC):</strong> This is the absolute strictest form of security, designed by the government. Access is enforced based on hard-coded sensitivity labels. Even the owner of the document cannot casually change permissions. 
+                            <br><em>Example: Heavily used in the military. If a defense document is officially classified as "Top Secret", a young soldier with only "Secret" clearance will be instantly and permanently denied access.</em></li>
+                        <li><strong>4. Discretionary Access Control (DAC):</strong> This is the most flexible and common personal form. The original owner or creator of a file or resource has full, absolute discretion to decide exactly who can access it and what actions they can perform. 
+                            <br><em>Example: A college student creating a project folder on a shared Google Drive and personally choosing to give "read/write" permissions to two specific classmates, while blocking everyone else.</em></li>
+                    </ul>
+                    
+                    <h3>Conclusion</h3>
+                    <p>Without strict authorization, anyone who simply logs into a company network would have the terrifying power to delete the entire database. Authorization provides the necessary borders and walls inside a system.</p>`
+            }
+        }
+    ];
+
+    function renderQuestionBank() {
+        const container = document.getElementById('main-content-wrapper');
+        let html = '';
+        
+        qbData.forEach(q => {
+            if (q.section) {
+                html += '<h2 class="section-header">' + q.section + '</h2>';
+            } else {
+                html += '<article class="note-card">';
+                html += '<h2 class="note-title">' + q.title + '</h2>';
+                html += '<div class="note-body">' + q.content[currentLength] + '</div>';
+                html += '</article>';
+            }
+        });
+
+        container.innerHTML = html;
+    }
+
+    // Initialize application
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeSelect').value = savedTheme;
+        document.getElementById('lengthSelect').value = 'long';
+        
+        renderQuestionBank();
+    });
+</script>
+</body>
+</html>
