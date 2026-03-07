@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
       <link rel="icon" type="image/png" href="https://i.ibb.co/q86yqpy/1771434071328-modified.png">
     <title>Exam Central - BAFs App</title>
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M7CKP1XWMW"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M7CKP1XWMW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
@@ -112,7 +111,7 @@
       .header-title { font-weight: 600; font-size: 18px; flex-grow: 1; text-align: center; }
       
       /* ⏳ --- Countdown & Collapsible Timetable --- ⏳ */
-      .main-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 30px; box-shadow: var(--shadow); }
+      .main-card { background-color: var(--card-bg); border: 1px solid var(--border-color); border-radius: 16px; padding: 25px; margin-bottom: 20px; /* Reduced from 30px for banner spacing */ box-shadow: var(--shadow); }
       .section-header { display: flex; align-items: center; font-size: 1.4rem; font-weight: 600; color: var(--text-primary); }
       .section-header i { margin-right: 12px; color: var(--primary-accent); }
       #countdown-container { text-align: center; padding-bottom: 25px; }
@@ -132,6 +131,21 @@
       .timetable-row { display: flex; flex-direction: column; gap: 5px; padding: 15px; border-radius: 12px; background-color: var(--timetable-row-bg); border: 1px solid var(--border-color); }
       .timetable-date { font-weight: 600; color: var(--primary-accent); font-size: 1rem; }
       .timetable-subject { font-weight: 500; color: var(--text-primary); font-size: 0.95rem; }
+
+      /* 🖼️ --- New Banner Image Styles --- 🖼️ */
+      .banner-container {
+        margin-bottom: 20px; /* Space between banner and resources header */
+        border-radius: 16px; /* Rounded corners */
+        overflow: hidden; /* Essential for border-radius on images */
+        box-shadow: var(--shadow); /* Theme shadow */
+        border: 1px solid var(--border-color); /* Defines edge */
+      }
+
+      .banner-image {
+        display: block; /* Remove whitespace below image */
+        width: 100%; /* Fully responsive width */
+        height: auto; /* Maintain aspect ratio */
+      }
 
       /* 📚 --- Resources Section --- 📚 */
       .resources-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
@@ -197,6 +211,10 @@
                 </div>
                 <div class="timetable-list" id="timetable-list">
                     </div>
+            </section>
+
+            <section class="banner-container">
+              <img src="https://i.ibb.co/wN4skCSD/image.png" alt="Exam Central Resources Banner" class="banner-image" loading="lazy">
             </section>
             
             <div class="resources-header">
