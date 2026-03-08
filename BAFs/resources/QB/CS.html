@@ -1,1331 +1,724 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="light">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=1024" />
-  <title>Cost Accounting QB</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Cyber Security QB</title>
   
-  <link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
-  
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-M7CKP1XWMW"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-M7CKP1XWMW');
+</script>
+  <script>
+    (function() {
+      const savedTheme = localStorage.getItem('theme') || 'light';
+      document.documentElement.setAttribute('data-theme', savedTheme);
+      const themeColors = { light: '#f0f9ff', dark: '#0f172a', sepia: '#f4ecd8' };
+      document.write('<meta id="theme-color-meta" name="theme-color" content="' + themeColors[savedTheme] + '">');
+    })();
+  </script>
+
   <style>
     :root {
-      --bg-paper: #fffdf8;
-      --blue-line: #d0e2ff;
-      --red-margin: #ff9999;
-      --text-ink: #1a1a1a;
-      --heading-ink: #000080;
-      --table-border: #a0b4d6;
-      --highlight: #fff3cd;
+      var(--primary-accent): #0ea5e9;
+      --primary-gradient: linear-gradient(90deg, #0284c7, #06b6d4);
+      --danger-color: #ef4444;
+      --font-sans: 'Inter', sans-serif;
+      --font-serif: 'Lora', serif;
+      --border-radius: 12px;
+      --transition-speed: 0.3s;
     }
     
-    body {
-      margin: 0;
-      padding: 20px;
-      font-family: 'Patrick Hand', cursive;
-      background-color: #e5e7eb; /* Desk background */
-      color: var(--text-ink);
-      font-size: 19px;
-      line-height: 1.8;
+    html[data-theme="light"] {
+      --bg-color: #f0f9ff; 
+      --card-bg: #ffffff;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --border-color: #bae6fd;
+      --shadow: 0 4px 20px rgba(14, 165, 233, 0.08);
+      --header-bg: rgba(255, 255, 255, 0.9);
+      --input-bg: #e0f2fe;
+      --table-header-bg: #e0f2fe;
     }
 
-    /* Notebook Paper Effect */
-    .notebook-page {
-      max-width: 950px;
-      margin: 0 auto;
-      background-color: var(--bg-paper);
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-      border-radius: 5px;
-      padding: 40px 40px 60px 60px;
-      position: relative;
-      /* Ruled lines background */
-      background-image: repeating-linear-gradient(
-        transparent,
-        transparent 31px,
-        var(--blue-line) 31px,
-        var(--blue-line) 32px
-      );
-      background-size: 100% 32px;
-      background-position: 0 8px; /* Align text to lines */
+    html[data-theme="dark"] {
+      --bg-color: #0f172a; 
+      --card-bg: #1e293b;
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --border-color: #334155;
+      --shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      --header-bg: rgba(15, 23, 42, 0.9);
+      --input-bg: #334155;
+      --table-header-bg: #1e293b;
+    }
+      
+    html[data-theme="sepia"] {
+        --bg-color: #f4ecd8;
+        --card-bg: #fbf5e9;
+        --text-primary: #5b4636;
+        --text-secondary: #7d6b59;
+        --border-color: #dcd0b9;
+        --primary-accent: #a98244;
+        --primary-gradient: linear-gradient(135deg, #c5a265, #a98244);
+        --shadow: 0 6px 25px rgba(0, 0, 0, 0.1);
+        --header-bg: rgba(244, 236, 216, 0.9);
+        --input-bg: #e9deca;
+        --table-header-bg: #e9deca;
     }
 
-    /* Red Margin Line */
-    .notebook-page::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 45px;
-      width: 2px;
-      background-color: var(--red-margin);
-      z-index: 1;
-    }
-
-    /* Content wrapper to sit above lines and margin */
-    .content {
-      position: relative;
-      z-index: 2;
-    }
-
-    h1, h2, h3 {
-      color: var(--heading-ink);
-      margin-top: 30px;
-      margin-bottom: 15px;
-      font-weight: normal;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
     
-    h1 { font-size: 2.2rem; text-align: center; border-bottom: 2px dashed var(--heading-ink); display: inline-block; padding-bottom: 5px;}
-    h2 { font-size: 1.8rem; background: var(--highlight); display: inline-block; padding: 0 10px; border-radius: 3px;}
-    h3 { font-size: 1.5rem; text-decoration: underline; }
+    body { font-family: var(--font-serif); background-color: var(--bg-color); color: var(--text-primary); transition: background-color var(--transition-speed), color var(--transition-speed); line-height: 1.7; font-size: 16px; }
+    .top-bar { font-family: var(--font-sans); display: flex; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--header-bg); backdrop-filter: blur(8px); position: sticky; top: 0; z-index: 100; border-bottom: 1px solid var(--border-color); flex-wrap: wrap; gap: 15px; }
+    .top-bar .title { font-weight: 800; font-size: 24px; color: var(--text-primary); letter-spacing: -0.5px; }
+    .controls { display: flex; gap: 12px; }
+    .custom-select { width: 100%; }
+    .custom-select select { width: 100%; background-color: var(--input-bg); color: var(--text-primary); border: 1px solid var(--border-color); border-radius: 6px; padding: 8px 32px 8px 12px; font-family: var(--font-sans); font-size: 14px; font-weight: 600; -webkit-appearance: none; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='%23888' viewBox='0 0 16 16'%3E%3Cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 10px center; cursor: pointer; text-overflow: ellipsis; }
+    .custom-select select:focus { outline: 2px solid var(--primary-accent); }
 
-    p { margin: 10px 0; }
-
-    /* Accounting Tables */
-    .table-responsive {
-      overflow-x: auto;
-      margin: 20px 0;
-      background-color: rgba(255, 255, 255, 0.7);
-      border-radius: 5px;
-      padding: 10px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    @media (max-width: 600px) {
+        .top-bar { flex-direction: column; align-items: stretch; padding: 12px 16px; gap: 12px; }
+        .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; width: 100%; }
+        .custom-select select { font-size: 13px; padding: 8px 25px 8px 8px; }
     }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      border: 2px solid var(--table-border);
-    }
+    .container { padding: 30px 20px; max-width: 900px; margin: 0 auto; }
+    .section-header { font-family: var(--font-sans); font-size: 28px; font-weight: 800; margin: 40px 0 20px; color: var(--primary-accent); border-bottom: 2px solid var(--border-color); padding-bottom: 8px; }
+    .note-card { background: var(--card-bg); border: 1px solid var(--border-color); border-radius: var(--border-radius); box-shadow: var(--shadow); margin-bottom: 30px; overflow: hidden; }
+    .note-title { font-family: var(--font-sans); font-size: 20px; font-weight: 700; padding: 16px 24px; background: var(--primary-gradient); color: #fff; text-shadow: 0 1px 2px rgba(0,0,0,0.15); }
+    .note-body { padding: 24px; animation: fadeIn 0.3s ease-in-out; }
+    .note-body h3 { font-family: var(--font-sans); font-size: 1.25rem; font-weight: 700; color: var(--primary-accent); margin: 24px 0 12px; }
+    .note-body h3:first-child { margin-top: 0; }
+    .note-body p { margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body strong { font-family: var(--font-sans); font-weight: 700; color: var(--text-primary); }
+    .note-body ul, .note-body ol { padding-left: 24px; margin-bottom: 16px; color: var(--text-secondary); }
+    .note-body li { margin-bottom: 10px; }
+    .note-body li::marker { color: var(--primary-accent); font-weight: bold; }
+    .table-wrapper { overflow-x: auto; margin-bottom: 16px; border-radius: 8px; border: 1px solid var(--border-color); }
+    .diff-table { width: 100%; border-collapse: collapse; font-family: var(--font-sans); min-width: 500px; }
+    .diff-table th, .diff-table td { padding: 12px 16px; border: 1px solid var(--border-color); text-align: left; vertical-align: top; }
+    .diff-table th { background-color: var(--table-header-bg); font-weight: 700; color: var(--primary-accent); font-size: 1.05rem; }
+    .diff-table td { color: var(--text-secondary); }
+    .diff-table strong { color: var(--text-primary); }
 
-    th, td {
-      border: 1px solid var(--table-border);
-      padding: 8px 12px;
-      text-align: left;
-    }
-
-    th {
-      background-color: #f0f4fa;
-      color: var(--heading-ink);
-      font-weight: bold;
-      text-align: center;
-    }
-
-    .amt-col {
-      text-align: right;
-      width: 130px;
-    }
-    
-    .unit-col {
-      text-align: right;
-      width: 80px;
-    }
-
-    .bold-row td {
-      font-weight: bold;
-      background-color: #f9fbff;
-    }
-
-    .total-row td {
-      font-weight: bold;
-      border-top: 2px solid var(--table-border);
-      border-bottom: 3px double var(--table-border);
-      background-color: #eaf0f8;
-    }
-
-    /* Working Notes Box */
-    .working-notes {
-      border: 2px dashed #bba171;
-      background-color: #fffdf2;
-      padding: 15px 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    .working-notes h4 {
-      margin-top: 0;
-      color: #8b6e3b;
-      font-size: 1.3rem;
-    }
-    .working-notes ul {
-      padding-left: 20px;
-      margin-bottom: 0;
-    }
-
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(3px); } to { opacity: 1; transform: translateY(0); } }
   </style>
 </head>
 <body>
 
-  <div class="notebook-page">
-    <div class="content">
-      
-      <div style="text-align: center;">
-        <h1>Cost Accounting - Question Bank</h1>
-        <p><strong>Batch 2: Questions 5 to 10</strong></p>
-      </div>
-
-      <h2>Q.5: Reconciliation of Cost and Financial Accounts</h2>
-      <p><strong>Problem:</strong> Profit disclosed by a company's cost accounts for the year was 50,000/- whereas the net profit as disclosed by the financial accounts was 46,000/-. Following information is available:</p>
-      <ul>
-        <li>a) Overheads as per cost accounts were estimated 55,555/-. The charge for the year shown by the financial accounts was 50,000/-.</li>
-        <li>b) Director's fees shown in financial accounts only 1,000/-.</li>
-        <li>c) The company allocated 2,000/- as provision for doubtful debts.</li>
-        <li>d) In financial accounts, depreciation was charged more in comparison with cost accounts by 3,000/-.</li>
-        <li>e) Share-transfer fees received during the year 445/-.</li>
-        <li>f) Provision for Income-Tax was 4,000/-.</li>
-      </ul>
-      <p>Prepare a statement reconciling the figures shown by the cost and financial accounts.</p>
-
-      <h3>Solution: Reconciliation Statement</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th>
-            <th>Amount (₹)</th>
-            <th>Amount (₹)</th>
-          </tr>
-          <tr class="bold-row">
-            <td>Net Profit as per Cost Accounts</td>
-            <td></td>
-            <td class="amt-col">50,000</td>
-          </tr>
-          <tr>
-            <td><strong>Add: Incomes/Gains not recorded in Cost or Over-recoveries</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1. Overheads over-recovered in Cost A/c (55,555 - 50,000)</td>
-            <td class="amt-col">5,555</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2. Share-transfer fees received (Income in Financial A/c only)</td>
-            <td class="amt-col">445</td>
-            <td class="amt-col">6,000</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td class="amt-col"><strong>56,000</strong></td>
-          </tr>
-          <tr>
-            <td><strong>Less: Expenses/Losses charged only in Financial A/c</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1. Director's fees</td>
-            <td class="amt-col">1,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2. Provision for doubtful debts</td>
-            <td class="amt-col">2,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>3. Excess depreciation charged in Financial A/c</td>
-            <td class="amt-col">3,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>4. Provision for Income-Tax</td>
-            <td class="amt-col">4,000</td>
-            <td class="amt-col">(10,000)</td>
-          </tr>
-          <tr class="total-row">
-            <td>Net Profit as per Financial Accounts</td>
-            <td></td>
-            <td class="amt-col">46,000</td>
-          </tr>
-        </table>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.6: Reconciliation Statement</h2>
-      <p><strong>Problem:</strong> Profit disclosed by a Company's cost accounts for the year ended 31st March, 2014, was 1,00,000 whereas the net profit as disclosed by the financial accounts was 59,500. Following information is available:</p>
-      <ul>
-        <li>a) Work was commenced on a new factory and expenditure of 60,000 was incurred. Depreciation was provided at 5% for six months in the financial accounts.</li>
-        <li>b) Directors Fees shown in financial accounts 4,000.</li>
-        <li>c) Share transferred fees received during the year was 2,000.</li>
-        <li>d) Provision for income tax was 30,000.</li>
-        <li>e) The Company allocated 10,000 as provision for doubtful debts.</li>
-        <li>f) Overheads as per cost accounts were estimated at 17,000. The charge for the year shown by the financial accounts was 14,000.</li>
-      </ul>
-
-      <h3>Solution: Reconciliation Statement</h3>
-      <div class="working-notes" style="margin-bottom: 20px;">
-        <h4>Working Note:</h4>
-        <ul>
-          <li><strong>Depreciation on new factory:</strong> 60,000 × 5% × (6/12) = ₹ 1,500. This is charged only in Financial Accounts, so it reduces financial profit.</li>
-          <li><strong>Overheads Over-recovered:</strong> Cost accounts (17,000) - Financial accounts (14,000) = ₹ 3,000. This increases cost profit, so it must be added back to match financial profit.</li>
-        </ul>
-      </div>
-
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th>
-            <th>Amount (₹)</th>
-            <th>Amount (₹)</th>
-          </tr>
-          <tr class="bold-row">
-            <td>Net Profit as per Cost Accounts</td>
-            <td></td>
-            <td class="amt-col">1,00,000</td>
-          </tr>
-          <tr>
-            <td><strong>Add: Items increasing Financial Profit</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1. Overheads over-recovered in Cost A/c (17,000 - 14,000)</td>
-            <td class="amt-col">3,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2. Share transfer fees received (Income in Financial A/c only)</td>
-            <td class="amt-col">2,000</td>
-            <td class="amt-col">5,000</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td class="amt-col"><strong>1,05,000</strong></td>
-          </tr>
-          <tr>
-            <td><strong>Less: Items decreasing Financial Profit</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1. Depreciation on new factory (Financial A/c only)</td>
-            <td class="amt-col">1,500</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2. Directors Fees</td>
-            <td class="amt-col">4,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>3. Provision for Income Tax</td>
-            <td class="amt-col">30,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>4. Provision for doubtful debts</td>
-            <td class="amt-col">10,000</td>
-            <td class="amt-col">(45,500)</td>
-          </tr>
-          <tr class="total-row">
-            <td>Net Profit as per Financial Accounts</td>
-            <td></td>
-            <td class="amt-col">59,500</td>
-          </tr>
-        </table>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.7: Contract Costing (2 Years)</h2>
-      <p><strong>Problem:</strong> The following information relates to a building contract for Rs. 20,00,000:</p>
-      <div class="table-responsive">
-        <table>
-          <tr><th>Particulars</th><th>2024 (Rs.)</th><th>2025 (Rs.)</th></tr>
-          <tr><td>Material Issued</td><td class="amt-col">6,00,000</td><td class="amt-col">1,68,000</td></tr>
-          <tr><td>Direct Wages</td><td class="amt-col">4,60,000</td><td class="amt-col">2,10,000</td></tr>
-          <tr><td>Direct Expenses</td><td class="amt-col">44,000</td><td class="amt-col">20,000</td></tr>
-          <tr><td>Indirect Expenses</td><td class="amt-col">12,000</td><td class="amt-col">2,800</td></tr>
-          <tr><td>Work Certified</td><td class="amt-col">15,00,000</td><td class="amt-col">20,00,000</td></tr>
-          <tr><td>Work Uncertified</td><td class="amt-col">16,000</td><td class="amt-col">-</td></tr>
-          <tr><td>Material at Site</td><td class="amt-col">10,000</td><td class="amt-col">14,000</td></tr>
-          <tr><td>Plant Issued</td><td class="amt-col">28,000</td><td class="amt-col">4,000</td></tr>
-          <tr><td>Cash Received</td><td class="amt-col">12,00,000</td><td class="amt-col">20,00,000</td></tr>
-        </table>
-      </div>
-      <p>Value of plant at end of 2024 and 2025 was Rs. 14,000 and Rs. 10,000 respectively. Prepare Contract Account for the two years.</p>
-
-      <h3>Solution: Contract Account for the Year 2024</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th style="width:50%;">Particulars (Dr.)</th>
-            <th>Amount (₹)</th>
-            <th style="width:50%;">Particulars (Cr.)</th>
-            <th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Material Issued</td>
-            <td class="amt-col">6,00,000</td>
-            <td>By Plant at Site (closing)</td>
-            <td class="amt-col">14,000</td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td>
-            <td class="amt-col">4,60,000</td>
-            <td>By Material at Site (closing)</td>
-            <td class="amt-col">10,000</td>
-          </tr>
-          <tr>
-            <td>To Direct Expenses</td>
-            <td class="amt-col">44,000</td>
-            <td>By Work-in-Progress A/c:</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>To Indirect Expenses</td>
-            <td class="amt-col">12,000</td>
-            <td>&nbsp;&nbsp;&nbsp;- Work Certified</td>
-            <td class="amt-col">15,00,000</td>
-          </tr>
-          <tr>
-            <td>To Plant Issued</td>
-            <td class="amt-col">28,000</td>
-            <td>&nbsp;&nbsp;&nbsp;- Work Uncertified</td>
-            <td class="amt-col">16,000</td>
-          </tr>
-          <tr>
-            <td><strong>To Notional Profit c/d</strong></td>
-            <td class="amt-col"><strong>3,96,000</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td>
-            <td class="amt-col">15,40,000</td>
-            <td>Total</td>
-            <td class="amt-col">15,40,000</td>
-          </tr>
-          <tr>
-            <td>To Profit & Loss A/c (Transfer)</td>
-            <td class="amt-col">2,11,200</td>
-            <td><strong>By Notional Profit b/d</strong></td>
-            <td class="amt-col"><strong>3,96,000</strong></td>
-          </tr>
-          <tr>
-            <td>To WIP Reserve (Balance)</td>
-            <td class="amt-col">1,84,800</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td>
-            <td class="amt-col">3,96,000</td>
-            <td>Total</td>
-            <td class="amt-col">3,96,000</td>
-          </tr>
-        </table>
-      </div>
-      
-      <div class="working-notes" style="margin-bottom: 30px;">
-        <h4>Working Note (2024):</h4>
-        <ul>
-          <li><strong>Percentage of Completion:</strong> (Work Certified / Contract Price) × 100 = (15,00,000 / 20,00,000) × 100 = <strong>75%</strong>.</li>
-          <li>Since completion is between 50% and 90%, the formula for P&L transfer is:<br>
-          <strong>2/3 × Notional Profit × (Cash Received / Work Certified)</strong><br>
-          = 2/3 × 3,96,000 × (12,00,000 / 15,00,000) = <strong>₹ 2,11,200</strong>.</li>
-        </ul>
-      </div>
-
-      <h3>Contract Account for the Year 2025</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th style="width:50%;">Particulars (Dr.)</th>
-            <th>Amount (₹)</th>
-            <th style="width:50%;">Particulars (Cr.)</th>
-            <th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Work-in-Progress b/d (15,16,000 - 1,84,800)</td>
-            <td class="amt-col">13,31,200</td>
-            <td>By Plant at Site (closing)</td>
-            <td class="amt-col">10,000</td>
-          </tr>
-          <tr>
-            <td>To Plant at Site b/d</td>
-            <td class="amt-col">14,000</td>
-            <td>By Material at Site (closing)</td>
-            <td class="amt-col">14,000</td>
-          </tr>
-          <tr>
-            <td>To Material at Site b/d</td>
-            <td class="amt-col">10,000</td>
-            <td>By Contractee A/c (Contract Finished)</td>
-            <td class="amt-col">20,00,000</td>
-          </tr>
-          <tr>
-            <td>To Material Issued</td>
-            <td class="amt-col">1,68,000</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td>
-            <td class="amt-col">2,10,000</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>To Direct Expenses</td>
-            <td class="amt-col">20,000</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>To Indirect Expenses</td>
-            <td class="amt-col">2,800</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>To Plant Issued</td>
-            <td class="amt-col">4,000</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><strong>To Profit & Loss A/c (Net Profit)</strong></td>
-            <td class="amt-col"><strong>2,64,000</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td>
-            <td class="amt-col">20,24,000</td>
-            <td>Total</td>
-            <td class="amt-col">20,24,000</td>
-          </tr>
-        </table>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.8: Contract Costing (1 Year)</h2>
-      <p><strong>Problem:</strong> Contract Price = Rs. 20,00,000. Commenced 1st Jan, 2025. End date = 31-12-2025.<br>
-      Expenses: Material purchased: 6,00,000; Material from stores: 1,00,000; Wages: 2,25,000; Plant Issued: 75,000; Chargeable exp: 75,000; Apportioned indirect exp: 25,000.<br>
-      Work certified up to 30th Nov: 13,00,000. Cash received: 10,40,000.<br>
-      Work completed before 31st Dec but certified later (Uncertified): 60,000.<br>
-      Materials at site: 40,000. Plant at site on 31st Dec: 30,000.<br>
-      Prepare Contract Account.</p>
-
-      <h3>Solution: Contract Account for the year ended 31-12-2025</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th style="width:50%;">Particulars (Dr.)</th>
-            <th>Amount (₹)</th>
-            <th style="width:50%;">Particulars (Cr.)</th>
-            <th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Material Purchased</td>
-            <td class="amt-col">6,00,000</td>
-            <td>By Plant at Site c/d</td>
-            <td class="amt-col">30,000</td>
-          </tr>
-          <tr>
-            <td>To Material drawn from Stores</td>
-            <td class="amt-col">1,00,000</td>
-            <td>By Material at Site c/d</td>
-            <td class="amt-col">40,000</td>
-          </tr>
-          <tr>
-            <td>To Wages</td>
-            <td class="amt-col">2,25,000</td>
-            <td>By Work-in-Progress A/c:</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>To Plant Issued</td>
-            <td class="amt-col">75,000</td>
-            <td>&nbsp;&nbsp;&nbsp;- Work Certified</td>
-            <td class="amt-col">13,00,000</td>
-          </tr>
-          <tr>
-            <td>To Chargeable Expenses</td>
-            <td class="amt-col">75,000</td>
-            <td>&nbsp;&nbsp;&nbsp;- Work Uncertified</td>
-            <td class="amt-col">60,000</td>
-          </tr>
-          <tr>
-            <td>To Apportioned Indirect Expenses</td>
-            <td class="amt-col">25,000</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td><strong>To Notional Profit c/d</strong></td>
-            <td class="amt-col"><strong>3,30,000</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td>
-            <td class="amt-col">14,30,000</td>
-            <td>Total</td>
-            <td class="amt-col">14,30,000</td>
-          </tr>
-          <tr>
-            <td>To Profit & Loss A/c (Transfer)</td>
-            <td class="amt-col">1,76,000</td>
-            <td><strong>By Notional Profit b/d</strong></td>
-            <td class="amt-col"><strong>3,30,000</strong></td>
-          </tr>
-          <tr>
-            <td>To WIP Reserve (Balance)</td>
-            <td class="amt-col">1,54,000</td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td>
-            <td class="amt-col">3,30,000</td>
-            <td>Total</td>
-            <td class="amt-col">3,30,000</td>
-          </tr>
-        </table>
-      </div>
-      
-      <div class="working-notes" style="margin-bottom: 30px;">
-        <h4>Working Note:</h4>
-        <ul>
-          <li><strong>Percentage of Completion:</strong> (Work Certified / Contract Price) × 100 = (13,00,000 / 20,00,000) × 100 = <strong>65%</strong>.</li>
-          <li>Since completion is between 50% and 90%, the formula for P&L transfer is:<br>
-          <strong>2/3 × Notional Profit × (Cash Received / Work Certified)</strong><br>
-          = 2/3 × 3,30,000 × (10,40,000 / 13,00,000) = <strong>₹ 1,76,000</strong>.</li>
-        </ul>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.9: Process Costing</h2>
-      <p><strong>Problem:</strong> Prepare Process Accounts from the following. 1,000 units at ₹6 per unit were introduced in Process I. Production overheads to be distributed as 100% on direct wages.</p>
-      <div class="table-responsive">
-        <table>
-          <tr><th>Process</th><th>Material (₹)</th><th>Wages (₹)</th><th>Prod OH (₹)</th><th>Actual Output</th><th>Normal Loss</th><th>Scrap Value</th></tr>
-          <tr><td>Process I</td><td>8,200</td><td>4,000</td><td>4,000</td><td>950 units</td><td>5%</td><td>₹ 4</td></tr>
-          <tr><td>Process II</td><td>3,960</td><td>6,000</td><td>6,000</td><td>840 units</td><td>10%</td><td>₹ 8</td></tr>
-          <tr><td>Process III</td><td>5,924</td><td>8,000</td><td>8,000</td><td>750 units</td><td>15%</td><td>₹ 10</td></tr>
-        </table>
-      </div>
-
-      <h3>Solution: Process I Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Units Introduced (@ ₹6)</td><td class="unit-col">1,000</td><td class="amt-col">6,000</td>
-            <td>By Normal Loss (5% of 1000)</td><td class="unit-col">50</td><td class="amt-col">200</td>
-          </tr>
-          <tr>
-            <td>To Material</td><td class="unit-col"></td><td class="amt-col">8,200</td>
-            <td>By Transfer to Process II</td><td class="unit-col">950</td><td class="amt-col">22,000</td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td><td class="unit-col"></td><td class="amt-col">4,000</td>
-            <td><em>(@ ₹23.16 per unit)</em></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td>To Production Overhead</td><td class="unit-col"></td><td class="amt-col">4,000</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">1,000</td><td class="amt-col">22,200</td>
-            <td>Total</td><td class="unit-col">1,000</td><td class="amt-col">22,200</td>
-          </tr>
-        </table>
-      </div>
-
-      <h3>Process II Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Transfer from Process I</td><td class="unit-col">950</td><td class="amt-col">22,000</td>
-            <td>By Normal Loss (10% of 950)</td><td class="unit-col">95</td><td class="amt-col">760</td>
-          </tr>
-          <tr>
-            <td>To Material</td><td class="unit-col"></td><td class="amt-col">3,960</td>
-            <td>By Abnormal Loss A/c</td><td class="unit-col">15</td><td class="amt-col">653</td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td><td class="unit-col"></td><td class="amt-col">6,000</td>
-            <td>By Transfer to Process III</td><td class="unit-col">840</td><td class="amt-col">36,547</td>
-          </tr>
-          <tr>
-            <td>To Production Overhead</td><td class="unit-col"></td><td class="amt-col">6,000</td>
-            <td><em>(@ ₹43.51 per unit)</em></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">950</td><td class="amt-col">37,960</td>
-            <td>Total</td><td class="unit-col">950</td><td class="amt-col">37,960</td>
-          </tr>
-        </table>
-      </div>
-
-      <h3>Process III Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Transfer from Process II</td><td class="unit-col">840</td><td class="amt-col">36,547</td>
-            <td>By Normal Loss (15% of 840)</td><td class="unit-col">126</td><td class="amt-col">1,260</td>
-          </tr>
-          <tr>
-            <td>To Material</td><td class="unit-col"></td><td class="amt-col">5,924</td>
-            <td>By Transfer to Finished Goods</td><td class="unit-col">750</td><td class="amt-col">60,096</td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td><td class="unit-col"></td><td class="amt-col">8,000</td>
-            <td><em>(@ ₹80.13 per unit)</em></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td>To Production Overhead</td><td class="unit-col"></td><td class="amt-col">8,000</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td><strong>To Abnormal Gain A/c</strong></td><td class="unit-col"><strong>36</strong></td><td class="amt-col"><strong>2,885</strong></td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">876</td><td class="amt-col">61,356</td>
-            <td>Total</td><td class="unit-col">876</td><td class="amt-col">61,356</td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="working-notes" style="margin-bottom: 30px;">
-        <h4>Working Notes (Cost Per Unit Calculations):</h4>
-        <ul>
-          <li><strong>Formula:</strong> Cost per unit = (Total Cost - Scrap Value) / (Input Units - Normal Loss Units)</li>
-          <li><strong>Process I:</strong> (22,200 - 200) / (1,000 - 50) = 22,000 / 950 = <strong>₹ 23.157...</strong></li>
-          <li><strong>Process II:</strong> (37,960 - 760) / (950 - 95) = 37,200 / 855 = <strong>₹ 43.508...</strong><br>
-          <em>Abnormal Loss Units = Expected (855) - Actual (840) = 15 units. Value = 15 × 43.508 = ₹ 653.</em></li>
-          <li><strong>Process III:</strong> (58,471 - 1,260) / (840 - 126) = 57,211 / 714 = <strong>₹ 80.127...</strong><br>
-          <em>Abnormal Gain Units = Actual (750) - Expected (714) = 36 units. Value = 36 × 80.127 = ₹ 2,885.</em></li>
-        </ul>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.10: Process Costing (Product P)</h2>
-      <p><strong>Problem:</strong> 1,000 units @ ₹5 each issued to Process 1. Production overhead allocated at 50% of direct labour.</p>
-      <div class="table-responsive">
-        <table>
-          <tr><th>Process</th><th>Mat (₹)</th><th>Lab (₹)</th><th>Dir Exp (₹)</th><th>Output</th><th>Norm. Loss</th><th>Scrap/u</th></tr>
-          <tr><td>Process 1</td><td>2,000</td><td>3,000</td><td>500</td><td>920 u</td><td>10%</td><td>₹ 3</td></tr>
-          <tr><td>Process 2</td><td>3,020</td><td>4,000</td><td>226</td><td>870 u</td><td>5%</td><td>₹ 5</td></tr>
-          <tr><td>Process 3</td><td>3,462</td><td>5,000</td><td>-</td><td>800 u</td><td>10%</td><td>₹ 6</td></tr>
-        </table>
-      </div>
-
-      <h3>Solution: Process 1 Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Units Introduced (@ ₹5)</td><td class="unit-col">1,000</td><td class="amt-col">5,000</td>
-            <td>By Normal Loss (10% of 1000)</td><td class="unit-col">100</td><td class="amt-col">300</td>
-          </tr>
-          <tr>
-            <td>To Direct Materials</td><td class="unit-col"></td><td class="amt-col">2,000</td>
-            <td>By Transfer to Process 2</td><td class="unit-col">920</td><td class="amt-col">11,960</td>
-          </tr>
-          <tr>
-            <td>To Direct Labour</td><td class="unit-col"></td><td class="amt-col">3,000</td>
-            <td><em>(@ ₹13 per unit)</em></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td>To Direct Expenses</td><td class="unit-col"></td><td class="amt-col">500</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td>To Production OH (50% of Lab)</td><td class="unit-col"></td><td class="amt-col">1,500</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td><strong>To Abnormal Gain A/c</strong></td><td class="unit-col"><strong>20</strong></td><td class="amt-col"><strong>260</strong></td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">1,020</td><td class="amt-col">12,260</td>
-            <td>Total</td><td class="unit-col">1,020</td><td class="amt-col">12,260</td>
-          </tr>
-        </table>
-      </div>
-
-      <h3>Process 2 Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Transfer from Process 1</td><td class="unit-col">920</td><td class="amt-col">11,960</td>
-            <td>By Normal Loss (5% of 920)</td><td class="unit-col">46</td><td class="amt-col">230</td>
-          </tr>
-          <tr>
-            <td>To Direct Materials</td><td class="unit-col"></td><td class="amt-col">3,020</td>
-            <td>By Abnormal Loss A/c</td><td class="unit-col">4</td><td class="amt-col">96</td>
-          </tr>
-          <tr>
-            <td>To Direct Labour</td><td class="unit-col"></td><td class="amt-col">4,000</td>
-            <td>By Transfer to Process 3</td><td class="unit-col">870</td><td class="amt-col">20,880</td>
-          </tr>
-          <tr>
-            <td>To Direct Expenses</td><td class="unit-col"></td><td class="amt-col">226</td>
-            <td><em>(@ ₹24 per unit)</em></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td>To Production OH (50% of Lab)</td><td class="unit-col"></td><td class="amt-col">2,000</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">920</td><td class="amt-col">21,206</td>
-            <td>Total</td><td class="unit-col">920</td><td class="amt-col">21,206</td>
-          </tr>
-        </table>
-      </div>
-
-      <h3>Process 3 Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Units</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Transfer from Process 2</td><td class="unit-col">870</td><td class="amt-col">20,880</td>
-            <td>By Normal Loss (10% of 870)</td><td class="unit-col">87</td><td class="amt-col">522</td>
-          </tr>
-          <tr>
-            <td>To Direct Materials</td><td class="unit-col"></td><td class="amt-col">3,462</td>
-            <td>By Transfer to Finished Goods</td><td class="unit-col">800</td><td class="amt-col">32,000</td>
-          </tr>
-          <tr>
-            <td>To Direct Labour</td><td class="unit-col"></td><td class="amt-col">5,000</td>
-            <td><em>(@ ₹40 per unit)</em></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td>To Production OH (50% of Lab)</td><td class="unit-col"></td><td class="amt-col">2,500</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td><strong>To Abnormal Gain A/c</strong></td><td class="unit-col"><strong>17</strong></td><td class="amt-col"><strong>680</strong></td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">887</td><td class="amt-col">32,522</td>
-            <td>Total</td><td class="unit-col">887</td><td class="amt-col">32,522</td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="working-notes" style="margin-bottom: 30px;">
-        <h4>Working Notes (Cost Per Unit Calculations):</h4>
-        <ul>
-          <li><strong>Process 1:</strong> (12,000 - 300) / (1,000 - 100) = 11,700 / 900 = <strong>₹ 13 per unit.</strong><br>
-          <em>Expected Output = 900. Actual = 920. Abnormal Gain = 20 units (Value: 20 × 13 = ₹ 260).</em></li>
-          
-          <li><strong>Process 2:</strong> (21,206 - 230) / (920 - 46) = 20,976 / 874 = <strong>₹ 24 per unit.</strong><br>
-          <em>Expected Output = 874. Actual = 870. Abnormal Loss = 4 units (Value: 4 × 24 = ₹ 96).</em></li>
-          
-          <li><strong>Process 3:</strong> (31,842 - 522) / (870 - 87) = 31,320 / 783 = <strong>₹ 40 per unit.</strong><br>
-          <em>Expected Output = 783. Actual = 800. Abnormal Gain = 17 units (Value: 17 × 40 = ₹ 680).</em></li>
-        </ul>
-      </div>
-  <h2>Q.11: Process Costing with Sale & Transfer</h2>
-      <p><strong>Problem:</strong> S Limited manufacture and sell three Fertilizers. Details:</p>
-      <div class="table-responsive">
-        <table>
-          <tr><th>Particulars</th><th>Process A</th><th>Process B</th><th>Process C</th></tr>
-          <tr><td>Raw Materials (Tons)</td><td class="unit-col">200</td><td class="unit-col">71</td><td class="unit-col">264</td></tr>
-          <tr><td>Cost per ton (₹)</td><td class="unit-col">100</td><td class="unit-col">300</td><td class="unit-col">250</td></tr>
-          <tr><td>Direct Wages (₹)</td><td class="unit-col">8,000</td><td class="unit-col">3,490</td><td class="unit-col">2,850</td></tr>
-          <tr><td>Direct Expenses (₹)</td><td class="unit-col">2,520</td><td class="unit-col">2,400</td><td class="unit-col">3,820</td></tr>
-          <tr><td>Finished Product sold (%)</td><td class="unit-col">25%</td><td class="unit-col">50%</td><td class="unit-col">100%</td></tr>
-          <tr><td>Transferred to next process (%)</td><td class="unit-col">75%</td><td class="unit-col">50%</td><td class="unit-col">-</td></tr>
-          <tr><td>Sale of scrap per ton (₹)</td><td class="unit-col">80</td><td class="unit-col">100</td><td class="unit-col">120</td></tr>
-        </table>
-      </div>
-      <p>In each process, 6% of total weight is lost and 8% is scrap. Sales are made to show a gross profit of 20% on process cost. Prepare process cost accounts.</p>
-
-      <h3>Solution: Process A Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Tons</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Tons</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Raw Materials (200 x 100)</td><td class="unit-col">200</td><td class="amt-col">20,000</td>
-            <td>By Weight Lost (6% of 200)</td><td class="unit-col">12</td><td class="amt-col">-</td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td><td class="unit-col"></td><td class="amt-col">8,000</td>
-            <td>By Sale of Scrap (8% of 200) @ ₹80</td><td class="unit-col">16</td><td class="amt-col">1,280</td>
-          </tr>
-          <tr>
-            <td>To Direct Expenses</td><td class="unit-col"></td><td class="amt-col">2,520</td>
-            <td>By Transfer to Process B (75%)</td><td class="unit-col">129</td><td class="amt-col">21,930</td>
-          </tr>
-          <tr>
-            <td>To Profit on Sale (20% on Cost)</td><td class="unit-col"></td><td class="amt-col">1,462</td>
-            <td>By Sales A/c (25%)</td><td class="unit-col">43</td><td class="amt-col">8,772</td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">200</td><td class="amt-col">31,982</td>
-            <td>Total</td><td class="unit-col">200</td><td class="amt-col">31,982</td>
-          </tr>
-        </table>
-      </div>
-      
-      <div class="working-notes" style="margin-bottom: 20px;">
-        <h4>Working Note (Process A):</h4>
-        <ul>
-          <li><strong>Total Input:</strong> 200 tons. Good Output = 200 - 12 (loss) - 16 (scrap) = <strong>172 tons</strong>.</li>
-          <li><strong>Total Cost:</strong> ₹30,520 - ₹1,280 (Scrap value) = ₹29,240. </li>
-          <li><strong>Cost per ton:</strong> 29,240 / 172 = <strong>₹170 per ton</strong>.</li>
-          <li><strong>Transferred (75%):</strong> 129 tons × ₹170 = ₹21,930.</li>
-          <li><strong>Sold (25%):</strong> Cost of 43 tons = ₹7,310. Profit (20%) = ₹1,462. Sales Value = ₹8,772.</li>
-        </ul>
-      </div>
-
-      <h3>Process B Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Tons</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Tons</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Transfer from Process A</td><td class="unit-col">129</td><td class="amt-col">21,930</td>
-            <td>By Weight Lost (6% of 200)</td><td class="unit-col">12</td><td class="amt-col">-</td>
-          </tr>
-          <tr>
-            <td>To Raw Materials (71 x 300)</td><td class="unit-col">71</td><td class="amt-col">21,300</td>
-            <td>By Sale of Scrap (8% of 200) @ ₹100</td><td class="unit-col">16</td><td class="amt-col">1,600</td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td><td class="unit-col"></td><td class="amt-col">3,490</td>
-            <td>By Transfer to Process C (50%)</td><td class="unit-col">86</td><td class="amt-col">23,760</td>
-          </tr>
-          <tr>
-            <td>To Direct Expenses</td><td class="unit-col"></td><td class="amt-col">2,400</td>
-            <td>By Sales A/c (50%)</td><td class="unit-col">86</td><td class="amt-col">28,512</td>
-          </tr>
-          <tr>
-            <td>To Profit on Sale (20% on Cost)</td><td class="unit-col"></td><td class="amt-col">4,752</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">200</td><td class="amt-col">53,872</td>
-            <td>Total</td><td class="unit-col">200</td><td class="amt-col">53,872</td>
-          </tr>
-        </table>
-      </div>
-
-      <div class="working-notes" style="margin-bottom: 20px;">
-        <h4>Working Note (Process B):</h4>
-        <ul>
-          <li><strong>Total Input:</strong> 129 + 71 = 200 tons. Good Output = 200 - 12 - 16 = <strong>172 tons</strong>.</li>
-          <li><strong>Total Cost:</strong> 21,930 + 21,300 + 3,490 + 2,400 = ₹49,120. Net Cost = 49,120 - 1,600 = <strong>₹47,520</strong>.</li>
-          <li><strong>Transferred (50%):</strong> Half of 47,520 = <strong>₹23,760</strong> (for 86 tons).</li>
-          <li><strong>Sold (50%):</strong> Cost of 86 tons = ₹23,760. Profit (20%) = ₹4,752. Sales Value = ₹28,512.</li>
-        </ul>
-      </div>
-
-      <h3>Process C Account</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th><th>Tons</th><th>Amount (₹)</th>
-            <th>Particulars</th><th>Tons</th><th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td>To Transfer from Process B</td><td class="unit-col">86</td><td class="amt-col">23,760</td>
-            <td>By Weight Lost (6% of 350)</td><td class="unit-col">21</td><td class="amt-col">-</td>
-          </tr>
-          <tr>
-            <td>To Raw Materials (264 x 250)</td><td class="unit-col">264</td><td class="amt-col">66,000</td>
-            <td>By Sale of Scrap (8% of 350) @ ₹120</td><td class="unit-col">28</td><td class="amt-col">3,360</td>
-          </tr>
-          <tr>
-            <td>To Direct Wages</td><td class="unit-col"></td><td class="amt-col">2,850</td>
-            <td>By Sales A/c (100%)</td><td class="unit-col">301</td><td class="amt-col">1,11,684</td>
-          </tr>
-          <tr>
-            <td>To Direct Expenses</td><td class="unit-col"></td><td class="amt-col">3,820</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr>
-            <td>To Profit on Sale (20% on Cost)</td><td class="unit-col"></td><td class="amt-col">18,614</td>
-            <td></td><td class="unit-col"></td><td class="amt-col"></td>
-          </tr>
-          <tr class="total-row">
-            <td>Total</td><td class="unit-col">350</td><td class="amt-col">1,15,044</td>
-            <td>Total</td><td class="unit-col">350</td><td class="amt-col">1,15,044</td>
-          </tr>
-        </table>
-      </div>
-      
-      <div class="working-notes" style="margin-bottom: 40px;">
-        <h4>Working Note (Process C):</h4>
-        <ul>
-          <li><strong>Total Input:</strong> 86 + 264 = 350 tons. Good Output = 350 - 21 - 28 = <strong>301 tons</strong>.</li>
-          <li><strong>Total Cost:</strong> 23,760 + 66,000 + 2,850 + 3,820 = ₹96,430. Net Cost = 96,430 - 3,360 = <strong>₹93,070</strong>.</li>
-          <li><strong>Sold (100%):</strong> Cost of 301 tons = ₹93,070. Profit (20%) = ₹18,614. Sales Value = ₹1,11,684.</li>
-        </ul>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.12: Calculation of Factory Cost</h2>
-      <p><strong>Problem:</strong> Calculate factory cost from the following information:</p>
-      <ul>
-        <li>Stock of Materials (Op: 25,000 | Cl: 10,000)</li>
-        <li>WIP (Op: 10,000 | Cl: 4,000)</li>
-        <li>Purchases: 1,00,000</li>
-        <li>Direct Labour: 40,000</li>
-        <li>Direct Expenses: 20,000</li>
-        <li>Factory Expenses: 20,000</li>
-        <li><em>(Note: Office Expenses and Closing Stock of FG are given but should be ignored for calculating Factory Cost).</em></li>
-      </ul>
-
-      <h3>Solution: Statement showing Factory Cost</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th>
-            <th>Amount (₹)</th>
-            <th>Amount (₹)</th>
-          </tr>
-          <tr>
-            <td><strong>Direct Materials Consumed:</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Opening Stock of Materials</td>
-            <td class="amt-col">25,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Add: Purchases</td>
-            <td class="amt-col">1,00,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Less: Closing Stock of Materials</td>
-            <td class="amt-col">(10,000)</td>
-            <td class="amt-col">1,15,000</td>
-          </tr>
-          <tr>
-            <td>Direct Labour</td>
-            <td></td>
-            <td class="amt-col">40,000</td>
-          </tr>
-          <tr>
-            <td>Direct Expenses</td>
-            <td></td>
-            <td class="amt-col">20,000</td>
-          </tr>
-          <tr class="bold-row">
-            <td>Prime Cost</td>
-            <td></td>
-            <td class="amt-col">1,75,000</td>
-          </tr>
-          <tr>
-            <td>Add: Factory Expenses (Overheads)</td>
-            <td></td>
-            <td class="amt-col">20,000</td>
-          </tr>
-          <tr>
-            <td><strong>Gross Factory Cost</strong></td>
-            <td></td>
-            <td class="amt-col">1,95,000</td>
-          </tr>
-          <tr>
-            <td>Add: Opening Work-in-Progress</td>
-            <td class="amt-col">10,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>Less: Closing Work-in-Progress</td>
-            <td class="amt-col">(4,000)</td>
-            <td class="amt-col">6,000</td>
-          </tr>
-          <tr class="total-row">
-            <td>Net Factory Cost</td>
-            <td></td>
-            <td class="amt-col">2,01,000</td>
-          </tr>
-        </table>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.13: Cost Sheet & Selling Price Calculation</h2>
-      <p><strong>Problem:</strong> A factory produces 100 units of a commodity. Cost of production is: Direct materials: ₹10,000, Direct Wages: ₹5,000, Direct Expenses: ₹1,000, Factory Overheads: ₹6,500, Administrative Overheads: ₹3,480. Profit of 25% on sales is to be realized. Prepare the cost sheet and find selling price of each commodity.</p>
-
-      <h3>Solution: Cost Sheet (Output: 100 Units)</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th>
-            <th>Total Cost (₹)</th>
-            <th>Cost Per Unit (₹)</th>
-          </tr>
-          <tr>
-            <td>Direct Materials</td>
-            <td class="amt-col">10,000</td>
-            <td class="amt-col">100.00</td>
-          </tr>
-          <tr>
-            <td>Direct Wages</td>
-            <td class="amt-col">5,000</td>
-            <td class="amt-col">50.00</td>
-          </tr>
-          <tr>
-            <td>Direct Expenses</td>
-            <td class="amt-col">1,000</td>
-            <td class="amt-col">10.00</td>
-          </tr>
-          <tr class="bold-row">
-            <td>Prime Cost</td>
-            <td class="amt-col">16,000</td>
-            <td class="amt-col">160.00</td>
-          </tr>
-          <tr>
-            <td>Add: Factory Overheads</td>
-            <td class="amt-col">6,500</td>
-            <td class="amt-col">65.00</td>
-          </tr>
-          <tr class="bold-row">
-            <td>Works Cost</td>
-            <td class="amt-col">22,500</td>
-            <td class="amt-col">225.00</td>
-          </tr>
-          <tr>
-            <td>Add: Administrative Overheads</td>
-            <td class="amt-col">3,480</td>
-            <td class="amt-col">34.80</td>
-          </tr>
-          <tr class="bold-row">
-            <td>Cost of Production / Total Cost</td>
-            <td class="amt-col">25,980</td>
-            <td class="amt-col">259.80</td>
-          </tr>
-          <tr>
-            <td>Add: Profit (1/3 of Cost)</td>
-            <td class="amt-col">8,660</td>
-            <td class="amt-col">86.60</td>
-          </tr>
-          <tr class="total-row">
-            <td>Sales</td>
-            <td class="amt-col">34,640</td>
-            <td class="amt-col">346.40</td>
-          </tr>
-        </table>
-      </div>
-      
-      <div class="working-notes" style="margin-bottom: 30px;">
-        <h4>Working Note (Profit Calculation):</h4>
-        <ul>
-          <li>Profit is desired at <strong>25% on Sales</strong>.</li>
-          <li>We know: If Profit is 1/4 (25%) on Sales, it equals <strong>1/3 (33.33%) on Cost</strong>.</li>
-          <li>Profit = 1/3 of ₹25,980 = <strong>₹8,660</strong>.</li>
-          <li>Selling price of each commodity = Total Sales / 100 units = 34,640 / 100 = <strong>₹346.40</strong>.</li>
-        </ul>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.14: Apportionment of Overheads & Cost Sheet</h2>
-      <p><strong>Problem:</strong> A factory produces 200 units of A and 400 units of B. Costs: <br>
-      Direct Mat: A (24,000), B (20,000)<br>
-      Direct Wages: A (16,000), B (2,000)<br>
-      Chargeable Exp: A (10,000), B (2,000)<br>
-      Overheads: Factory = 13,000; Office = 6,960. Profit is 25% on sales. Find Selling Price of each article.</p>
-
-      <h3>Solution: Cost Sheet for Product A and B</h3>
-      <div class="working-notes" style="margin-bottom: 20px;">
-        <h4>Working Note for Apportionment of Overheads:</h4>
-        <ul>
-          <li><strong>Factory Overheads (₹13,000):</strong> Apportioned on the basis of Direct Wages. Ratio of A : B = 16,000 : 2,000 = <strong>8 : 1</strong>.<br>
-          A's share = 13,000 × (8/9) = ₹11,555.56 | B's share = 13,000 × (1/9) = ₹1,444.44.</li>
-          <li><strong>Office Overheads (₹6,960):</strong> Apportioned on the basis of Works Cost. Total Works Cost = 61,555.56 (A) + 25,444.44 (B) = 87,000.<br>
-          Office OH rate = (6,960 / 87,000) × 100 = <strong>8% of Works Cost</strong>.</li>
-        </ul>
-      </div>
-
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th rowspan="2">Particulars</th>
-            <th colspan="2">Product A (200 Units)</th>
-            <th colspan="2">Product B (400 Units)</th>
-          </tr>
-          <tr>
-            <th>Total (₹)</th>
-            <th>Per Unit (₹)</th>
-            <th>Total (₹)</th>
-            <th>Per Unit (₹)</th>
-          </tr>
-          <tr>
-            <td>Direct Materials</td>
-            <td class="amt-col">24,000.00</td>
-            <td class="amt-col">120.00</td>
-            <td class="amt-col">20,000.00</td>
-            <td class="amt-col">50.00</td>
-          </tr>
-          <tr>
-            <td>Direct Wages</td>
-            <td class="amt-col">16,000.00</td>
-            <td class="amt-col">80.00</td>
-            <td class="amt-col">2,000.00</td>
-            <td class="amt-col">5.00</td>
-          </tr>
-          <tr>
-            <td>Chargeable Expenses</td>
-            <td class="amt-col">10,000.00</td>
-            <td class="amt-col">50.00</td>
-            <td class="amt-col">2,000.00</td>
-            <td class="amt-col">5.00</td>
-          </tr>
-          <tr class="bold-row">
-            <td>Prime Cost</td>
-            <td class="amt-col">50,000.00</td>
-            <td class="amt-col">250.00</td>
-            <td class="amt-col">24,000.00</td>
-            <td class="amt-col">60.00</td>
-          </tr>
-          <tr>
-            <td>Add: Factory Overheads (Ratio 8:1)</td>
-            <td class="amt-col">11,555.56</td>
-            <td class="amt-col">57.78</td>
-            <td class="amt-col">1,444.44</td>
-            <td class="amt-col">3.61</td>
-          </tr>
-          <tr class="bold-row">
-            <td>Works Cost</td>
-            <td class="amt-col">61,555.56</td>
-            <td class="amt-col">307.78</td>
-            <td class="amt-col">25,444.44</td>
-            <td class="amt-col">63.61</td>
-          </tr>
-          <tr>
-            <td>Add: Office Overheads (8% of Works Cost)</td>
-            <td class="amt-col">4,924.44</td>
-            <td class="amt-col">24.62</td>
-            <td class="amt-col">2,035.56</td>
-            <td class="amt-col">5.09</td>
-          </tr>
-          <tr class="bold-row">
-            <td>Total Cost</td>
-            <td class="amt-col">66,480.00</td>
-            <td class="amt-col">332.40</td>
-            <td class="amt-col">27,480.00</td>
-            <td class="amt-col">68.70</td>
-          </tr>
-          <tr>
-            <td>Add: Profit (1/3 of Total Cost)</td>
-            <td class="amt-col">22,160.00</td>
-            <td class="amt-col">110.80</td>
-            <td class="amt-col">9,160.00</td>
-            <td class="amt-col">22.90</td>
-          </tr>
-          <tr class="total-row">
-            <td>Sales</td>
-            <td class="amt-col">88,640.00</td>
-            <td class="amt-col">443.20</td>
-            <td class="amt-col">36,640.00</td>
-            <td class="amt-col">91.60</td>
-          </tr>
-        </table>
-      </div>
-
-      <hr style="margin: 40px 0; border: 1px dashed var(--table-border);">
-
-      <h2>Q.15: Reconciliation of Cost and Financial Records</h2>
-      <p><strong>Problem:</strong> Prepare a statement reconciling profit as per Cost Records with profit as per Financial Records.</p>
-      <div class="table-responsive">
-        <table>
-          <tr><th>Particulars</th><th>Cost Records (₹)</th><th>Financial Records (₹)</th></tr>
-          <tr><td>Stores Consumed</td><td class="amt-col">2,00,000</td><td class="amt-col">2,02,000</td></tr>
-          <tr><td>Works on Cost / Expenses</td><td class="amt-col">75,000</td><td class="amt-col">80,500</td></tr>
-          <tr><td>Office on Cost / Expenses</td><td class="amt-col">42,700</td><td class="amt-col">37,000</td></tr>
-          <tr><td>Net Profit</td><td class="amt-col">97,500</td><td class="amt-col">95,700</td></tr>
-        </table>
-      </div>
-
-      <h3>Solution: Reconciliation Statement</h3>
-      <div class="table-responsive">
-        <table>
-          <tr>
-            <th>Particulars</th>
-            <th>Amount (₹)</th>
-            <th>Amount (₹)</th>
-          </tr>
-          <tr class="bold-row">
-            <td>Net Profit as per Cost Records</td>
-            <td></td>
-            <td class="amt-col">97,500</td>
-          </tr>
-          <tr>
-            <td><strong>Add: Incomes/Gains not recorded in Cost or Over-recoveries</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1. Office Overheads over-recovered in Cost (42,700 - 37,000)</td>
-            <td class="amt-col">5,700</td>
-            <td class="amt-col">5,700</td>
-          </tr>
-          <tr>
-            <td></td>
-            <td></td>
-            <td class="amt-col"><strong>1,03,200</strong></td>
-          </tr>
-          <tr>
-            <td><strong>Less: Expenses/Losses charged more in Financial A/c or Under-recoveries</strong></td>
-            <td></td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>1. Stores Consumed under-charged in Cost (2,02,000 - 2,00,000)</td>
-            <td class="amt-col">2,000</td>
-            <td></td>
-          </tr>
-          <tr>
-            <td>2. Works Overheads under-recovered in Cost (80,500 - 75,000)</td>
-            <td class="amt-col">5,500</td>
-            <td class="amt-col">(7,500)</td>
-          </tr>
-          <tr class="total-row">
-            <td>Net Profit as per Financial Records</td>
-            <td></td>
-            <td class="amt-col">95,700</td>
-          </tr>
-        </table>
-      </div>
-
+  <header class="top-bar">
+    <h1 class="title">BirlaOne</h1>
+    <div class="controls">
+        <div class="custom-select">
+            <select id="lengthSelect" onchange="changeLength(this.value)" aria-label="Select Answer Length">
+             <option value="long">Long (Pura)</option>
+              <option value="medium">Medium (Thoda bahut)</option>
+              <option value="short">Short (Thoda sa)</option>
+            </select>
+        </div>
+        <div class="custom-select">
+            <select id="themeSelect" onchange="changeTheme(this.value)" aria-label="Select theme">
+              <option value="light">Light Theme</option>
+              <option value="dark">Dark Theme</option>
+              <option value="sepia">Sepia Theme</option>
+            </select>
+        </div>
     </div>
-  </div>
+  </header>
 
+  <main class="container" id="main-content-wrapper"></main>
+
+<script>
+    function changeTheme(theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+        const themeColors = { light: '#f0f9ff', dark: '#0f172a', sepia: '#f4ecd8' };
+        const metaTag = document.getElementById('theme-color-meta');
+        if (metaTag) { metaTag.setAttribute('content', themeColors[theme]); }
+    }
+    
+    let currentLength = 'long';
+    function changeLength(length) {
+        currentLength = length;
+        renderQuestionBank();
+    }
+
+    const qbData = [
+        { section: "Model 1: Fundamentals of Cyber Security" },
+        {
+            title: "Q1. Define Cyber security with its application and example.",
+            content: {
+                short: `
+                    <p>Cyber Security is the practice of protecting computers, networks, systems, and data from unauthorized access, cyber-attacks, damage, or theft.</p>
+                    <h3>Applications:</h3>
+                    <ul>
+                        <li><strong>Network Security:</strong> Firewalls, IDS, IPS.</li>
+                        <li><strong>Information Security:</strong> Encrypting confidential files.</li>
+                        <li><strong>Application Security:</strong> Secure login systems in apps.</li>
+                        <li><strong>Cloud Security:</strong> 2FA in Google Drive or AWS.</li>
+                        <li><strong>Cyber Crime Prevention:</strong> Antivirus software.</li>
+                        <li><strong>Critical Infrastructure Protection:</strong> Protecting hospital databases.</li>
+                    </ul>`,
+                medium: `
+                    <p>Cyber Security is the practice of protecting computers, networks, systems, and data from unauthorized access, cyber-attacks, damage, or theft. It uses technologies like firewalls, antivirus, and encryption to ensure data confidentiality, integrity, and availability.</p>
+                    <h3>Applications of Cyber Security:</h3>
+                    <ul>
+                        <li><strong>Network Security:</strong> Protects networks from unauthorized access. <em>Example: Firewalls to block suspicious activities.</em></li>
+                        <li><strong>Information Security:</strong> Protects data from modification or destruction. <em>Example: Encrypting confidential company files.</em></li>
+                        <li><strong>Application Security:</strong> Secures software during development. <em>Example: Secure logins in mobile banking.</em></li>
+                        <li><strong>Cloud Security:</strong> Protects data on cloud platforms. <em>Example: 2FA on Google Drive.</em></li>
+                        <li><strong>Cyber Crime Prevention:</strong> Detecting and responding to fraud. <em>Example: Antivirus blocking malware.</em></li>
+                        <li><strong>Critical Infrastructure Protection:</strong> Securing power grids and hospitals. <em>Example: Protecting patient records.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Cyber Security is the practice of protecting computers, networks, systems, and data from unauthorized access, cyber-attacks, damage, or theft. It ensures that digital information remains secure and accessible only to authorized users. Cyber security uses technologies such as firewalls, antivirus software, intrusion detection systems, and encryption to protect systems and data. It also involves processes like access control, regular software updates, and data backups. These measures help prevent threats such as hacking, malware, phishing, and data breaches. Cyber security is essential for safeguarding personal, organizational, and government information. Overall, it maintains the confidentiality, integrity, and availability of information in the digital environment.</p>
+                    <h3>Applications of Cyber Security</h3>
+                    <ul>
+                        <li><strong>1. Network Security:</strong> Network security focuses on protecting computer networks from unauthorized access, misuse, and cyber-attacks. It ensures safe communication and data transfer within an organization.<br><em>Example: Firewalls, Intrusion Detection Systems (IDS), and Intrusion Prevention Systems (IPS) used in organizations to monitor and block suspicious network activities.</em></li>
+                        <li><strong>2. Information Security:</strong> Information security protects data from unauthorized access, modification, or destruction while ensuring confidentiality, integrity, and availability. It safeguards both digital and physical information.<br><em>Example: Encrypting confidential files in a company database to prevent data leakage.</em></li>
+                        <li><strong>3. Application Security:</strong> Application security involves securing software and applications throughout their development and usage lifecycle. It helps prevent vulnerabilities that attackers can exploit.<br><em>Example: Secure login systems, authentication, and regular updates in mobile banking applications.</em></li>
+                        <li><strong>4. Cloud Security:</strong> Cloud security protects data, applications, and services hosted on cloud platforms from cyber threats. It ensures secure access and data privacy in cloud environments.<br><em>Example: Two-factor authentication (2FA) and encryption used in cloud services like Google Drive or AWS.</em></li>
+                        <li><strong>5. Cyber Crime Prevention:</strong> Cyber security plays a vital role in detecting, preventing, and responding to cyber-crimes such as hacking, fraud, and identity theft.<br><em>Example: Antivirus and anti-malware software that detect and block malicious programs.</em></li>
+                        <li><strong>6. Critical Infrastructure Protection:</strong> This application focuses on securing essential systems such as power grids, banking networks, transportation, and healthcare systems from cyber attacks.<br><em>Example: Protecting hospital databases to ensure the safety and privacy of patient records.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q2. Differentiate between black hat and white hat hackers with example.",
+            content: {
+                short: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Black Hat Hackers</th><th>White Hat Hackers</th></tr></thead>
+                            <tbody>
+                                <tr><td>Break into systems illegally for malicious purposes.</td><td>Test systems legally to improve security.</td></tr>
+                                <tr><td>Violate cyber laws and ethical standards.</td><td>Work within legal and ethical boundaries.</td></tr>
+                                <tr><td>Example: Stealing banking info using malware.</td><td>Example: Performing penetration testing for a company.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Black Hat Hackers</th><th>White Hat Hackers</th></tr></thead>
+                            <tbody>
+                                <tr><td>Individuals who illegally break into computer systems for malicious purposes to steal data or cause damage.</td><td>Ethical professionals who test systems legally to improve security and identify vulnerabilities.</td></tr>
+                                <tr><td>They violate cyber laws and exploit security weaknesses for personal or financial gain.</td><td>They work within legal boundaries and help organizations fix security flaws before attackers exploit them.</td></tr>
+                                <tr><td>Their activities result in data breaches, financial loss, and system damage.</td><td>Their activities improve system security and prevent cyber-attacks.</td></tr>
+                                <tr><td><em>Example: A hacker stealing banking information using malware.</em></td><td><em>Example: An ethical hacker performing penetration testing for a company.</em></td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Black Hat Hackers</th><th>White Hat Hackers</th></tr></thead>
+                            <tbody>
+                                <tr><td>Black hat hackers are individuals who illegally break into computer systems for malicious purposes.</td><td>White hat hackers are ethical professionals who test systems legally to improve security.</td></tr>
+                                <tr><td>Their intention is to steal data, cause damage, or gain unauthorized access.</td><td>Their intention is to identify vulnerabilities and protect systems from attacks.</td></tr>
+                                <tr><td>They violate cyber laws and ethical standards.</td><td>They work within legal and ethical boundaries.</td></tr>
+                                <tr><td>They exploit security weaknesses for personal or financial gain.</td><td>They help organizations fix security flaws before attackers exploit them.</td></tr>
+                                <tr><td>Their activities result in data breaches, financial loss, and system damage.</td><td>Their activities improve system security and prevent cyber-attacks.</td></tr>
+                                <tr><td><strong>Example:</strong> A hacker stealing banking information using malware.</td><td><strong>Example:</strong> An ethical hacker performing penetration testing for a company.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`
+            }
+        },
+        {
+            title: "Q3. Describe phishing attack with example.",
+            content: {
+                short: `
+                    <p>Phishing is when attackers deceive users into sharing sensitive information by pretending to be trusted entities.</p>
+                    <h3>Types:</h3>
+                    <ul>
+                        <li><strong>Email Phishing:</strong> Fake emails requesting account updates.</li>
+                        <li><strong>Website Phishing:</strong> Fake login pages.</li>
+                        <li><strong>SMS Phishing (Smishing):</strong> Fake text message alerts.</li>
+                        <li><strong>Voice Phishing (Vishing):</strong> Fake phone calls asking for OTP.</li>
+                        <li><strong>Social Media Phishing:</strong> Fake profile links.</li>
+                    </ul>`,
+                medium: `
+                    <p>Phishing is a dangerous cyberattack where attackers deceive users into sharing sensitive information (passwords, OTPs, bank details) by pretending to be trusted organizations. They use fear or urgency to rush users into clicking bad links.</p>
+                    <h3>Types of Phishing:</h3>
+                    <ul>
+                        <li><strong>Email Phishing:</strong> Fraudulent emails from "banks" asking to verify details. <em>Example: Fake bank email with a malicious link.</em></li>
+                        <li><strong>Website Phishing:</strong> Fake websites built to capture credentials. <em>Example: A fake Google login page.</em></li>
+                        <li><strong>SMS Phishing (Smishing):</strong> Deceptive text messages. <em>Example: "Account blocked, click here" SMS.</em></li>
+                        <li><strong>Voice Phishing (Vishing):</strong> Phone calls from impersonators. <em>Example: Fake bank staff asking for your OTP.</em></li>
+                        <li><strong>Social Media Phishing:</strong> Targets users via platforms like Facebook. <em>Example: Fake giveaway link leading to account theft.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Phishing is a common and dangerous cyberattack in which attackers deceive users into sharing sensitive information such as usernames, passwords, credit card numbers, bank details, or one-time passwords (OTPs). The attackers pretend to be trusted organizations or individuals, such as banks, government agencies, online services, or well-known companies, to gain the victim's trust. These attacks are typically carried out through fake emails, text messages, websites, social media messages, or phone calls that closely resemble legitimate communication. To increase the success of the attack, phishing messages are often designed to create a sense of urgency or fear, such as warnings about account suspension, security breaches, or unexpected rewards and prizes. This psychological pressure pushes users to act quickly without verifying the source. When users click on malicious links or enter their personal details on fake websites, the attackers secretly capture the information. The stolen data is then used for financial fraud, identity theft, unauthorized account access, or further cyberattacks, causing serious personal and organizational losses.</p>
+                    <h3>Some of the phishing attacks:</h3>
+                    <ul>
+                        <li><strong>1. Email Phishing:</strong> Email phishing involves sending fraudulent emails that appear to come from trusted organizations to trick users into revealing sensitive information.<br><em>Example: An email pretending to be from a bank asks the user to click a link and update account details on a fake website.</em></li>
+                        <li><strong>2. Website Phishing:</strong> Website phishing uses fake websites that closely resemble legitimate sites to capture user login credentials.<br><em>Example: A fake Google login page steals usernames and passwords when users attempt to sign in.</em></li>
+                        <li><strong>3. SMS Phishing (Smishing):</strong> Smishing uses deceptive text messages to lure users into clicking malicious links or sharing personal information.<br><em>Example: A message stating "Your account is blocked, click here to reactivate" redirects the user to a fake page.</em></li>
+                        <li><strong>4. Voice Phishing (Vishing):</strong> Vishing involves phone calls where attackers impersonate officials to obtain confidential information.<br><em>Example: A caller posing as bank staff asks for OTP details for "verification".</em></li>
+                        <li><strong>5. Social Media Phishing:</strong> Social media phishing targets users through fake profiles or messages on platforms like Facebook or Instagram.<br><em>Example: A fake giveaway message asks users to log in through a link, leading to account theft.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q4. Explain the TCP/IP model with diagram.",
+            content: {
+                short: `
+                    <p>The TCP/IP model sets the rules for how computers communicate over the Internet across 4 layers:</p>
+                    <ol>
+                        <li><strong>Application Layer:</strong> Interface for users (e.g., HTTP, FTP).</li>
+                        <li><strong>Transport Layer:</strong> Reliable data transfer (e.g., TCP, UDP).</li>
+                        <li><strong>Internet Layer:</strong> IP addressing and routing (e.g., IPv4).</li>
+                        <li><strong>Network Access Layer:</strong> Physical transmission (e.g., Ethernet, Wi-Fi).</li>
+                    </ol>`,
+                medium: `
+                    <p>The TCP/IP model is a framework that sets the rules for how computers communicate over the Internet. It is organized into four layers:</p>
+                    <ol>
+                        <li><strong>Application Layer:</strong> The interface between the user and the network. Allows web browsing and email. <em>Examples: HTTP, FTP, SMTP.</em></li>
+                        <li><strong>Transport Layer:</strong> Ensures reliable, ordered data transfer without errors. <em>Examples: TCP (reliable) and UDP (fast streaming).</em></li>
+                        <li><strong>Internet Layer:</strong> Handles logical addressing and routing to find the best path for data. <em>Examples: IP (IPv4/IPv6).</em></li>
+                        <li><strong>Network Access Layer:</strong> Manages how data is physically transmitted over wired or wireless mediums. <em>Examples: Ethernet, Wi-Fi.</em></li>
+                    </ol> 
+
+[Image of TCP/IP Model Layers]
+`,
+                long: `
+                    <p>The TCP/IP (Transmission Control Protocol / Internet Protocol) model is a key framework that sets the rules for how computers communicate over the Internet and other networks. It makes sure that data sent from one device reaches another accurately, efficiently, and reliably, no matter what kind of hardware or software is being used. Essentially, it provides a common "language" that allows different systems to understand each other, covering everything from how data is formatted and transmitted to how it's routed and received. The model is organized into four layers, with each layer handling specific tasks in the communication process. These layers talk to the ones directly above and below them, keeping data moving smoothly and in order. This layered design makes the TCP/IP model flexible, scalable, and easier to troubleshoot since problems can often be traced to a particular layer. In short, the TCP/IP model is the backbone of modern networking and underpins many of the protocols we use every day, such as HTTP, FTP, and SMTP.</p>
+                    
+
+[Image of TCP/IP Model Layers]
+
+                    <h3>Layers of TCP/IP Model:</h3>
+                    <ul>
+                        <li><strong>1. Application Layer:</strong> The topmost layer. It is the interface between the user (or application software) and the network. This layer allows applications to communicate over the network by providing services like file transfer, email, and web browsing. Essentially, it's where users interact with the network without worrying about how the data actually travels.<br><em>Examples: HTTP (loading websites), FTP (transferring files), SMTP (sending emails), DNS (translating website names).</em></li>
+                        <li><strong>2. Transport Layer:</strong> Responsible for reliable data transfer between devices. It ensures that data is delivered correctly, in order, and without errors. It can establish a connection before sending data or send it quickly without establishing a connection. Handles error detection and flow control.<br><em>Examples: TCP (provides reliable, connection-oriented communication), UDP (provides faster, connectionless communication like live streaming).</em></li>
+                        <li><strong>3. Internet Layer:</strong> Deals with logical addressing and routing. It is responsible for sending data packets from the source device to the destination device, even if they are on different networks. This layer decides the best path for data to travel across complex networks.<br><em>Examples: IP (Assigns addresses and routes packets), ICMP (Diagnostic tools like ping), ARP (Converts IP to MAC addresses).</em></li>
+                        <li><strong>4. Network Access (Link) Layer:</strong> Manages how data is physically transmitted over the network medium. It deals with hardware addresses (MAC addresses), and it ensures devices can actually access the network, whether wired or wireless.<br><em>Examples: Ethernet (wired LANs), Wi-Fi (wireless), PPP (direct connections).</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q5. Identify analyse various attack targets on the internet with suitable example.",
+            content: {
+                short: `
+                    <p>Targets are systems selected by attackers to steal data or disrupt services.</p>
+                    <ul>
+                        <li><strong>Websites:</strong> Hacked to steal data (e.g., SQL injection).</li>
+                        <li><strong>Servers:</strong> Crashed with traffic (e.g., DDoS).</li>
+                        <li><strong>Networks:</strong> Monitored for data (e.g., Man-in-the-middle).</li>
+                        <li><strong>User Devices:</strong> Infected with malware (e.g., Ransomware).</li>
+                        <li><strong>Online Accounts:</strong> Stolen identities (e.g., Phishing).</li>
+                        <li><strong>Cloud Services:</strong> Breached storage.</li>
+                        <li><strong>IoT Devices:</strong> Hacked smart cameras.</li>
+                    </ul>`,
+                medium: `
+                    <p>Attack targets on the Internet are the systems, services, or users that attackers select to carry out harmful activities like stealing data or crashing servers.</p>
+                    <ul>
+                        <li><strong>Websites:</strong> Targeted to steal stored data. <em>Example: SQL injection to steal customer info.</em></li>
+                        <li><strong>Servers:</strong> Targeted to disrupt important services. <em>Example: A DDoS attack causing a website to crash.</em></li>
+                        <li><strong>Networks:</strong> Targeted to monitor data flow. <em>Example: MitM attack on public Wi-Fi.</em></li>
+                        <li><strong>User Devices:</strong> Attacked to install malware. <em>Example: Ransomware encrypting a laptop's files.</em></li>
+                        <li><strong>Online Accounts:</strong> Targeted for identity theft. <em>Example: Phishing emails stealing passwords.</em></li>
+                        <li><strong>Cloud Services:</strong> Attacked to access massive stored data. <em>Example: Breaching cloud storage.</em></li>
+                        <li><strong>IoT Devices:</strong> Easy to hack due to weak security. <em>Example: Hacking smart CCTV cameras to spy.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Attack targets on the Internet are the systems, services, or users that cyber attackers intentionally select to carry out harmful activities. These targets can include websites, servers, networks, user devices, online accounts, cloud services, and smart devices connected to the Internet. Attackers mainly focus on such targets to steal sensitive information, such as personal details, banking information, or important business data. In many situations, the goal of an attack is to interrupt normal operations by crashing servers, slowing down networks, or making online services unavailable. Such attacks can lead to financial losses and harm an organization's reputation. Cyber attackers may also try to gain unauthorized access to systems in order to install malware, alter data, or use the hacked system for future attacks. Attack targets are often chosen because of weak security, valuable data, or easy access. Hence, understanding these targets helps individuals and organizations improve security and better protect their digital assets on the Internet.</p>
+                    <h3>Attack Targets on the Internet:</h3>
+                    <ul>
+                        <li><strong>1. Websites:</strong> Websites are targeted to damage their appearance, steal stored data, or spread malware to visitors.<br><em>Example: Using SQL injection to steal customer information from an online shopping website.</em></li>
+                        <li><strong>2. Servers:</strong> Servers are attacked because they store critical data and run important services.<br><em>Example: A DDoS attack floods a server with traffic, causing the website to crash.</em></li>
+                        <li><strong>3. Networks:</strong> Networks are targeted to monitor data flow or gain access to internal systems.<br><em>Example: A man-in-the-middle attack on public Wi-Fi to capture login credentials.</em></li>
+                        <li><strong>4. User Devices (Computers and Mobile Phones):</strong> Personal devices are attacked to install malware or steal private information.<br><em>Example: Ransomware encrypting files on a laptop and demanding payment.</em></li>
+                        <li><strong>5. Online Accounts:</strong> Online accounts are targeted to steal identities or financial information.<br><em>Example: A phishing email tricking a user into revealing their email password.</em></li>
+                        <li><strong>6. Cloud Services:</strong> Cloud platforms are attacked to access or steal large amounts of stored data.<br><em>Example: Unauthorized access to cloud storage due to weak passwords.</em></li>
+                        <li><strong>7. IoT Devices:</strong> IoT devices often have weak security and are easy to hack.<br><em>Example: Hackers accessing smart CCTV cameras to spy on users.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q6. Differentiate between threats and virus with example.",
+            content: {
+                short: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Threat</th><th>Virus</th></tr></thead>
+                            <tbody>
+                                <tr><td>Any potential danger that can harm a system.</td><td>A malicious program that infects files.</td></tr>
+                                <tr><td>Broad concept (malware, phishing, hacking).</td><td>Specific type of malware.</td></tr>
+                                <tr><td>Example: Phishing attack or Ransomware.</td><td>Example: ILOVEYOU virus.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Aspect</th><th>Threat</th><th>Virus</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Definition</strong></td><td>Any potential danger that can harm a computer system, network, or data.</td><td>A type of malicious program that attaches to files or programs and spreads when executed.</td></tr>
+                                <tr><td><strong>Nature</strong></td><td>Broad concept, includes malware, hacking, phishing, spam, etc.</td><td>Specific type of malware that infects files and programs.</td></tr>
+                                <tr><td><strong>Spread Method</strong></td><td>Can be via email, network attacks, phishing, or removable media.</td><td>Requires user action, such as opening an infected file.</td></tr>
+                                <tr><td><strong>Example</strong></td><td><em>Phishing attack - tricking users to reveal passwords.</em></td><td><em>ILOVEYOU virus - spread via email attachments.</em></td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Aspect</th><th>Threat</th><th>Virus</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Definition</strong></td><td>Any potential danger that can harm a computer system, network, or data.</td><td>A type of malicious program that attaches to files or programs and spreads when executed.</td></tr>
+                                <tr><td><strong>Nature</strong></td><td>Broad concept, includes malware, hacking, phishing, spam, etc.</td><td>Specific type of malware that infects files and programs.</td></tr>
+                                <tr><td><strong>Mode of Harm</strong></td><td>Can include unauthorized access, data theft, system downtime, or corruption.</td><td>Directly infects files or programs, potentially deleting or corrupting data.</td></tr>
+                                <tr><td><strong>Spread Method</strong></td><td>Can be via email, network attacks, phishing, or removable media.</td><td>Requires user action, such as opening an infected file or running a malicious program.</td></tr>
+                                <tr><td><strong>Detection & Prevention</strong></td><td>Use firewalls, antivirus, encryption, user awareness, and security policies.</td><td>Detected and removed using antivirus software by scanning and deleting infected files.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>Phishing attack - tricking users to reveal passwords; Ransomware locks data for ransom.</td><td>ILOVEYOU virus - spread via email attachments; Melissa virus - infected Word documents.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`
+            }
+        },
+        {
+            title: "Q7. Describe the various attacks targets on the internet with suitable example.",
+            content: {
+                short: `
+                    <p>Targets are systems selected by attackers to steal data or disrupt services.</p>
+                    <ul>
+                        <li><strong>Websites:</strong> Hacked to steal data (e.g., SQL injection).</li>
+                        <li><strong>Servers:</strong> Crashed with traffic (e.g., DDoS).</li>
+                        <li><strong>Networks:</strong> Monitored for data (e.g., Man-in-the-middle).</li>
+                        <li><strong>User Devices:</strong> Infected with malware (e.g., Ransomware).</li>
+                        <li><strong>Online Accounts:</strong> Stolen identities (e.g., Phishing).</li>
+                        <li><strong>Cloud Services:</strong> Breached storage.</li>
+                        <li><strong>IoT Devices:</strong> Hacked smart cameras.</li>
+                    </ul>`,
+                medium: `
+                    <p>Attack targets on the Internet are the systems, services, or users that attackers select to carry out harmful activities like stealing data or crashing servers.</p>
+                    <ul>
+                        <li><strong>Websites:</strong> Targeted to steal stored data. <em>Example: SQL injection to steal customer info.</em></li>
+                        <li><strong>Servers:</strong> Targeted to disrupt important services. <em>Example: A DDoS attack causing a website to crash.</em></li>
+                        <li><strong>Networks:</strong> Targeted to monitor data flow. <em>Example: MitM attack on public Wi-Fi.</em></li>
+                        <li><strong>User Devices:</strong> Attacked to install malware. <em>Example: Ransomware encrypting a laptop's files.</em></li>
+                        <li><strong>Online Accounts:</strong> Targeted for identity theft. <em>Example: Phishing emails stealing passwords.</em></li>
+                        <li><strong>Cloud Services:</strong> Attacked to access massive stored data. <em>Example: Breaching cloud storage.</em></li>
+                        <li><strong>IoT Devices:</strong> Easy to hack due to weak security. <em>Example: Hacking smart CCTV cameras to spy.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Attack targets on the Internet are the systems, services, or users that cyber attackers intentionally select to carry out harmful activities. These targets can include websites, servers, networks, user devices, online accounts, cloud services, and smart devices connected to the Internet. Attackers mainly focus on such targets to steal sensitive information, such as personal details, banking information, or important business data. In many situations, the goal of an attack is to interrupt normal operations by crashing servers, slowing down networks, or making online services unavailable. Such attacks can lead to financial losses and harm an organization's reputation. Cyber attackers may also try to gain unauthorized access to systems in order to install malware, alter data, or use the hacked system for future attacks. Attack targets are often chosen because of weak security, valuable data, or easy access. Hence, understanding these targets helps individuals and organizations improve security and better protect their digital assets on the Internet.</p>
+                    <h3>Attack Targets on the Internet:</h3>
+                    <ul>
+                        <li><strong>1. Websites:</strong> Websites are targeted to damage their appearance, steal stored data, or spread malware to visitors.<br><em>Example: Using SQL injection to steal customer information from an online shopping website.</em></li>
+                        <li><strong>2. Servers:</strong> Servers are attacked because they store critical data and run important services.<br><em>Example: A DDoS attack floods a server with traffic, causing the website to crash.</em></li>
+                        <li><strong>3. Networks:</strong> Networks are targeted to monitor data flow or gain access to internal systems.<br><em>Example: A man-in-the-middle attack on public Wi-Fi to capture login credentials.</em></li>
+                        <li><strong>4. User Devices (Computers and Mobile Phones):</strong> Personal devices are attacked to install malware or steal private information.<br><em>Example: Ransomware encrypting files on a laptop and demanding payment.</em></li>
+                        <li><strong>5. Online Accounts:</strong> Online accounts are targeted to steal identities or financial information.<br><em>Example: A phishing email tricking a user into revealing their email password.</em></li>
+                        <li><strong>6. Cloud Services:</strong> Cloud platforms are attacked to access or steal large amounts of stored data.<br><em>Example: Unauthorized access to cloud storage due to weak passwords.</em></li>
+                        <li><strong>7. IoT Devices:</strong> IoT devices often have weak security and are easy to hack.<br><em>Example: Hackers accessing smart CCTV cameras to spy on users.</em></li>
+                    </ul>`
+            }
+        },
+
+        { section: "Model 2: Advanced Cyber Concepts" },
+        {
+            title: "Q1. Define password theft and account access tricks with example.",
+            content: {
+                short: `
+                    <p>Password theft is stealing user login details to gain unauthorized access to accounts.</p>
+                    <h3>Tricks:</h3>
+                    <ul>
+                        <li><strong>Phishing:</strong> Fake emails/links.</li>
+                        <li><strong>Keylogging:</strong> Software recording keystrokes.</li>
+                        <li><strong>Brute Force:</strong> Repeatedly guessing passwords.</li>
+                        <li><strong>Credential Stuffing:</strong> Reusing stolen passwords on other sites.</li>
+                        <li><strong>Fake Login Pages:</strong> Websites mimicking real ones.</li>
+                        <li><strong>Shoulder Surfing:</strong> Physically watching someone type a PIN.</li>
+                    </ul>`,
+                medium: `
+                    <p>Password theft occurs when attackers secretly obtain a user's login details. Because people reuse passwords, stealing one can expose many accounts to fraud.</p>
+                    <h3>Account Access Tricks:</h3>
+                    <ul>
+                        <li><strong>Phishing:</strong> Sending fake emails to trick users. <em>Example: A fake bank email.</em></li>
+                        <li><strong>Keylogging:</strong> Software that secretly records typing. <em>Example: A cracked game capturing passwords.</em></li>
+                        <li><strong>Brute Force Attack:</strong> Trying many password combinations fast. <em>Example: Guessing "123456".</em></li>
+                        <li><strong>Credential Stuffing:</strong> Using stolen login details on multiple sites. <em>Example: Using leaked login details on other websites.</em></li>
+                        <li><strong>Fake Login Pages:</strong> Fake sites to steal credentials. <em>Example: A fake Instagram page.</em></li>
+                        <li><strong>Shoulder Surfing:</strong> Watching someone enter a password. <em>Example: Looking at an ATM PIN over a shoulder.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Password theft is a common cyber-crime in which attackers secretly obtain a user's login details, such as usernames and passwords, without their knowledge. This is often done by tricking users, exploiting weak passwords, or using malicious software. Once the password is stolen, attackers can easily access the user's online accounts like email, social media, or banking services. This unauthorized access allows them to read private information, misuse accounts, steal money, or even lock the real user out. Because many people reuse the same password on multiple websites, a single stolen password can put several accounts at risk, making password theft a serious threat to personal security and privacy.</p>
+                    <h3>Common Password Theft & Account Access Tricks:</h3>
+                    <ul>
+                        <li><strong>1. Phishing:</strong> Phishing is a technique where attackers send fake emails, messages, or links that appear genuine to trick users into revealing their login details.<br><em>Example: A fake bank email asks the user to verify account details.</em></li>
+                        <li><strong>2. Keylogging:</strong> Keylogging is a method in which malicious software secretly records keystrokes to capture passwords and sensitive information.<br><em>Example: A cracked game records the user's passwords.</em></li>
+                        <li><strong>3. Brute Force Attack:</strong> A brute force attack involves repeatedly trying multiple password combinations until the correct one is found.<br><em>Example: Trying common passwords like 123456.</em></li>
+                        <li><strong>4. Credential Stuffing:</strong> Credential stuffing is an attack where stolen login details from one website are used to access other websites.<br><em>Example: Using leaked login details on other websites.</em></li>
+                        <li><strong>5. Fake Login Pages:</strong> Fake login pages are fraudulent websites designed to look like real login pages to steal user credentials.<br><em>Example: A fake Instagram login page steals credentials.</em></li>
+                        <li><strong>6. Shoulder Surfing:</strong> Shoulder surfing is a physical technique where attackers steal passwords by watching users enter them.<br><em>Example: Watching someone enter an ATM PIN.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q2. Describe and classify authentication with types and example.",
+            content: {
+                short: `
+                    <p>Authentication verifies that a person trying to log in is who they claim to be.</p>
+                    <h3>Types:</h3>
+                    <ul>
+                        <li><strong>Password-Based:</strong> Username and secret password.</li>
+                        <li><strong>2FA:</strong> Two verifications (e.g., Password + OTP).</li>
+                        <li><strong>Biometric:</strong> Physical traits (e.g., Fingerprint).</li>
+                        <li><strong>Token-Based:</strong> Physical/digital access key.</li>
+                        <li><strong>Certificate-Based:</strong> Digital SSL certificates.</li>
+                        <li><strong>MFA:</strong> Multiple layered verifications.</li>
+                    </ul>`,
+                medium: `
+                    <p>Authentication verifies the identity of the person logging in. It checks passwords, PINs, or fingerprints before granting access to protect data from unauthorized users.</p>
+                    <h3>Types of Authentication:</h3>
+                    <ul>
+                        <li><strong>Password-Based:</strong> Proving identity using something memorized. <em>Example: Email ID and password.</em></li>
+                        <li><strong>Two-Factor (2FA):</strong> Requires two forms of verification. <em>Example: Password + mobile OTP.</em></li>
+                        <li><strong>Biometric:</strong> Uses physical characteristics. <em>Example: Fingerprint or Face ID to unlock a phone.</em></li>
+                        <li><strong>Token-Based:</strong> Uses a physical or digital device. <em>Example: Smart card access for an office.</em></li>
+                        <li><strong>Certificate-Based:</strong> Uses digital certificates. <em>Example: SSL/TLS for secure websites.</em></li>
+                        <li><strong>Multi-Factor (MFA):</strong> Layers two or more factors. <em>Example: Bank login using password, OTP, and fingerprint.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Authentication is a way to make sure that the person trying to log in is really who they claim to be. Before giving access to a system, device, or online account, it checks details like a password, PIN, fingerprint, or a one-time code. This process helps protect personal data, emails, and financial information from unauthorized access. Authentication acts as the first layer of security and reduces the risk of cyberattacks. Strong authentication methods make it much harder for attackers to misuse user accounts. It also builds trust in digital systems by ensuring safe and secure access. Today, authentication is used in almost every online service we use daily. With increasing cyber threats, advanced methods like multi-factor authentication and biometric verification have become common to add extra layers of security. It also helps organizations monitor access and detect unusual activities quickly, keeping sensitive systems safer.</p>
+                    <h3>Types of Authentication with Examples:</h3>
+                    <ul>
+                        <li><strong>1. Password-Based Authentication:</strong> This is the most common method where a user proves their identity using a username and password. It relies on something the user knows and is simple to use, but its security depends on creating strong and unique passwords.<br><em>Example: Logging into an email account using a user ID and password.</em></li>
+                        <li><strong>2. Two-Factor Authentication (2FA):</strong> This method requires two different forms of verification, usually combining something the user knows (like a password) and something the user has (like a mobile device). It adds an extra layer of security.<br><em>Example: Entering a password along with an OTP sent to the user's mobile phone.</em></li>
+                        <li><strong>3. Biometric Authentication:</strong> This method uses unique physical or behavioral characteristics of a user, such as fingerprints, facial features, or voice patterns. Biometric authentication is difficult to forge.<br><em>Example: Using a fingerprint or face recognition to unlock a smartphone.</em></li>
+                        <li><strong>4. Token-Based Authentication:</strong> In this method, a physical or digital token is used to verify identity. Tokens generate time-sensitive codes or act as access keys.<br><em>Example: Using a smart card or security token to access an office system.</em></li>
+                        <li><strong>5. Certificate-Based Authentication:</strong> This method uses digital certificates issued by trusted authorities to confirm a user's identity. Certificates ensure that communication or access is secure.<br><em>Example: Accessing a secure website using an SSL/TLS certificate.</em></li>
+                        <li><strong>6. Multi-Factor Authentication (MFA):</strong> MFA requires two or more authentication factors, combining anything the user knows, has, or is. This layered approach greatly reduces risk.<br><em>Example: Logging into a bank account using a password, OTP, and fingerprint.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q3. Differentiate between DOS and DDOS attack with example.",
+            content: {
+                short: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>DOS (Denial of Service)</th><th>DDOS (Distributed Denial of Service)</th></tr></thead>
+                            <tbody>
+                                <tr><td>Attack from a single computer to make service unavailable.</td><td>Attack from multiple computers (botnet).</td></tr>
+                                <tr><td>Limited impact, easier to detect.</td><td>Massive impact, harder to detect.</td></tr>
+                                <tr><td>Example: Ping of Death from one PC.</td><td>Example: Mirai Botnet taking down Twitter.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Aspect</th><th>DOS (Denial of Service)</th><th>DDOS (Distributed Denial of Service)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Source</strong></td><td>Single attacker/machine.</td><td>Multiple attackers/machines (botnet).</td></tr>
+                                <tr><td><strong>Impact</strong></td><td>Limited; affects only the target server.</td><td>Massive; harder to mitigate and affects large-scale targets.</td></tr>
+                                <tr><td><strong>Detection</strong></td><td>Easier to detect as traffic comes from one source.</td><td>Harder to detect due to traffic coming from many sources.</td></tr>
+                                <tr><td><strong>Example</strong></td><td><em>Ping of Death attack on a website from one computer.</em></td><td><em>Mirai Botnet attack taking down major sites.</em></td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <p><strong>DOS (Denial of Service) Attack:</strong> A DOS attack is when a single computer or attacker targets a server, website, or network to make it unavailable for legitimate users. The attacker floods the system with excessive requests, causing it to slow down or crash.</p>
+                    <p><strong>DDOS (Distributed Denial of Service) Attack:</strong> A DDOS attack is similar in purpose but comes from multiple computers or devices, often part of a botnet controlled by the attacker. The combined traffic overwhelms the target, making it unavailable to legitimate users.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Aspect</th><th>DOS (Denial of Service)</th><th>DDOS (Distributed Denial of Service)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Definition</strong></td><td>Attack from a single system to make a service unavailable.</td><td>Attack from multiple systems (a network of bots) to overwhelm a service.</td></tr>
+                                <tr><td><strong>Source</strong></td><td>Single attacker/machine.</td><td>Multiple attackers/machines (botnet).</td></tr>
+                                <tr><td><strong>Impact</strong></td><td>Limited; affects only the target server.</td><td>Massive; harder to mitigate and affects large-scale targets.</td></tr>
+                                <tr><td><strong>Detection</strong></td><td>Easier to detect as traffic comes from one source.</td><td>Harder to detect due to traffic coming from many sources.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>Ping of Death attack on a website from one computer.</td><td>Mirai Botnet attack that took down Twitter, Netflix, and Reddit in 2016.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`
+            }
+        },
+        {
+            title: "Q4. Explain the cloud with different service and example.",
+            content: {
+                short: `
+                    <p>Cloud services let you rent servers, storage, and software over the internet without buying hardware.</p>
+                    <h3>Models:</h3>
+                    <ul>
+                        <li><strong>IaaS:</strong> Renting basic servers and storage (e.g., AWS EC2).</li>
+                        <li><strong>PaaS:</strong> A platform for developers to build apps (e.g., Google App Engine).</li>
+                        <li><strong>SaaS:</strong> Ready-to-use software on the web (e.g., Gmail, Dropbox).</li>
+                    </ul>`,
+                medium: `
+                    <p>Cloud services allow businesses to use computing resources over the internet without owning physical hardware. It is scalable, collaborative, and maintenance is handled by the provider.</p>
+                    <h3>Cloud Service Models:</h3>
+                    <ul>
+                        <li><strong>IaaS (Infrastructure as a Service):</strong> Virtualized computing resources (servers, storage) over the internet. <em>Example: Amazon Web Services (AWS EC2).</em></li>
+                        <li><strong>PaaS (Platform as a Service):</strong> Provides a complete environment for developers to build and test applications. <em>Example: Google App Engine.</em></li>
+                        <li><strong>SaaS (Software as a Service):</strong> Delivers ready-to-use software directly via a web browser. No installation needed. <em>Example: Gmail, Salesforce.</em></li>
+                    </ul> 
+
+[Image of Cloud Service Models]
+`,
+                long: `
+                    <p>Cloud services let people and businesses use computing resources like servers, storage, databases, networking, software, and analytics over the internet—without having to buy and maintain physical hardware. Think of it like renting tools instead of owning a full workshop: you use what you need and pay only for that. Cloud services make it easy to scale—adding more storage or computing power is just a few clicks away. They also make collaboration simple, since multiple users can access the same applications and data from anywhere in the world. On top of that, providers handle updates, maintenance, and security, so you can focus on your work without worrying about the technical backend.</p>
+                    
+
+[Image of Cloud Service Models]
+
+                    <h3>Different services of Cloud:</h3>
+                    <ul>
+                        <li><strong>1. IaaS (Infrastructure as a Service):</strong> IaaS provides virtualized computing resources over the internet, such as servers, storage, and networking. Users are responsible for managing the operating system, applications, and data, while the cloud provider handles the physical hardware and infrastructure. This model is flexible and cost-effective.<br><em>Example: Amazon Web Services (AWS EC2), Microsoft Azure Virtual Machines, Google Compute Engine.</em></li>
+                        <li><strong>2. PaaS (Platform as a Service):</strong> PaaS offers a complete platform for developing, testing, and deploying applications without worrying about the underlying hardware or operating systems. It includes tools, libraries, and services that simplify coding and app management.<br><em>Example: Google App Engine, Microsoft Azure App Service, Heroku.</em></li>
+                        <li><strong>3. SaaS (Software as a Service):</strong> SaaS delivers ready-to-use software applications over the internet, accessible via a web browser. Users don't have to install, manage, or maintain the software or infrastructure it's all handled by the provider. This is convenient for everyday tools.<br><em>Example: Gmail, Microsoft 365, Dropbox, Salesforce.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q5. Difference between IDS and IPS with example.",
+            content: {
+                short: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>IDS (Intrusion Detection System)</th><th>IPS (Intrusion Prevention System)</th></tr></thead>
+                            <tbody>
+                                <tr><td>Passive - watches and raises an alert.</td><td>Active - watches and automatically stops the threat.</td></tr>
+                                <tr><td>Safe, doesn't touch or block normal traffic.</td><td>Can accidentally block normal traffic if misconfigured.</td></tr>
+                                <tr><td>Example: Snort in detection mode sending an email.</td><td>Example: Snort in prevention mode dropping packets.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                medium: `
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Aspect</th><th>IDS (Intrusion Detection System)</th><th>IPS (Intrusion Prevention System)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Action</strong></td><td>Passive - just detects and notifies you.</td><td>Active - detects and takes action automatically.</td></tr>
+                                <tr><td><strong>Placement</strong></td><td>Usually monitors traffic without touching it.</td><td>Placed directly in the traffic path to block attacks.</td></tr>
+                                <tr><td><strong>Response Time</strong></td><td>Depends on a human to react to alerts.</td><td>Instant - stops the attack in real-time.</td></tr>
+                                <tr><td><strong>Example</strong></td><td><em>Snort in detection mode - sends alert for activity.</em></td><td><em>Snort in prevention mode - blocks suspicious packets.</em></td></tr>
+                            </tbody>
+                        </table>
+                    </div>`,
+                long: `
+                    <p>An <strong>Intrusion Detection System (IDS)</strong> monitors network traffic and system activity to spot suspicious behavior or attacks. It acts like a security alarm, alerting administrators of unusual activity, such as failed logins or strange data transfers, without blocking it.</p>
+                    <p>An <strong>Intrusion Prevention System (IPS)</strong> monitors network traffic and blocks threats in real-time, acting like a security guard. It can automatically stop malicious packets or sessions immediately.</p>
+                    <div class="table-wrapper">
+                        <table class="diff-table">
+                            <thead><tr><th>Aspect</th><th>IDS (Intrusion Detection System)</th><th>IPS (Intrusion Prevention System)</th></tr></thead>
+                            <tbody>
+                                <tr><td><strong>Purpose</strong></td><td>Watches your network and raises an alert if something suspicious happens.</td><td>Watches and stops the threat immediately before it can cause damage.</td></tr>
+                                <tr><td><strong>Action</strong></td><td>Passive - just detects and notifies you.</td><td>Active - detects and takes action automatically.</td></tr>
+                                <tr><td><strong>Placement</strong></td><td>Usually monitors traffic without touching it.</td><td>Placed directly in the traffic path to block attacks.</td></tr>
+                                <tr><td><strong>Response Time</strong></td><td>Depends on a human to react to alerts.</td><td>Instant - stops the attack in real-time.</td></tr>
+                                <tr><td><strong>Impact</strong></td><td>Safe, doesn't disturb normal traffic.</td><td>Can accidentally block normal traffic if not configured carefully.</td></tr>
+                                <tr><td><strong>Example</strong></td><td>Snort in detection mode - sends alert for unusual activity.</td><td>Snort in prevention mode - blocks suspicious packets automatically.</td></tr>
+                            </tbody>
+                        </table>
+                    </div>`
+            }
+        },
+        {
+            title: "Q6. Analysis cloud with the different services and example.",
+            content: {
+                short: `
+                    <p>Cloud services let you rent servers, storage, and software over the internet without buying hardware.</p>
+                    <h3>Models:</h3>
+                    <ul>
+                        <li><strong>IaaS:</strong> Renting basic servers and storage (e.g., AWS EC2).</li>
+                        <li><strong>PaaS:</strong> A platform for developers to build apps (e.g., Google App Engine).</li>
+                        <li><strong>SaaS:</strong> Ready-to-use software on the web (e.g., Gmail, Dropbox).</li>
+                    </ul>`,
+                medium: `
+                    <p>Cloud services allow businesses to use computing resources over the internet without owning physical hardware. It is scalable, collaborative, and maintenance is handled by the provider.</p>
+                    <h3>Cloud Service Models:</h3>
+                    <ul>
+                        <li><strong>IaaS (Infrastructure as a Service):</strong> Virtualized computing resources (servers, storage) over the internet. <em>Example: Amazon Web Services (AWS EC2).</em></li>
+                        <li><strong>PaaS (Platform as a Service):</strong> Provides a complete environment for developers to build and test applications. <em>Example: Google App Engine.</em></li>
+                        <li><strong>SaaS (Software as a Service):</strong> Delivers ready-to-use software directly via a web browser. No installation needed. <em>Example: Gmail, Salesforce.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Cloud services let people and businesses use computing resources like servers, storage, databases, networking, software, and analytics over the internet—without having to buy and maintain physical hardware. Think of it like renting tools instead of owning a full workshop: you use what you need and pay only for that. Cloud services make it easy to scale—adding more storage or computing power is just a few clicks away. They also make collaboration simple, since multiple users can access the same applications and data from anywhere in the world. On top of that, providers handle updates, maintenance, and security, so you can focus on your work without worrying about the technical backend.</p>
+                    <h3>Different services of Cloud:</h3>
+                    <ul>
+                        <li><strong>1. IaaS (Infrastructure as a Service):</strong> IaaS provides virtualized computing resources over the internet, such as servers, storage, and networking. Users are responsible for managing the operating system, applications, and data, while the cloud provider handles the physical hardware and infrastructure. This model is flexible and cost-effective.<br><em>Example: Amazon Web Services (AWS EC2), Microsoft Azure Virtual Machines, Google Compute Engine.</em></li>
+                        <li><strong>2. PaaS (Platform as a Service):</strong> PaaS offers a complete platform for developing, testing, and deploying applications without worrying about the underlying hardware or operating systems. It includes tools, libraries, and services that simplify coding and app management.<br><em>Example: Google App Engine, Microsoft Azure App Service, Heroku.</em></li>
+                        <li><strong>3. SaaS (Software as a Service):</strong> SaaS delivers ready-to-use software applications over the internet, accessible via a web browser. Users don't have to install, manage, or maintain the software or infrastructure it's all handled by the provider. This is convenient for everyday tools.<br><em>Example: Gmail, Microsoft 365, Dropbox, Salesforce.</em></li>
+                    </ul>`
+            }
+        },
+        {
+            title: "Q7. Describe and classify authorisation with types and example.",
+            content: {
+                short: `
+                    <p>Authorization decides what a logged-in user is allowed to do within a system.</p>
+                    <h3>Types:</h3>
+                    <ul>
+                        <li><strong>RBAC:</strong> Based on job role (e.g., Admin vs Employee).</li>
+                        <li><strong>ABAC:</strong> Based on smart attributes (e.g., Dept, Time).</li>
+                        <li><strong>PBAC:</strong> Based on admin policies.</li>
+                        <li><strong>MAC:</strong> Strict clearance levels (e.g., Military Top Secret).</li>
+                        <li><strong>DAC:</strong> The file owner decides access.</li>
+                        <li><strong>Rule-Based:</strong> Based on specific rules like IP/Time.</li>
+                    </ul>`,
+                medium: `
+                    <p>While authentication answers "Who are you?", authorization answers "What are you allowed to do?" It controls permissions and access to keep sensitive information safe.</p>
+                    <h3>Types of Authorization:</h3>
+                    <ul>
+                        <li><strong>Role-Based (RBAC):</strong> Access is based on the user's job role. <em>Example: An Admin edits data, an Employee only views it.</em></li>
+                        <li><strong>Attribute-Based (ABAC):</strong> Access depends on factors like time, location, or department. <em>Example: Only accessible during office hours.</em></li>
+                        <li><strong>Policy-Based (PBAC):</strong> Decided by admin rules. <em>Example: Only EU employees can access EU servers.</em></li>
+                        <li><strong>Mandatory (MAC):</strong> Very strict, based on security clearance. <em>Example: Military "Top Secret" documents.</em></li>
+                        <li><strong>Discretionary (DAC):</strong> The file owner chooses who gets access. <em>Example: Sharing a Google Doc.</em></li>
+                        <li><strong>Rule-Based:</strong> Access controlled by specific network rules. <em>Example: Logins only allowed between 9 AM and 5 PM.</em></li>
+                    </ul>`,
+                long: `
+                    <p>Authorization is all about deciding what a user can and cannot do after the system knows who they are. While authentication answers "Who are you?", authorization answers "What are you allowed to do?". It controls the permissions and access a user has within a system. For example, in a banking app, logging in proves you are the account holder (authentication), but authorization decides whether you can just check your balance, transfer money, or close your account. In a company's HR system, it determines whether an employee can edit records, approve leave, or just view their own profile. Authorization is really important because it keeps sensitive information safe and makes sure people only access what they're supposed to. Without it, even trusted users could accidentally or intentionally get into areas they shouldn't, causing data leaks or other problems.</p>
+                    <h3>Types of Authorization:</h3>
+                    <ul>
+                        <li><strong>1. Role-Based Authorization (RBAC):</strong> Users are assigned roles, and each role determines what actions they can perform. Access is strictly based on the user's role.<br><em>Example: Admin -> Can add/remove users. Manager -> Can view/edit reports. Employee -> Can only view their own data.</em></li>
+                        <li><strong>2. Attribute-Based Authorization (ABAC):</strong> Access depends on multiple factors such as user attributes, resource attributes, and environmental conditions like time or location. This allows dynamic and flexible control.<br><em>Example: A document accessed only if the user is in Finance, classification is internal, and it is during work hours.</em></li>
+                        <li><strong>3. Policy-Based Authorization (PBAC):</strong> Access is determined by rules or policies defined by administrators. These policies consider various conditions.<br><em>Example: A policy granting access only if "Employees in Europe can access EU server data only".</em></li>
+                        <li><strong>4. Mandatory Access Control (MAC):</strong> Access is enforced based on sensitivity labels of both users and resources. Users cannot change permissions, ensuring high security.<br><em>Example: Military system where a user with "Secret" clearance is denied access to a "Top Secret" document.</em></li>
+                        <li><strong>5. Discretionary Access Control (DAC):</strong> The owner of a resource decides who can access it and what actions they can perform.<br><em>Example: A file owner sharing a Google Drive file and giving read/write permissions to specific colleagues.</em></li>
+                        <li><strong>6. Rule-Based Authorization:</strong> Access is controlled by predefined rules rather than roles or attributes. Rules can include time, location, or network restrictions.<br><em>Example: Users can log in only between 9 AM and 5 PM, or access is blocked from restricted IP addresses.</em></li>
+                    </ul>`
+            }
+        }
+    ];
+
+    function renderQuestionBank() {
+        const container = document.getElementById('main-content-wrapper');
+        let html = '';
+        
+        qbData.forEach(q => {
+            if (q.section) {
+                html += '<h2 class="section-header">' + q.section + '</h2>';
+            } else {
+                html += '<article class="note-card">';
+                html += '<h2 class="note-title">' + q.title + '</h2>';
+                html += '<div class="note-body">' + q.content[currentLength] + '</div>';
+                html += '</article>';
+            }
+        });
+
+        container.innerHTML = html;
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.documentElement.setAttribute('data-theme', savedTheme);
+        document.getElementById('themeSelect').value = savedTheme;
+        document.getElementById('lengthSelect').value = 'long';
+        
+        renderQuestionBank();
+    });
+</script>
 </body>
 </html>
