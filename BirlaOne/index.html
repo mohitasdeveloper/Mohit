@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="google-adsense-account" content="ca-pub-6878501206056792">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BirlaOne (BAFs) | Comprehensive Campus Management App</title>
+    <meta name="description" content="A detailed technical case study of the BirlaOne platform, an innovative campus management application designed to centralize college resources and streamline attendance.">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --primary-color: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.95);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.8; margin: 0; padding: 0; }
+        nav { padding: 20px 8%; background: var(--nav-bg); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;}
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .back-link:hover { color: var(--primary-color); }
+        .article-container { max-width: 800px; margin: 60px auto; padding: 0 5%; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.2;}
+        h2 { font-size: 1.8rem; margin-top: 50px; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; display: inline-block;}
+        p { margin-bottom: 20px; font-size: 1.1rem; color: #334155; }
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 10px; font-size: 1.1rem; color: #334155; }
+        .launch-box { background: var(--surface-color); padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin: 50px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .launch-btn { display: inline-block; background: var(--primary-color); color: white; padding: 15px 40px; text-decoration: none; font-weight: 800; font-size: 1.2rem; border-radius: 8px; transition: transform 0.2s; }
+        .launch-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 50px;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="https://mohitmali.in" class="logo">Mohit.</a>
+        <a href="https://mohitmali.in" class="back-link">&larr; Back to Portfolio</a>
+    </nav>
+
+    <div class="article-container">
+        <p style="color: var(--primary-color); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Project Documentation & Case Study</p>
+        <h1>BirlaOne: Architecting a Centralized Campus Ecosystem</h1>
+        
+        <p>In the modern educational environment, students frequently face the challenge of navigating highly fragmented systems. From checking daily attendance and securing study materials to tracking campus event announcements, the data is often scattered across multiple group chats, notice boards, and disparate web portals. As an independent software developer and B.A.F. student, I recognized this critical inefficiency and engineered a specialized solution: <strong>BirlaOne</strong>.</p>
+
+        <div class="launch-box">
+            <h3 style="margin-top: 0; font-size: 1.5rem;">Access the Application</h3>
+            <p style="font-size: 1rem; color: var(--text-muted);">BirlaOne is a public utility application designed for seamless access. No authentication is required to view core public resources.</p>
+            <a href="/BAFs/app.html" class="launch-btn">Launch BirlaOne App &rarr;</a>
+        </div>
+
+        <h2>The Core Problem: Fragmented Communication</h2>
+        <p>Before the development of BirlaOne, the primary method of communication between campus administration, event coordinators, and the student body relied heavily on manual updates. This resulted in significant information asymmetry. Students would routinely miss critical deadlines, struggle to calculate their required attendance percentages, or lose access to vital academic resources simply because the delivery mechanisms were unreliable.</p>
+        <p>The objective was clear: architect a single, highly responsive, mobile-first web application that serves as the definitive source of truth for campus operations.</p>
+
+        <h2>Key Features and Functionality</h2>
+        <p>BirlaOne was designed with a strict focus on utility, speed, and user experience. The application provides several core modules engineered to resolve daily friction points for students:</p>
+        <ul>
+            <li><strong>Centralized Resource Hub:</strong> A structured repository where students can easily locate syllabus copies, academic guidelines, and administrative forms without endless searching.</li>
+            <li><strong>Automated Attendance Tracking:</strong> A sophisticated calculation engine that allows students to input their current statistics and instantly understand their required attendance thresholds to maintain academic compliance.</li>
+            <li><strong>Real-Time Campus Announcements:</strong> A dedicated digital notice board that eliminates the noise of social media platforms, delivering pure, actionable campus news and event details.</li>
+            <li><strong>Zero-Friction Access:</strong> Recognizing that logging into portals creates unnecessary barriers, core features of the platform were designed to be publicly accessible, ensuring immediate value delivery.</li>
+        </ul>
+
+        <h2>Technical Architecture & Development Approach</h2>
+        <p>To ensure high availability and rapid load times across varying network conditions, BirlaOne was built using a lightweight, highly optimized web stack. As the sole developer on this project, I handled end-to-end execution, from database structuring to front-end UI/UX design.</p>
+        <p>The front end utilizes modern HTML5, CSS3, and Vanilla JavaScript to create a deeply interactive, app-like experience directly within the browser. By avoiding heavy frontend frameworks, the application achieves near-instantaneous render times, a crucial metric for users accessing the platform on mobile devices with limited bandwidth.</p>
+        <p>For data management, I integrated robust database logic to ensure that announcements and resources could be updated dynamically without requiring manual code deployments. This approach ensures scalability, allowing the platform to grow alongside the campus population.</p>
+
+        <h2>Impact and Future Scaling</h2>
+        <p>The deployment of BirlaOne represents a significant step forward in digital campus management. By replacing chaotic communication channels with a streamlined, purpose-built application, students reclaim valuable time and maintain a clearer focus on their academic responsibilities.</p>
+        <p>Moving forward, the architecture of BirlaOne is designed to be highly modular. Future iterations will include deeper integrations with specific event platforms (such as the OJAS and URJA sports systems) and more granular data analytics for administrative oversight.</p>
+    </div>
+
+    <footer>
+        <p>Engineered by Mohit Mali &copy; 2026</p>
+        <div style="margin-top: 10px; font-size: 0.8rem;">
+            <a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+            <a href="/terms-of-service.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Terms of Service</a> |
+            <a href="/contact.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
