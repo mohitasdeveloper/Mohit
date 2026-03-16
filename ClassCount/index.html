@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClassCount | Academic Statistics & Attendance Engine</title>
+    <meta name="description" content="A technical case study on ClassCount, a utility application engineered to solve student pain points by calculating daily attendance requirements and educational statistics.">
+    <meta name="google-adsense-account" content="ca-pub-6878501206056792">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M7CKP1XWMW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M7CKP1XWMW');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --primary-color: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.95);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.8; margin: 0; padding: 0; }
+        nav { padding: 20px 8%; background: var(--nav-bg); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;}
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .back-link:hover { color: var(--primary-color); }
+        .article-container { max-width: 800px; margin: 60px auto; padding: 0 5%; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.2;}
+        h2 { font-size: 1.8rem; margin-top: 50px; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; display: inline-block;}
+        p { margin-bottom: 20px; font-size: 1.1rem; color: #334155; }
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 10px; font-size: 1.1rem; color: #334155; }
+        .launch-box { background: var(--surface-color); padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin: 50px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .launch-btn { display: inline-block; background: var(--primary-color); color: white; padding: 15px 40px; text-decoration: none; font-weight: 800; font-size: 1.2rem; border-radius: 8px; transition: transform 0.2s; }
+        .launch-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 50px;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="https://mohitmali.in" class="logo">Mohit.</a>
+        <a href="https://mohitmali.in" class="back-link">&larr; Back to Portfolio</a>
+    </nav>
+
+    <div class="article-container">
+        <p style="color: var(--primary-color); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Utility Application Case Study</p>
+        <h1>ClassCount: Algorithmic Attendance Tracking</h1>
+        
+        <p>For university students, maintaining mandatory attendance thresholds is a persistent source of academic anxiety. Institutions often enforce strict policies (such as a 75% minimum), yet the digital tools provided to students to track their own standing are frequently outdated, slow, or lack predictive capabilities. To resolve this core pain point, I developed <strong>ClassCount</strong>, a lightweight utility application engineered to calculate educational statistics and attendance requirements effortlessly.</p>
+
+        <div class="launch-box">
+            <h3 style="margin-top: 0; font-size: 1.5rem;">Access the Utility</h3>
+            <p style="font-size: 1rem; color: var(--text-muted);">ClassCount is designed to run seamlessly in the browser, providing instant statistical feedback without the need for application downloads or account creation.</p>
+            <a href="mailto:developer@mohitmali.in" class="launch-btn">Request Application Link &rarr;</a>
+        </div>
+
+        <h2>The Problem: Predictive Academic Data</h2>
+        <p>The primary issue with manual attendance tracking is the complexity of predictive math. A student doesn't just need to know their current percentage; they need to know actionable metrics: <em>"How many consecutive lectures can I safely miss?"</em> or <em>"How many consecutive lectures must I attend to recover from a deficit?"</em></p>
+        <p>When calculated manually, this data is highly prone to human error. A single miscalculation can result in severe academic penalties. ClassCount was built to entirely automate this mathematical logic, transforming raw data inputs into immediate, actionable academic insights.</p>
+
+        <h2>Core Algorithmic Features</h2>
+        <p>ClassCount was designed with a strict focus on utility and processing speed, integrating several key features:</p>
+        <ul>
+            <li><strong>Predictive Calculation Engine:</strong> The application utilizes custom algorithmic logic to project future attendance requirements based on real-time inputs of 'classes held' versus 'classes attended'.</li>
+            <li><strong>Dynamic Safety Margins:</strong> The system immediately outputs how many specific lectures a student can afford to skip before breaching institutional thresholds, allowing for better personal time management.</li>
+            <li><strong>Recovery Metrics:</strong> If a student falls below the mandatory threshold, the engine calculates the exact number of consecutive classes required to restore their percentage to a safe level.</li>
+            <li><strong>Persistent Local Storage:</strong> To eliminate friction, the application leverages browser-based local storage (rather than heavy backend databases), ensuring that a user's data remains saved securely on their device for their next session.</li>
+        </ul>
+
+        <h2>Technical Architecture</h2>
+        <p>From a software development perspective, the priority for ClassCount was extreme efficiency. The application was built using Vanilla JavaScript to handle the core computational logic, avoiding heavy frameworks that could increase load times.</p>
+        <p>Because the target demographic consists of students checking their stats between classes, the front-end UI was designed with a strict mobile-first approach. The CSS architecture is highly responsive, ensuring the interface is clean, distraction-free, and legible on varying screen sizes and under direct sunlight.</p>
+
+        <h2>Project Conclusion</h2>
+        <p>ClassCount successfully bridges the gap between raw educational data and student utility. By offloading complex predictive math to a structured algorithm, the application reduces academic friction and empowers students to take data-driven control of their schedules. It is a prime example of using targeted software development to solve hyper-specific, everyday logistical problems.</p>
+    </div>
+
+    <footer>
+        <p>Engineered by Mohit Mali &copy; 2026</p>
+        <div style="margin-top: 10px; font-size: 0.8rem;">
+            <a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+            <a href="/terms-of-service.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Terms of Service</a> |
+            <a href="/disclaimer.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Disclaimer</a> |
+            <a href="/contact.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
