@@ -13,15 +13,36 @@
     <meta property="og:description" content="I engineer custom software & financial solutions.">
     <meta property="og:image" content="https://i.ibb.co/8tLQ9tb/1771434071328.png">
     <meta property="og:url" content="https://mohitmali.in/">
-    <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-M7CKP1XWMW"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M7CKP1XWMW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'G-M7CKP1XWMW');
+    </script>
 
-  gtag('config', 'G-M7CKP1XWMW');
-</script>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Mohit Mali",
+      "alternateName": "Bharat Mali",
+      "url": "https://mohitmali.in",
+      "image": "https://i.ibb.co/8tLQ9tb/1771434071328.png",
+      "jobTitle": "Software Developer & FinTech Specialist",
+      "alumniOf": {
+        "@type": "CollegeOrUniversity",
+        "name": "Mumbai University"
+      },
+      "knowsAbout": ["Software Engineering", "FinTech", "Web Development", "Accounting Software", "Equity Derivatives"],
+      "sameAs": [
+        "https://github.com/mohitasdeveloper"
+      ]
+    }
+    </script>
+
     <title>Mohit Mali | Software Developer & FinTech Specialist</title> 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
@@ -718,7 +739,7 @@
                     <p class="project-desc">A powerful web-based financial application built from scratch. Designed to handle complex, Tally-inspired data structures including Vouchers, Ledgers, and real-time Trial Balance compilation.</p>
                 </div>
                 <div class="project-footer">
-                    <a href="/mally" target="_blank" class="project-link">View Project <span>&rarr;</span></a>
+                    <a href="/mally" class="project-link">View Project <span>&rarr;</span></a>
                 </div>
             </div>
 
@@ -748,7 +769,7 @@
                     <p class="project-desc">Architected a comprehensive mobile platform specifically tailored for students. Centralizes campus resources, announcements, and automates attendance tracking.</p>
                 </div>
                 <div class="project-footer">
-                    <a href="/BAFs/app.html" target="_blank" class="project-link">View Project <span>&rarr;</span></a>
+                    <a href="/BAFs" class="project-link">View Project <span>&rarr;</span></a>
                 </div>
             </div>
 
@@ -759,7 +780,7 @@
                     <p class="project-desc">Built an environmentally-focused digital partner platform handling massive volumes of student registration data and reward points with absolute precision.</p>
                 </div>
                 <div class="project-footer">
-                    <a href="/EcoCampus" target="_blank" class="project-link">View Project <span>&rarr;</span></a>
+                    <a href="/EcoCampus" class="project-link">View Project <span>&rarr;</span></a>
                 </div>
             </div>
 
@@ -768,6 +789,9 @@
                     <img src="https://i.ibb.co/LDWjzyBn/Be-Aware-4.png" alt="Voting Engine Logo" class="project-logo" loading="lazy">
                     <h3 class="project-title">Digital Voting Engine</h3>
                     <p class="project-desc">Programmed a secure, real-time digital voting infrastructure for the "Mr. & Miss Birla" event, processing live data entries and compiling results instantly.</p>
+                </div>
+                <div class="project-footer">
+                    <a href="/voting" class="project-link">View Project <span>&rarr;</span></a>
                 </div>
             </div>
 
@@ -795,7 +819,7 @@
         <p style="color: var(--text-muted); font-size: 1.1rem;">Whether you need a complex database structured, a custom application built from the ground up, or an integrated financial system, I have the technical depth to deliver. My inbox is always open for new opportunities.</p>
         
         <div class="contact-info">
-            <a href="mailto:mohitforestudies@gmail.com" class="contact-pill" style="text-decoration: none;">
+            <a href="mailto:developer@mohitmali.in" class="contact-pill" style="text-decoration: none;">
                 ✉️ developer@mohitmali.in
             </a>
             <div class="contact-pill">
@@ -807,14 +831,20 @@
         </div>
     </section>
 
-        <footer>
+    <footer>
         <p>Engineered by Mohit Mali &copy; 2026</p>
         <div style="margin-top: 10px; font-size: 0.8rem;">
             <a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
-            <a href="/terms-of-service.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Terms of Service</a>
+            <a href="/terms-of-service.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Terms of Service</a> |
+            <a href="/disclaimer.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Disclaimer</a> |
+            <a href="/contact.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Contact</a>
         </div>
     </footer>
 
+    <div id="cookie-banner" style="position: fixed; bottom: 0; left: 0; width: 100%; background: #1e293b; color: #f8fafc; padding: 15px; text-align: center; z-index: 9999; border-top: 1px solid #38bdf8; display: flex; justify-content: center; align-items: center; gap: 20px; flex-wrap: wrap;">
+        <span style="font-size: 0.9rem;">We use cookies (and third-party services like Google AdSense) to enhance your browsing experience and serve personalized ads. By continuing to use this site, you consent to our use of cookies.</span>
+        <button onclick="document.getElementById('cookie-banner').style.display='none'" style="background: #38bdf8; color: #0f172a; border: none; padding: 8px 20px; border-radius: 5px; font-weight: bold; cursor: pointer;">Got it!</button>
+    </div>
 
     <script>
         const themeBtn = document.getElementById('theme-btn');
