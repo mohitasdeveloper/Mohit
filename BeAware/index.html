@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BeAware | AI-Powered Ingredient Analysis Engine</title>
+    <meta name="description" content="A comprehensive case study on BeAware, an AI-powered product rating application that utilizes natural language processing to analyze chemical ingredients and recommend safe alternatives.">
+    <meta name="google-adsense-account" content="ca-pub-6878501206056792">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-M7CKP1XWMW"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-M7CKP1XWMW');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #f8fafc;
+            --surface-color: #ffffff;
+            --primary-color: #0284c7;
+            --text-main: #0f172a;
+            --text-muted: #475569;
+            --border-color: #e2e8f0;
+            --nav-bg: rgba(248, 250, 252, 0.95);
+        }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-color); color: var(--text-main); line-height: 1.8; margin: 0; padding: 0; }
+        nav { padding: 20px 8%; background: var(--nav-bg); border-bottom: 1px solid var(--border-color); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; z-index: 100;}
+        .logo { font-size: 1.5rem; font-weight: 800; color: var(--primary-color); text-decoration: none; }
+        .back-link { color: var(--text-muted); text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+        .back-link:hover { color: var(--primary-color); }
+        .article-container { max-width: 800px; margin: 60px auto; padding: 0 5%; }
+        h1 { font-size: 3rem; font-weight: 800; letter-spacing: -1px; margin-bottom: 20px; line-height: 1.2;}
+        h2 { font-size: 1.8rem; margin-top: 50px; margin-bottom: 20px; border-bottom: 2px solid var(--primary-color); padding-bottom: 10px; display: inline-block;}
+        p { margin-bottom: 20px; font-size: 1.1rem; color: #334155; }
+        ul { margin-bottom: 20px; padding-left: 20px; }
+        li { margin-bottom: 10px; font-size: 1.1rem; color: #334155; }
+        .launch-box { background: var(--surface-color); padding: 40px; border-radius: 12px; border: 1px solid var(--border-color); text-align: center; margin: 50px 0; box-shadow: 0 10px 15px -3px rgba(0,0,0,0.05); }
+        .launch-btn { display: inline-block; background: var(--primary-color); color: white; padding: 15px 40px; text-decoration: none; font-weight: 800; font-size: 1.2rem; border-radius: 8px; transition: transform 0.2s; }
+        .launch-btn:hover { transform: translateY(-3px); box-shadow: 0 10px 20px rgba(2, 132, 199, 0.3); }
+        footer { text-align: center; padding: 40px; color: var(--text-muted); border-top: 1px solid var(--border-color); margin-top: 50px;}
+    </style>
+</head>
+<body>
+
+    <nav>
+        <a href="https://mohitmali.in" class="logo">Mohit.</a>
+        <a href="https://mohitmali.in" class="back-link">&larr; Back to Portfolio</a>
+    </nav>
+
+    <div class="article-container">
+        <p style="color: var(--primary-color); font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Artificial Intelligence Case Study</p>
+        <h1>BeAware: Decoding Consumer Products with AI</h1>
+        
+        <p>In today's highly commercialized market, consumers are constantly exposed to complex chemical ingredients in their daily personal care products, cosmetics, and consumables. While ingredient lists are legally mandated, they are intentionally obscured by complex scientific nomenclature, making it nearly impossible for the average consumer to identify toxic compounds, allergens, or carcinogens. To solve this information asymmetry, I engineered <strong>BeAware</strong>, an AI-powered product analysis application designed to instantly decode and rate ingredient safety.</p>
+
+        <div class="launch-box">
+            <h3 style="margin-top: 0; font-size: 1.5rem;">Access the AI Interface</h3>
+            <p style="font-size: 1rem; color: var(--text-muted);">The BeAware analysis engine is currently undergoing iterative training. Connect with me directly for access to the developer sandbox.</p>
+            <a href="mailto:developer@mohitmali.in" class="launch-btn">Request Sandbox Access &rarr;</a>
+        </div>
+
+        <h2>The Problem: The "Greenwashing" Epidemic</h2>
+        <p>Many modern consumer brands utilize marketing strategies often referred to as "greenwashing"—packaging products as natural, organic, or safe, while simultaneously including harsh chemical preservatives or hidden synthetic compounds. A consumer might read "sulfate-free" on the front label, while the back label secretly lists a dozen unregulated endocrine disruptors.</p>
+        <p>Manually cross-referencing these 20-syllable chemical names against global health databases takes hours. The objective of BeAware was to reduce that verification time from hours to milliseconds using advanced Artificial Intelligence and machine learning algorithms.</p>
+
+        <h2>Core Algorithmic & AI Features</h2>
+        <p>Developing an application capable of understanding and evaluating chemical structures requires a highly specialized technical approach. BeAware is built upon several advanced programmatic pillars:</p>
+        <ul>
+            <li><strong>Natural Language Processing (NLP):</strong> The application utilizes text-parsing algorithms to accurately read and separate complex, comma-separated ingredient lists, handling spelling variations and alternative chemical names efficiently.</li>
+            <li><strong>Automated Health Scoring:</strong> Once parsed, the engine queries a localized database of known compounds, assigning a weighted safety score based on toxicity, allergen potential, and long-term health risks.</li>
+            <li><strong>Smart Alternative Recommendations:</strong> If a product scores below a designated safety threshold, the logic engine automatically filters and suggests alternative products within the same category that possess a cleaner, safer chemical makeup.</li>
+            <li><strong>Frictionless User Interface:</strong> Built for rapid utility, the front-end allows users to manually type or copy-paste ingredient lists and receive a full safety breakdown in an intuitive, color-coded dashboard.</li>
+        </ul>
+
+        <h2>Technical Architecture & Deployment</h2>
+        <p>From a software engineering perspective, the challenge of BeAware lies in data retrieval speed. When a user inputs a list of 30 distinct ingredients, the application must execute 30 simultaneous database queries to cross-reference the chemical profiles without timing out or crashing the browser.</p>
+        <p>To achieve this, the application architecture relies heavily on asynchronous JavaScript and optimized API routing. By structuring the database efficiently and utilizing client-side rendering where appropriate, the UI remains highly responsive. The design is strictly mobile-first, targeting users who are actively standing in a store aisle and need an immediate health assessment before making a purchase decision.</p>
+
+        <h2>Project Conclusion</h2>
+        <p>BeAware represents the intersection of Artificial Intelligence and consumer advocacy. By leveraging modern web development frameworks and algorithmic processing, the application successfully strips away marketing deception and puts transparent, data-driven power directly back into the hands of the consumer. This project serves as a prime example of how software can be engineered to generate tangible, positive impacts on public health.</p>
+    </div>
+
+    <footer>
+        <p>Engineered by Mohit Mali &copy; 2026</p>
+        <div style="margin-top: 10px; font-size: 0.8rem;">
+            <a href="/privacy-policy.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Privacy Policy</a> | 
+            <a href="/terms-of-service.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Terms of Service</a> |
+            <a href="/disclaimer.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Disclaimer</a> |
+            <a href="/contact.html" style="color: var(--text-muted); text-decoration: none; margin: 0 10px;">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
