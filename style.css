@@ -1,60 +1,241 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Mohit's Portfolio | Developer & Student</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
+:root {
+  --bg-dark: #ffffff;
+  --text-primary: #09090b;
+  --text-muted: #8d8d94;
+  --accent-blue: #0281e0;
+  --font-sans: 'Inter', sans-serif;
+  --font-display: 'DM Sans', sans-serif;
+  --font-handwritten: 'Caveat', cursive;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg-dark);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  overflow: hidden; 
+}
+
+/* =========================================
+   Hero Screen Section & Reliable Sky
+========================================= */
+.hero {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 0 8%;
   
-  <!-- Landing Hero Section -->
-  <section class="hero" id="hero">
-    
-    <!-- Typography & Content -->
-    <div class="hero-content">
-      <div class="hero-tag">
-        <span class="wave">👋</span> Hey, I'm Mohit Mali
-      </div>
-      
-      <div class="hero-headline">
-        <h1 class="hero-title">
-          <span class="hero-word-primary">Developer</span>
-          <span class="hero-word-secondary">& student</span>
-        </h1>
-      </div>
-      
-      <div class="hero-sub">
-        <p class="hero-description">
-          Building responsive web apps & systems @ 
-          <span class="hero-pill-badge">
-            <span class="badge-icon">🏫</span> mumbai university
-          </span>
-        </p>
-      </div>
-    </div>
+  /* Solid blue fallback color */
+  background-color: #5baefc; 
+  
+  /* Photographic Sky over the fallback */
+  background-image: 
+    linear-gradient(to bottom, rgba(255, 255, 255, 0) 65%, #ffffff 100%),
+    url('https://images.unsplash.com/photo-1513222386665-063994e410a8?q=80&w=2070&auto=format&fit=crop');
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+}
 
-    <!-- Profile Cutout Layer (Forced flush right on all devices) -->
-    <div class="hero-image-wrapper">
-      <img src="https://i.postimg.cc/02rnQPZF/Chat-GPT-Image-Jul-12-2026-07-10-16-PM-(1).png" alt="Mohit Profile" class="hero-profile-img">
-    </div>
+/* =========================================
+   Typography & Structure Layer
+========================================= */
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: 900px;
+  /* Increased negative margin to pull the entire text block higher up */
+  margin-top: -18vh; 
+}
 
-    <!-- Bottom Metadata Bar -->
-    <div class="hero-bottom-bar">
-      <div class="hero-location">
-        <span class="hero-location-label">BASED IN</span>
-        <span class="hero-location-value">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
-          MUMBAI, MH
-        </span>
-      </div>
-      <div class="hero-status">CODE > COMMERCE</div>
-    </div>
-    
-  </section>
+.hero-tag {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 12px;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+}
 
-</body>
-</html>
+.wave {
+  font-size: 20px;
+}
+
+.hero-title {
+  display: flex;
+  flex-direction: column;
+  line-height: 0.8;
+  margin-bottom: 24px;
+}
+
+.hero-word-primary {
+  font-family: var(--font-display);
+  font-size: 160px;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.05em;
+  text-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.hero-word-secondary {
+  font-family: var(--font-handwritten);
+  font-size: 140px;
+  color: #ffffff;
+  font-weight: 600;
+  /* Lowered from -40px to -10px to reduce overlap with "developer" */
+  margin-top: -10px;
+  margin-left: 210px;
+  /* Added a stronger, tighter shadow to separate it from the white text behind it */
+  text-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+}
+
+.hero-description {
+  font-size: 21px;
+  font-weight: 600;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.hero-pill-badge {
+  background-color: rgba(255, 255, 255, 0.9);
+  color: var(--accent-blue);
+  padding: 6px 18px;
+  border-radius: 100px;
+  font-size: 17px;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-shadow: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.badge-icon {
+  font-size: 16px;
+}
+
+/* =========================================
+   Profile Ledge Image Layer Placement
+========================================= */
+.hero-image-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  height: 90%;
+  width: 55vw;
+  max-width: 850px;
+  z-index: 1; 
+  pointer-events: none;
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+}
+
+.hero-profile-img {
+  height: 100%;
+  width: 100%; 
+  object-fit: contain;
+  object-position: bottom right; 
+  -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+  mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+}
+
+/* =========================================
+   Base Layout Metadata Bar
+========================================= */
+.hero-bottom-bar {
+  position: absolute;
+  bottom: 32px;
+  left: 0;
+  width: 100%;
+  padding: 0 8%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 2;
+}
+
+.hero-location {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-family: var(--font-display);
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+}
+
+.hero-location-value {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--text-primary);
+  font-weight: 800;
+}
+
+.hero-status {
+  font-size: 11px;
+  font-family: var(--font-display);
+  letter-spacing: 0.15em;
+  color: var(--text-muted);
+  font-weight: 600;
+}
+
+/* =========================================
+   Viewport Breakpoint Adjustments
+========================================= */
+@media(max-width: 1400px) {
+  .hero-word-primary { font-size: 12vw; }
+  .hero-word-secondary { font-size: 11vw; margin-left: 15vw; }
+}
+
+@media(max-width: 992px) {
+  html, body { overflow: auto; }
+  .hero { height: 100vh; padding: 0 6%; } 
+  
+  .hero-content { margin-top: -20vh; z-index: 3; } 
+  .hero-word-primary { font-size: 16vw; }
+  .hero-word-secondary { font-size: 15vw; margin-left: 10vw; margin-top: -10px; }
+  
+  .hero-image-wrapper {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 60vh;
+    width: 90vw;
+    margin-top: 0;
+    justify-content: flex-end; 
+  }
+  
+  .hero-profile-img { 
+    object-position: bottom right; 
+    width: 100%; 
+  }
+  
+  .hero-bottom-bar { 
+    position: absolute; 
+    bottom: 24px; 
+    padding: 0 6%; 
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-description { font-size: 16px; flex-wrap: wrap; }
+  .hero-bottom-bar { flex-direction: column; align-items: flex-start; gap: 12px; }
+}
