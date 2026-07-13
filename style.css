@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mohit's Portfolio | Developer & Student</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700;9..40,800&family=Caveat:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  
+  <!-- Landing Hero Section -->
+  <section class="hero" id="hero">
+    
+    <!-- Typography & Content -->
+    <div class="hero-content">
+      <div class="hero-tag">
+        <span class="wave">👋</span> Hey, I'm Mohit Mali
+      </div>
+      
+      <div class="hero-headline">
+        <h1 class="hero-title">
+          <span class="hero-word-primary">Developer</span>
+          <span class="hero-word-secondary">& student</span>
+        </h1>
+      </div>
+      
+      <div class="hero-sub">
+        <p class="hero-description">
+          Building responsive web apps & systems @ 
+          <span class="hero-pill-badge">
+            <span class="badge-icon">🏫</span> mumbai university
+          </span>
+        </p>
+      </div>
+    </div>
+
+    <!-- Profile Cutout Layer (Forced flush right on all devices) -->
+    <div class="hero-image-wrapper">
+      <img src="https://i.postimg.cc/02rnQPZF/Chat-GPT-Image-Jul-12-2026-07-10-16-PM-(1).png" alt="Mohit Profile" class="hero-profile-img">
+    </div>
+
+    <!-- Bottom Metadata Bar -->
+    <div class="hero-bottom-bar">
+      <div class="hero-location">
+        <span class="hero-location-label">BASED IN</span>
+        <span class="hero-location-value">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+          MUMBAI, MH
+        </span>
+      </div>
+      <div class="hero-status">CODE > COMMERCE</div>
+    </div>
+    
+  </section>
+
+</body>
+</html>
